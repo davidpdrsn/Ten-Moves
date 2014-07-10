@@ -22,6 +22,10 @@
 		86ED30D5196F0F0F00FC738B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B9196F0F0F00FC738B /* CoreData.framework */; };
 		86ED30DD196F0F1000FC738B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86ED30DB196F0F1000FC738B /* InfoPlist.strings */; };
 		86ED30DF196F0F1000FC738B /* TenMovesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30DE196F0F1000FC738B /* TenMovesTests.m */; };
+		86ED30EA196F112400FC738B /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30E9196F112400FC738B /* Move.m */; };
+		86ED30EC196F114D00FC738B /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86ED30EB196F114D00FC738B /* MainStoryboard.storyboard */; };
+		86ED30EF196F120700FC738B /* MovesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30EE196F120700FC738B /* MovesTableViewController.m */; };
+		86ED30F2196F193200FC738B /* AddMoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30F1196F193200FC738B /* AddMoveViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,13 @@
 		86ED30DA196F0F1000FC738B /* TenMovesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TenMovesTests-Info.plist"; sourceTree = "<group>"; };
 		86ED30DC196F0F1000FC738B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		86ED30DE196F0F1000FC738B /* TenMovesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TenMovesTests.m; sourceTree = "<group>"; };
+		86ED30E8196F112400FC738B /* Move.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Move.h; sourceTree = "<group>"; };
+		86ED30E9196F112400FC738B /* Move.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Move.m; sourceTree = "<group>"; };
+		86ED30EB196F114D00FC738B /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		86ED30ED196F120700FC738B /* MovesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovesTableViewController.h; sourceTree = "<group>"; };
+		86ED30EE196F120700FC738B /* MovesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovesTableViewController.m; sourceTree = "<group>"; };
+		86ED30F0196F193200FC738B /* AddMoveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMoveViewController.h; sourceTree = "<group>"; };
+		86ED30F1196F193200FC738B /* AddMoveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMoveViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,10 +126,17 @@
 		86ED30BB196F0F0F00FC738B /* TenMoves */ = {
 			isa = PBXGroup;
 			children = (
+				86ED30ED196F120700FC738B /* MovesTableViewController.h */,
+				86ED30EE196F120700FC738B /* MovesTableViewController.m */,
+				86ED30F0196F193200FC738B /* AddMoveViewController.h */,
+				86ED30F1196F193200FC738B /* AddMoveViewController.m */,
 				86ED30C4196F0F0F00FC738B /* AppDelegate.h */,
 				86ED30C5196F0F0F00FC738B /* AppDelegate.m */,
 				86ED30CA196F0F0F00FC738B /* Images.xcassets */,
 				86ED30C7196F0F0F00FC738B /* TenMoves.xcdatamodeld */,
+				86ED30E8196F112400FC738B /* Move.h */,
+				86ED30E9196F112400FC738B /* Move.m */,
+				86ED30EB196F114D00FC738B /* MainStoryboard.storyboard */,
 				86ED30BC196F0F0F00FC738B /* Supporting Files */,
 			);
 			path = TenMoves;
@@ -228,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86ED30EC196F114D00FC738B /* MainStoryboard.storyboard in Resources */,
 				86ED30C0196F0F0F00FC738B /* InfoPlist.strings in Resources */,
 				86ED30CB196F0F0F00FC738B /* Images.xcassets in Resources */,
 			);
@@ -248,9 +267,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86ED30EA196F112400FC738B /* Move.m in Sources */,
+				86ED30F2196F193200FC738B /* AddMoveViewController.m in Sources */,
 				86ED30C6196F0F0F00FC738B /* AppDelegate.m in Sources */,
 				86ED30C9196F0F0F00FC738B /* TenMoves.xcdatamodeld in Sources */,
 				86ED30C2196F0F0F00FC738B /* main.m in Sources */,
+				86ED30EF196F120700FC738B /* MovesTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

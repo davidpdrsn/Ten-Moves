@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MovesTableViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
