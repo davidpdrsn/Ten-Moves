@@ -1,0 +1,475 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		86ED30B4196F0F0F00FC738B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B3196F0F0F00FC738B /* Foundation.framework */; };
+		86ED30B6196F0F0F00FC738B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B5196F0F0F00FC738B /* CoreGraphics.framework */; };
+		86ED30B8196F0F0F00FC738B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B7196F0F0F00FC738B /* UIKit.framework */; };
+		86ED30BA196F0F0F00FC738B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B9196F0F0F00FC738B /* CoreData.framework */; };
+		86ED30C0196F0F0F00FC738B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86ED30BE196F0F0F00FC738B /* InfoPlist.strings */; };
+		86ED30C2196F0F0F00FC738B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30C1196F0F0F00FC738B /* main.m */; };
+		86ED30C6196F0F0F00FC738B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30C5196F0F0F00FC738B /* AppDelegate.m */; };
+		86ED30C9196F0F0F00FC738B /* TenMoves.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30C7196F0F0F00FC738B /* TenMoves.xcdatamodeld */; };
+		86ED30CB196F0F0F00FC738B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86ED30CA196F0F0F00FC738B /* Images.xcassets */; };
+		86ED30D2196F0F0F00FC738B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30D1196F0F0F00FC738B /* XCTest.framework */; };
+		86ED30D3196F0F0F00FC738B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B3196F0F0F00FC738B /* Foundation.framework */; };
+		86ED30D4196F0F0F00FC738B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B7196F0F0F00FC738B /* UIKit.framework */; };
+		86ED30D5196F0F0F00FC738B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B9196F0F0F00FC738B /* CoreData.framework */; };
+		86ED30DD196F0F1000FC738B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86ED30DB196F0F1000FC738B /* InfoPlist.strings */; };
+		86ED30DF196F0F1000FC738B /* TenMovesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30DE196F0F1000FC738B /* TenMovesTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		86ED30D6196F0F1000FC738B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 86ED30A8196F0F0F00FC738B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86ED30AF196F0F0F00FC738B;
+			remoteInfo = TenMoves;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		86ED30B0196F0F0F00FC738B /* TenMoves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TenMoves.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86ED30B3196F0F0F00FC738B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		86ED30B5196F0F0F00FC738B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		86ED30B7196F0F0F00FC738B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		86ED30B9196F0F0F00FC738B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		86ED30BD196F0F0F00FC738B /* TenMoves-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TenMoves-Info.plist"; sourceTree = "<group>"; };
+		86ED30BF196F0F0F00FC738B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		86ED30C1196F0F0F00FC738B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		86ED30C3196F0F0F00FC738B /* TenMoves-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TenMoves-Prefix.pch"; sourceTree = "<group>"; };
+		86ED30C4196F0F0F00FC738B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		86ED30C5196F0F0F00FC738B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		86ED30C8196F0F0F00FC738B /* TenMoves.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TenMoves.xcdatamodel; sourceTree = "<group>"; };
+		86ED30CA196F0F0F00FC738B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		86ED30D0196F0F0F00FC738B /* TenMovesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TenMovesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		86ED30D1196F0F0F00FC738B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		86ED30DA196F0F1000FC738B /* TenMovesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TenMovesTests-Info.plist"; sourceTree = "<group>"; };
+		86ED30DC196F0F1000FC738B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		86ED30DE196F0F1000FC738B /* TenMovesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TenMovesTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		86ED30AD196F0F0F00FC738B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86ED30B6196F0F0F00FC738B /* CoreGraphics.framework in Frameworks */,
+				86ED30BA196F0F0F00FC738B /* CoreData.framework in Frameworks */,
+				86ED30B8196F0F0F00FC738B /* UIKit.framework in Frameworks */,
+				86ED30B4196F0F0F00FC738B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86ED30CD196F0F0F00FC738B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86ED30D2196F0F0F00FC738B /* XCTest.framework in Frameworks */,
+				86ED30D5196F0F0F00FC738B /* CoreData.framework in Frameworks */,
+				86ED30D4196F0F0F00FC738B /* UIKit.framework in Frameworks */,
+				86ED30D3196F0F0F00FC738B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		86ED30A7196F0F0F00FC738B = {
+			isa = PBXGroup;
+			children = (
+				86ED30BB196F0F0F00FC738B /* TenMoves */,
+				86ED30D8196F0F1000FC738B /* TenMovesTests */,
+				86ED30B2196F0F0F00FC738B /* Frameworks */,
+				86ED30B1196F0F0F00FC738B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		86ED30B1196F0F0F00FC738B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				86ED30B0196F0F0F00FC738B /* TenMoves.app */,
+				86ED30D0196F0F0F00FC738B /* TenMovesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		86ED30B2196F0F0F00FC738B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				86ED30B3196F0F0F00FC738B /* Foundation.framework */,
+				86ED30B5196F0F0F00FC738B /* CoreGraphics.framework */,
+				86ED30B7196F0F0F00FC738B /* UIKit.framework */,
+				86ED30B9196F0F0F00FC738B /* CoreData.framework */,
+				86ED30D1196F0F0F00FC738B /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		86ED30BB196F0F0F00FC738B /* TenMoves */ = {
+			isa = PBXGroup;
+			children = (
+				86ED30C4196F0F0F00FC738B /* AppDelegate.h */,
+				86ED30C5196F0F0F00FC738B /* AppDelegate.m */,
+				86ED30CA196F0F0F00FC738B /* Images.xcassets */,
+				86ED30C7196F0F0F00FC738B /* TenMoves.xcdatamodeld */,
+				86ED30BC196F0F0F00FC738B /* Supporting Files */,
+			);
+			path = TenMoves;
+			sourceTree = "<group>";
+		};
+		86ED30BC196F0F0F00FC738B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				86ED30BD196F0F0F00FC738B /* TenMoves-Info.plist */,
+				86ED30BE196F0F0F00FC738B /* InfoPlist.strings */,
+				86ED30C1196F0F0F00FC738B /* main.m */,
+				86ED30C3196F0F0F00FC738B /* TenMoves-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		86ED30D8196F0F1000FC738B /* TenMovesTests */ = {
+			isa = PBXGroup;
+			children = (
+				86ED30DE196F0F1000FC738B /* TenMovesTests.m */,
+				86ED30D9196F0F1000FC738B /* Supporting Files */,
+			);
+			path = TenMovesTests;
+			sourceTree = "<group>";
+		};
+		86ED30D9196F0F1000FC738B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				86ED30DA196F0F1000FC738B /* TenMovesTests-Info.plist */,
+				86ED30DB196F0F1000FC738B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		86ED30AF196F0F0F00FC738B /* TenMoves */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 86ED30E2196F0F1000FC738B /* Build configuration list for PBXNativeTarget "TenMoves" */;
+			buildPhases = (
+				86ED30AC196F0F0F00FC738B /* Sources */,
+				86ED30AD196F0F0F00FC738B /* Frameworks */,
+				86ED30AE196F0F0F00FC738B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TenMoves;
+			productName = TenMoves;
+			productReference = 86ED30B0196F0F0F00FC738B /* TenMoves.app */;
+			productType = "com.apple.product-type.application";
+		};
+		86ED30CF196F0F0F00FC738B /* TenMovesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 86ED30E5196F0F1000FC738B /* Build configuration list for PBXNativeTarget "TenMovesTests" */;
+			buildPhases = (
+				86ED30CC196F0F0F00FC738B /* Sources */,
+				86ED30CD196F0F0F00FC738B /* Frameworks */,
+				86ED30CE196F0F0F00FC738B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				86ED30D7196F0F1000FC738B /* PBXTargetDependency */,
+			);
+			name = TenMovesTests;
+			productName = TenMovesTests;
+			productReference = 86ED30D0196F0F0F00FC738B /* TenMovesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		86ED30A8196F0F0F00FC738B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "David Pedersen";
+				TargetAttributes = {
+					86ED30CF196F0F0F00FC738B = {
+						TestTargetID = 86ED30AF196F0F0F00FC738B;
+					};
+				};
+			};
+			buildConfigurationList = 86ED30AB196F0F0F00FC738B /* Build configuration list for PBXProject "TenMoves" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 86ED30A7196F0F0F00FC738B;
+			productRefGroup = 86ED30B1196F0F0F00FC738B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				86ED30AF196F0F0F00FC738B /* TenMoves */,
+				86ED30CF196F0F0F00FC738B /* TenMovesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		86ED30AE196F0F0F00FC738B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86ED30C0196F0F0F00FC738B /* InfoPlist.strings in Resources */,
+				86ED30CB196F0F0F00FC738B /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86ED30CE196F0F0F00FC738B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86ED30DD196F0F1000FC738B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		86ED30AC196F0F0F00FC738B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86ED30C6196F0F0F00FC738B /* AppDelegate.m in Sources */,
+				86ED30C9196F0F0F00FC738B /* TenMoves.xcdatamodeld in Sources */,
+				86ED30C2196F0F0F00FC738B /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86ED30CC196F0F0F00FC738B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86ED30DF196F0F1000FC738B /* TenMovesTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		86ED30D7196F0F1000FC738B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86ED30AF196F0F0F00FC738B /* TenMoves */;
+			targetProxy = 86ED30D6196F0F1000FC738B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		86ED30BE196F0F0F00FC738B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				86ED30BF196F0F0F00FC738B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		86ED30DB196F0F1000FC738B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				86ED30DC196F0F1000FC738B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		86ED30E0196F0F1000FC738B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		86ED30E1196F0F1000FC738B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		86ED30E3196F0F1000FC738B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TenMoves/TenMoves-Prefix.pch";
+				INFOPLIST_FILE = "TenMoves/TenMoves-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		86ED30E4196F0F1000FC738B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TenMoves/TenMoves-Prefix.pch";
+				INFOPLIST_FILE = "TenMoves/TenMoves-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		86ED30E6196F0F1000FC738B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TenMoves.app/TenMoves";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TenMoves/TenMoves-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TenMovesTests/TenMovesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		86ED30E7196F0F1000FC738B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TenMoves.app/TenMoves";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TenMoves/TenMoves-Prefix.pch";
+				INFOPLIST_FILE = "TenMovesTests/TenMovesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		86ED30AB196F0F0F00FC738B /* Build configuration list for PBXProject "TenMoves" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86ED30E0196F0F1000FC738B /* Debug */,
+				86ED30E1196F0F1000FC738B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		86ED30E2196F0F1000FC738B /* Build configuration list for PBXNativeTarget "TenMoves" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86ED30E3196F0F1000FC738B /* Debug */,
+				86ED30E4196F0F1000FC738B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		86ED30E5196F0F1000FC738B /* Build configuration list for PBXNativeTarget "TenMovesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86ED30E6196F0F1000FC738B /* Debug */,
+				86ED30E7196F0F1000FC738B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		86ED30C7196F0F0F00FC738B /* TenMoves.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				86ED30C8196F0F0F00FC738B /* TenMoves.xcdatamodel */,
+			);
+			currentVersion = 86ED30C8196F0F0F00FC738B /* TenMoves.xcdatamodel */;
+			path = TenMoves.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 86ED30A8196F0F0F00FC738B /* Project object */;
+}
