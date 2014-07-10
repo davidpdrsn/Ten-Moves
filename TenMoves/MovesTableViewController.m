@@ -139,10 +139,11 @@
 - (void)addCourseViewControllerDidSave {
     NSError *error;
     if (![self.managedObjectContext save:&error]) {
-        NSLog(@"There was an error saving the move - %@", error);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Missing name" message:@"Are you sure the move has a name?" delegate:nil cancelButtonTitle:@"I'll look into it" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)addCourseViewControllerDidCancel:(Move *)moveToDelete {

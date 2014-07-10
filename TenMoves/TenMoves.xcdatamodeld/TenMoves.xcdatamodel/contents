@@ -2,7 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Move" representedClassName="Move" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" defaultDateTimeInterval="347112000" defaultValueString="2012-01-01" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" minValueString="1" syncable="YES"/>
     </entity>
     <elements>
         <element name="Move" positionX="-54" positionY="-9" width="128" height="75"/>
