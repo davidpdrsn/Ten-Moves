@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84DE765F5B484136A47281D2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE63772FF7C54DF5B88E07D2 /* libPods.a */; };
+		8685E3B1196F58CB00A97585 /* Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B0196F58CB00A97585 /* Snapshot.m */; };
+		8685E3B4196F595E00A97585 /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B3196F595E00A97585 /* Move.m */; };
+		8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B6196F5B0900A97585 /* MoveTableViewCell.m */; };
+		8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3BA196F60E200A97585 /* SnapshotsTableViewController.m */; };
+		8685E3BE196F6A9200A97585 /* AddSnapshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3BD196F6A9200A97585 /* AddSnapshotViewController.m */; };
 		86ED30B4196F0F0F00FC738B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B3196F0F0F00FC738B /* Foundation.framework */; };
 		86ED30B6196F0F0F00FC738B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B5196F0F0F00FC738B /* CoreGraphics.framework */; };
 		86ED30B8196F0F0F00FC738B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B7196F0F0F00FC738B /* UIKit.framework */; };
@@ -22,7 +28,6 @@
 		86ED30D5196F0F0F00FC738B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B9196F0F0F00FC738B /* CoreData.framework */; };
 		86ED30DD196F0F1000FC738B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86ED30DB196F0F1000FC738B /* InfoPlist.strings */; };
 		86ED30DF196F0F1000FC738B /* TenMovesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30DE196F0F1000FC738B /* TenMovesTests.m */; };
-		86ED30EA196F112400FC738B /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30E9196F112400FC738B /* Move.m */; };
 		86ED30EC196F114D00FC738B /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86ED30EB196F114D00FC738B /* MainStoryboard.storyboard */; };
 		86ED30EF196F120700FC738B /* MovesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30EE196F120700FC738B /* MovesTableViewController.m */; };
 		86ED30F2196F193200FC738B /* AddMoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30F1196F193200FC738B /* AddMoveViewController.m */; };
@@ -39,6 +44,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4816D04F5138490DBFCB6865 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		8685E3AF196F58CB00A97585 /* Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snapshot.h; sourceTree = "<group>"; };
+		8685E3B0196F58CB00A97585 /* Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snapshot.m; sourceTree = "<group>"; };
+		8685E3B2196F595E00A97585 /* Move.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Move.h; sourceTree = "<group>"; };
+		8685E3B3196F595E00A97585 /* Move.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Move.m; sourceTree = "<group>"; };
+		8685E3B5196F5B0900A97585 /* MoveTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveTableViewCell.h; sourceTree = "<group>"; };
+		8685E3B6196F5B0900A97585 /* MoveTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveTableViewCell.m; sourceTree = "<group>"; };
+		8685E3B9196F60E200A97585 /* SnapshotsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotsTableViewController.h; sourceTree = "<group>"; };
+		8685E3BA196F60E200A97585 /* SnapshotsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotsTableViewController.m; sourceTree = "<group>"; };
+		8685E3BC196F6A9200A97585 /* AddSnapshotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSnapshotViewController.h; sourceTree = "<group>"; };
+		8685E3BD196F6A9200A97585 /* AddSnapshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSnapshotViewController.m; sourceTree = "<group>"; };
 		86ED30B0196F0F0F00FC738B /* TenMoves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TenMoves.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86ED30B3196F0F0F00FC738B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		86ED30B5196F0F0F00FC738B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -57,13 +73,12 @@
 		86ED30DA196F0F1000FC738B /* TenMovesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TenMovesTests-Info.plist"; sourceTree = "<group>"; };
 		86ED30DC196F0F1000FC738B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		86ED30DE196F0F1000FC738B /* TenMovesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TenMovesTests.m; sourceTree = "<group>"; };
-		86ED30E8196F112400FC738B /* Move.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Move.h; sourceTree = "<group>"; };
-		86ED30E9196F112400FC738B /* Move.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Move.m; sourceTree = "<group>"; };
 		86ED30EB196F114D00FC738B /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		86ED30ED196F120700FC738B /* MovesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovesTableViewController.h; sourceTree = "<group>"; };
 		86ED30EE196F120700FC738B /* MovesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovesTableViewController.m; sourceTree = "<group>"; };
 		86ED30F0196F193200FC738B /* AddMoveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMoveViewController.h; sourceTree = "<group>"; };
 		86ED30F1196F193200FC738B /* AddMoveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMoveViewController.m; sourceTree = "<group>"; };
+		CE63772FF7C54DF5B88E07D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +90,7 @@
 				86ED30BA196F0F0F00FC738B /* CoreData.framework in Frameworks */,
 				86ED30B8196F0F0F00FC738B /* UIKit.framework in Frameworks */,
 				86ED30B4196F0F0F00FC738B /* Foundation.framework in Frameworks */,
+				84DE765F5B484136A47281D2 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +108,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8685E3B8196F5B0E00A97585 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				8685E3B5196F5B0900A97585 /* MoveTableViewCell.h */,
+				8685E3B6196F5B0900A97585 /* MoveTableViewCell.m */,
+			);
+			name = CustomViews;
+			sourceTree = "<group>";
+		};
 		86ED30A7196F0F0F00FC738B = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +124,7 @@
 				86ED30D8196F0F1000FC738B /* TenMovesTests */,
 				86ED30B2196F0F0F00FC738B /* Frameworks */,
 				86ED30B1196F0F0F00FC738B /* Products */,
+				4816D04F5138490DBFCB6865 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +145,7 @@
 				86ED30B7196F0F0F00FC738B /* UIKit.framework */,
 				86ED30B9196F0F0F00FC738B /* CoreData.framework */,
 				86ED30D1196F0F0F00FC738B /* XCTest.framework */,
+				CE63772FF7C54DF5B88E07D2 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -126,16 +153,13 @@
 		86ED30BB196F0F0F00FC738B /* TenMoves */ = {
 			isa = PBXGroup;
 			children = (
-				86ED30ED196F120700FC738B /* MovesTableViewController.h */,
-				86ED30EE196F120700FC738B /* MovesTableViewController.m */,
-				86ED30F0196F193200FC738B /* AddMoveViewController.h */,
-				86ED30F1196F193200FC738B /* AddMoveViewController.m */,
+				8685E3B8196F5B0E00A97585 /* CustomViews */,
+				86EE8D95196F503200EE4DCF /* ViewControllers */,
+				86EE8D96196F504200EE4DCF /* Models */,
 				86ED30C4196F0F0F00FC738B /* AppDelegate.h */,
 				86ED30C5196F0F0F00FC738B /* AppDelegate.m */,
 				86ED30CA196F0F0F00FC738B /* Images.xcassets */,
 				86ED30C7196F0F0F00FC738B /* TenMoves.xcdatamodeld */,
-				86ED30E8196F112400FC738B /* Move.h */,
-				86ED30E9196F112400FC738B /* Move.m */,
 				86ED30EB196F114D00FC738B /* MainStoryboard.storyboard */,
 				86ED30BC196F0F0F00FC738B /* Supporting Files */,
 			);
@@ -171,6 +195,32 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		86EE8D95196F503200EE4DCF /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8685E3BC196F6A9200A97585 /* AddSnapshotViewController.h */,
+				8685E3BD196F6A9200A97585 /* AddSnapshotViewController.m */,
+				86ED30F0196F193200FC738B /* AddMoveViewController.h */,
+				86ED30F1196F193200FC738B /* AddMoveViewController.m */,
+				86ED30ED196F120700FC738B /* MovesTableViewController.h */,
+				86ED30EE196F120700FC738B /* MovesTableViewController.m */,
+				8685E3B9196F60E200A97585 /* SnapshotsTableViewController.h */,
+				8685E3BA196F60E200A97585 /* SnapshotsTableViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		86EE8D96196F504200EE4DCF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8685E3B2196F595E00A97585 /* Move.h */,
+				8685E3B3196F595E00A97585 /* Move.m */,
+				8685E3AF196F58CB00A97585 /* Snapshot.h */,
+				8685E3B0196F58CB00A97585 /* Snapshot.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -178,9 +228,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 86ED30E2196F0F1000FC738B /* Build configuration list for PBXNativeTarget "TenMoves" */;
 			buildPhases = (
+				77CC8A84294B4065BD57785E /* Check Pods Manifest.lock */,
 				86ED30AC196F0F0F00FC738B /* Sources */,
 				86ED30AD196F0F0F00FC738B /* Frameworks */,
 				86ED30AE196F0F0F00FC738B /* Resources */,
+				A39E04FB1E4D4DEA8CA8B336 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -262,16 +314,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		77CC8A84294B4065BD57785E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A39E04FB1E4D4DEA8CA8B336 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		86ED30AC196F0F0F00FC738B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86ED30EA196F112400FC738B /* Move.m in Sources */,
+				8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */,
+				8685E3B1196F58CB00A97585 /* Snapshot.m in Sources */,
 				86ED30F2196F193200FC738B /* AddMoveViewController.m in Sources */,
+				8685E3B4196F595E00A97585 /* Move.m in Sources */,
+				8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */,
 				86ED30C6196F0F0F00FC738B /* AppDelegate.m in Sources */,
 				86ED30C9196F0F0F00FC738B /* TenMoves.xcdatamodeld in Sources */,
 				86ED30C2196F0F0F00FC738B /* main.m in Sources */,
+				8685E3BE196F6A9200A97585 /* AddSnapshotViewController.m in Sources */,
 				86ED30EF196F120700FC738B /* MovesTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,6 +475,7 @@
 		};
 		86ED30E3196F0F1000FC738B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4816D04F5138490DBFCB6865 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -399,6 +489,7 @@
 		};
 		86ED30E4196F0F1000FC738B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4816D04F5138490DBFCB6865 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -469,6 +560,7 @@
 				86ED30E4196F0F1000FC738B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		86ED30E5196F0F1000FC738B /* Build configuration list for PBXNativeTarget "TenMovesTests" */ = {
 			isa = XCConfigurationList;
@@ -477,6 +569,7 @@
 				86ED30E7196F0F1000FC738B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -8,6 +8,8 @@
 
 #import "MovesTableViewController.h"
 #import "Move.h"
+#import "MoveTableViewCell.h"
+#import "SnapshotsTableViewController.h"
 
 @interface MovesTableViewController ()
 
@@ -27,6 +29,17 @@
     }
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMove)];
+    
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
+    
+    self.tableView.tableFooterView = [UIView new];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
 }
 
 - (void)addNewMove {
@@ -39,8 +52,6 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     nav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:nav animated:YES completion:nil];
-    
-
 }
 
 #pragma mark - Table view data source
@@ -55,12 +66,17 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    static NSString *identifier = @"Move";
+    MoveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     Move *move = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    cell.textLabel.text = move.name;
+    cell.nameLabel.text = move.name;
+    cell.countLabel.text = [NSString stringWithFormat:@"%i", (int)move.snapshots.count];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    cell.detailTextLabel.text = [formatter stringFromDate:move.createdAt];
     
     return cell;
 }
@@ -78,6 +94,16 @@
     }
 }
 
+#pragma mark - segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showSnapshots"]) {
+        SnapshotsTableViewController *destination = (SnapshotsTableViewController *) segue.destinationViewController;
+        destination.move = [self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        destination.managedObjectContext = self.managedObjectContext;
+    }
+}
+
 #pragma mark - Fetched results controller section
 
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -89,8 +115,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Move" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    // Specify how the fetched objects should be sorted
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt"
                                                                    ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
     
@@ -122,8 +147,9 @@
             
         case NSFetchedResultsChangeUpdate: {
             Move *changedMove = [self.fetchedResultsController objectAtIndexPath:indexPath];
-            UITableViewCell *cell = [table cellForRowAtIndexPath:indexPath];
-            cell.textLabel.text = changedMove.name;
+            MoveTableViewCell *cell = (MoveTableViewCell *) [table cellForRowAtIndexPath:indexPath];
+            cell.nameLabel.text = changedMove.name;
+            [cell setNeedsLayout];
         }
             break;
             
@@ -149,6 +175,31 @@
 - (void)addCourseViewControllerDidCancel:(Move *)moveToDelete {
     [self.managedObjectContext deleteObject:moveToDelete];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Empty table view data
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @"Zero Moves";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @"It seems you have not added any moves yet. Tap the plus button to get started.";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
 

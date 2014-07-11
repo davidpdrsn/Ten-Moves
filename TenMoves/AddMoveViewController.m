@@ -29,6 +29,7 @@
     addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self
                                                                                            action:@selector(add)];
+    addButton.enabled = NO;
     self.navigationItem.rightBarButtonItem = addButton;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
@@ -54,6 +55,17 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self add];
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSRange textFieldRange = NSMakeRange(0, [textField.text length]);
+    if (NSEqualRanges(range, textFieldRange) && [string length] == 0) {
+        addButton.enabled = NO;
+    } else {
+        addButton.enabled = YES;
+    }
+    
     return YES;
 }
 
