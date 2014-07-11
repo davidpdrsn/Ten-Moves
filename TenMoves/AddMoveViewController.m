@@ -20,26 +20,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.nameField.text = [self.currentMove name];
-    self.nameField.delegate = self;
     
     self.title = @"Add new move";
-    
-    addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                           target:self
-                                                                                           action:@selector(add)];
-    addButton.enabled = NO;
-    self.navigationItem.rightBarButtonItem = addButton;
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                          target:self
-                                                                                          action:@selector(cancel)];
+    [self setupNameField];
+    [self setupNavigationBar];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.nameField becomeFirstResponder];
 }
+
+#pragma mark - setup view elements
+
+- (void)setupNameField {
+    self.nameField.text = [self.currentMove name];
+    self.nameField.delegate = self;
+}
+
+- (void)setupNavigationBar {
+    addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(add)];
+    addButton.enabled = NO;
+    
+    self.navigationItem.rightBarButtonItem = addButton;
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
+}
+
+#pragma mark - button actions
 
 - (void)add {
     self.currentMove.name = self.nameField.text;
@@ -59,14 +66,18 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    [self enableOrDisableAddButtonWithTextField:textField string:string range:range];
+    
+    return YES;
+}
+
+- (void)enableOrDisableAddButtonWithTextField:(UITextField *)textField string:(NSString *)string range:(NSRange)range {
     NSRange textFieldRange = NSMakeRange(0, [textField.text length]);
     if (NSEqualRanges(range, textFieldRange) && [string length] == 0) {
         addButton.enabled = NO;
     } else {
         addButton.enabled = YES;
     }
-    
-    return YES;
 }
 
 @end
