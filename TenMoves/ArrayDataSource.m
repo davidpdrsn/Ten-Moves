@@ -79,6 +79,16 @@
     }
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    if ([self tableView:tableView numberOfRowsInSection:section] > 0 && self.textForFooter) {
+        id<NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[section];
+        NSArray *objects = [sectionInfo objects];
+        return self.textForFooter(objects);
+    } else {
+        return nil;
+    }
+}
+
 #pragma mark - fetched results controller delegate methods
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
@@ -86,6 +96,11 @@
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    if (self.textForFooter) {
+        NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:0];
+        [self.table reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
     [self.table endUpdates];
 }
 

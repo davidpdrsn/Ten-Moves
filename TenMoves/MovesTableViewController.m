@@ -29,6 +29,10 @@
     
     self.dataSource.emptyTableViewHeaderText = @"Zero Moves";
     self.dataSource.emptyTableViewText = @"It seems you haven't added any moves yet. Tap the plus button to get started.";
+    [self.dataSource setTextForFooter:^NSString *(NSArray *moves) {
+        NSInteger remaining = 10 - moves.count;
+        return [NSString stringWithFormat:@"You have %i slot(s) remaining", remaining];
+    }];
     
     self.tableView.delegate = self.dataSource;
     self.tableView.dataSource = self.dataSource;

@@ -14,6 +14,8 @@
 @property (strong, nonatomic) NSString *emptyTableViewHeaderText;
 @property (strong, nonatomic) NSString *emptyTableViewText;
 
+@property (strong, nonatomic) NSString* (^textForFooter)(NSArray *items);
+
 - (instancetype)initWithItems:(NSFetchRequest *)fetchRequest
          managedObjectContext:(NSManagedObjectContext *)managedObjectContext
                cellIdentifier:(NSString *)cellIdentifier
