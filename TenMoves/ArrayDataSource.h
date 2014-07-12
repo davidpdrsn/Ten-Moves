@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "UIScrollView+EmptyDataSet.h"
 
+typedef UITableViewCell* (^ConfigureCellBlock)(UITableViewCell *cell, id item);
+
 @interface ArrayDataSource : NSObject <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property (strong, nonatomic) NSString *emptyTableViewHeaderText;

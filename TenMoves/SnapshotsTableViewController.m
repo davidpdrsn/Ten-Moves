@@ -60,16 +60,17 @@
 }
 
 - (ArrayDataSource *)createDataSource {
-    ArrayDataSource *data = [[ArrayDataSource alloc] initWithItems:[Snapshot fetchRequestForMove:self.move]
-                                                    cellIdentifier:@"Snapshot"
-                                                configureCellBlock:^UITableViewCell *(UITableViewCell *cell, Snapshot *snapshot) {
-                                                    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                                                    [formatter setDateStyle:NSDateFormatterMediumStyle];
-                                                    cell.textLabel.text = [formatter stringFromDate:snapshot.createdAt];
-                                                    
-                                                    return cell;
-                                                }];
-    return data;
+    ConfigureCellBlock configureCell = ^UITableViewCell *(UITableViewCell *cell, Snapshot *snapshot) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterMediumStyle];
+        cell.textLabel.text = [formatter stringFromDate:snapshot.createdAt];
+        
+        return cell;
+    };
+    
+    return [[ArrayDataSource alloc] initWithItems:[Snapshot fetchRequestForMove:self.move]
+                                   cellIdentifier:@"Snapshot"
+                               configureCellBlock:configureCell];
 }
 
 @end

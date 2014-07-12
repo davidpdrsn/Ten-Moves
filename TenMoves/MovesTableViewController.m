@@ -67,7 +67,7 @@
 
 #pragma mark - add move view controller delegate
 
-- (void)addCourseViewControllerDidSave {
+- (void)addMoveViewControllerDidSave {
     [Repository saveWithCompletionHandler:^(NSError *error) {
         if (error) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Missing name" message:@"Are you sure the move has a name?" delegate:nil cancelButtonTitle:@"I'll look into it" otherButtonTitles:nil];
@@ -78,25 +78,27 @@
     }];
 }
 
-- (void)addCourseViewControllerDidCancel:(Move *)moveToDelete {
+- (void)addMoveViewControllerDidCancel:(Move *)moveToDelete {
     [Repository deleteObject:moveToDelete];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (ArrayDataSource *)createDataSource {
+    ConfigureCellBlock configureCell = ^UITableViewCell *(UITableViewCell *cell, Move *move) {
+        MoveTableViewCell *moveCell = (MoveTableViewCell *)cell;
+        moveCell.nameLabel.text = move.name;
+        moveCell.countLabel.text = [NSString stringWithFormat:@"%i", (int)move.snapshots.count];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterMediumStyle];
+        moveCell.detailTextLabel.text = [formatter stringFromDate:move.createdAt];
+        
+        return moveCell;
+    };
+    
     return [[ArrayDataSource alloc] initWithItems:[Move fetchRequest]
                                    cellIdentifier:@"Move"
-                               configureCellBlock:^UITableViewCell *(UITableViewCell *cell, Move *move) {
-                                   MoveTableViewCell *moveCell = (MoveTableViewCell *)cell;
-                                   moveCell.nameLabel.text = move.name;
-                                   moveCell.countLabel.text = [NSString stringWithFormat:@"%i", (int)move.snapshots.count];
-                                   
-                                   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                                   [formatter setDateStyle:NSDateFormatterMediumStyle];
-                                   moveCell.detailTextLabel.text = [formatter stringFromDate:move.createdAt];
-                                   
-                                   return moveCell;
-                               }];
+                               configureCellBlock:configureCell];
 }
 
 @end

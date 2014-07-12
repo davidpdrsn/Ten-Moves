@@ -11,8 +11,8 @@
 
 @protocol AddMoveViewControllerDelegate
 
-- (void)addCourseViewControllerDidSave;
-- (void)addCourseViewControllerDidCancel:(Move *)moveToDelete;
+- (void)addMoveViewControllerDidSave;
+- (void)addMoveViewControllerDidCancel:(Move *)moveToDelete;
 
 @end
 

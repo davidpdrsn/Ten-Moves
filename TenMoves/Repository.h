@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^CompletionWithPossibleErrorBlock)(NSError *);
+
 @interface Repository : NSObject
 
 + (NSManagedObjectContext *)managedObjectContext;

@@ -51,11 +51,11 @@
 - (void)add {
     self.currentMove.name = self.nameField.text;
     
-    [self.delegate addCourseViewControllerDidSave];
+    [self.delegate addMoveViewControllerDidSave];
 }
 
 - (void)cancel {
-    [self.delegate addCourseViewControllerDidCancel:self.currentMove];
+    [self.delegate addMoveViewControllerDidCancel:self.currentMove];
 }
 
 #pragma mark - text field delegate

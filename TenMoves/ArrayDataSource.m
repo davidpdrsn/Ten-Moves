@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSString *cellIdentifier;
-@property (strong, nonatomic) UITableViewCell* (^configureCellBlock)(UITableViewCell *cell, id item);
+@property (strong, nonatomic) ConfigureCellBlock configureCellBlock;
 @property (strong, nonatomic) UITableView *table;
 
 @end
@@ -22,7 +22,7 @@
 
 - (instancetype)initWithItems:(NSFetchRequest *)fetchRequest
                cellIdentifier:(NSString *)cellIdentifier
-           configureCellBlock:(UITableViewCell* (^)(UITableViewCell* cell, id item))configureCellBlock {
+           configureCellBlock:(ConfigureCellBlock)configureCellBlock {
     self = [super init];
     if (self) {
         _cellIdentifier = cellIdentifier;
