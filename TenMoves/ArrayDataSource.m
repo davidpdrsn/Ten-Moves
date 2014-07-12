@@ -114,4 +114,37 @@
     }
 }
 
+#pragma mark - empty table view
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    if (self.emptyTableViewHeaderText) {
+        NSString *text = self.emptyTableViewHeaderText;
+        
+        NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0],
+                                     NSForegroundColorAttributeName: [UIColor lightGrayColor]};
+        
+        return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+    } else {
+        return nil;
+    }
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
+    if (self.emptyTableViewText) {
+        NSString *text = self.emptyTableViewText;
+        
+        NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+        paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+        paragraph.alignment = NSTextAlignmentCenter;
+        
+        NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0],
+                                     NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                     NSParagraphStyleAttributeName: paragraph};
+        
+        return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+    } else {
+        return nil;
+    }
+}
+
 @end

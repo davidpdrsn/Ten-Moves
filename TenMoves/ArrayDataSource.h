@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface ArrayDataSource : NSObject <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@interface ArrayDataSource : NSObject <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+
+@property (strong, nonatomic) NSString *emptyTableViewHeaderText;
+@property (strong, nonatomic) NSString *emptyTableViewText;
 
 - (instancetype)initWithItems:(NSFetchRequest *)fetchRequest
          managedObjectContext:(NSManagedObjectContext *)managedObjectContext
