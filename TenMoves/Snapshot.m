@@ -16,6 +16,7 @@ static NSString *entityName = @"Snapshot";
 
 @dynamic createdAt;
 @dynamic move;
+@dynamic videoPath;
 
 + (instancetype)newManagedObject {
     Snapshot *snapshot = (Snapshot *) [NSEntityDescription insertNewObjectForEntityForName:entityName
@@ -38,6 +39,10 @@ static NSString *entityName = @"Snapshot";
 - (void)awakeFromInsert {
     [super awakeFromInsert];
     [self setValue:[NSDate date] forKey:@"createdAt"];
+}
+
+- (NSURL *)videoUrl {
+    return [[NSURL alloc] initWithString:self.videoPath];
 }
 
 @end

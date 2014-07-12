@@ -19,5 +19,6 @@
 
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) Move *move;
+@property (nonatomic, retain) NSString *videoPath;
 
 @end

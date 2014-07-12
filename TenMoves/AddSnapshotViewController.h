@@ -11,7 +11,7 @@
 
 @protocol AddSnapshowViewControllerDelegate;
 
-@interface AddSnapshotViewController : UIViewController
+@interface AddSnapshotViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) id<AddSnapshowViewControllerDelegate> delegate;
 @property (nonatomic, strong) Snapshot *currentSnapshot;

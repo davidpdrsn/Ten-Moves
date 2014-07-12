@@ -7,10 +7,11 @@
     </entity>
     <entity name="Snapshot" representedClassName="Snapshot" syncable="YES">
         <attribute name="createdAt" attributeType="Date" syncable="YES"/>
+        <attribute name="videoPath" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="move" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Move" inverseName="snapshots" inverseEntity="Move" syncable="YES"/>
     </entity>
     <elements>
         <element name="Move" positionX="-54" positionY="-9" width="128" height="90"/>
-        <element name="Snapshot" positionX="223" positionY="71" width="128" height="73"/>
+        <element name="Snapshot" positionX="223" positionY="71" width="128" height="90"/>
     </elements>
 </model>
