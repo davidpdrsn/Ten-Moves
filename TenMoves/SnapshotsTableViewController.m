@@ -59,19 +59,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (NSFetchRequest *)fetchRequest {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Snapshot" inManagedObjectContext:[Repository managedObjectContext]];
-    [fetchRequest setEntity:entity];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"move = %@", self.move];
-    [fetchRequest setPredicate:predicate];
-    return fetchRequest;
-}
-
 - (ArrayDataSource *)createDataSource {
-    ArrayDataSource *data = [[ArrayDataSource alloc] initWithItems:[self fetchRequest]
+    ArrayDataSource *data = [[ArrayDataSource alloc] initWithItems:[Snapshot fetchRequestForMove:self.move]
                                                     cellIdentifier:@"Snapshot"
                                                 configureCellBlock:^UITableViewCell *(UITableViewCell *cell, Snapshot *snapshot) {
                                                     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

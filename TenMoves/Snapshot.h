@@ -15,6 +15,8 @@
 
 + (instancetype)newManagedObject;
 
++ (NSFetchRequest *)fetchRequestForMove:(Move *)move;
+
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) Move *move;
 

@@ -10,21 +10,34 @@
 #import "Move.h"
 #import "Repository.h"
 
+static NSString *entityName = @"Snapshot";
+
 @implementation Snapshot
 
 @dynamic createdAt;
 @dynamic move;
 
-- (void)awakeFromInsert {
-    [super awakeFromInsert];
-    [self setValue:[NSDate date] forKey:@"createdAt"];
-}
-
 + (instancetype)newManagedObject {
-    Snapshot *snapshot = (Snapshot *) [NSEntityDescription insertNewObjectForEntityForName:@"Snapshot"
+    Snapshot *snapshot = (Snapshot *) [NSEntityDescription insertNewObjectForEntityForName:entityName
                                                                     inManagedObjectContext:[Repository managedObjectContext]];
     
     return snapshot;
+}
+
++ (NSFetchRequest *)fetchRequestForMove:(Move *)move {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:[Repository managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"move = %@", move];
+    [fetchRequest setPredicate:predicate];
+    return fetchRequest;
+}
+
+- (void)awakeFromInsert {
+    [super awakeFromInsert];
+    [self setValue:[NSDate date] forKey:@"createdAt"];
 }
 
 @end

@@ -10,6 +10,8 @@
 #import "Snapshot.h"
 #import "Repository.h"
 
+static NSString *entityName = @"Move";
+
 @implementation Move
 
 @dynamic createdAt;
@@ -17,10 +19,20 @@
 @dynamic snapshots;
 
 + (instancetype)newManagedObject {
-    Move *move = (Move *) [NSEntityDescription insertNewObjectForEntityForName:@"Move"
+    Move *move = (Move *) [NSEntityDescription insertNewObjectForEntityForName:entityName
                                                         inManagedObjectContext:[Repository managedObjectContext]];
     
     return move;
+}
+
++ (NSFetchRequest *)fetchRequest {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:[Repository managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+    
+    return fetchRequest;
 }
 
 - (void)awakeFromInsert {

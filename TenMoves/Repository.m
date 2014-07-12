@@ -10,6 +10,8 @@
 
 static NSManagedObjectContext *_managedObjectContext;
 
+typedef void (^completionWithPossibleErrorBlock)(NSError *);
+
 @implementation Repository
 
 + (NSManagedObjectContext *)managedObjectContext {
@@ -24,7 +26,7 @@ static NSManagedObjectContext *_managedObjectContext;
     [_managedObjectContext deleteObject:objectToDelete];
 }
 
-+ (void)saveWithCompletionHandler:(void (^)(NSError *))completionHandler {
++ (void)saveWithCompletionHandler:(completionWithPossibleErrorBlock)completionHandler {
     NSError *error;
     [_managedObjectContext save:&error];
     completionHandler(error);

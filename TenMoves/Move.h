@@ -19,6 +19,8 @@
 
 + (instancetype)newManagedObject;
 
++ (NSFetchRequest *)fetchRequest;
+
 @end
 
 @interface Move (CoreDataGeneratedAccessors)

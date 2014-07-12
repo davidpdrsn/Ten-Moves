@@ -83,17 +83,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (NSFetchRequest *)fetchRequest {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Move" inManagedObjectContext:[Repository managedObjectContext]];
-    [fetchRequest setEntity:entity];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
-    return fetchRequest;
-}
-
 - (ArrayDataSource *)createDataSource {
-    return [[ArrayDataSource alloc] initWithItems:[self fetchRequest]
+    return [[ArrayDataSource alloc] initWithItems:[Move fetchRequest]
                                    cellIdentifier:@"Move"
                                configureCellBlock:^UITableViewCell *(UITableViewCell *cell, Move *move) {
                                    MoveTableViewCell *moveCell = (MoveTableViewCell *)cell;
