@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AddMoveViewController.h"
-#import "UIScrollView+EmptyDataSet.h"
 
-@interface MovesTableViewController : UITableViewController <AddMoveViewControllerDelegate, NSFetchedResultsControllerDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
+@interface MovesTableViewController : UITableViewController <AddMoveViewControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end
