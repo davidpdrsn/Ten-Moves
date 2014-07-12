@@ -25,26 +25,15 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMove)];
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Move" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+    self.dataSource = [self createDataSource];
     
-    self.dataSource = [[ArrayDataSource alloc] initWithItems:fetchRequest managedObjectContext:self.managedObjectContext cellIdentifier:@"Move" configureCellBlock:^UITableViewCell *(UITableViewCell *cell, Move *move) {
-        MoveTableViewCell *moveCell = (MoveTableViewCell *)cell;
-        moveCell.nameLabel.text = move.name;
-        moveCell.countLabel.text = [NSString stringWithFormat:@"%i", (int)move.snapshots.count];
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateStyle:NSDateFormatterMediumStyle];
-        moveCell.detailTextLabel.text = [formatter stringFromDate:move.createdAt];
-        
-        return moveCell;
-    }];
+    self.dataSource.emptyTableViewHeaderText = @"Zero Moves";
+    self.dataSource.emptyTableViewText = @"It seems you haven't added any moves yet. Tap the plus button to get started.";
     
     self.tableView.delegate = self.dataSource;
     self.tableView.dataSource = self.dataSource;
+    self.tableView.emptyDataSetDelegate = self.dataSource;
+    self.tableView.emptyDataSetSource = self.dataSource;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -90,4 +79,31 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (NSFetchRequest *)fetchRequest {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Move" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+    return fetchRequest;
+}
+
+- (ArrayDataSource *)createDataSource {
+    return [[ArrayDataSource alloc] initWithItems:[self fetchRequest]
+                             managedObjectContext:self.managedObjectContext
+                                   cellIdentifier:@"Move"
+                               configureCellBlock:^UITableViewCell *(UITableViewCell *cell, Move *move) {
+                                   MoveTableViewCell *moveCell = (MoveTableViewCell *)cell;
+                                   moveCell.nameLabel.text = move.name;
+                                   moveCell.countLabel.text = [NSString stringWithFormat:@"%i", (int)move.snapshots.count];
+                                   
+                                   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                                   [formatter setDateStyle:NSDateFormatterMediumStyle];
+                                   moveCell.detailTextLabel.text = [formatter stringFromDate:move.createdAt];
+                                   
+                                   return moveCell;
+                               }];
+}
+
 @end
+

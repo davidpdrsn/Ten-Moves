@@ -17,6 +17,5 @@
 @property (nonatomic, strong) Move *move;
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end
