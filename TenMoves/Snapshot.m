@@ -8,7 +8,7 @@
 
 #import "Snapshot.h"
 #import "Move.h"
-
+#import "Repository.h"
 
 @implementation Snapshot
 
@@ -18,6 +18,13 @@
 - (void)awakeFromInsert {
     [super awakeFromInsert];
     [self setValue:[NSDate date] forKey:@"createdAt"];
+}
+
++ (instancetype)newManagedObject {
+    Snapshot *snapshot = (Snapshot *) [NSEntityDescription insertNewObjectForEntityForName:@"Snapshot"
+                                                                    inManagedObjectContext:[Repository managedObjectContext]];
+    
+    return snapshot;
 }
 
 @end

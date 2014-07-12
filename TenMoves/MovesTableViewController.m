@@ -11,6 +11,7 @@
 #import "MoveTableViewCell.h"
 #import "SnapshotsTableViewController.h"
 #import "ArrayDataSource.h"
+#import "Repository.h"
 
 @interface MovesTableViewController ()
 
@@ -47,8 +48,7 @@
 - (void)addNewMove {
     UIStoryboard *storyBoard = [self storyboard];
     AddMoveViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"AddMoveViewController"];
-    Move *move = (Move *) [NSEntityDescription insertNewObjectForEntityForName:@"Move"
-                                                        inManagedObjectContext:self.managedObjectContext];
+    Move *move = [Move newManagedObject];
     vc.currentMove = move;
     vc.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
@@ -62,30 +62,30 @@
     if ([segue.identifier isEqualToString:@"showSnapshots"]) {
         SnapshotsTableViewController *destination = (SnapshotsTableViewController *) segue.destinationViewController;
         destination.move = [self.dataSource itemAtIndexPath:[self.tableView indexPathForSelectedRow]];
-        destination.managedObjectContext = self.managedObjectContext;
     }
 }
 
 #pragma mark - add move view controller delegate
 
 - (void)addCourseViewControllerDidSave {
-    NSError *error;
-    if (![self.managedObjectContext save:&error]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Missing name" message:@"Are you sure the move has a name?" delegate:nil cancelButtonTitle:@"I'll look into it" otherButtonTitles:nil];
-        [alert show];
-    } else {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
+    [Repository saveWithCompletionHandler:^(NSError *error) {
+        if (error) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Missing name" message:@"Are you sure the move has a name?" delegate:nil cancelButtonTitle:@"I'll look into it" otherButtonTitles:nil];
+            [alert show];
+        } else {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
 }
 
 - (void)addCourseViewControllerDidCancel:(Move *)moveToDelete {
-    [self.managedObjectContext deleteObject:moveToDelete];
+    [Repository deleteObject:moveToDelete];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (NSFetchRequest *)fetchRequest {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Move" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Move" inManagedObjectContext:[Repository managedObjectContext]];
     [fetchRequest setEntity:entity];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
@@ -94,7 +94,6 @@
 
 - (ArrayDataSource *)createDataSource {
     return [[ArrayDataSource alloc] initWithItems:[self fetchRequest]
-                             managedObjectContext:self.managedObjectContext
                                    cellIdentifier:@"Move"
                                configureCellBlock:^UITableViewCell *(UITableViewCell *cell, Move *move) {
                                    MoveTableViewCell *moveCell = (MoveTableViewCell *)cell;

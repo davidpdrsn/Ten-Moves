@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Repository.h"
 
 @implementation AppDelegate
 
@@ -16,10 +17,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+    [Repository setManagedObjectContext:self.managedObjectContext];
     
-    MovesTableViewController *vc = (MovesTableViewController *)nav.viewControllers.firstObject;
-    vc.managedObjectContext = self.managedObjectContext;
     return YES;
 }
 

@@ -13,6 +13,8 @@
 
 @interface Snapshot : NSManagedObject
 
++ (instancetype)newManagedObject;
+
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) Move *move;
 

@@ -17,7 +17,6 @@
 @property (strong, nonatomic) NSString* (^textForFooter)(NSArray *items);
 
 - (instancetype)initWithItems:(NSFetchRequest *)fetchRequest
-         managedObjectContext:(NSManagedObjectContext *)managedObjectContext
                cellIdentifier:(NSString *)cellIdentifier
            configureCellBlock:(UITableViewCell* (^)(UITableViewCell* cell, id item))configureCellBlock;
 

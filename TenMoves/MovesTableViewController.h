@@ -11,6 +11,4 @@
 
 @interface MovesTableViewController : UITableViewController <AddMoveViewControllerDelegate>
 
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-
 @end

@@ -8,6 +8,7 @@
 
 #import "SnapshotsTableViewController.h"
 #import "ArrayDataSource.h"
+#import "Repository.h"
 
 @interface SnapshotsTableViewController ()
 
@@ -31,8 +32,7 @@
 - (void)addSnapshot {
     UIStoryboard *storyBoard = [self storyboard];
     AddSnapshotViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"AddSnapshotViewController"];
-    Snapshot *snapshot = (Snapshot *) [NSEntityDescription insertNewObjectForEntityForName:@"Snapshot"
-                                                        inManagedObjectContext:self.managedObjectContext];
+    Snapshot *snapshot = [Snapshot newManagedObject];
     [self.move addSnapshotsObject:snapshot];
     vc.currentSnapshot = snapshot;
     vc.delegate = self;
@@ -44,23 +44,24 @@
 #pragma mark - add snapshot delegate
 
 - (void)addSnapshotViewControllerDidSave {
-    NSError *error;
-    if (![self.managedObjectContext save:&error]) {
-        NSLog(@"Error saving - %@", error);
-    }
+    [Repository saveWithCompletionHandler:^(NSError *error) {
+        if (error) {
+            NSLog(@"Error saving - %@", error);
+        }
+    }];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)addSnapshotViewControllerDidCancel:(Snapshot *)snapshotToDelete {
     [self.move removeSnapshotsObject:snapshotToDelete];
-    [self.managedObjectContext deleteObject:snapshotToDelete];
+    [Repository deleteObject:snapshotToDelete];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (NSFetchRequest *)fetchRequest {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Snapshot" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Snapshot" inManagedObjectContext:[Repository managedObjectContext]];
     [fetchRequest setEntity:entity];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
@@ -71,7 +72,6 @@
 
 - (ArrayDataSource *)createDataSource {
     ArrayDataSource *data = [[ArrayDataSource alloc] initWithItems:[self fetchRequest]
-                                              managedObjectContext:self.managedObjectContext
                                                     cellIdentifier:@"Snapshot"
                                                 configureCellBlock:^UITableViewCell *(UITableViewCell *cell, Snapshot *snapshot) {
                                                     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

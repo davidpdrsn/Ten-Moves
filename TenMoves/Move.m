@@ -8,13 +8,20 @@
 
 #import "Move.h"
 #import "Snapshot.h"
-
+#import "Repository.h"
 
 @implementation Move
 
 @dynamic createdAt;
 @dynamic name;
 @dynamic snapshots;
+
++ (instancetype)newManagedObject {
+    Move *move = (Move *) [NSEntityDescription insertNewObjectForEntityForName:@"Move"
+                                                        inManagedObjectContext:[Repository managedObjectContext]];
+    
+    return move;
+}
 
 - (void)awakeFromInsert {
     [super awakeFromInsert];

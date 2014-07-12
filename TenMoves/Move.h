@@ -17,6 +17,8 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *snapshots;
 
++ (instancetype)newManagedObject;
+
 @end
 
 @interface Move (CoreDataGeneratedAccessors)

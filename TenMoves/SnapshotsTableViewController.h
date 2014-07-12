@@ -16,6 +16,4 @@
 
 @property (nonatomic, strong) Move *move;
 
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-
 @end

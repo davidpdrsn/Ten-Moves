@@ -7,13 +7,13 @@
 //
 
 #import "ArrayDataSource.h"
+#import "Repository.h"
 
 @interface ArrayDataSource ()
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSString *cellIdentifier;
 @property (strong, nonatomic) UITableViewCell* (^configureCellBlock)(UITableViewCell *cell, id item);
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) UITableView *table;
 
 @end
@@ -21,16 +21,14 @@
 @implementation ArrayDataSource
 
 - (instancetype)initWithItems:(NSFetchRequest *)fetchRequest
-         managedObjectContext:(NSManagedObjectContext *)managedObjectContext
                cellIdentifier:(NSString *)cellIdentifier
            configureCellBlock:(UITableViewCell* (^)(UITableViewCell* cell, id item))configureCellBlock {
     self = [super init];
     if (self) {
         _cellIdentifier = cellIdentifier;
         _configureCellBlock = configureCellBlock;
-        _managedObjectContext = managedObjectContext;
         
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[Repository managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
         
         _fetchedResultsController.delegate = self;
         
@@ -70,12 +68,13 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         id itemToDelete = [self itemAtIndexPath:indexPath];
-        [self.managedObjectContext deleteObject:itemToDelete];
+        [Repository deleteObject:itemToDelete];
         
-        NSError *error;
-        if (![self.managedObjectContext save:&error]) {
-            NSLog(@"Error %@", error);
-        }
+        [Repository saveWithCompletionHandler:^(NSError *error) {
+            if (error) {
+                NSLog(@"Error %@", error);
+            }
+        }];
     }
 }
 
