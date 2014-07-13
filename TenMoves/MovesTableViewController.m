@@ -24,23 +24,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMove)];
-    self.navigationItem.rightBarButtonItem = self.addButton;
-    [self enableOrDisableAddButton];
-    
     self.dataSource = [self createDataSource];
     self.dataSource.delegate = self;
     self.dataSource.emptyTableViewHeaderText = @"Zero Moves";
     self.dataSource.emptyTableViewText = @"It seems you haven't added any moves yet. Tap the plus button to get started.";
     
+    self.addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMove)];
+    self.navigationItem.rightBarButtonItem = self.addButton;
+    [self enableOrDisableAddButton];
+    
     self.tableView.delegate = self.dataSource;
     self.tableView.dataSource = self.dataSource;
     self.tableView.emptyDataSetDelegate = self.dataSource;
     self.tableView.emptyDataSetSource = self.dataSource;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
 }
 
 - (void)addNewMove {
