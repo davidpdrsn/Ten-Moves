@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImageViewWithSnapshot.h"
 
 @interface SnapshotTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *thumbnailImageView;
+@property (strong, nonatomic) IBOutlet ImageViewWithSnapshot *thumbnailImageView;
 
 @end

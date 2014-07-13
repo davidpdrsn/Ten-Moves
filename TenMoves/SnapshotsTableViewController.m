@@ -12,6 +12,7 @@
 #import "UITableViewCell+HelperMethods.h"
 #import "ALAssetsLibrary+HelperMethods.h"
 #import "SnapshotTableViewCell.h"
+#import "ImageViewWithSnapshot.h"
 @import MediaPlayer;
 @import AssetsLibrary;
 @import AVFoundation;
@@ -52,24 +53,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Snapshot *snapshot = [self.dataSource itemAtIndexPath:indexPath];
-
-    [ALAssetsLibrary assetForURL:[snapshot videoUrl] resultBlock:^(ALAsset *asset) {
-        self.player = [[MPMoviePlayerController alloc] initWithContentURL:[snapshot videoUrl]];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(moviePlayBackDidFinish:)
-                                                     name:MPMoviePlayerWillExitFullscreenNotification
-                                                   object:nil];
-        
-        [self.view addSubview:self.player.view];
-        [self.player.view setFrame:self.view.frame];
-        [self.player setFullscreen:YES animated:YES];
-        [self.player play];
-    } failureBlock:^(NSError *error) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Video not found" message:@"..." delegate:nil cancelButtonTitle:@"Ups" otherButtonTitles:nil];
-        [alert show];
-    }];
 }
 
 - (void)moviePlayBackDidFinish:(NSNotification *)notification {
@@ -102,6 +85,11 @@
         [ALAssetsLibrary assetForURL:snapshot.videoUrl resultBlock:^(ALAsset *asset) {
             UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
             snapshotCell.thumbnailImageView.image = image;
+            
+            UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
+            [snapshotCell.thumbnailImageView addGestureRecognizer:tapped];
+            snapshotCell.thumbnailImageView.userInteractionEnabled = YES;
+            snapshotCell.thumbnailImageView.snapshot = snapshot;
         } failureBlock:^(NSError *error) {
             NSLog(@"image not found...");
         }];
@@ -112,6 +100,28 @@
     return [[ArrayDataSource alloc] initWithItems:[Snapshot fetchRequestForMove:self.move]
                                    cellIdentifier:@"Snapshot"
                                configureCellBlock:configureCell];
+}
+
+- (void)imageTapped:(UIGestureRecognizer *)gesture {
+    ImageViewWithSnapshot *imageView = (ImageViewWithSnapshot *)gesture.view;
+    Snapshot *snapshot = imageView.snapshot;
+    
+    [ALAssetsLibrary assetForURL:[snapshot videoUrl] resultBlock:^(ALAsset *asset) {
+        self.player = [[MPMoviePlayerController alloc] initWithContentURL:[snapshot videoUrl]];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(moviePlayBackDidFinish:)
+                                                     name:MPMoviePlayerWillExitFullscreenNotification
+                                                   object:nil];
+        
+        [self.view addSubview:self.player.view];
+        [self.player.view setFrame:self.view.frame];
+        [self.player setFullscreen:YES animated:YES];
+        [self.player play];
+    } failureBlock:^(NSError *error) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Video not found" message:@"..." delegate:nil cancelButtonTitle:@"Ups" otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 - (NSDateFormatter *)formatter {
