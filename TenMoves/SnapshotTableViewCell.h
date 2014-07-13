@@ -10,7 +10,7 @@
 
 @interface SnapshotTableViewCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *thumbnailImageView;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *thumbnailImageView;
 
 @end
