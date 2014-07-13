@@ -7,16 +7,19 @@
 //
 
 #import "UITableViewCell+HelperMethods.h"
+#import "ALAssetsLibrary+HelperMethods.h"
 @import AssetsLibrary;
 
 @implementation UITableViewCell (HelperMethods)
 
 - (void)setImageWithAssetUrl:(NSURL *)url {
-    ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
-    
-    [library assetForURL:url resultBlock:^(ALAsset *asset) {
+    [self setImageWithAssetUrl:url forKeyPath:@"imageView.image"];
+}
+
+- (void)setImageWithAssetUrl:(NSURL *)url forKeyPath:(NSString *)keyPath {
+    [ALAssetsLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
         UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
-        self.imageView.image = image;
+        [self setValue:image forKey:keyPath];
         [self setNeedsLayout];
     } failureBlock:^(NSError *error) {
         NSLog(@"Image not found");

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		84DE765F5B484136A47281D2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE63772FF7C54DF5B88E07D2 /* libPods.a */; };
 		8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 860129991972886A0053C71D /* UITableViewCell+HelperMethods.m */; };
+		8601299E197297280053C71D /* ALAssetsLibrary+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */; };
+		8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */; };
 		8685E3B1196F58CB00A97585 /* Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B0196F58CB00A97585 /* Snapshot.m */; };
 		8685E3B4196F595E00A97585 /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B3196F595E00A97585 /* Move.m */; };
 		8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B6196F5B0900A97585 /* MoveTableViewCell.m */; };
@@ -50,6 +52,10 @@
 		4816D04F5138490DBFCB6865 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		860129981972886A0053C71D /* UITableViewCell+HelperMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+HelperMethods.h"; sourceTree = "<group>"; };
 		860129991972886A0053C71D /* UITableViewCell+HelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+HelperMethods.m"; sourceTree = "<group>"; };
+		8601299C197297280053C71D /* ALAssetsLibrary+HelperMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+HelperMethods.h"; sourceTree = "<group>"; };
+		8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+HelperMethods.m"; sourceTree = "<group>"; };
+		8658D0FB197302FB00A2B36C /* SnapshotTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotTableViewCell.h; sourceTree = "<group>"; };
+		8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotTableViewCell.m; sourceTree = "<group>"; };
 		8671A8B7197181CA00C7C0F6 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		8685E3AF196F58CB00A97585 /* Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snapshot.h; sourceTree = "<group>"; };
 		8685E3B0196F58CB00A97585 /* Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snapshot.m; sourceTree = "<group>"; };
@@ -121,6 +127,8 @@
 		8601299B19728FC90053C71D /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				8601299C197297280053C71D /* ALAssetsLibrary+HelperMethods.h */,
+				8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */,
 				860129981972886A0053C71D /* UITableViewCell+HelperMethods.h */,
 				860129991972886A0053C71D /* UITableViewCell+HelperMethods.m */,
 			);
@@ -130,6 +138,8 @@
 		8685E3B8196F5B0E00A97585 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				8658D0FB197302FB00A2B36C /* SnapshotTableViewCell.h */,
+				8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */,
 				8685E3B5196F5B0900A97585 /* MoveTableViewCell.h */,
 				8685E3B6196F5B0900A97585 /* MoveTableViewCell.m */,
 			);
@@ -397,6 +407,8 @@
 				86A3F26319712D7900E389A1 /* ArrayDataSource.m in Sources */,
 				86ED30C2196F0F0F00FC738B /* main.m in Sources */,
 				8685E3BE196F6A9200A97585 /* AddSnapshotViewController.m in Sources */,
+				8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */,
+				8601299E197297280053C71D /* ALAssetsLibrary+HelperMethods.m in Sources */,
 				86ED30EF196F120700FC738B /* MovesTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

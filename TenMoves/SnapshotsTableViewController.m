@@ -10,6 +10,8 @@
 #import "ArrayDataSource.h"
 #import "Repository.h"
 #import "UITableViewCell+HelperMethods.h"
+#import "ALAssetsLibrary+HelperMethods.h"
+#import "SnapshotTableViewCell.h"
 @import MediaPlayer;
 @import AssetsLibrary;
 @import AVFoundation;
@@ -52,9 +54,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Snapshot *snapshot = [self.dataSource itemAtIndexPath:indexPath];
 
-    ALAssetsLibrary *lib = [[ALAssetsLibrary alloc] init];
-    
-    [lib assetForURL:[snapshot videoUrl] resultBlock:^(ALAsset *asset) {
+    [ALAssetsLibrary assetForURL:[snapshot videoUrl] resultBlock:^(ALAsset *asset) {
         self.player = [[MPMoviePlayerController alloc] initWithContentURL:[snapshot videoUrl]];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -96,13 +96,17 @@
 
 - (ArrayDataSource *)createDataSource {
     ConfigureCellBlock configureCell = ^UITableViewCell *(UITableViewCell *cell, Snapshot *snapshot) {
-        [cell setImageWithAssetUrl:[snapshot videoUrl]];
+        SnapshotTableViewCell *snapshotCell = (SnapshotTableViewCell *)cell;
+        snapshotCell.dateLabel.text = [self.formatter stringFromDate:snapshot.createdAt];
         
-        cell.textLabel.text = [self.formatter stringFromDate:snapshot.createdAt];
+        [ALAssetsLibrary assetForURL:snapshot.videoUrl resultBlock:^(ALAsset *asset) {
+            UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
+            snapshotCell.thumbnailImageView.image = image;
+        } failureBlock:^(NSError *error) {
+            NSLog(@"image not found...");
+        }];
         
-        [cell setNeedsLayout];
-        
-        return cell;
+        return snapshotCell;
     };
     
     return [[ArrayDataSource alloc] initWithItems:[Snapshot fetchRequestForMove:self.move]

@@ -11,5 +11,6 @@
 @interface UITableViewCell (HelperMethods)
 
 - (void)setImageWithAssetUrl:(NSURL *)url;
+- (void)setImageWithAssetUrl:(NSURL *)url forKeyPath:(NSString *)keyPath;
 
 @end
