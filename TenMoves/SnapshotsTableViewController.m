@@ -47,12 +47,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Snapshot *snapshot = [self.dataSource itemAtIndexPath:indexPath];
-    NSURL *videoUrl = [NSURL URLWithString:snapshot.videoPath];
 
     ALAssetsLibrary *lib = [[ALAssetsLibrary alloc] init];
     
-    [lib assetForURL:videoUrl resultBlock:^(ALAsset *asset) {
-        _player = [[MPMoviePlayerController alloc] initWithContentURL:videoUrl];
+    [lib assetForURL:[snapshot videoUrl] resultBlock:^(ALAsset *asset) {
+        _player = [[MPMoviePlayerController alloc] initWithContentURL:[snapshot videoUrl]];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(moviePlayBackDidFinish:)

@@ -42,7 +42,7 @@ static NSString *entityName = @"Snapshot";
 }
 
 - (NSURL *)videoUrl {
-    return [[NSURL alloc] initWithString:self.videoPath];
+    return [NSURL URLWithString:self.videoPath];
 }
 
 @end

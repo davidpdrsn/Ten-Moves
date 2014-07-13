@@ -21,4 +21,6 @@
 @property (nonatomic, retain) Move *move;
 @property (nonatomic, retain) NSString *videoPath;
 
+- (NSURL *)videoUrl;
+
 @end

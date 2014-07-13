@@ -19,7 +19,6 @@
 @interface AddMoveViewController : UIViewController <UITextFieldDelegate>
 
 @property (nonatomic, strong) Move *currentMove;
-
-@property (nonatomic, weak) id<AddMoveViewControllerDelegate> delegate;
+@property (nonatomic, strong) id<AddMoveViewControllerDelegate> delegate;
 
 @end
