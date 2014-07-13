@@ -10,7 +10,7 @@
 #import "Snapshot.h"
 #import "Repository.h"
 
-static NSString *entityName = @"Move";
+#define ENTITY_NAME @"Move"
 
 @implementation Move
 
@@ -19,7 +19,7 @@ static NSString *entityName = @"Move";
 @dynamic snapshots;
 
 + (instancetype)newManagedObject {
-    Move *move = (Move *) [NSEntityDescription insertNewObjectForEntityForName:entityName
+    Move *move = (Move *) [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
                                                         inManagedObjectContext:[Repository managedObjectContext]];
     
     return move;
@@ -27,7 +27,7 @@ static NSString *entityName = @"Move";
 
 + (NSFetchRequest *)fetchRequest {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:[Repository managedObjectContext]];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:ENTITY_NAME inManagedObjectContext:[Repository managedObjectContext]];
     [fetchRequest setEntity:entity];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
