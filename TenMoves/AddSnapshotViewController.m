@@ -60,7 +60,7 @@
     UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
     mediaUI.sourceType = type;
     mediaUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-    mediaUI.allowsEditing = NO;
+    mediaUI.allowsEditing = YES;
     mediaUI.delegate = delegate;
     [controller presentViewController:mediaUI animated:YES completion:nil];
     return YES;
