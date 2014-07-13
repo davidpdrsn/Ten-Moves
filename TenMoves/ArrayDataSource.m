@@ -40,6 +40,10 @@
     return self;
 }
 
+- (NSUInteger)totalNumberOfObjects {
+    return self.fetchedResultsController.fetchedObjects.count;
+}
+
 #pragma mark - table view data source methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -79,10 +83,8 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if ([self tableView:tableView numberOfRowsInSection:section] > 0 && self.textForFooter) {
-        id<NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[section];
-        NSArray *objects = [sectionInfo objects];
-        return self.textForFooter(objects);
+    if (self.delegate && [self.delegate respondsToSelector:@selector(arrayDataSource:textForFooterView:)]) {
+        return [self.delegate arrayDataSource:self textForFooterView:self.fetchedResultsController.fetchedObjects];
     } else {
         return nil;
     }
@@ -95,9 +97,13 @@
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    if (self.textForFooter) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(arrayDataSource:textForFooterView:)]) {
         NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:0];
         [self.table reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(arrayDataSourceDidChangeData:)]) {
+        [self.delegate arrayDataSourceDidChangeData:self];
     }
     
     [self.table endUpdates];
