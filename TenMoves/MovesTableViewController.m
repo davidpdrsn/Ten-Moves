@@ -10,12 +10,12 @@
 #import "Move.h"
 #import "MoveTableViewCell.h"
 #import "SnapshotsTableViewController.h"
-#import "ArrayDataSource.h"
 #import "Repository.h"
 
 @interface MovesTableViewController ()
 
 @property (strong, nonatomic) ArrayDataSource *dataSource;
+@property (strong, nonatomic) UIBarButtonItem *addButton;
 
 @end
 
@@ -24,16 +24,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMove)];
+    self.addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMove)];
+    self.navigationItem.rightBarButtonItem = self.addButton;
+    [self enableOrDisableAddButton];
     
     self.dataSource = [self createDataSource];
-    
+    self.dataSource.delegate = self;
     self.dataSource.emptyTableViewHeaderText = @"Zero Moves";
     self.dataSource.emptyTableViewText = @"It seems you haven't added any moves yet. Tap the plus button to get started.";
-    [self.dataSource setTextForFooter:^NSString *(NSArray *moves) {
-        NSInteger remaining = 10 - moves.count;
-        return [NSString stringWithFormat:@"You have %i slot(s) remaining", (int)remaining];
-    }];
     
     self.tableView.delegate = self.dataSource;
     self.tableView.dataSource = self.dataSource;
@@ -54,6 +52,14 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     nav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)enableOrDisableAddButton {
+    if ([self.dataSource totalNumberOfObjects] >= 10) {
+        self.addButton.enabled = NO;
+    } else {
+        self.addButton.enabled = YES;
+    }
 }
 
 #pragma mark - segue
@@ -77,6 +83,8 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
+    
+    [self enableOrDisableAddButton];
 }
 
 // TODO: this method does not belong here
@@ -101,6 +109,21 @@
     return [[ArrayDataSource alloc] initWithItems:[Move fetchRequest]
                                    cellIdentifier:@"Move"
                                configureCellBlock:configureCell];
+}
+
+#pragma mark - array data source delegate
+
+- (NSString *)arrayDataSource:(ArrayDataSource *)arrayDataSource textForFooterView:(NSArray *)objects {
+    if (objects.count == 0) {
+        return nil;
+    } else {
+        NSInteger remaining = 10 - objects.count;
+        return [NSString stringWithFormat:@"You have %i slot(s) remaining", (int)remaining];
+    }
+}
+
+- (void)arrayDataSourceDidChangeData:(ArrayDataSource *)arrayDataSource {
+    [self enableOrDisableAddButton];
 }
 
 @end
