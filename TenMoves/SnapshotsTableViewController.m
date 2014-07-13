@@ -9,6 +9,7 @@
 #import "SnapshotsTableViewController.h"
 #import "ArrayDataSource.h"
 #import "Repository.h"
+#import "UITableViewCell+HelperMethods.h"
 @import MediaPlayer;
 @import AssetsLibrary;
 @import AVFoundation;
@@ -17,10 +18,13 @@
 
 @property (strong, nonatomic) ArrayDataSource *dataSource;
 @property (strong, nonatomic) MPMoviePlayerController *player;
+@property (strong, readonly, nonatomic) NSDateFormatter *formatter;
 
 @end
 
 @implementation SnapshotsTableViewController
+
+@synthesize formatter = __formatter;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,17 +55,17 @@
     ALAssetsLibrary *lib = [[ALAssetsLibrary alloc] init];
     
     [lib assetForURL:[snapshot videoUrl] resultBlock:^(ALAsset *asset) {
-        _player = [[MPMoviePlayerController alloc] initWithContentURL:[snapshot videoUrl]];
+        self.player = [[MPMoviePlayerController alloc] initWithContentURL:[snapshot videoUrl]];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(moviePlayBackDidFinish:)
                                                      name:MPMoviePlayerWillExitFullscreenNotification
                                                    object:nil];
         
-        [self.view addSubview:_player.view];
-        [_player.view setFrame:self.view.frame];
-        [_player setFullscreen:YES animated:YES];
-        [_player play];
+        [self.view addSubview:self.player.view];
+        [self.player.view setFrame:self.view.frame];
+        [self.player setFullscreen:YES animated:YES];
+        [self.player play];
     } failureBlock:^(NSError *error) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Video not found" message:@"..." delegate:nil cancelButtonTitle:@"Ups" otherButtonTitles:nil];
         [alert show];
@@ -69,7 +73,7 @@
 }
 
 - (void)moviePlayBackDidFinish:(NSNotification *)notification {
-    [_player.view removeFromSuperview];
+    [self.player.view removeFromSuperview];
 }
 
 #pragma mark - add snapshot delegate
@@ -92,19 +96,11 @@
 
 - (ArrayDataSource *)createDataSource {
     ConfigureCellBlock configureCell = ^UITableViewCell *(UITableViewCell *cell, Snapshot *snapshot) {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateStyle:NSDateFormatterMediumStyle];
+        [cell setImageWithAssetUrl:[snapshot videoUrl]];
         
-        ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
+        cell.textLabel.text = [self.formatter stringFromDate:snapshot.createdAt];
         
-        [library assetForURL:[NSURL URLWithString:snapshot.videoPath] resultBlock:^(ALAsset *asset) {
-            UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
-            cell.imageView.image = image;
-            [cell setNeedsLayout];
-        } failureBlock:^(NSError *error) {
-        }];
-        
-        cell.textLabel.text = [formatter stringFromDate:snapshot.createdAt];
+        [cell setNeedsLayout];
         
         return cell;
     };
@@ -112,6 +108,13 @@
     return [[ArrayDataSource alloc] initWithItems:[Snapshot fetchRequestForMove:self.move]
                                    cellIdentifier:@"Snapshot"
                                configureCellBlock:configureCell];
+}
+
+- (NSDateFormatter *)formatter {
+    if (__formatter) return __formatter;
+    __formatter = [[NSDateFormatter alloc] init];
+    [__formatter setDateStyle:NSDateFormatterMediumStyle];
+    return  __formatter;
 }
 
 @end

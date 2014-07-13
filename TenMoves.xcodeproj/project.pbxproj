@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		84DE765F5B484136A47281D2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE63772FF7C54DF5B88E07D2 /* libPods.a */; };
+		8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 860129991972886A0053C71D /* UITableViewCell+HelperMethods.m */; };
 		8685E3B1196F58CB00A97585 /* Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B0196F58CB00A97585 /* Snapshot.m */; };
 		8685E3B4196F595E00A97585 /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B3196F595E00A97585 /* Move.m */; };
 		8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B6196F5B0900A97585 /* MoveTableViewCell.m */; };
@@ -47,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		4816D04F5138490DBFCB6865 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		860129981972886A0053C71D /* UITableViewCell+HelperMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+HelperMethods.h"; sourceTree = "<group>"; };
+		860129991972886A0053C71D /* UITableViewCell+HelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+HelperMethods.m"; sourceTree = "<group>"; };
 		8671A8B7197181CA00C7C0F6 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		8685E3AF196F58CB00A97585 /* Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snapshot.h; sourceTree = "<group>"; };
 		8685E3B0196F58CB00A97585 /* Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snapshot.m; sourceTree = "<group>"; };
@@ -115,6 +118,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8601299B19728FC90053C71D /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				860129981972886A0053C71D /* UITableViewCell+HelperMethods.h */,
+				860129991972886A0053C71D /* UITableViewCell+HelperMethods.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		8685E3B8196F5B0E00A97585 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +184,7 @@
 			children = (
 				86A3F2651971578900E389A1 /* Repository.h */,
 				86A3F2661971578900E389A1 /* Repository.m */,
+				8601299B19728FC90053C71D /* Categories */,
 				86A3F26419712D7D00E389A1 /* DataSources */,
 				8685E3B8196F5B0E00A97585 /* CustomViews */,
 				86EE8D95196F503200EE4DCF /* ViewControllers */,
@@ -374,6 +387,7 @@
 			files = (
 				8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */,
 				8685E3B1196F58CB00A97585 /* Snapshot.m in Sources */,
+				8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */,
 				86ED30F2196F193200FC738B /* AddMoveViewController.m in Sources */,
 				8685E3B4196F595E00A97585 /* Move.m in Sources */,
 				8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */,
