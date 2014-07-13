@@ -29,7 +29,7 @@ static NSString *entityName = @"Snapshot";
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:[Repository managedObjectContext]];
     [fetchRequest setEntity:entity];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"move = %@", move];
     [fetchRequest setPredicate:predicate];
