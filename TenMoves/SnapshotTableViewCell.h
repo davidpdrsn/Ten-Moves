@@ -13,5 +13,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet ImageViewWithSnapshot *thumbnailImageView;
+@property (weak, nonatomic) IBOutlet UILabel *ratingsLabel;
 
 @end

@@ -81,6 +81,7 @@
     ConfigureCellBlock configureCell = ^UITableViewCell *(UITableViewCell *cell, Snapshot *snapshot) {
         SnapshotTableViewCell *snapshotCell = (SnapshotTableViewCell *)cell;
         snapshotCell.dateLabel.text = [self.formatter stringFromDate:snapshot.createdAt];
+        snapshotCell.ratingsLabel.text = @"★★★☆☆";
         
         [ALAssetsLibrary assetForURL:snapshot.videoUrl resultBlock:^(ALAsset *asset) {
             UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
