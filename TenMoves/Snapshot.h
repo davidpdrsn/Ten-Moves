@@ -2,7 +2,7 @@
 //  Snapshot.h
 //  TenMoves
 //
-//  Created by David Pedersen on 11/07/14.
+//  Created by David Pedersen on 17/07/14.
 //  Copyright (c) 2014 David Pedersen. All rights reserved.
 //
 
@@ -13,14 +13,17 @@
 
 @interface Snapshot : NSManagedObject
 
+@property (nonatomic, retain) NSDate * createdAt;
+@property (nonatomic, retain) NSString * videoPath;
+@property (nonatomic, retain) NSNumber * rating;
+@property (nonatomic, retain) Move *move;
+
 + (instancetype)newManagedObject;
 
 + (NSFetchRequest *)fetchRequestForMove:(Move *)move;
 
-@property (nonatomic, retain) NSDate * createdAt;
-@property (nonatomic, retain) Move *move;
-@property (nonatomic, retain) NSString *videoPath;
-
 - (NSURL *)videoUrl;
+
+- (NSString *)ratingsStars;
 
 @end

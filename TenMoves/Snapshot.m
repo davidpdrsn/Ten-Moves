@@ -2,7 +2,7 @@
 //  Snapshot.m
 //  TenMoves
 //
-//  Created by David Pedersen on 11/07/14.
+//  Created by David Pedersen on 17/07/14.
 //  Copyright (c) 2014 David Pedersen. All rights reserved.
 //
 
@@ -15,8 +15,9 @@
 @implementation Snapshot
 
 @dynamic createdAt;
-@dynamic move;
 @dynamic videoPath;
+@dynamic rating;
+@dynamic move;
 
 + (instancetype)newManagedObject {
     Snapshot *snapshot = (Snapshot *) [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
@@ -43,6 +44,20 @@
 
 - (NSURL *)videoUrl {
     return [NSURL URLWithString:self.videoPath];
+}
+
+- (NSString *)ratingsStars {
+    NSString *acc = @"";
+    
+    for (int i = 1; i <= 5; i++) {
+        if (i <= self.rating.intValue) {
+            acc = [acc stringByAppendingString:@"★"];
+        } else {
+            acc = [acc stringByAppendingString:@"☆"];
+        }
+    }
+    
+    return acc;
 }
 
 @end

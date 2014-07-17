@@ -10,9 +10,9 @@
 		84DE765F5B484136A47281D2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE63772FF7C54DF5B88E07D2 /* libPods.a */; };
 		8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 860129991972886A0053C71D /* UITableViewCell+HelperMethods.m */; };
 		8601299E197297280053C71D /* ALAssetsLibrary+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */; };
+		8602703B1978679200984CF2 /* Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8602703A1978679200984CF2 /* Snapshot.m */; };
 		8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */; };
 		8658D100197317A000A2B36C /* ImageViewWithSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FF197317A000A2B36C /* ImageViewWithSnapshot.m */; };
-		8685E3B1196F58CB00A97585 /* Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B0196F58CB00A97585 /* Snapshot.m */; };
 		8685E3B4196F595E00A97585 /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B3196F595E00A97585 /* Move.m */; };
 		8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B6196F5B0900A97585 /* MoveTableViewCell.m */; };
 		8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3BA196F60E200A97585 /* SnapshotsTableViewController.m */; };
@@ -55,13 +55,13 @@
 		860129991972886A0053C71D /* UITableViewCell+HelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+HelperMethods.m"; sourceTree = "<group>"; };
 		8601299C197297280053C71D /* ALAssetsLibrary+HelperMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+HelperMethods.h"; sourceTree = "<group>"; };
 		8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+HelperMethods.m"; sourceTree = "<group>"; };
+		860270391978679200984CF2 /* Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snapshot.h; sourceTree = "<group>"; };
+		8602703A1978679200984CF2 /* Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snapshot.m; sourceTree = "<group>"; };
 		8658D0FB197302FB00A2B36C /* SnapshotTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotTableViewCell.h; sourceTree = "<group>"; };
 		8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotTableViewCell.m; sourceTree = "<group>"; };
 		8658D0FE197317A000A2B36C /* ImageViewWithSnapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewWithSnapshot.h; sourceTree = "<group>"; };
 		8658D0FF197317A000A2B36C /* ImageViewWithSnapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewWithSnapshot.m; sourceTree = "<group>"; };
 		8671A8B7197181CA00C7C0F6 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		8685E3AF196F58CB00A97585 /* Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snapshot.h; sourceTree = "<group>"; };
-		8685E3B0196F58CB00A97585 /* Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snapshot.m; sourceTree = "<group>"; };
 		8685E3B2196F595E00A97585 /* Move.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Move.h; sourceTree = "<group>"; };
 		8685E3B3196F595E00A97585 /* Move.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Move.m; sourceTree = "<group>"; };
 		8685E3B5196F5B0900A97585 /* MoveTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveTableViewCell.h; sourceTree = "<group>"; };
@@ -261,10 +261,10 @@
 		86EE8D96196F504200EE4DCF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				860270391978679200984CF2 /* Snapshot.h */,
+				8602703A1978679200984CF2 /* Snapshot.m */,
 				8685E3B2196F595E00A97585 /* Move.h */,
 				8685E3B3196F595E00A97585 /* Move.m */,
-				8685E3AF196F58CB00A97585 /* Snapshot.h */,
-				8685E3B0196F58CB00A97585 /* Snapshot.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -401,11 +401,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */,
-				8685E3B1196F58CB00A97585 /* Snapshot.m in Sources */,
 				8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */,
 				86ED30F2196F193200FC738B /* AddMoveViewController.m in Sources */,
 				8685E3B4196F595E00A97585 /* Move.m in Sources */,
 				8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */,
+				8602703B1978679200984CF2 /* Snapshot.m in Sources */,
 				86ED30C6196F0F0F00FC738B /* AppDelegate.m in Sources */,
 				86ED30C9196F0F0F00FC738B /* TenMoves.xcdatamodeld in Sources */,
 				86A3F2671971578900E389A1 /* Repository.m in Sources */,
