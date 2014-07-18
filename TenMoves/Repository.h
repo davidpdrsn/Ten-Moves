@@ -17,6 +17,6 @@ typedef void (^CompletionWithPossibleErrorBlock)(NSError *);
 
 + (void)deleteObject:(id)objectToDelete;
 
-+ (void)saveWithCompletionHandler:(void (^)(NSError *error))completionHandler;
++ (void)saveWithCompletionHandler:(CompletionWithPossibleErrorBlock)completionHandler;
 
 @end

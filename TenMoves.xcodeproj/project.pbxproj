@@ -207,8 +207,6 @@
 		86ED30BB196F0F0F00FC738B /* TenMoves */ = {
 			isa = PBXGroup;
 			children = (
-				86A3F2651971578900E389A1 /* Repository.h */,
-				86A3F2661971578900E389A1 /* Repository.m */,
 				8601299B19728FC90053C71D /* Categories */,
 				86A3F26419712D7D00E389A1 /* DataSources */,
 				8685E3B8196F5B0E00A97585 /* CustomViews */,
@@ -271,6 +269,8 @@
 		86EE8D96196F504200EE4DCF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				86A3F2651971578900E389A1 /* Repository.h */,
+				86A3F2661971578900E389A1 /* Repository.m */,
 				860270391978679200984CF2 /* Snapshot.h */,
 				8602703A1978679200984CF2 /* Snapshot.m */,
 				8685E3B2196F595E00A97585 /* Move.h */,
