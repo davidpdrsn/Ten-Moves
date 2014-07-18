@@ -80,20 +80,11 @@
 - (ArrayDataSource *)createDataSource {
     ConfigureCellBlock configureCell = ^UITableViewCell *(UITableViewCell *cell, Snapshot *snapshot) {
         SnapshotTableViewCell *snapshotCell = (SnapshotTableViewCell *)cell;
-        snapshotCell.dateLabel.text = [self.formatter stringFromDate:snapshot.createdAt];
-        snapshotCell.ratingsLabel.text = [snapshot ratingsStars];
+        snapshotCell.snapshot = snapshot;
         
-        [ALAssetsLibrary assetForURL:snapshot.videoUrl resultBlock:^(ALAsset *asset) {
-            UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
-            snapshotCell.thumbnailImageView.image = image;
-            
-            UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
-            [snapshotCell.thumbnailImageView addGestureRecognizer:tapped];
-            snapshotCell.thumbnailImageView.userInteractionEnabled = YES;
-            snapshotCell.thumbnailImageView.snapshot = snapshot;
-        } failureBlock:^(NSError *error) {
-            NSLog(@"image not found...");
-        }];
+        UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
+        [snapshotCell.thumbnailImageView addGestureRecognizer:tapped];
+        snapshotCell.thumbnailImageView.userInteractionEnabled = YES;
         
         return snapshotCell;
     };

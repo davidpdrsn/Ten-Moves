@@ -11,6 +11,7 @@
 #import "Move.h"
 #import "AddSnapshotViewController.h"
 #import "UIScrollView+EmptyDataSet.h"
+#import "RatingView.h"
 
 @interface SnapshotsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddSnapshowViewControllerDelegate>
 

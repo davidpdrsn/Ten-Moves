@@ -11,6 +11,8 @@
 
 @interface AddSnapshotViewController ()
 
+@property (strong, nonatomic) IBOutlet RatingView *ratingView;
+
 @end
 
 @implementation AddSnapshotViewController
@@ -19,6 +21,13 @@
     [super viewDidLoad];
     self.title = @"Add snapshot";
     [self setupNavigationBar];
+    
+    self.ratingView = [self.ratingView initWithFrame:self.ratingView.frame numberOfStars:5 enableUserInteraction:YES fontSize:25];
+    self.ratingView.delegate = self;
+}
+
+- (void)ratingView:(RatingView *)ratingView ratingDidChangeTo:(NSUInteger)stars outOf:(NSUInteger)totalNumberOfStars {
+    self.currentSnapshot.rating = [NSNumber numberWithInt:(int)stars];
 }
 
 - (void)add {

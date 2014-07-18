@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "ImageViewWithSnapshot.h"
+#import "Snapshot.h"
+#import "RatingView.h"
 
 @interface SnapshotTableViewCell : UITableViewCell
 
+@property (strong, nonatomic) Snapshot *snapshot;
+
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet ImageViewWithSnapshot *thumbnailImageView;
-@property (weak, nonatomic) IBOutlet UILabel *ratingsLabel;
+@property (strong, nonatomic) IBOutlet RatingView *ratingView;
 
 @end

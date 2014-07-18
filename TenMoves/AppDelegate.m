@@ -104,11 +104,9 @@
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"TenMoves.sqlite"];
     
-    // [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
-    
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:@{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES} error:&error]) {
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
          
@@ -133,9 +131,9 @@
          
          */
         
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        
         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
+        
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
     }
     
     return _persistentStoreCoordinator;

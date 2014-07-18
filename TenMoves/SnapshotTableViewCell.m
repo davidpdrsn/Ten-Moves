@@ -7,7 +7,37 @@
 //
 
 #import "SnapshotTableViewCell.h"
+#import "ALAssetsLibrary+HelperMethods.h"
+@import AssetsLibrary;
+
+@interface SnapshotTableViewCell ()
+
+@end
 
 @implementation SnapshotTableViewCell
+
+- (void)setSnapshot:(Snapshot *)snapshot {
+    _snapshot = snapshot;
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateStyle = NSDateFormatterMediumStyle;
+    
+    self.dateLabel.text = [formatter stringFromDate:snapshot.createdAt];
+    
+    self.ratingView = [self.ratingView initWithFrame:self.ratingView.frame
+                                                       numberOfStars:5
+                                               enableUserInteraction:NO
+                                                            fontSize:15];
+    
+    [self.ratingView selectStars:snapshot.rating.intValue];
+    
+    [ALAssetsLibrary assetForURL:snapshot.videoUrl resultBlock:^(ALAsset *asset) {
+        UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
+        self.thumbnailImageView.image = image;
+        self.thumbnailImageView.snapshot = snapshot;
+    } failureBlock:^(NSError *error) {
+        NSLog(@"image not found...");
+    }];
+}
 
 @end
