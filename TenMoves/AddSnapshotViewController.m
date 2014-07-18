@@ -24,6 +24,7 @@
     
     self.ratingView = [self.ratingView initWithFrame:self.ratingView.frame numberOfStars:5 enableUserInteraction:YES fontSize:25];
     self.ratingView.delegate = self;
+    [self.ratingView selectStars:self.currentSnapshot.rating.intValue];
 }
 
 - (void)ratingView:(RatingView *)ratingView ratingDidChangeTo:(NSUInteger)stars outOf:(NSUInteger)totalNumberOfStars {
