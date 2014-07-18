@@ -11,6 +11,7 @@
 		8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 860129991972886A0053C71D /* UITableViewCell+HelperMethods.m */; };
 		8601299E197297280053C71D /* ALAssetsLibrary+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */; };
 		8602703B1978679200984CF2 /* Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8602703A1978679200984CF2 /* Snapshot.m */; };
+		8602703E197870D200984CF2 /* RatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8602703D197870D200984CF2 /* RatingView.m */; };
 		8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */; };
 		8658D100197317A000A2B36C /* ImageViewWithSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FF197317A000A2B36C /* ImageViewWithSnapshot.m */; };
 		8685E3B4196F595E00A97585 /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B3196F595E00A97585 /* Move.m */; };
@@ -57,6 +58,8 @@
 		8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+HelperMethods.m"; sourceTree = "<group>"; };
 		860270391978679200984CF2 /* Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snapshot.h; sourceTree = "<group>"; };
 		8602703A1978679200984CF2 /* Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snapshot.m; sourceTree = "<group>"; };
+		8602703C197870D200984CF2 /* RatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingView.h; sourceTree = "<group>"; };
+		8602703D197870D200984CF2 /* RatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingView.m; sourceTree = "<group>"; };
 		8658D0FB197302FB00A2B36C /* SnapshotTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotTableViewCell.h; sourceTree = "<group>"; };
 		8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotTableViewCell.m; sourceTree = "<group>"; };
 		8658D0FE197317A000A2B36C /* ImageViewWithSnapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewWithSnapshot.h; sourceTree = "<group>"; };
@@ -141,6 +144,8 @@
 		8685E3B8196F5B0E00A97585 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				8602703C197870D200984CF2 /* RatingView.h */,
+				8602703D197870D200984CF2 /* RatingView.m */,
 				8658D0FE197317A000A2B36C /* ImageViewWithSnapshot.h */,
 				8658D0FF197317A000A2B36C /* ImageViewWithSnapshot.m */,
 				8658D0FB197302FB00A2B36C /* SnapshotTableViewCell.h */,
@@ -402,6 +407,7 @@
 			files = (
 				8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */,
 				8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */,
+				8602703E197870D200984CF2 /* RatingView.m in Sources */,
 				86ED30F2196F193200FC738B /* AddMoveViewController.m in Sources */,
 				8685E3B4196F595E00A97585 /* Move.m in Sources */,
 				8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */,
