@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Star.h"
 
 @protocol RatingViewDelegate;
 
 
-@interface RatingView : UIView
+@interface RatingView : UIView <StarDelegate>
 
 @property (strong, nonatomic) NSObject<RatingViewDelegate> *delegate;
 

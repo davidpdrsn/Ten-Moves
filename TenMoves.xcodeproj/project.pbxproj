@@ -14,6 +14,7 @@
 		8602703E197870D200984CF2 /* RatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8602703D197870D200984CF2 /* RatingView.m */; };
 		8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */; };
 		8658D100197317A000A2B36C /* ImageViewWithSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FF197317A000A2B36C /* ImageViewWithSnapshot.m */; };
+		86799B7F197958E200891A62 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = 86799B7E197958E200891A62 /* Star.m */; };
 		8685E3B4196F595E00A97585 /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B3196F595E00A97585 /* Move.m */; };
 		8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B6196F5B0900A97585 /* MoveTableViewCell.m */; };
 		8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3BA196F60E200A97585 /* SnapshotsTableViewController.m */; };
@@ -65,6 +66,8 @@
 		8658D0FE197317A000A2B36C /* ImageViewWithSnapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewWithSnapshot.h; sourceTree = "<group>"; };
 		8658D0FF197317A000A2B36C /* ImageViewWithSnapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewWithSnapshot.m; sourceTree = "<group>"; };
 		8671A8B7197181CA00C7C0F6 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		86799B7D197958E200891A62 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
+		86799B7E197958E200891A62 /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Star.m; sourceTree = "<group>"; };
 		8685E3B2196F595E00A97585 /* Move.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Move.h; sourceTree = "<group>"; };
 		8685E3B3196F595E00A97585 /* Move.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Move.m; sourceTree = "<group>"; };
 		8685E3B5196F5B0900A97585 /* MoveTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveTableViewCell.h; sourceTree = "<group>"; };
@@ -144,6 +147,8 @@
 		8685E3B8196F5B0E00A97585 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				86799B7D197958E200891A62 /* Star.h */,
+				86799B7E197958E200891A62 /* Star.m */,
 				8602703C197870D200984CF2 /* RatingView.h */,
 				8602703D197870D200984CF2 /* RatingView.m */,
 				8658D0FE197317A000A2B36C /* ImageViewWithSnapshot.h */,
@@ -406,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */,
+				86799B7F197958E200891A62 /* Star.m in Sources */,
 				8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */,
 				8602703E197870D200984CF2 /* RatingView.m in Sources */,
 				86ED30F2196F193200FC738B /* AddMoveViewController.m in Sources */,
