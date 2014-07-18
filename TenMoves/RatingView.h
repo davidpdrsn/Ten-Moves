@@ -18,7 +18,6 @@
 
 - (id)initWithFrame:(CGRect)frame
       numberOfStars:(NSUInteger)numberOfStars
-enableUserInteraction:(BOOL)enableUserInteraction
            fontSize:(CGFloat)fontSize;
 
 - (void)selectStars:(NSUInteger)numberOfStarsToSelect;

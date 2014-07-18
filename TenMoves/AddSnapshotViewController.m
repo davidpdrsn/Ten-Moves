@@ -22,7 +22,8 @@
     self.title = @"Add snapshot";
     [self setupNavigationBar];
     
-    self.ratingView = [self.ratingView initWithFrame:self.ratingView.frame numberOfStars:5 enableUserInteraction:YES fontSize:25];
+    self.ratingView = [self.ratingView initWithFrame:self.ratingView.frame numberOfStars:5 fontSize:25];
+    self.ratingView.userInteractionEnabled = YES;
     self.ratingView.delegate = self;
     [self.ratingView selectStars:self.currentSnapshot.rating.intValue];
 }

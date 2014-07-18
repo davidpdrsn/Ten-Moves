@@ -26,7 +26,6 @@
     
     self.ratingView = [self.ratingView initWithFrame:self.ratingView.frame
                                                        numberOfStars:5
-                                               enableUserInteraction:NO
                                                             fontSize:15];
     
     [self.ratingView selectStars:snapshot.rating.intValue];

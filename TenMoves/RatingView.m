@@ -13,7 +13,6 @@
 @property (strong, nonatomic) NSMutableArray *stars;
 
 @property (assign, nonatomic) NSUInteger numberOfStars;
-@property (assign, nonatomic) BOOL enableUserInteraction;
 
 @end
 
@@ -21,7 +20,6 @@
 
 - (id)initWithFrame:(CGRect)frame
       numberOfStars:(NSUInteger)numberOfStars
-enableUserInteraction:(BOOL)enableUserInteraction
            fontSize:(CGFloat)fontSize {
     self = [super initWithFrame:frame];
     if (self) {
@@ -30,7 +28,6 @@ enableUserInteraction:(BOOL)enableUserInteraction
         self.stars = [NSMutableArray array];
         
         self.numberOfStars = numberOfStars;
-        self.enableUserInteraction = enableUserInteraction;
         
         CGFloat starWidth = [Star widthOfStarWidthFontSize:fontSize];
         CGFloat spaceWidth = (self.frame.size.width - self.numberOfStars * starWidth)/(self.numberOfStars+1);
@@ -40,7 +37,6 @@ enableUserInteraction:(BOOL)enableUserInteraction
         for (int i = 1; i <= self.numberOfStars; i++) {
             CGRect frame = CGRectMake(spaceWidth*i+starWidth*(i-1), self.frame.size.height/2-starWidth/2, starWidth, starWidth);
             star = [[Star alloc] initWithFrame:frame fontSize:fontSize delegate:self];
-            star.userInteractionEnabled = enableUserInteraction;
             [self.stars addObject:star];
         }
         
@@ -49,6 +45,14 @@ enableUserInteraction:(BOOL)enableUserInteraction
         }
     }
     return self;
+}
+
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled {
+    [super setUserInteractionEnabled:userInteractionEnabled];
+    
+    for (Star *star in self.stars) {
+        star.userInteractionEnabled = userInteractionEnabled;
+    }
 }
 
 - (void)resetAllStars {
