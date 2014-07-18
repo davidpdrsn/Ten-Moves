@@ -11,7 +11,6 @@
 @interface ImageViewWithSnapshot ()
 
 @property (strong, nonatomic) UIView *overlay;
-@property (strong, nonatomic) UIImageView *triangle;
 
 @end
 
@@ -21,15 +20,19 @@
     [super awakeFromNib];
     
     self.overlay = [[UIView alloc] initWithFrame:self.bounds];
-    self.overlay.backgroundColor = [self transparentBlue];
+    [self setBackground];
     [self addSubview:self.overlay];
     
     double width = 45.0/2.0;
-    self.triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-    self.triangle.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2);
-    self.triangle.image = [UIImage imageNamed:@"triangle"];
+    UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+    triangle.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2);
+    triangle.image = [UIImage imageNamed:@"triangle"];
     
-    [self addSubview:self.triangle];
+    [self addSubview:triangle];
+}
+
+- (void)setBackground {
+    self.overlay.backgroundColor = [self transparentBlue];
 }
 
 - (UIColor *)transparentBlue {
