@@ -8,7 +8,7 @@
     <entity name="Snapshot" representedClassName="Snapshot" syncable="YES">
         <attribute name="createdAt" attributeType="Date" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 16" minValueString="1" maxValueString="5" defaultValueString="1" syncable="YES"/>
-        <attribute name="videoPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoPath" attributeType="String" syncable="YES"/>
         <relationship name="move" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Move" inverseName="snapshots" inverseEntity="Move" syncable="YES"/>
     </entity>
     <elements>

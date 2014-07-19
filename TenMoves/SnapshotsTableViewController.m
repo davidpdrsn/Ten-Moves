@@ -64,11 +64,15 @@
 - (void)addSnapshotViewControllerDidSave {
     [Repository saveWithCompletionHandler:^(NSError *error) {
         if (error) {
-            NSLog(@"Error saving - %@", error);
+            [[[UIAlertView alloc] initWithTitle:@"Video missing"
+                                        message:@"Snapshots have to contain a video"
+                                       delegate:nil
+                              cancelButtonTitle:@"Okay, sorry"
+                              otherButtonTitles:nil] show];
+        } else {
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)addSnapshotViewControllerDidCancel:(Snapshot *)snapshotToDelete {
@@ -84,6 +88,7 @@
         
         UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
         [snapshotCell.thumbnailImageView addGestureRecognizer:tapped];
+        snapshotCell.thumbnailImageView.snapshot = snapshot;
         snapshotCell.thumbnailImageView.userInteractionEnabled = YES;
         
         return snapshotCell;
@@ -98,7 +103,7 @@
     ImageViewWithSnapshot *imageView = (ImageViewWithSnapshot *)gesture.view;
     Snapshot *snapshot = imageView.snapshot;
     
-    [ALAssetsLibrary assetForURL:[snapshot videoUrl] resultBlock:^(ALAsset *asset) {
+//    [ALAssetsLibrary assetForURL:[snapshot videoUrl] resultBlock:^(ALAsset *asset) {
         self.player = [[MPMoviePlayerController alloc] initWithContentURL:[snapshot videoUrl]];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -110,10 +115,10 @@
         [self.player.view setFrame:self.view.frame];
         [self.player setFullscreen:YES animated:YES];
         [self.player play];
-    } failureBlock:^(NSError *error) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Video not found" message:@"..." delegate:nil cancelButtonTitle:@"Ups" otherButtonTitles:nil];
-        [alert show];
-    }];
+//    } failureBlock:^(NSError *error) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Video not found" message:@"..." delegate:nil cancelButtonTitle:@"Ups" otherButtonTitles:nil];
+//        [alert show];
+//    }];
 }
 
 - (NSDateFormatter *)formatter {
