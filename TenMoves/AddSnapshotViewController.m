@@ -23,6 +23,7 @@
     [self setupNavigationBar];
     
     self.ratingView = [self.ratingView initWithFrame:self.ratingView.frame numberOfStars:5 fontSize:25];
+    self.ratingView.tintColor = self.view.tintColor;
     self.ratingView.userInteractionEnabled = YES;
     self.ratingView.delegate = self;
     [self.ratingView selectStars:self.currentSnapshot.rating.intValue];
@@ -41,9 +42,13 @@
 }
 
 - (void)setupNavigationBar {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(add)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(add)];
+    addButton.tintColor = self.view.tintColor;
+    self.navigationItem.rightBarButtonItem = addButton;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
+    cancelButton.tintColor = self.view.tintColor;
+    self.navigationItem.leftBarButtonItem = cancelButton;
 }
 
 - (IBAction)pickPhoto:(id)sender {

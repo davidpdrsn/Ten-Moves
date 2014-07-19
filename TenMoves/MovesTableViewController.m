@@ -30,6 +30,7 @@
     self.dataSource.emptyTableViewText = @"It seems you haven't added any moves yet. Tap the plus button to get started.";
     
     self.addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMove)];
+    self.addButton.tintColor = self.view.tintColor;
     self.navigationItem.rightBarButtonItem = self.addButton;
     [self enableOrDisableAddButton];
     

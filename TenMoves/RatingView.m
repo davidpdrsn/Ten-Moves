@@ -37,6 +37,7 @@
         for (int i = 1; i <= self.numberOfStars; i++) {
             CGRect frame = CGRectMake(spaceWidth*i+starWidth*(i-1), self.frame.size.height/2-starWidth/2, starWidth, starWidth);
             star = [[Star alloc] initWithFrame:frame fontSize:fontSize delegate:self];
+            star.textColor = self.tintColor;
             [self.stars addObject:star];
         }
         

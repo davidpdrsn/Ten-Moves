@@ -39,4 +39,9 @@
     }];
 }
 
+- (void)setTintColor:(UIColor *)tintColor {
+    [super setTintColor:tintColor];
+    self.thumbnailImageView.tintColor = tintColor;
+}
+
 @end

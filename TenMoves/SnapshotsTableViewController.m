@@ -32,7 +32,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addSnapshot)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addSnapshot)];
+    addButton.tintColor = self.view.tintColor;
+    self.navigationItem.rightBarButtonItem = addButton;
+    
+    self.navigationController.view.tintColor = self.view.tintColor;
     
     self.dataSource = [self createDataSource];
     
@@ -84,6 +88,7 @@
 - (ArrayDataSource *)createDataSource {
     ConfigureCellBlock configureCell = ^UITableViewCell *(UITableViewCell *cell, Snapshot *snapshot) {
         SnapshotTableViewCell *snapshotCell = (SnapshotTableViewCell *)cell;
+        snapshotCell.tintColor = self.view.tintColor;
         snapshotCell.snapshot = snapshot;
         
         UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];

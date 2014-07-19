@@ -13,6 +13,6 @@
 
 @property (strong, nonatomic) Snapshot *snapshot;
 
-- (void)setBackground;
+- (void)updateBackground;
 
 @end

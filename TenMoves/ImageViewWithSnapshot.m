@@ -11,6 +11,7 @@
 @interface ImageViewWithSnapshot ()
 
 @property (strong, nonatomic) UIView *overlay;
+@property (strong, nonatomic) UIColor *backgroundColor;
 
 @end
 
@@ -19,8 +20,10 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    _backgroundColor = [self.tintColor colorWithAlphaComponent:0.5];
+    
     self.overlay = [[UIView alloc] initWithFrame:self.bounds];
-    [self setBackground];
+    [self updateBackground];
     [self addSubview:self.overlay];
     
     double width = 45.0/2.0;
@@ -31,19 +34,17 @@
     [self addSubview:triangle];
 }
 
-- (void)setBackground {
-    self.overlay.backgroundColor = [self transparentBlue];
+- (void)updateBackground {
+    self.overlay.backgroundColor = [self.tintColor colorWithAlphaComponent:0.5];
 }
 
-- (UIColor *)transparentBlue {
-    return [UIColor colorWithRed:86.0/255.0
-                           green:169.0/255.0
-                            blue:249.0/255.0
-                           alpha:0.5];
+- (void)setTintColor:(UIColor *)tintColor {
+    _backgroundColor = tintColor;
+    [self updateBackground];
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
-    [self setBackground];
+    [self updateBackground];
 }
 
 @end

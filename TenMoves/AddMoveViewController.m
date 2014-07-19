@@ -39,11 +39,14 @@
 
 - (void)setupNavigationBar {
     addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(add)];
+    addButton.tintColor = self.view.tintColor;
     addButton.enabled = NO;
     
     self.navigationItem.rightBarButtonItem = addButton;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
+    cancelButton.tintColor = self.view.tintColor;
+    self.navigationItem.leftBarButtonItem = cancelButton;
 }
 
 #pragma mark - button actions
