@@ -42,4 +42,8 @@
                            alpha:0.5];
 }
 
+- (void)setHighlighted:(BOOL)highlighted {
+    [self setBackground];
+}
+
 @end
