@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ImageViewWithSnapshot.h"
 #import "Snapshot.h"
-#import "RatingView.h"
 
 @interface SnapshotTableViewCell : UITableViewCell
 
@@ -17,6 +16,5 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet ImageViewWithSnapshot *thumbnailImageView;
-@property (strong, nonatomic) IBOutlet RatingView *ratingView;
 
 @end

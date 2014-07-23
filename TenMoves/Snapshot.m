@@ -16,7 +16,6 @@
 
 @dynamic createdAt;
 @dynamic videoPath;
-@dynamic rating;
 @dynamic move;
 
 + (instancetype)newManagedObject {
@@ -44,20 +43,6 @@
 
 - (NSURL *)videoUrl {
     return [NSURL URLWithString:self.videoPath];
-}
-
-- (NSString *)ratingsStars {
-    NSString *acc = @"";
-    
-    for (int i = 1; i <= 5; i++) {
-        if (i <= self.rating.intValue) {
-            acc = [acc stringByAppendingString:@"★"];
-        } else {
-            acc = [acc stringByAppendingString:@"☆"];
-        }
-    }
-    
-    return acc;
 }
 
 @end

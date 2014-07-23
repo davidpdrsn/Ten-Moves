@@ -24,12 +24,6 @@
     
     self.dateLabel.text = [formatter stringFromDate:snapshot.createdAt];
     
-    self.ratingView = [self.ratingView initWithFrame:self.ratingView.frame
-                                                       numberOfStars:5
-                                                            fontSize:15];
-    
-    [self.ratingView selectStars:snapshot.rating.intValue];
-    
     [ALAssetsLibrary assetForURL:snapshot.videoUrl resultBlock:^(ALAsset *asset) {
         UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
         self.thumbnailImageView.image = image;

@@ -15,7 +15,6 @@
 
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSString * videoPath;
-@property (nonatomic, retain) NSNumber * rating;
 @property (nonatomic, retain) Move *move;
 
 + (instancetype)newManagedObject;
@@ -23,7 +22,5 @@
 + (NSFetchRequest *)fetchRequestForMove:(Move *)move;
 
 - (NSURL *)videoUrl;
-
-- (NSString *)ratingsStars;
 
 @end

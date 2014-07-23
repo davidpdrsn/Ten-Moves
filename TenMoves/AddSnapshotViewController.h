@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Snapshot.h"
-#import "RatingView.h"
 
 @protocol AddSnapshowViewControllerDelegate;
 
-@interface AddSnapshotViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, RatingViewDelegate>
+@interface AddSnapshotViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) id<AddSnapshowViewControllerDelegate> delegate;
 @property (nonatomic, strong) Snapshot *currentSnapshot;

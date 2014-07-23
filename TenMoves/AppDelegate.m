@@ -104,8 +104,6 @@
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"TenMoves.sqlite"];
     
-//    [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
-    
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
@@ -132,6 +130,8 @@
          Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
          
          */
+        
+        [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
         
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
     }
