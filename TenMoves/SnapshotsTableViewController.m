@@ -46,7 +46,7 @@
 
 - (void)addSnapshot {
     UIStoryboard *storyBoard = [self storyboard];
-    AddSnapshotViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"AddSnapshotViewController"];
+    AddSnapshotTableViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"AddSnapshotTableViewController"];
     Snapshot *snapshot = [Snapshot newManagedObject];
     [self.move addSnapshotsObject:snapshot];
     vc.currentSnapshot = snapshot;
@@ -65,7 +65,7 @@
 
 #pragma mark - add snapshot delegate
 
-- (void)addSnapshotViewControllerDidSave {
+- (void)addSnapshotTableViewControllerDidSave {
     [Repository saveWithCompletionHandler:^(NSError *error) {
         if (error) {
             [[[UIAlertView alloc] initWithTitle:@"Video missing"
@@ -79,7 +79,7 @@
     }];
 }
 
-- (void)addSnapshotViewControllerDidCancel:(Snapshot *)snapshotToDelete {
+- (void)addSnapshotTableViewControllerDidCancel:(Snapshot *)snapshotToDelete {
     [self.move removeSnapshotsObject:snapshotToDelete];
     [Repository deleteObject:snapshotToDelete];
     [self dismissViewControllerAnimated:YES completion:nil];

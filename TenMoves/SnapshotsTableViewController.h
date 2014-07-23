@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Snapshot.h"
 #import "Move.h"
-#import "AddSnapshotViewController.h"
+#import "AddSnapshotTableViewController.h"
 #import "UIScrollView+EmptyDataSet.h"
 
-@interface SnapshotsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddSnapshowViewControllerDelegate>
+@interface SnapshotsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddSnapshowTableViewControllerDelegate>
 
 @property (nonatomic, strong) Move *move;
 

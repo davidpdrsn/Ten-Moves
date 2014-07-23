@@ -16,7 +16,7 @@
 		8685E3B4196F595E00A97585 /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B3196F595E00A97585 /* Move.m */; };
 		8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B6196F5B0900A97585 /* MoveTableViewCell.m */; };
 		8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3BA196F60E200A97585 /* SnapshotsTableViewController.m */; };
-		8685E3BE196F6A9200A97585 /* AddSnapshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3BD196F6A9200A97585 /* AddSnapshotViewController.m */; };
+		8685E3BE196F6A9200A97585 /* AddSnapshotTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3BD196F6A9200A97585 /* AddSnapshotTableViewController.m */; };
 		86A3F26319712D7900E389A1 /* ArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A3F26219712D7900E389A1 /* ArrayDataSource.m */; };
 		86A3F2671971578900E389A1 /* Repository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A3F2661971578900E389A1 /* Repository.m */; };
 		86ED30B4196F0F0F00FC738B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B3196F0F0F00FC738B /* Foundation.framework */; };
@@ -68,8 +68,8 @@
 		8685E3B6196F5B0900A97585 /* MoveTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveTableViewCell.m; sourceTree = "<group>"; };
 		8685E3B9196F60E200A97585 /* SnapshotsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotsTableViewController.h; sourceTree = "<group>"; };
 		8685E3BA196F60E200A97585 /* SnapshotsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotsTableViewController.m; sourceTree = "<group>"; };
-		8685E3BC196F6A9200A97585 /* AddSnapshotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSnapshotViewController.h; sourceTree = "<group>"; };
-		8685E3BD196F6A9200A97585 /* AddSnapshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSnapshotViewController.m; sourceTree = "<group>"; };
+		8685E3BC196F6A9200A97585 /* AddSnapshotTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSnapshotTableViewController.h; sourceTree = "<group>"; };
+		8685E3BD196F6A9200A97585 /* AddSnapshotTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSnapshotTableViewController.m; sourceTree = "<group>"; };
 		86A3F26119712D7900E389A1 /* ArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayDataSource.h; sourceTree = "<group>"; };
 		86A3F26219712D7900E389A1 /* ArrayDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayDataSource.m; sourceTree = "<group>"; };
 		86A3F2651971578900E389A1 /* Repository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Repository.h; sourceTree = "<group>"; };
@@ -244,8 +244,8 @@
 		86EE8D95196F503200EE4DCF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8685E3BC196F6A9200A97585 /* AddSnapshotViewController.h */,
-				8685E3BD196F6A9200A97585 /* AddSnapshotViewController.m */,
+				8685E3BC196F6A9200A97585 /* AddSnapshotTableViewController.h */,
+				8685E3BD196F6A9200A97585 /* AddSnapshotTableViewController.m */,
 				86ED30F0196F193200FC738B /* AddMoveViewController.h */,
 				86ED30F1196F193200FC738B /* AddMoveViewController.m */,
 				86ED30ED196F120700FC738B /* MovesTableViewController.h */,
@@ -411,7 +411,7 @@
 				86A3F2671971578900E389A1 /* Repository.m in Sources */,
 				86A3F26319712D7900E389A1 /* ArrayDataSource.m in Sources */,
 				86ED30C2196F0F0F00FC738B /* main.m in Sources */,
-				8685E3BE196F6A9200A97585 /* AddSnapshotViewController.m in Sources */,
+				8685E3BE196F6A9200A97585 /* AddSnapshotTableViewController.m in Sources */,
 				8658D100197317A000A2B36C /* ImageViewWithSnapshot.m in Sources */,
 				8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */,
 				8601299E197297280053C71D /* ALAssetsLibrary+HelperMethods.m in Sources */,

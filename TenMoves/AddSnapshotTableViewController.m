@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 David Pedersen. All rights reserved.
 //
 
-#import "AddSnapshotViewController.h"
+#import "AddSnapshotTableViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 
-@interface AddSnapshotViewController ()
+@interface AddSnapshotTableViewController ()
 
 @end
 
-@implementation AddSnapshotViewController
+@implementation AddSnapshotTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,11 +22,11 @@
 }
 
 - (void)add {
-    [self.delegate addSnapshotViewControllerDidSave];
+    [self.delegate addSnapshotTableViewControllerDidSave];
 }
 
 - (void)cancel {
-    [self.delegate addSnapshotViewControllerDidCancel:self.currentSnapshot];
+    [self.delegate addSnapshotTableViewControllerDidCancel:self.currentSnapshot];
 }
 
 - (void)setupNavigationBar {
