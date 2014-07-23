@@ -10,7 +10,7 @@
 #import "Snapshot.h"
 #import "Repository.h"
 
-#define ENTITY_NAME @"Move"
+static NSString *ENTITY_NAME = @"Move";
 
 @implementation Move
 
