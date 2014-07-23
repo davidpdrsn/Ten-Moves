@@ -11,6 +11,7 @@
 #import "MoveTableViewCell.h"
 #import "SnapshotsTableViewController.h"
 #import "Repository.h"
+#import "Constants.h"
 
 @interface MovesTableViewController ()
 
@@ -52,7 +53,7 @@
 }
 
 - (void)enableOrDisableAddButton {
-    if ([self.dataSource totalNumberOfObjects] >= 10) {
+    if ([self.dataSource totalNumberOfObjects] >= MAX_NUMBER_OF_MOVES) {
         self.addButton.enabled = NO;
     } else {
         self.addButton.enabled = YES;
@@ -114,7 +115,7 @@
     if (objects.count == 0) {
         return nil;
     } else {
-        NSInteger remaining = 10 - objects.count;
+        NSInteger remaining = MAX_NUMBER_OF_MOVES - objects.count;
         return [NSString stringWithFormat:@"You have %i slot(s) remaining", (int)remaining];
     }
 }
