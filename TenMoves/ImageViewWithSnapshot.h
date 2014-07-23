@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Snapshot.h"
+
+@class Snapshot;
 
 @interface ImageViewWithSnapshot : UIImageView
 

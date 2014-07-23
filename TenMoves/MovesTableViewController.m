@@ -12,6 +12,8 @@
 #import "SnapshotsTableViewController.h"
 #import "Repository.h"
 #import "Constants.h"
+#import "AddMoveViewController.h"
+#import "ArrayDataSource.h"
 
 @interface MovesTableViewController ()
 

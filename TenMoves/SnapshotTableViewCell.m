@@ -8,6 +8,8 @@
 
 #import "SnapshotTableViewCell.h"
 #import "ALAssetsLibrary+HelperMethods.h"
+#import "ImageViewWithSnapshot.h"
+#import "Snapshot.h"
 @import AssetsLibrary;
 
 @interface SnapshotTableViewCell ()

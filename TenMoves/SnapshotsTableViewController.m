@@ -13,6 +13,9 @@
 #import "ALAssetsLibrary+HelperMethods.h"
 #import "SnapshotTableViewCell.h"
 #import "ImageViewWithSnapshot.h"
+#import "Snapshot.h"
+#import "Move.h"
+#import "AddSnapshotTableViewController.h"
 @import MediaPlayer;
 @import AssetsLibrary;
 @import AVFoundation;

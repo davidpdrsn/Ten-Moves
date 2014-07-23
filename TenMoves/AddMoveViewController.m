@@ -7,6 +7,7 @@
 //
 
 #import "AddMoveViewController.h"
+#import "Move.h"
 
 @interface AddMoveViewController () {
     UIBarButtonItem *addButton;

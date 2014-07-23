@@ -7,6 +7,7 @@
 //
 
 #import "ImageViewWithSnapshot.h"
+#import "Snapshot.h"
 
 @interface ImageViewWithSnapshot ()
 

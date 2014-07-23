@@ -7,14 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Move.h"
+#import "AddMoveViewControllerDelegate.h"
 
-@protocol AddMoveViewControllerDelegate
-
-- (void)addMoveViewControllerDidSave;
-- (void)addMoveViewControllerDidCancel:(Move *)moveToDelete;
-
-@end
+@class Move;
 
 @interface AddMoveViewController : UIViewController <UITextFieldDelegate>
 

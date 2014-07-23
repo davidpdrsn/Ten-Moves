@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AddMoveViewController.h"
-#import "ArrayDataSource.h"
+#import "ArrayDataSourceDelegate.h"
+#import "AddMoveViewControllerDelegate.h"
+
+@class AddMoveViewController;
+@class ArrayDataSource;
 
 @interface MovesTableViewController : UITableViewController <AddMoveViewControllerDelegate, ArrayDataSourceDelegate>
 

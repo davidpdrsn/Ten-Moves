@@ -8,21 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "UIScrollView+EmptyDataSet.h"
+#import "ArrayDataSourceDelegate.h"
 
 typedef UITableViewCell* (^ConfigureCellBlock)(UITableViewCell *cell, id item);
 
 @class ArrayDataSource;
-
-@protocol ArrayDataSourceDelegate
-
-@required
-@optional
-
-- (NSString *)arrayDataSource:(ArrayDataSource *)arrayDataSource textForFooterView:(NSArray *)objects;
-
-- (void)arrayDataSourceDidChangeData:(ArrayDataSource *)arrayDataSource;
-
-@end
 
 @interface ArrayDataSource : NSObject <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
