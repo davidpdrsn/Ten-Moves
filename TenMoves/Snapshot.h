@@ -12,7 +12,8 @@
 typedef enum {
     SnapshotProgressImproved = 0,
     SnapshotProgressSame = 1,
-    SnapshotProgressRegressed = 2
+    SnapshotProgressRegressed = 2,
+    SnapshotProgressBaseline = 3
 } SnapshotProgress;
 
 @class Move;

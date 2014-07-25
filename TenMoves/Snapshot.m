@@ -55,6 +55,9 @@ static NSString *ENTITY_NAME = @"Snapshot";
         case SnapshotProgressRegressed:
             return [UIColor colorWithRed:0.945 green:0.233 blue:0.221 alpha:1.000];
             break;
+        case SnapshotProgressBaseline:
+            return [UIColor colorWithRed:0.574 green:0.634 blue:0.638 alpha:1.000];
+            break;
         default:
             // can't be reached
             break;
@@ -63,7 +66,9 @@ static NSString *ENTITY_NAME = @"Snapshot";
 
 - (void)awakeFromInsert {
     [super awakeFromInsert];
+    
     [self setValue:[NSDate date] forKey:@"createdAt"];
+    [self setProgressTypeRaw:SnapshotProgressBaseline];
 }
 
 - (NSURL *)videoUrl {
