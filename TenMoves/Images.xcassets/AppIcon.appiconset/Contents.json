@@ -3,19 +3,19 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "icon@2x3.png",
+      "filename" : "icon@2x3_beta.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "icon@2x2.png",
+      "filename" : "icon@2x2_beta.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "icon@2x1 copy 2.png",
+      "filename" : "icon@2x1_beta.png",
       "scale" : "2x"
     }
   ],

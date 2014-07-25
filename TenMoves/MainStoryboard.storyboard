@@ -108,6 +108,7 @@
                                     <outlet property="dateLabel" destination="ZGz-G3-eSU" id="5o2-fO-uwO"/>
                                     <outlet property="progressIndicator" destination="ow1-Kc-dJH" id="1DH-mY-jYG"/>
                                     <outlet property="thumbnailImageView" destination="hJ1-UY-VhF" id="3S3-IP-SKL"/>
+                                    <segue destination="Rdj-AS-qii" kind="push" id="3X1-n0-FMd"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -128,6 +129,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xRf-1G-k4Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-361" y="-438"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Pav-hT-9le">
+            <objects>
+                <viewController id="Rdj-AS-qii" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="atn-iV-zee"/>
+                        <viewControllerLayoutGuide type="bottom" id="o5B-l6-rdY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yWg-ji-MDh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not implemented yet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNu-Yo-SKg">
+                                <rect key="frame" x="20" y="273" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VNu-Yo-SKg" firstAttribute="leading" secondItem="yWg-ji-MDh" secondAttribute="leading" constant="20" id="Onb-ua-y70"/>
+                            <constraint firstAttribute="trailing" secondItem="VNu-Yo-SKg" secondAttribute="trailing" constant="20" id="djR-ue-nRc"/>
+                            <constraint firstItem="o5B-l6-rdY" firstAttribute="top" secondItem="VNu-Yo-SKg" secondAttribute="bottom" constant="274" id="gUI-jx-HJK"/>
+                            <constraint firstItem="VNu-Yo-SKg" firstAttribute="top" secondItem="atn-iV-zee" secondAttribute="bottom" constant="209" id="zVk-EK-sV2"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="mc5-Bv-7Nd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kd1-BE-aiJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="177" y="-438"/>
         </scene>
         <!--Add Snapshot Table View Controller - Add snapshot-->
         <scene sceneID="BPQ-X1-JxN">

@@ -359,6 +359,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "David Pedersen";
 				TargetAttributes = {
+					86ED30AF196F0F0F00FC738B = {
+						DevelopmentTeam = T7C44MC7U8;
+					};
 					86ED30CF196F0F0F00FC738B = {
 						TestTargetID = 86ED30AF196F0F0F00FC738B;
 					};
@@ -576,10 +579,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TenMoves/TenMoves-Prefix.pch";
 				INFOPLIST_FILE = "TenMoves/TenMoves-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5E961619-BFCF-4FDC-85A8-F72891CB3426";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -590,10 +595,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: David Pedersen (T7C44MC7U8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TenMoves/TenMoves-Prefix.pch";
 				INFOPLIST_FILE = "TenMoves/TenMoves-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5E961619-BFCF-4FDC-85A8-F72891CB3426";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
