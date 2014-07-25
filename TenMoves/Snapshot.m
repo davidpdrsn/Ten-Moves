@@ -56,7 +56,7 @@ static NSString *ENTITY_NAME = @"Snapshot";
             return [UIColor colorWithRed:0.945 green:0.233 blue:0.221 alpha:1.000];
             break;
         case SnapshotProgressBaseline:
-            return [UIColor colorWithRed:0.574 green:0.634 blue:0.638 alpha:1.000];
+            return [UIColor colorWithRed:0.707 green:0.775 blue:0.785 alpha:1.000];
             break;
         default:
             // can't be reached

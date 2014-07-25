@@ -14,6 +14,7 @@
 #import "ImageViewWithSnapshot.h"
 @import AssetsLibrary;
 #import "ALAssetsLibrary+HelperMethods.h"
+#import "Move.h"
 
 @interface AddSnapshotTableViewController ()
 
@@ -43,7 +44,35 @@
     [self.regressionProgressView setLabelText:@"Worse"];
     [self.regressionProgressView setShowBorder:NO];
     
+    if ([self snapshotIsBaseline]) {
+        for (ProgressPickerButton *progressPicker in @[self.improvedProgressView,
+                                                       self.sameProgressView,
+                                                       self.regressionProgressView]) {
+            progressPicker.enabled = NO;
+        }
+        
+        self.progressCell.userInteractionEnabled = NO;
+    } else {
+        [self.currentSnapshot setProgressTypeRaw:SnapshotProgressImproved];
+    }
+    
     [self updateActiveProgressPicker];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    if (section == 1 && [self snapshotIsBaseline]) {
+        return @"The first snapshot is considered the baseline, so you can't rate it. You will be able to when you add the next snapshot.";
+    }
+    
+    return nil;
+}
+
+- (BOOL)snapshotIsBaseline {
+    return [self numberOfSnapshotsForMove] == 1;
+}
+
+- (NSUInteger)numberOfSnapshotsForMove {
+    return [[self.currentSnapshot move] snapshots].count;
 }
 
 - (void)updateActiveProgressPicker {

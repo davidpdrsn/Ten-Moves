@@ -14,6 +14,7 @@
 @property (strong, nonatomic) CALayer *border;
 @property (strong, nonatomic) CALayer *innerCircle;
 @property (strong, nonatomic) UIImageView *circle;
+@property (strong, nonatomic) UILabel *label;
 @property (assign, nonatomic) BOOL isActive;
 
 @end
@@ -99,7 +100,14 @@
                              self.frame.size.height - label.frame.size.height - 7,
                              self.frame.size.width,
                              label.frame.size.height);
+    self.label = label;
     [self addSubview:label];
+}
+
+- (void)setEnabled:(BOOL)enabled {
+    [super setEnabled:enabled];
+    self.circle.backgroundColor = [[Snapshot colorForProgressType:SnapshotProgressBaseline] colorWithAlphaComponent:.33333];
+    self.label.textColor = [Snapshot colorForProgressType:SnapshotProgressBaseline];
 }
 
 @end
