@@ -151,7 +151,8 @@
     UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
     mediaUI.sourceType = type;
     mediaUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-    mediaUI.allowsEditing = YES;
+    // TODO: set this to YES and figure out how to save the trimmed videos
+    mediaUI.allowsEditing = NO;
     mediaUI.delegate = delegate;
     [controller presentViewController:mediaUI animated:YES completion:nil];
     return YES;
