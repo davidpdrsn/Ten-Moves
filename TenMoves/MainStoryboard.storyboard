@@ -163,10 +163,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection footerTitle="How was your performance?" id="Rr2-E0-4bP">
+                            <tableViewSection headerTitle="How was your performance?" id="Rr2-E0-4bP">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="84" id="la3-SE-8Al">
-                                        <rect key="frame" x="0.0" y="182" width="320" height="84"/>
+                                        <rect key="frame" x="0.0" y="210" width="320" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="la3-SE-8Al" id="xUZ-Mz-bdn">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
