@@ -12,9 +12,12 @@
 
 @interface ProgressPickerButton : UIButton
 
+@property (assign, nonatomic) SnapshotProgress type;
+
 - (void)resizeToFit:(CGRect)parentFrame;
 - (void)setProgressType:(SnapshotProgress)type;
 - (void)setLabelText:(NSString *)text;
 - (void)setShowBorder:(BOOL)shouldShowBorder;
+- (void)setActive:(BOOL)shouldBeActive;
 
 @end

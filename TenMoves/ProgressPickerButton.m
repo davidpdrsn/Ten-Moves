@@ -12,7 +12,9 @@
 @interface ProgressPickerButton ()
 
 @property (strong, nonatomic) CALayer *border;
-@property (assign, nonatomic) SnapshotProgress type;
+@property (strong, nonatomic) CALayer *innerCircle;
+@property (strong, nonatomic) UIImageView *circle;
+@property (assign, nonatomic) BOOL isActive;
 
 @end
 
@@ -22,6 +24,7 @@
     [super awakeFromNib];
     [self resizeToFit:self.superview.frame];
     self.backgroundColor = [UIColor clearColor];
+    self.isActive = NO;
 }
 
 - (void)resizeToFit:(CGRect)parentFrame {
@@ -44,6 +47,22 @@
     }
 }
 
+- (void)setActive:(BOOL)shouldBeActive {
+    if (shouldBeActive == self.isActive) return;
+    _isActive = shouldBeActive;
+    
+    CGFloat toSize = (shouldBeActive) ? self.circle.frame.size.height-11 : 0;
+    
+    [CATransaction begin];
+    [CATransaction setValue:@(.2) forKey:kCATransactionAnimationDuration];
+    self.innerCircle.bounds = CGRectMake(self.innerCircle.bounds.origin.x,
+                                         self.innerCircle.bounds.origin.y,
+                                         toSize,
+                                         toSize);
+    self.innerCircle.cornerRadius = toSize/2;
+    [CATransaction commit];
+}
+
 - (void)setProgressType:(SnapshotProgress)type {
     _type = type;
     
@@ -58,6 +77,15 @@
     imageView.backgroundColor = color;
     imageView.layer.cornerRadius = size/2;
     
+    CALayer *innerCircle = [[CALayer alloc] init];
+    int innerCircleSize = 0;
+    innerCircle.frame = CGRectMake(size/2-innerCircleSize/2, size/2-innerCircleSize/2, innerCircleSize, innerCircleSize);
+    innerCircle.backgroundColor = [UIColor whiteColor].CGColor;
+    
+    self.circle = imageView;
+    self.innerCircle = innerCircle;
+    
+    [imageView.layer addSublayer:innerCircle];
     [self addSubview:imageView];
 }
 

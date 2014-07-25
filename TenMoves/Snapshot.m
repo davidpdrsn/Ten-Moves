@@ -47,13 +47,13 @@ static NSString *ENTITY_NAME = @"Snapshot";
 + (UIColor *)colorForProgressType:(SnapshotProgress)type {
     switch (type) {
         case SnapshotProgressImproved:
-            return [UIColor greenColor];
+            return [UIColor colorWithRed:0.225 green:0.848 blue:0.423 alpha:1.000];
             break;
         case SnapshotProgressSame:
-            return [UIColor yellowColor];
+            return [UIColor colorWithRed:1.000 green:0.780 blue:0.153 alpha:1.000];
             break;
         case SnapshotProgressRegressed:
-            return [UIColor redColor];
+            return [UIColor colorWithRed:0.945 green:0.233 blue:0.221 alpha:1.000];
             break;
         default:
             // can't be reached

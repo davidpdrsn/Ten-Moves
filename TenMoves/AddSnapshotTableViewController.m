@@ -38,6 +38,30 @@
     [self.regressionProgressView setProgressType:SnapshotProgressRegressed];
     [self.regressionProgressView setLabelText:@"Worse"];
     [self.regressionProgressView setShowBorder:NO];
+    
+    [self updateActiveProgressPicker];
+}
+
+- (void)updateActiveProgressPicker {
+    for (ProgressPickerButton *progressView in @[self.improvedProgressView, self.sameProgressView, self.regressionProgressView]) {
+        BOOL shouldBeActive = self.currentSnapshot.progressTypeRaw == progressView.type;
+        [progressView setActive:shouldBeActive];
+    }
+}
+
+- (IBAction)improvedTapped:(ProgressPickerButton *)sender {
+    [self.currentSnapshot setProgressTypeRaw:sender.type];
+    [self updateActiveProgressPicker];
+}
+
+- (IBAction)sameTapped:(ProgressPickerButton *)sender {
+    [self.currentSnapshot setProgressTypeRaw:sender.type];
+    [self updateActiveProgressPicker];
+}
+
+- (IBAction)regressedTapped:(ProgressPickerButton *)sender {
+    [self.currentSnapshot setProgressTypeRaw:sender.type];
+    [self updateActiveProgressPicker];
 }
 
 - (void)add {
