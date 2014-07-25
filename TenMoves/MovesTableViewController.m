@@ -109,9 +109,13 @@
     if (objects.count == 0) {
         return nil;
     } else {
+        // TODO: make this a little nicer
         NSInteger remaining = MAX_NUMBER_OF_MOVES - objects.count;
-        // TODO: conditionally add the s
-        return [NSString stringWithFormat:@"You have %i slot(s) remaining", (int)remaining];
+        if (remaining == 1) {
+            return [NSString stringWithFormat:@"You have %i slot remaining", (int)remaining];
+        } else {
+            return [NSString stringWithFormat:@"You have %i slots remaining", (int)remaining];
+        }
     }
 }
 
