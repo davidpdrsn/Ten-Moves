@@ -23,7 +23,6 @@
 @interface SnapshotsTableViewController ()
 
 @property (strong, nonatomic) ArrayDataSource *dataSource;
-@property (strong, nonatomic) MPMoviePlayerController *player;
 @property (strong, readonly, nonatomic) NSDateFormatter *formatter;
 
 @end
@@ -43,12 +42,7 @@
     self.tableView.dataSource = self.dataSource;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-}
-
-- (void)moviePlayBackDidFinish:(NSNotification *)notification {
-    [self.player.view removeFromSuperview];
-}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"AddSnapshot"]) {
@@ -88,11 +82,7 @@
         SnapshotTableViewCell *snapshotCell = (SnapshotTableViewCell *)cell;
         snapshotCell.tintColor = self.view.tintColor;
         snapshotCell.snapshot = snapshot;
-        
-        UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
-        [snapshotCell.thumbnailImageView addGestureRecognizer:tapped];
         snapshotCell.thumbnailImageView.snapshot = snapshot;
-        snapshotCell.thumbnailImageView.userInteractionEnabled = YES;
         
         return snapshotCell;
     };
@@ -100,28 +90,6 @@
     return [[ArrayDataSource alloc] initWithItems:[Snapshot fetchRequestForMove:self.move]
                                    cellIdentifier:@"Snapshot"
                                configureCellBlock:configureCell];
-}
-
-- (void)imageTapped:(UIGestureRecognizer *)gesture {
-    ImageViewWithSnapshot *imageView = (ImageViewWithSnapshot *)gesture.view;
-    Snapshot *snapshot = imageView.snapshot;
-    
-//    [ALAssetsLibrary assetForURL:[snapshot videoUrl] resultBlock:^(ALAsset *asset) {
-        self.player = [[MPMoviePlayerController alloc] initWithContentURL:[snapshot videoUrl]];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(moviePlayBackDidFinish:)
-                                                     name:MPMoviePlayerWillExitFullscreenNotification
-                                                   object:nil];
-        
-        [self.view addSubview:self.player.view];
-        [self.player.view setFrame:self.view.frame];
-        [self.player setFullscreen:YES animated:YES];
-        [self.player play];
-//    } failureBlock:^(NSError *error) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Video not found" message:@"..." delegate:nil cancelButtonTitle:@"Ups" otherButtonTitles:nil];
-//        [alert show];
-//    }];
 }
 
 - (NSDateFormatter *)formatter {

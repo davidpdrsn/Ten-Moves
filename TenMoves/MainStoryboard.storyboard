@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fdZ-9A-wJ3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fdZ-9A-wJ3">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -141,15 +141,15 @@
                         <sections>
                             <tableViewSection id="DFR-CC-V87">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="xV7-pE-reK">
-                                        <rect key="frame" x="0.0" y="99" width="320" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="63" id="xV7-pE-reK">
+                                        <rect key="frame" x="0.0" y="99" width="320" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xV7-pE-reK" id="uuA-bH-j0p">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JnG-IP-oJX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Pick video">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -166,7 +166,7 @@
                             <tableViewSection footerTitle="How was your performance?" id="Rr2-E0-4bP">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="84" id="la3-SE-8Al">
-                                        <rect key="frame" x="0.0" y="163" width="320" height="84"/>
+                                        <rect key="frame" x="0.0" y="182" width="320" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="la3-SE-8Al" id="xUZ-Mz-bdn">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
@@ -230,6 +230,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="improvedProgressView" destination="1uy-fg-7ZF" id="10A-Rv-Xoc"/>
+                        <outlet property="pickVideoButton" destination="JnG-IP-oJX" id="ZOW-cc-PYh"/>
                         <outlet property="progressCell" destination="la3-SE-8Al" id="Dvd-Yj-8xb"/>
                         <outlet property="regressionProgressView" destination="jus-tY-ZeZ" id="cKh-AZ-N8T"/>
                         <outlet property="sameProgressView" destination="KGO-mc-uwP" id="UCV-F1-WDZ"/>

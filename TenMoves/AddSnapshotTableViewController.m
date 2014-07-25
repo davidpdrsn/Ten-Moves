@@ -11,10 +11,14 @@
 #import "Snapshot.h"
 #import "Constants.h"
 #import "ProgressPickerButton.h"
+#import "ImageViewWithSnapshot.h"
+@import AssetsLibrary;
+#import "ALAssetsLibrary+HelperMethods.h"
 
 @interface AddSnapshotTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *progressCell;
+@property (weak, nonatomic) IBOutlet UIButton *pickVideoButton;
 
 @property (weak, nonatomic) IBOutlet ProgressPickerButton *improvedProgressView;
 @property (weak, nonatomic) IBOutlet ProgressPickerButton *sameProgressView;
@@ -85,6 +89,23 @@
     
     NSURL *url = [info objectForKey:UIImagePickerControllerReferenceURL];
     self.currentSnapshot.videoPath = [url absoluteString];
+    
+    [self.pickVideoButton setTitle:@"Pick different video" forState:UIControlStateNormal];
+    
+    int offset = 5;
+    CGFloat size = self.pickVideoButton.superview.frame.size.height-offset*2;
+    ImageViewWithSnapshot *thumbnail = [[ImageViewWithSnapshot alloc] initWithFrame:CGRectMake(offset, offset, size, size)];
+    
+    [ALAssetsLibrary assetForURL:self.currentSnapshot.videoUrl resultBlock:^(ALAsset *asset) {
+        UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
+        thumbnail.image = image;
+        thumbnail.snapshot = self.currentSnapshot;
+        [thumbnail awakeFromNib];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"image not found...");
+    }];
+    
+    [self.pickVideoButton.superview addSubview:thumbnail];
 }
 
 - (BOOL) startMediaBrowserFromViewController: (UIViewController*) controller
