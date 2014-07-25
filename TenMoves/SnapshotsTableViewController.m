@@ -35,10 +35,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addSnapshot)];
-    addButton.tintColor = self.view.tintColor;
-    self.navigationItem.rightBarButtonItem = addButton;
-    
     self.navigationController.view.tintColor = self.view.tintColor;
     
     self.dataSource = [self createDataSource];
@@ -47,23 +43,22 @@
     self.tableView.dataSource = self.dataSource;
 }
 
-- (void)addSnapshot {
-    UIStoryboard *storyBoard = [self storyboard];
-    AddSnapshotTableViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"AddSnapshotTableViewController"];
-    Snapshot *snapshot = [Snapshot newManagedObject];
-    [self.move addSnapshotsObject:snapshot];
-    vc.currentSnapshot = snapshot;
-    vc.delegate = self;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    nav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:nav animated:YES completion:nil];
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (void)moviePlayBackDidFinish:(NSNotification *)notification {
     [self.player.view removeFromSuperview];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"AddSnapshot"]) {
+        UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
+        AddSnapshotTableViewController *add = (AddSnapshotTableViewController *)nav.topViewController;
+        Snapshot *snapshot = [Snapshot newManagedObject];
+        [self.move addSnapshotsObject:snapshot];
+        add.currentSnapshot = snapshot;
+        add.delegate = self;
+    }
 }
 
 #pragma mark - add snapshot delegate

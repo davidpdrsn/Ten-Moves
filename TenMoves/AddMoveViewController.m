@@ -22,9 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Add new move";
     [self setupNameField];
-    [self setupNavigationBar];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -38,27 +36,17 @@
     self.nameField.delegate = self;
 }
 
-- (void)setupNavigationBar {
-    addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(add)];
-    addButton.tintColor = self.view.tintColor;
-    addButton.enabled = NO;
-    
-    self.navigationItem.rightBarButtonItem = addButton;
-    
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
-    cancelButton.tintColor = self.view.tintColor;
-    self.navigationItem.leftBarButtonItem = cancelButton;
-}
-
 #pragma mark - button actions
+- (IBAction)done:(id)sender {
+    [self add];
+}
 
 - (void)add {
     self.currentMove.name = self.nameField.text;
-    
     [self.delegate addMoveViewControllerDidSave];
 }
 
-- (void)cancel {
+- (IBAction)cancel:(id)sender {
     [self.delegate addMoveViewControllerDidCancel:self.currentMove];
 }
 

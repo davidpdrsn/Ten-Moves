@@ -8,8 +8,16 @@
 
 #import "AddSnapshotTableViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
+#import "Snapshot.h"
+#import "ProgressPickerButton.h"
 
 @interface AddSnapshotTableViewController ()
+
+@property (weak, nonatomic) IBOutlet UITableViewCell *progressCell;
+
+@property (weak, nonatomic) IBOutlet ProgressPickerButton *improvedProgressView;
+@property (weak, nonatomic) IBOutlet ProgressPickerButton *sameProgressView;
+@property (weak, nonatomic) IBOutlet ProgressPickerButton *regressionProgressView;
 
 @end
 
@@ -17,26 +25,78 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Add snapshot";
-    [self setupNavigationBar];
+    
+    for (ProgressPickerButton *progressView in @[self.improvedProgressView,
+                                         self.sameProgressView,
+                                         self.regressionProgressView]) {
+        [progressView resizeToFit:self.progressCell.frame];
+        progressView.backgroundColor = [UIColor clearColor];
+    }
+    
+    [self addCircleToProgressView:self.improvedProgressView withColor:[UIColor greenColor]];
+    [self addLabelToProgressView:self.improvedProgressView withText:@"Better"];
+    
+    [self addCircleToProgressView:self.sameProgressView withColor:[UIColor yellowColor]];
+    [self addLabelToProgressView:self.sameProgressView withText:@"Same"];
+
+    [self addCircleToProgressView:self.regressionProgressView withColor:[UIColor redColor]];
+    [self addLabelToProgressView:self.regressionProgressView withText:@"Worse"];
+    
+    for (ProgressPickerButton *progressView in @[self.improvedProgressView,
+                                         self.sameProgressView]) {
+        CALayer *rightBorder = [CALayer layer];
+        rightBorder.frame = CGRectMake(progressView.frame.size.width, 0, 0.5f, self.progressCell.frame.size.height);
+        rightBorder.backgroundColor = [[UITableView alloc] init].separatorColor.CGColor;
+        [progressView.layer addSublayer:rightBorder];
+    }
+}
+
+- (void)addLabelToProgressView:(ProgressPickerButton *)progressView withText:(NSString *)text {
+    UILabel *label = [[UILabel alloc] init];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = text;
+    label.font = [UIFont systemFontOfSize:12];
+    [label sizeToFit];
+    label.frame = CGRectMake(0,
+                             progressView.frame.size.height - label.frame.size.height - 7,
+                             progressView.frame.size.width,
+                             label.frame.size.height);
+    [progressView addSubview:label];
+}
+
+- (void)addCircleToProgressView:(ProgressPickerButton *)progressView withColor:(UIColor *)color {
+    CGFloat size = progressView.frame.size.height/2;
+    CGRect frame = CGRectMake(progressView.frame.size.width/2 - size/2,
+                              progressView.frame.size.height/2 - size/2 - 7,
+                              size,
+                              size);
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.backgroundColor = color;
+    imageView.layer.cornerRadius = size/2;
+    [progressView addSubview:imageView];
+}
+
+- (void)progressViewTapped:(ProgressPickerButton *)progressView {
+    if (progressView == self.improvedProgressView) {
+        NSLog(@"improved");
+    } else if (progressView == self.sameProgressView) {
+        NSLog(@"same");
+    } else if (progressView == self.regressionProgressView) {
+        NSLog(@"regression");
+    }
 }
 
 - (void)add {
     [self.delegate addSnapshotTableViewControllerDidSave];
 }
 
-- (void)cancel {
+- (IBAction)cancel:(id)sender {
     [self.delegate addSnapshotTableViewControllerDidCancel:self.currentSnapshot];
 }
 
-- (void)setupNavigationBar {
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(add)];
-    addButton.tintColor = self.view.tintColor;
-    self.navigationItem.rightBarButtonItem = addButton;
-    
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
-    cancelButton.tintColor = self.view.tintColor;
-    self.navigationItem.leftBarButtonItem = cancelButton;
+- (IBAction)done:(id)sender {
+    [self add];
 }
 
 - (IBAction)pickPhoto:(id)sender {

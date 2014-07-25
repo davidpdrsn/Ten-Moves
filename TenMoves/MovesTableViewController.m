@@ -18,7 +18,7 @@
 @interface MovesTableViewController ()
 
 @property (strong, nonatomic) ArrayDataSource *dataSource;
-@property (strong, nonatomic) UIBarButtonItem *addButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 
 @end
 
@@ -32,26 +32,12 @@
     self.dataSource.emptyTableViewHeaderText = @"Zero Moves";
     self.dataSource.emptyTableViewText = @"It seems you haven't added any moves yet. Tap the plus button to get started.";
     
-    self.addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMove)];
-    self.addButton.tintColor = self.view.tintColor;
-    self.navigationItem.rightBarButtonItem = self.addButton;
     [self enableOrDisableAddButton];
     
     self.tableView.delegate = self.dataSource;
     self.tableView.dataSource = self.dataSource;
     self.tableView.emptyDataSetDelegate = self.dataSource;
     self.tableView.emptyDataSetSource = self.dataSource;
-}
-
-- (void)addNewMove {
-    UIStoryboard *storyBoard = [self storyboard];
-    AddMoveViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"AddMoveViewController"];
-    Move *move = [Move newManagedObject];
-    vc.currentMove = move;
-    vc.delegate = self;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    nav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)enableOrDisableAddButton {
@@ -68,6 +54,12 @@
     if ([segue.identifier isEqualToString:@"showSnapshots"]) {
         SnapshotsTableViewController *destination = (SnapshotsTableViewController *) segue.destinationViewController;
         destination.move = [self.dataSource itemAtIndexPath:[self.tableView indexPathForSelectedRow]];
+    } else if ([segue.identifier isEqualToString:@"AddMove"]) {
+        Move *move = [Move newManagedObject];
+        UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
+        AddMoveViewController *add = (AddMoveViewController *)nav.topViewController;
+        add.currentMove = move;
+        add.delegate = self;
     }
 }
 

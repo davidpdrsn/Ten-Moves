@@ -179,6 +179,25 @@
 			name = DataSources;
 			sourceTree = "<group>";
 		};
+		86D1380F1981B87700B32FC2 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				86ED30C4196F0F0F00FC738B /* AppDelegate.h */,
+				86ED30C5196F0F0F00FC738B /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		86D138101981B88400B32FC2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				86ED30CA196F0F0F00FC738B /* Images.xcassets */,
+				86ED30C7196F0F0F00FC738B /* TenMoves.xcdatamodeld */,
+				86ED30EB196F114D00FC738B /* MainStoryboard.storyboard */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		86ED30A7196F0F0F00FC738B = {
 			isa = PBXGroup;
 			children = (
@@ -216,18 +235,15 @@
 		86ED30BB196F0F0F00FC738B /* TenMoves */ = {
 			isa = PBXGroup;
 			children = (
+				8679AFED19804B7400052C30 /* Constants.h */,
 				8679AFEF19804E9C00052C30 /* Protocols */,
 				8601299B19728FC90053C71D /* Categories */,
 				86A3F26419712D7D00E389A1 /* DataSources */,
 				8685E3B8196F5B0E00A97585 /* CustomViews */,
 				86EE8D95196F503200EE4DCF /* ViewControllers */,
 				86EE8D96196F504200EE4DCF /* Models */,
-				86ED30C4196F0F0F00FC738B /* AppDelegate.h */,
-				86ED30C5196F0F0F00FC738B /* AppDelegate.m */,
-				86ED30CA196F0F0F00FC738B /* Images.xcassets */,
-				86ED30C7196F0F0F00FC738B /* TenMoves.xcdatamodeld */,
-				86ED30EB196F114D00FC738B /* MainStoryboard.storyboard */,
-				8679AFED19804B7400052C30 /* Constants.h */,
+				86D138101981B88400B32FC2 /* Resources */,
+				86D1380F1981B87700B32FC2 /* AppDelegate */,
 				86ED30BC196F0F0F00FC738B /* Supporting Files */,
 			);
 			path = TenMoves;

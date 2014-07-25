@@ -7,20 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Snapshot.h"
+#import "AddSnapshotTableViewControllerDelegate.h"
 
-@protocol AddSnapshowTableViewControllerDelegate;
+@class Snapshot;
 
 @interface AddSnapshotTableViewController : UITableViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, strong) id<AddSnapshowTableViewControllerDelegate> delegate;
+@property (nonatomic, strong) id<AddSnapshotTableViewControllerDelegate> delegate;
 @property (nonatomic, strong) Snapshot *currentSnapshot;
-
-@end
-
-@protocol AddSnapshowTableViewControllerDelegate
-
-- (void)addSnapshotTableViewControllerDidSave;
-- (void)addSnapshotTableViewControllerDidCancel:(Snapshot *)snapshotToDelete;
 
 @end

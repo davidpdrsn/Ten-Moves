@@ -17,7 +17,6 @@ typedef UITableViewCell* (^ConfigureCellBlock)(UITableViewCell *cell, id item);
 @interface ArrayDataSource : NSObject <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property (strong, nonatomic) NSObject<ArrayDataSourceDelegate> *delegate;
-
 @property (strong, nonatomic) NSString *emptyTableViewHeaderText;
 @property (strong, nonatomic) NSString *emptyTableViewText;
 
