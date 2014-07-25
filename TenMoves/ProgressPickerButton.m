@@ -7,19 +7,21 @@
 //
 
 #import "ProgressPickerButton.h"
+#import "Snapshot.h"
 
 @interface ProgressPickerButton ()
+
+@property (strong, nonatomic) CALayer *border;
+@property (assign, nonatomic) SnapshotProgress type;
 
 @end
 
 @implementation ProgressPickerButton
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        NSLog(@"view did load was called");
-    }
-    return self;
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self resizeToFit:self.superview.frame];
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)resizeToFit:(CGRect)parentFrame {
@@ -28,28 +30,48 @@
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, width, height);
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
-    
-    animation.fromValue = (id)[UIColor clearColor].CGColor;
-    animation.toValue = (id)[UIColor magentaColor].CGColor;
-    animation.duration = .15;
-    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    animation.delegate = self;
-    
-    [self.layer addAnimation:animation forKey:@"in"];
-    
-    self.backgroundColor = [UIColor magentaColor];
+- (void)setShowBorder:(BOOL)shouldShowBorder {
+    if (shouldShowBorder) {
+        CALayer *rightBorder = [CALayer layer];
+        rightBorder.frame = CGRectMake(self.frame.size.width, 0, 0.5f, [self superview].frame.size.height);
+        rightBorder.backgroundColor = [[UITableView alloc] init].separatorColor.CGColor;
+        
+        [self.layer addSublayer:rightBorder];
+        
+        self.border = rightBorder;
+    } else {
+        self.border = nil;
+    }
 }
 
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
-    animation.fromValue = (id)self.backgroundColor.CGColor;
-    animation.toValue = (id)[UIColor clearColor].CGColor;
-    animation.duration = .15;
-    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    [self.layer addAnimation:animation forKey:@"out"];
-    self.backgroundColor = [UIColor clearColor];
+- (void)setProgressType:(SnapshotProgress)type {
+    _type = type;
+    
+    UIColor *color = [Snapshot colorForProgressType:type];
+    CGFloat size = self.frame.size.height/2;
+    CGRect frame = CGRectMake(self.frame.size.width/2 - size/2,
+                              self.frame.size.height/2 - size/2 - 7,
+                              size,
+                              size);
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.backgroundColor = color;
+    imageView.layer.cornerRadius = size/2;
+    
+    [self addSubview:imageView];
+}
+
+- (void)setLabelText:(NSString *)text {
+    UILabel *label = [[UILabel alloc] init];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = text;
+    label.font = [UIFont systemFontOfSize:12];
+    [label sizeToFit];
+    label.frame = CGRectMake(0,
+                             self.frame.size.height - label.frame.size.height - 7,
+                             self.frame.size.width,
+                             label.frame.size.height);
+    [self addSubview:label];
 }
 
 @end

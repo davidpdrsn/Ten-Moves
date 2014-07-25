@@ -10,6 +10,7 @@
 #import "ALAssetsLibrary+HelperMethods.h"
 #import "ImageViewWithSnapshot.h"
 #import "Snapshot.h"
+#import "Constants.h"
 @import AssetsLibrary;
 
 @interface SnapshotTableViewCell ()
@@ -18,6 +19,11 @@
 
 @implementation SnapshotTableViewCell
 
+- (void)setupProgressIndicator {
+    self.progressIndicator.layer.cornerRadius = self.progressIndicator.frame.size.height/2;
+    self.progressIndicator.backgroundColor = [self.snapshot colorForProgressType];
+}
+
 - (void)setSnapshot:(Snapshot *)snapshot {
     _snapshot = snapshot;
     
@@ -25,6 +31,8 @@
     formatter.dateStyle = NSDateFormatterMediumStyle;
     
     self.dateLabel.text = [formatter stringFromDate:snapshot.createdAt];
+    
+    [self setupProgressIndicator];
     
     [ALAssetsLibrary assetForURL:snapshot.videoUrl resultBlock:^(ALAsset *asset) {
         UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];

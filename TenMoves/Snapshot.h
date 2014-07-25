@@ -9,18 +9,28 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+typedef enum {
+    SnapshotProgressImproved = 0,
+    SnapshotProgressSame = 1,
+    SnapshotProgressRegressed = 2
+} SnapshotProgress;
+
 @class Move;
 
 @interface Snapshot : NSManagedObject
 
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSString * videoPath;
+@property (nonatomic, retain) NSNumber * progress;
 @property (nonatomic, retain) Move *move;
 
 + (instancetype)newManagedObject;
-
 + (NSFetchRequest *)fetchRequestForMove:(Move *)move;
++ (UIColor *)colorForProgressType:(SnapshotProgress)type;
 
 - (NSURL *)videoUrl;
+- (SnapshotProgress)progressTypeRaw;
+- (void)setProgressTypeRaw:(SnapshotProgress)type;
+- (UIColor *)colorForProgressType;
 
 @end

@@ -17,6 +17,7 @@ static NSString *ENTITY_NAME = @"Snapshot";
 @dynamic createdAt;
 @dynamic videoPath;
 @dynamic move;
+@dynamic progress;
 
 + (instancetype)newManagedObject {
     Snapshot *snapshot = (Snapshot *) [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
@@ -39,6 +40,27 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return fetchRequest;
 }
 
++(NSSet *)keyPathsForValuesAffectingItemTypeRaw {
+    return [NSSet setWithObject:@"progress"];
+}
+
++ (UIColor *)colorForProgressType:(SnapshotProgress)type {
+    switch (type) {
+        case SnapshotProgressImproved:
+            return [UIColor greenColor];
+            break;
+        case SnapshotProgressSame:
+            return [UIColor yellowColor];
+            break;
+        case SnapshotProgressRegressed:
+            return [UIColor redColor];
+            break;
+        default:
+            // can't be reached
+            break;
+    }
+}
+
 - (void)awakeFromInsert {
     [super awakeFromInsert];
     [self setValue:[NSDate date] forKey:@"createdAt"];
@@ -46,6 +68,18 @@ static NSString *ENTITY_NAME = @"Snapshot";
 
 - (NSURL *)videoUrl {
     return [NSURL URLWithString:self.videoPath];
+}
+
+- (SnapshotProgress)progressTypeRaw {
+    return (SnapshotProgress)self.progress.intValue;
+}
+
+- (void)setProgressTypeRaw:(SnapshotProgress)type {
+    self.progress = [NSNumber numberWithInt:type];
+}
+
+- (UIColor *)colorForProgressType {
+    return [self.class colorForProgressType:self.progressTypeRaw];
 }
 
 @end

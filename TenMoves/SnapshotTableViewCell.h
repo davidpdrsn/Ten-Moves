@@ -17,5 +17,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet ImageViewWithSnapshot *thumbnailImageView;
+@property (strong, nonatomic) IBOutlet UIView *progressIndicator;
 
 @end

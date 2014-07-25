@@ -9,6 +9,7 @@
 #import "AddSnapshotTableViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "Snapshot.h"
+#import "Constants.h"
 #import "ProgressPickerButton.h"
 
 @interface AddSnapshotTableViewController ()
@@ -26,65 +27,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    for (ProgressPickerButton *progressView in @[self.improvedProgressView,
-                                         self.sameProgressView,
-                                         self.regressionProgressView]) {
-        [progressView resizeToFit:self.progressCell.frame];
-        progressView.backgroundColor = [UIColor clearColor];
-    }
+    [self.improvedProgressView setProgressType:SnapshotProgressImproved];
+    [self.improvedProgressView setLabelText:@"Better"];
+    [self.improvedProgressView setShowBorder:YES];
     
-    [self addCircleToProgressView:self.improvedProgressView withColor:[UIColor greenColor]];
-    [self addLabelToProgressView:self.improvedProgressView withText:@"Better"];
+    [self.sameProgressView setProgressType:SnapshotProgressSame];
+    [self.sameProgressView setLabelText:@"Same"];
+    [self.sameProgressView setShowBorder:YES];
     
-    [self addCircleToProgressView:self.sameProgressView withColor:[UIColor yellowColor]];
-    [self addLabelToProgressView:self.sameProgressView withText:@"Same"];
-
-    [self addCircleToProgressView:self.regressionProgressView withColor:[UIColor redColor]];
-    [self addLabelToProgressView:self.regressionProgressView withText:@"Worse"];
-    
-    for (ProgressPickerButton *progressView in @[self.improvedProgressView,
-                                         self.sameProgressView]) {
-        CALayer *rightBorder = [CALayer layer];
-        rightBorder.frame = CGRectMake(progressView.frame.size.width, 0, 0.5f, self.progressCell.frame.size.height);
-        rightBorder.backgroundColor = [[UITableView alloc] init].separatorColor.CGColor;
-        [progressView.layer addSublayer:rightBorder];
-    }
-}
-
-- (void)addLabelToProgressView:(ProgressPickerButton *)progressView withText:(NSString *)text {
-    UILabel *label = [[UILabel alloc] init];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = text;
-    label.font = [UIFont systemFontOfSize:12];
-    [label sizeToFit];
-    label.frame = CGRectMake(0,
-                             progressView.frame.size.height - label.frame.size.height - 7,
-                             progressView.frame.size.width,
-                             label.frame.size.height);
-    [progressView addSubview:label];
-}
-
-- (void)addCircleToProgressView:(ProgressPickerButton *)progressView withColor:(UIColor *)color {
-    CGFloat size = progressView.frame.size.height/2;
-    CGRect frame = CGRectMake(progressView.frame.size.width/2 - size/2,
-                              progressView.frame.size.height/2 - size/2 - 7,
-                              size,
-                              size);
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.backgroundColor = color;
-    imageView.layer.cornerRadius = size/2;
-    [progressView addSubview:imageView];
-}
-
-- (void)progressViewTapped:(ProgressPickerButton *)progressView {
-    if (progressView == self.improvedProgressView) {
-        NSLog(@"improved");
-    } else if (progressView == self.sameProgressView) {
-        NSLog(@"same");
-    } else if (progressView == self.regressionProgressView) {
-        NSLog(@"regression");
-    }
+    [self.regressionProgressView setProgressType:SnapshotProgressRegressed];
+    [self.regressionProgressView setLabelText:@"Worse"];
+    [self.regressionProgressView setShowBorder:NO];
 }
 
 - (void)add {
