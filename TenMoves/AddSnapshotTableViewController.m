@@ -150,6 +150,7 @@
     
     UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
     mediaUI.sourceType = type;
+    mediaUI.view.tintColor = self.view.tintColor;
     mediaUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
     // TODO: set this to YES and figure out how to save the trimmed videos
     mediaUI.allowsEditing = NO;
