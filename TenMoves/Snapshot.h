@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+// TODO: rename to SnapshotProgressType
 typedef enum {
     SnapshotProgressImproved = 0,
     SnapshotProgressSame = 1,
