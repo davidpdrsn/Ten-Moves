@@ -43,7 +43,6 @@ static NSManagedObjectContext *_managedObjectContext;
     
     for (NSManagedObject *obj in [context insertedObjects]) {
         if ([obj conformsToProtocol:@protocol(ModelObjectWithTimeStamps)]) {
-            NSLog(@"setting timestamps");
             [obj setValue:now forKey:@"createdAt"];
             [obj setValue:now forKey:@"updatedAt"];
         }
@@ -51,7 +50,6 @@ static NSManagedObjectContext *_managedObjectContext;
     
     for (NSManagedObject *obj in [context updatedObjects]) {
         if ([obj conformsToProtocol:@protocol(ModelObjectWithTimeStamps)]) {
-            NSLog(@"updating time stamp");
             [obj setValue:now forKey:@"updatedAt"];
         }
     }
