@@ -91,6 +91,7 @@
 		86A3F26219712D7900E389A1 /* ArrayDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayDataSource.m; sourceTree = "<group>"; };
 		86A3F2651971578900E389A1 /* Repository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Repository.h; sourceTree = "<group>"; };
 		86A3F2661971578900E389A1 /* Repository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Repository.m; sourceTree = "<group>"; };
+		86EA19C119846F8F007B4813 /* ImageViewWithSnapshotDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewWithSnapshotDelegate.h; sourceTree = "<group>"; };
 		86ED30B0196F0F0F00FC738B /* TenMoves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TenMoves.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86ED30B3196F0F0F00FC738B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		86ED30B5196F0F0F00FC738B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -167,6 +168,7 @@
 		8679AFEF19804E9C00052C30 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				86EA19C119846F8F007B4813 /* ImageViewWithSnapshotDelegate.h */,
 				863B0EAF1984252A00AAF919 /* ModelObjectWithTimeStamps.h */,
 				8679AFF019804EE500052C30 /* AddMoveViewControllerDelegate.h */,
 				8679AFF119804F3000052C30 /* AddSnapshotTableViewControllerDelegate.h */,

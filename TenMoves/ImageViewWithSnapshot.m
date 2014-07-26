@@ -14,7 +14,6 @@
 
 @property (strong, nonatomic) UIView *overlay;
 @property (strong, nonatomic) UIColor *backgroundColor;
-@property (strong, nonatomic) MPMoviePlayerController *player;
 
 @end
 
@@ -47,23 +46,37 @@
     ImageViewWithSnapshot *imageView = (ImageViewWithSnapshot *)gesture.view;
     Snapshot *snapshot = imageView.snapshot;
     
-    self.player = [[MPMoviePlayerController alloc] initWithContentURL:[snapshot videoUrl]];
+    MPMoviePlayerViewController *player = [[MPMoviePlayerViewController alloc] initWithContentURL:[snapshot videoUrl]];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:player
+                                                    name:MPMoviePlayerPlaybackDidFinishNotification
+                                                  object:player.moviePlayer];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(moviePlayBackDidFinish:)
-                                                 name:MPMoviePlayerWillExitFullscreenNotification
-                                               object:nil];
+                                             selector:@selector(movieFinishedCallback:)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object:player.moviePlayer];
     
-    [self addSubview:self.player.view];
-    [self.player.view setFrame:CGRectMake(self.overlay.frame.origin.x,
-                                          self.overlay.frame.origin.y,
-                                          20, 20)];
-    [self.player setFullscreen:YES animated:YES];
-    [self.player play];
+    [player.moviePlayer prepareToPlay];
+    
+    if (self.delegate) {
+        [self.delegate imageViewWithSnapshot:self presentMoviePlayerViewControllerAnimated:player];
+    }
 }
-
-- (void)moviePlayBackDidFinish:(NSNotification *)notification {
-    [self.player.view removeFromSuperview];
+- (void)movieFinishedCallback:(NSNotification *)notification {
+    NSNumber *finishReason = [[notification userInfo] objectForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey];
+    
+    if ([finishReason intValue] != MPMovieFinishReasonPlaybackEnded) {
+        MPMoviePlayerController *moviePlayer = [notification object];
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                        name:MPMoviePlayerPlaybackDidFinishNotification
+                                                      object:moviePlayer];
+        
+        if (self.delegate) {
+            [self.delegate imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:self];
+        }
+    }
 }
 
 - (void)updateBackground {

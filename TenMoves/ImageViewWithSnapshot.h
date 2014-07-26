@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImageViewWithSnapshotDelegate.h"
 
 @class Snapshot;
 
 @interface ImageViewWithSnapshot : UIImageView
 
 @property (strong, nonatomic) Snapshot *snapshot;
+@property (strong, nonatomic) id<ImageViewWithSnapshotDelegate> delegate;
 
 - (void)updateBackground;
 

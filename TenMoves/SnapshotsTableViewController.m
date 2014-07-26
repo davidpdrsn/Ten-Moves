@@ -85,6 +85,7 @@
         snapshotCell.tintColor = self.view.tintColor;
         snapshotCell.snapshot = snapshot;
         snapshotCell.thumbnailImageView.snapshot = snapshot;
+        snapshotCell.thumbnailImageView.delegate = self;
         NSLog(@"created at - %@", snapshot.createdAt);
         NSLog(@"updated at - %@", snapshot.updatedAt);
         
@@ -101,6 +102,16 @@
     __formatter = [[NSDateFormatter alloc] init];
     [__formatter setDateStyle:NSDateFormatterMediumStyle];
     return  __formatter;
+}
+
+#pragma mark - image view with snapshot delegate methods
+
+- (void)imageViewWithSnapshot:(ImageViewWithSnapshot *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
+    [self presentMoviePlayerViewControllerAnimated:player];
+}
+
+- (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(ImageViewWithSnapshot *)imageView {
+    [self dismissMoviePlayerViewControllerAnimated];
 }
 
 @end

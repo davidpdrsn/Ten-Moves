@@ -6,13 +6,14 @@
 //  Copyright (c) 2014 David Pedersen. All rights reserved.
 //
 
-#import "AddSnapshotTableViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
+@import AssetsLibrary;
+
+#import "AddSnapshotTableViewController.h"
 #import "Snapshot.h"
 #import "Constants.h"
 #import "ProgressPickerButton.h"
 #import "ImageViewWithSnapshot.h"
-@import AssetsLibrary;
 #import "ALAssetsLibrary+HelperMethods.h"
 #import "Move.h"
 
@@ -114,30 +115,49 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    NSURL *mediaUrl = info[UIImagePickerControllerMediaURL];
+    NSString *extension = [mediaUrl pathExtension];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = paths[0];
+    NSString *filename = [NSString stringWithFormat:@"/%@.%@", [self uuidString], extension];
+    NSURL *destinationUrl = [NSURL fileURLWithPath:[documentsDirectory stringByAppendingString:filename]];
+    
+    NSFileManager *manager = [[NSFileManager alloc] init];
+    
+    NSError *error;
+    [manager copyItemAtURL:mediaUrl toURL:destinationUrl error:&error];
+    if (error) {
+        [[[UIAlertView alloc] initWithTitle:@"Failed copying video"
+                                    message:nil
+                                   delegate:nil
+                          cancelButtonTitle:@"Okay"
+                          otherButtonTitles:nil] show];
+        NSLog(@"error - %@", [error userInfo]);
+    } else {
+        self.currentSnapshot.videoPath = destinationUrl.absoluteString;
+        [self.pickVideoButton setTitle:@"Pick different video" forState:UIControlStateNormal];
+//        TODO: save binary thumbnail image
+//        int offset = 5;
+//        CGFloat size = self.pickVideoButton.superview.frame.size.height-offset*2;
+//        ImageViewWithSnapshot *thumbnail = [[ImageViewWithSnapshot alloc] initWithFrame:CGRectMake(offset, offset, size, size)];
+//        
+//        [ALAssetsLibrary assetForURL:self.currentSnapshot.videoUrl resultBlock:^(ALAsset *asset) {
+//            UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
+//            thumbnail.image = image;
+//            thumbnail.snapshot = self.currentSnapshot;
+//            [thumbnail awakeFromNib];
+//        } failureBlock:^(NSError *error) {
+//            NSLog(@"image not found...");
+//        }];
+//        [self.pickVideoButton.superview addSubview:thumbnail];
+    }
+    
     [picker dismissViewControllerAnimated:YES completion:nil];
-    
-    NSURL *url = [info objectForKey:UIImagePickerControllerReferenceURL];
-    self.currentSnapshot.videoPath = [url absoluteString];
-    
-    [self.pickVideoButton setTitle:@"Pick different video" forState:UIControlStateNormal];
-    
-    int offset = 5;
-    CGFloat size = self.pickVideoButton.superview.frame.size.height-offset*2;
-    ImageViewWithSnapshot *thumbnail = [[ImageViewWithSnapshot alloc] initWithFrame:CGRectMake(offset, offset, size, size)];
-    
-    [ALAssetsLibrary assetForURL:self.currentSnapshot.videoUrl resultBlock:^(ALAsset *asset) {
-        UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
-        thumbnail.image = image;
-        thumbnail.snapshot = self.currentSnapshot;
-        [thumbnail awakeFromNib];
-    } failureBlock:^(NSError *error) {
-        NSLog(@"image not found...");
-    }];
-    
-    [self.pickVideoButton.superview addSubview:thumbnail];
+
 }
 
-- (BOOL) startMediaBrowserFromViewController: (UIViewController*) controller
+- (void)startMediaBrowserFromViewController: (UIViewController*) controller
                                usingDelegate: (id <UIImagePickerControllerDelegate,
                                                UINavigationControllerDelegate>) delegate {
     UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -145,7 +165,7 @@
     if (([UIImagePickerController isSourceTypeAvailable: type] == NO)
         || (delegate == nil)
         || (controller == nil)) {
-        return NO;
+        return;
     }
     
     UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
@@ -156,7 +176,14 @@
     mediaUI.allowsEditing = NO;
     mediaUI.delegate = delegate;
     [controller presentViewController:mediaUI animated:YES completion:nil];
-    return YES;
+}
+
+- (NSString *)uuidString {
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
+    CFRelease(uuid);
+    
+    return uuidString;
 }
 
 @end
