@@ -109,12 +109,12 @@
     if (objects.count == 0) {
         return nil;
     } else {
-        // TODO: make this a little nicer
         NSInteger remaining = MAX_NUMBER_OF_MOVES - objects.count;
-        if (remaining == 1) {
-            return [NSString stringWithFormat:@"You have %i slot remaining", (int)remaining];
+        if (remaining == 0) {
+            return @"You have no slots remaining";
         } else {
-            return [NSString stringWithFormat:@"You have %i slots remaining", (int)remaining];
+            NSString *quantifier = (remaining == 1) ? @"slot" : @"slots";
+            return [NSString stringWithFormat:@"You have %i %@ remaining", (int)remaining, quantifier];
         }
     }
 }
