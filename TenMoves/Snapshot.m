@@ -15,6 +15,7 @@ static NSString *ENTITY_NAME = @"Snapshot";
 @implementation Snapshot
 
 @dynamic createdAt;
+@dynamic updatedAt;
 @dynamic videoPath;
 @dynamic move;
 @dynamic progress;
@@ -67,7 +68,6 @@ static NSString *ENTITY_NAME = @"Snapshot";
 - (void)awakeFromInsert {
     [super awakeFromInsert];
     
-    [self setValue:[NSDate date] forKey:@"createdAt"];
     [self setProgressTypeRaw:SnapshotProgressBaseline];
 }
 

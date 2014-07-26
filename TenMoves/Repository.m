@@ -7,6 +7,7 @@
 //
 
 #import "Repository.h"
+#import "ModelObjectWithTimeStamps.h"
 
 static NSManagedObjectContext *_managedObjectContext;
 
@@ -18,6 +19,11 @@ static NSManagedObjectContext *_managedObjectContext;
 
 + (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
     _managedObjectContext = managedObjectContext;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contextWillSave:)
+                                                 name:NSManagedObjectContextWillSaveNotification
+                                               object:_managedObjectContext];
 }
 
 + (void)deleteObject:(id)objectToDelete {
@@ -28,6 +34,27 @@ static NSManagedObjectContext *_managedObjectContext;
     NSError *error;
     [_managedObjectContext save:&error];
     completionHandler(error);
+}
+
++ (void)contextWillSave:(NSNotification *)notification {
+    NSManagedObjectContext *context = [notification object];
+    
+    NSDate *now = [NSDate date];
+    
+    for (NSManagedObject *obj in [context insertedObjects]) {
+        if ([obj conformsToProtocol:@protocol(ModelObjectWithTimeStamps)]) {
+            NSLog(@"setting timestamps");
+            [obj setValue:now forKey:@"createdAt"];
+            [obj setValue:now forKey:@"updatedAt"];
+        }
+    }
+    
+    for (NSManagedObject *obj in [context updatedObjects]) {
+        if ([obj conformsToProtocol:@protocol(ModelObjectWithTimeStamps)]) {
+            NSLog(@"updating time stamp");
+            [obj setValue:now forKey:@"updatedAt"];
+        }
+    }
 }
 
 @end

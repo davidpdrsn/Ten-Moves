@@ -108,7 +108,7 @@
                                     <outlet property="dateLabel" destination="ZGz-G3-eSU" id="5o2-fO-uwO"/>
                                     <outlet property="progressIndicator" destination="ow1-Kc-dJH" id="1DH-mY-jYG"/>
                                     <outlet property="thumbnailImageView" destination="hJ1-UY-VhF" id="3S3-IP-SKL"/>
-                                    <segue destination="Rdj-AS-qii" kind="push" id="3X1-n0-FMd"/>
+                                    <segue destination="Rdj-AS-qii" kind="push" identifier="showSnapshot" id="3X1-n0-FMd"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

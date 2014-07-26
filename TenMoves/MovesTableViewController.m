@@ -53,7 +53,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showSnapshots"]) {
         SnapshotsTableViewController *destination = (SnapshotsTableViewController *) segue.destinationViewController;
-        destination.move = [self.dataSource itemAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        Move *move = [self.dataSource itemAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        destination.move = move;
     } else if ([segue.identifier isEqualToString:@"AddMove"]) {
         Move *move = [Move newManagedObject];
         UINavigationController *nav = (UINavigationController *)segue.destinationViewController;

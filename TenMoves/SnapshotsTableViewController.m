@@ -52,6 +52,8 @@
         [self.move addSnapshotsObject:snapshot];
         add.currentSnapshot = snapshot;
         add.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"showSnapshot"]) {
+//        Snapshot *snapshot = [self.dataSource itemAtIndexPath:[self.tableView indexPathForSelectedRow]];
     }
 }
 
@@ -83,6 +85,8 @@
         snapshotCell.tintColor = self.view.tintColor;
         snapshotCell.snapshot = snapshot;
         snapshotCell.thumbnailImageView.snapshot = snapshot;
+        NSLog(@"created at - %@", snapshot.createdAt);
+        NSLog(@"updated at - %@", snapshot.updatedAt);
         
         return snapshotCell;
     };

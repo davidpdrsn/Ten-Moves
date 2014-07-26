@@ -15,6 +15,7 @@ static NSString *ENTITY_NAME = @"Move";
 @implementation Move
 
 @dynamic createdAt;
+@dynamic updatedAt;
 @dynamic name;
 @dynamic snapshots;
 
@@ -33,12 +34,6 @@ static NSString *ENTITY_NAME = @"Move";
     [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
     
     return fetchRequest;
-}
-
-- (void)awakeFromInsert {
-    [super awakeFromInsert];
-    
-    [self setValue:[NSDate date] forKey:@"createdAt"];
 }
 
 @end

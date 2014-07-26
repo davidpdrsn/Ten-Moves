@@ -11,6 +11,7 @@
 		8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 860129991972886A0053C71D /* UITableViewCell+HelperMethods.m */; };
 		8601299E197297280053C71D /* ALAssetsLibrary+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */; };
 		8602703B1978679200984CF2 /* Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8602703A1978679200984CF2 /* Snapshot.m */; };
+		863B0EAE1984237F00AAF919 /* ModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 863B0EAD1984237F00AAF919 /* ModelObject.m */; };
 		865304BD197FD97D00EEE9E0 /* ProgressPickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 865304BC197FD97D00EEE9E0 /* ProgressPickerButton.m */; };
 		8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */; };
 		8658D100197317A000A2B36C /* ImageViewWithSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FF197317A000A2B36C /* ImageViewWithSnapshot.m */; };
@@ -60,6 +61,10 @@
 		860270391978679200984CF2 /* Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snapshot.h; sourceTree = "<group>"; };
 		8602703A1978679200984CF2 /* Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snapshot.m; sourceTree = "<group>"; };
 		8631D7401983E6680030195A /* TenMoves.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TenMoves.entitlements; sourceTree = "<group>"; };
+		863B0EAC1984237F00AAF919 /* ModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelObject.h; sourceTree = "<group>"; };
+		863B0EAD1984237F00AAF919 /* ModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelObject.m; sourceTree = "<group>"; };
+		863B0EAF1984252A00AAF919 /* ModelObjectWithTimeStamps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelObjectWithTimeStamps.h; sourceTree = "<group>"; };
+		863B0EB0198426E500AAF919 /* TenMoves 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 3.xcdatamodel"; sourceTree = "<group>"; };
 		865304BB197FD97D00EEE9E0 /* ProgressPickerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressPickerButton.h; sourceTree = "<group>"; };
 		865304BC197FD97D00EEE9E0 /* ProgressPickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressPickerButton.m; sourceTree = "<group>"; };
 		8658D0FB197302FB00A2B36C /* SnapshotTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotTableViewCell.h; sourceTree = "<group>"; };
@@ -69,6 +74,7 @@
 		865E4D43198265FB0000CC30 /* TenMoves 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 2.xcdatamodel"; sourceTree = "<group>"; };
 		865E4D441982737A0000CC30 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		865E4D451982737A0000CC30 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		866A0B6419842BD300FF11A6 /* TenMoves 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 4.xcdatamodel"; sourceTree = "<group>"; };
 		8671A8B7197181CA00C7C0F6 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		8679AFEE19804E9300052C30 /* ArrayDataSourceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayDataSourceDelegate.h; sourceTree = "<group>"; };
 		8679AFF019804EE500052C30 /* AddMoveViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMoveViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -161,6 +167,7 @@
 		8679AFEF19804E9C00052C30 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				863B0EAF1984252A00AAF919 /* ModelObjectWithTimeStamps.h */,
 				8679AFF019804EE500052C30 /* AddMoveViewControllerDelegate.h */,
 				8679AFF119804F3000052C30 /* AddSnapshotTableViewControllerDelegate.h */,
 				8679AFEE19804E9300052C30 /* ArrayDataSourceDelegate.h */,
@@ -312,6 +319,8 @@
 		86EE8D96196F504200EE4DCF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				863B0EAC1984237F00AAF919 /* ModelObject.h */,
+				863B0EAD1984237F00AAF919 /* ModelObject.m */,
 				860270391978679200984CF2 /* Snapshot.h */,
 				8602703A1978679200984CF2 /* Snapshot.m */,
 				8685E3B2196F595E00A97585 /* Move.h */,
@@ -471,6 +480,7 @@
 				865304BD197FD97D00EEE9E0 /* ProgressPickerButton.m in Sources */,
 				86A3F26319712D7900E389A1 /* ArrayDataSource.m in Sources */,
 				86ED30C2196F0F0F00FC738B /* main.m in Sources */,
+				863B0EAE1984237F00AAF919 /* ModelObject.m in Sources */,
 				8685E3BE196F6A9200A97585 /* AddSnapshotTableViewController.m in Sources */,
 				8658D100197317A000A2B36C /* ImageViewWithSnapshot.m in Sources */,
 				8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */,
@@ -601,7 +611,7 @@
 				GCC_PREFIX_HEADER = "TenMoves/TenMoves-Prefix.pch";
 				INFOPLIST_FILE = "TenMoves/TenMoves-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "27B65825-845C-481C-810F-821E51C06775";
+				PROVISIONING_PROFILE = "790B5FA1-89A6-4A9C-9A3E-8C788434F1DC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -619,7 +629,7 @@
 				GCC_PREFIX_HEADER = "TenMoves/TenMoves-Prefix.pch";
 				INFOPLIST_FILE = "TenMoves/TenMoves-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "27B65825-845C-481C-810F-821E51C06775";
+				PROVISIONING_PROFILE = "790B5FA1-89A6-4A9C-9A3E-8C788434F1DC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -700,10 +710,12 @@
 		86ED30C7196F0F0F00FC738B /* TenMoves.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				863B0EB0198426E500AAF919 /* TenMoves 3.xcdatamodel */,
+				866A0B6419842BD300FF11A6 /* TenMoves 4.xcdatamodel */,
 				865E4D43198265FB0000CC30 /* TenMoves 2.xcdatamodel */,
 				86ED30C8196F0F0F00FC738B /* TenMoves.xcdatamodel */,
 			);
-			currentVersion = 865E4D43198265FB0000CC30 /* TenMoves 2.xcdatamodel */;
+			currentVersion = 866A0B6419842BD300FF11A6 /* TenMoves 4.xcdatamodel */;
 			path = TenMoves.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ModelObjectWithTimeStamps.h"
+#import "ModelObject.h"
 
 // TODO: rename to SnapshotProgressType
 typedef enum {
@@ -19,9 +21,10 @@ typedef enum {
 
 @class Move;
 
-@interface Snapshot : NSManagedObject
+@interface Snapshot : ModelObject <ModelObjectWithTimeStamps>
 
 @property (nonatomic, retain) NSDate * createdAt;
+@property (nonatomic, retain) NSDate * updatedAt;
 @property (nonatomic, retain) NSString * videoPath;
 @property (nonatomic, retain) NSNumber * progress;
 @property (nonatomic, retain) Move *move;
