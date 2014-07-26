@@ -65,11 +65,14 @@
 
 #pragma mark - add move view controller delegate
 
-// TODO: this method does not belong here
 - (void)addMoveViewControllerDidSave {
     [Repository saveWithCompletionHandler:^(NSError *error) {
         if (error) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Missing name" message:@"Are you sure the move has a name?" delegate:nil cancelButtonTitle:@"I'll look into it" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Missing name"
+                                                            message:@"Are you sure the move has a name?"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"I'll look into it"
+                                                  otherButtonTitles:nil];
             [alert show];
         } else {
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -79,7 +82,6 @@
     [self enableOrDisableAddButton];
 }
 
-// TODO: this method does not belong here
 - (void)addMoveViewControllerDidCancel:(Move *)moveToDelete {
     [Repository deleteObject:moveToDelete];
     [self dismissViewControllerAnimated:YES completion:nil];
