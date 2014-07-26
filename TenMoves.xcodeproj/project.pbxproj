@@ -149,6 +149,15 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		863B0EAB1984227800AAF919 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				86A3F2651971578900E389A1 /* Repository.h */,
+				86A3F2661971578900E389A1 /* Repository.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		8679AFEF19804E9C00052C30 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				86ED30CA196F0F0F00FC738B /* Images.xcassets */,
+				8631D7401983E6680030195A /* TenMoves.entitlements */,
 				86ED30C7196F0F0F00FC738B /* TenMoves.xcdatamodeld */,
 				86ED30EB196F114D00FC738B /* MainStoryboard.storyboard */,
 			);
@@ -239,9 +249,9 @@
 		86ED30BB196F0F0F00FC738B /* TenMoves */ = {
 			isa = PBXGroup;
 			children = (
-				8631D7401983E6680030195A /* TenMoves.entitlements */,
 				865E4D441982737A0000CC30 /* Constants.h */,
 				865E4D451982737A0000CC30 /* Constants.m */,
+				863B0EAB1984227800AAF919 /* Services */,
 				8679AFEF19804E9C00052C30 /* Protocols */,
 				8601299B19728FC90053C71D /* Categories */,
 				86A3F26419712D7D00E389A1 /* DataSources */,
@@ -302,8 +312,6 @@
 		86EE8D96196F504200EE4DCF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				86A3F2651971578900E389A1 /* Repository.h */,
-				86A3F2661971578900E389A1 /* Repository.m */,
 				860270391978679200984CF2 /* Snapshot.h */,
 				8602703A1978679200984CF2 /* Snapshot.m */,
 				8685E3B2196F595E00A97585 /* Move.h */,
