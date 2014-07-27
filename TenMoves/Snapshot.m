@@ -11,18 +11,19 @@
 #import "Repository.h"
 @import AssetsLibrary;
 #import "ALAssetsLibrary+HelperMethods.h"
+#import "SnapshotImage.h"
 
 static NSString *ENTITY_NAME = @"Snapshot";
 
 @implementation Snapshot
 
 @dynamic createdAt;
+@dynamic progress;
 @dynamic updatedAt;
 @dynamic videoPath;
-@dynamic imagePath;
 @dynamic uuid;
 @dynamic move;
-@dynamic progress;
+@dynamic image;
 
 + (instancetype)newManagedObject {
     Snapshot *snapshot = (Snapshot *) [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
@@ -80,10 +81,6 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return [NSURL URLWithString:self.videoPath];
 }
 
-- (NSURL *)imageUrl {
-    return [NSURL URLWithString:self.imagePath];
-}
-
 - (SnapshotProgress)progressTypeRaw {
     return (SnapshotProgress)self.progress.intValue;
 }
@@ -99,7 +96,6 @@ static NSString *ENTITY_NAME = @"Snapshot";
 - (void)prepareForDeletion {
     NSFileManager *manager = [[NSFileManager alloc] init];
     [manager removeItemAtURL:self.videoUrl error:nil];
-    [manager removeItemAtURL:self.imageUrl error:nil];
 }
 
 - (NSString *)documentsDirectory {
@@ -110,30 +106,20 @@ static NSString *ENTITY_NAME = @"Snapshot";
 
 - (void)saveVideoAtMediaUrl:(NSURL *)mediaUrl
            withReferenceUrl:(NSURL *)referenceUrl
-       completionBlock:(void (^)())completionBlock
+            completionBlock:(void (^)())completionBlock
                failureBlock:(void (^)(NSError *error))failureBlock {
     
     NSString *documentsDirectory = [self documentsDirectory];
     
     NSString *videosPath = [documentsDirectory stringByAppendingPathComponent:@"/snapshot-videos"];
-    NSString *imagesPath = [documentsDirectory stringByAppendingPathComponent:@"/snapshot-images"];
     
-    NSFileManager *manager = [[NSFileManager alloc] init];
+    NSFileManager *manager = [NSFileManager defaultManager];
     
     NSError *createVideoDirectoryError;
     if (![manager fileExistsAtPath:videosPath]) {
         [manager createDirectoryAtPath:videosPath withIntermediateDirectories:NO attributes:nil error:&createVideoDirectoryError];
         if (createVideoDirectoryError) {
             failureBlock(createVideoDirectoryError);
-            return;
-        }
-    }
-    
-    NSError *createImageDirectoryError;
-    if (![manager fileExistsAtPath:imagesPath]) {
-        [manager createDirectoryAtPath:imagesPath withIntermediateDirectories:NO attributes:nil error:&createImageDirectoryError];
-        if (createImageDirectoryError) {
-            failureBlock(createImageDirectoryError);
             return;
         }
     }
@@ -152,19 +138,13 @@ static NSString *ENTITY_NAME = @"Snapshot";
     
     [ALAssetsLibrary assetForURL:referenceUrl resultBlock:^(ALAsset *asset) {
         UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
-        NSData *imageData = UIImagePNGRepresentation(image);
+        SnapshotImage *snapshotImage = [SnapshotImage newManagedObjectForSnapshot:self withImage:image];
         
-        NSString *filename = [NSString stringWithFormat:@"/%@.png", self.uuid];
-        NSURL *imageDestinationUrl = [NSURL fileURLWithPath:[imagesPath stringByAppendingString:filename]];
-        
-        self.imagePath = imageDestinationUrl.absoluteString;
-        
-        NSError *writeImageError;
-        [imageData writeToURL:imageDestinationUrl options:NSDataWritingAtomic error:&writeImageError];
-        if (writeImageError) {
-            failureBlock(writeImageError);
-        } else {
+        if (snapshotImage) {
+            self.image = snapshotImage;
             completionBlock();
+        } else {
+            failureBlock(nil);
         }
     } failureBlock:^(NSError *error) {
         failureBlock(error);

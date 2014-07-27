@@ -8,6 +8,7 @@
 
 #import "ImageViewWithSnapshot.h"
 #import "Snapshot.h"
+#import "SnapshotImage.h"
 @import MediaPlayer;
 
 @interface ImageViewWithSnapshot ()
@@ -21,6 +22,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    // TODO: why does the date label not show up?!
     
     _backgroundColor = [self.tintColor colorWithAlphaComponent:0.5];
     
@@ -81,7 +84,7 @@
 
 - (void)setSnapshot:(Snapshot *)snapshot {
     _snapshot = snapshot;
-    self.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[self.snapshot imageUrl]]];
+    self.image = [snapshot.image image];
     [self updateBackground];
 }
 

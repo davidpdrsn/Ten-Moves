@@ -19,24 +19,23 @@ typedef enum {
     SnapshotProgressBaseline = 3
 } SnapshotProgress;
 
-@class Move;
+@class Move, SnapshotImage;
 
-@interface Snapshot : ModelObject <ModelObjectWithTimeStamps>
+@interface Snapshot : NSManagedObject
 
 @property (nonatomic, retain) NSDate * createdAt;
+@property (nonatomic, retain) NSNumber * progress;
 @property (nonatomic, retain) NSDate * updatedAt;
-@property (nonatomic, retain) NSString * imagePath;
 @property (nonatomic, retain) NSString * videoPath;
 @property (nonatomic, retain) NSString * uuid;
-@property (nonatomic, retain) NSNumber * progress;
 @property (nonatomic, retain) Move *move;
+@property (nonatomic, retain) SnapshotImage *image;
 
 + (instancetype)newManagedObject;
 + (NSFetchRequest *)fetchRequestForSnapshotsBelongingToMove:(Move *)move;
 + (UIColor *)colorForProgressType:(SnapshotProgress)type;
 
 - (NSURL *)videoUrl;
-- (NSURL *)imageUrl;
 
 - (SnapshotProgress)progressTypeRaw;
 - (void)setProgressTypeRaw:(SnapshotProgress)type;
@@ -44,7 +43,7 @@ typedef enum {
 
 - (void)saveVideoAtMediaUrl:(NSURL *)mediaUrl
            withReferenceUrl:(NSURL *)referenceUrl
-       completionBlock:(void (^)())completionBlock
-          failureBlock:(void (^)(NSError *error))failureBlock;
+            completionBlock:(void (^)())completionBlock
+               failureBlock:(void (^)(NSError *error))failureBlock;
 
 @end
