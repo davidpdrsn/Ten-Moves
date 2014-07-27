@@ -10,6 +10,7 @@
 #import "Move.h"
 #import "Repository.h"
 @import AssetsLibrary;
+@import AVFoundation;
 #import "ALAssetsLibrary+HelperMethods.h"
 #import "SnapshotImage.h"
 #import "SnapshotVideo.h"
@@ -92,29 +93,32 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return [self.class colorForProgressType:self.progressTypeRaw];
 }
 
-- (void)saveVideoAtMediaUrl:(NSURL *)mediaUrl
-           withReferenceUrl:(NSURL *)referenceUrl
+- (void)saveVideoAtFileUrl:(NSURL *)mediaUrl
             completionBlock:(void (^)())completionBlock
                failureBlock:(void (^)(NSError *error))failureBlock {
+    
     [SnapshotVideo newManagedObjectWithVideoAtUrl:mediaUrl success:^(SnapshotVideo *video) {
-        [ALAssetsLibrary assetForURL:referenceUrl resultBlock:^(ALAsset *asset) {
-            UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
-            
-            [SnapshotImage newManagedObjectWithImage:image success:^(SnapshotImage *image) {
-                self.video = video;
-                self.image = image;
-                completionBlock();
-            } failure:^(NSError *error) {
-                failureBlock(error);
-            }];
-        } failureBlock:^(NSError *error) {
+        UIImage *image = [self thumbnailForVideoAtUrl:mediaUrl];
+        
+        [SnapshotImage newManagedObjectWithImage:image success:^(SnapshotImage *image) {
+            self.video = video;
+            self.image = image;
+            completionBlock();
+        } failure:^(NSError *error) {
             failureBlock(error);
         }];
     } failure:^(NSError *error) {
         failureBlock(error);
     }];
-    
 }
 
+- (UIImage*)thumbnailForVideoAtUrl:(NSURL *)url {
+    AVAsset *asset = [AVAsset assetWithURL:url];
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc]initWithAsset:asset];
+    CMTime time = CMTimeMake(1, 1);
+    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:NULL error:NULL];
+    UIImage *thumbnail = [UIImage imageWithCGImage:imageRef];
+    return thumbnail;
+}
 
 @end

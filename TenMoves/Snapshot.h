@@ -37,8 +37,7 @@ typedef enum {
 - (void)setProgressTypeRaw:(SnapshotProgress)type;
 - (UIColor *)colorForProgressType;
 
-- (void)saveVideoAtMediaUrl:(NSURL *)mediaUrl
-           withReferenceUrl:(NSURL *)referenceUrl
+- (void)saveVideoAtFileUrl:(NSURL *)mediaUrl
             completionBlock:(void (^)())completionBlock
                failureBlock:(void (^)(NSError *error))failureBlock;
 

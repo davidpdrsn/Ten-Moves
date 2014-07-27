@@ -12,7 +12,13 @@
 
 @class Snapshot;
 
-@interface AddSnapshotTableViewController : UITableViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageViewWithSnapshotDelegate>
+@interface AddSnapshotTableViewController : UITableViewController
+<
+    UIImagePickerControllerDelegate,
+    UINavigationControllerDelegate,
+    ImageViewWithSnapshotDelegate,
+    UIActionSheetDelegate
+>
 
 @property (nonatomic, strong) id<AddSnapshotTableViewControllerDelegate> delegate;
 @property (nonatomic, strong) Snapshot *currentSnapshot;

@@ -31,6 +31,8 @@
 
 @implementation AddSnapshotTableViewController
 
+#pragma mark - view life cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -61,28 +63,7 @@
     [self updateActiveProgressPicker];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if (section == 1 && [self snapshotIsBaseline]) {
-        return @"The first snapshot is considered the baseline, so you can't rate it. You will be able to when you add the next snapshot.";
-    }
-    
-    return nil;
-}
-
-- (BOOL)snapshotIsBaseline {
-    return [self numberOfSnapshotsForMove] == 1;
-}
-
-- (NSUInteger)numberOfSnapshotsForMove {
-    return [[self.currentSnapshot move] snapshots].count;
-}
-
-- (void)updateActiveProgressPicker {
-    for (ProgressPickerButton *progressView in @[self.improvedProgressView, self.sameProgressView, self.regressionProgressView]) {
-        BOOL shouldBeActive = self.currentSnapshot.progressTypeRaw == progressView.type;
-        [progressView setActive:shouldBeActive];
-    }
-}
+#pragma mark - IBActions
 
 - (IBAction)improvedTapped:(ProgressPickerButton *)sender {
     [self.currentSnapshot setProgressTypeRaw:sender.type];
@@ -99,36 +80,74 @@
     [self updateActiveProgressPicker];
 }
 
-- (void)add {
-    [self.delegate addSnapshotTableViewControllerDidSave];
-}
-
 - (IBAction)cancel:(id)sender {
     [self.delegate addSnapshotTableViewControllerDidCancel:self.currentSnapshot];
 }
 
 - (IBAction)done:(id)sender {
-    [self add];
+    [self.delegate addSnapshotTableViewControllerDidSave];
 }
 
 - (IBAction)pickPhoto:(id)sender {
-    [self startMediaBrowserFromViewController:self usingDelegate:self];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"Take Video", @"Choose Existing", nil];
+    [sheet showInView:self.view];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            [self startMediaBrowserFromViewController:self usingDelegate:self type:UIImagePickerControllerSourceTypeCamera];
+            break;
+            
+        case 1:
+            [self startMediaBrowserFromViewController:self usingDelegate:self type:UIImagePickerControllerSourceTypePhotoLibrary];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark - table view
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    if (section == 1 && [self snapshotIsBaseline]) {
+        return @"The first snapshot is considered the baseline, so you can't rate it. You will be able to when you add the next snapshot.";
+    }
+    
+    return nil;
+}
+
+#pragma mark - picking video
+
+- (void)startMediaBrowserFromViewController: (UIViewController*) controller
+                               usingDelegate: (id <UIImagePickerControllerDelegate, UINavigationControllerDelegate>) delegate
+                                       type:(UIImagePickerControllerSourceType)type {
+    if (([UIImagePickerController isSourceTypeAvailable: type] == NO) || (delegate == nil) || (controller == nil)) {
+        return;
+    }
+    
+    UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
+    mediaUI.sourceType = type;
+    mediaUI.view.tintColor = self.view.tintColor;
+    mediaUI.mediaTypes = @[(NSString *)kUTTypeMovie];
+    mediaUI.allowsEditing = YES;
+    mediaUI.delegate = delegate;
+    [controller presentViewController:mediaUI animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSURL *mediaUrl = info[UIImagePickerControllerMediaURL];
-    NSURL *referenceUrl = info[UIImagePickerControllerReferenceURL];
     
-    [self.currentSnapshot saveVideoAtMediaUrl:mediaUrl withReferenceUrl:referenceUrl completionBlock:^{
+    [self.currentSnapshot saveVideoAtFileUrl:mediaUrl completionBlock:^{
         [self.pickVideoButton setTitle:@"Pick different video" forState:UIControlStateNormal];
-        
-        int offset = 5;
-        CGFloat size = self.pickVideoButton.superview.frame.size.height-offset*2;
-        ImageViewWithSnapshot *thumbnail = [[ImageViewWithSnapshot alloc] initWithFrame:CGRectMake(offset, offset, size, size)];
-        thumbnail.snapshot = self.currentSnapshot;
-        thumbnail.delegate = self;
-        [self.pickVideoButton.superview addSubview:thumbnail];
-        [thumbnail awakeFromNib];
+        [self showThumbnailOfVideo];
     } failureBlock:^(NSError *error) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed copying video" message:nil delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         [alert show];
@@ -136,6 +155,20 @@
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (void)showThumbnailOfVideo {
+    int offset = 5;
+    CGFloat size = self.pickVideoButton.superview.frame.size.height-offset*2;
+    ImageViewWithSnapshot *thumbnail = [[ImageViewWithSnapshot alloc] initWithFrame:CGRectMake(offset, offset, size, size)];
+    
+    thumbnail.snapshot = self.currentSnapshot;
+    thumbnail.delegate = self;
+    
+    [self.pickVideoButton.superview addSubview:thumbnail];
+    [thumbnail awakeFromNib];
+}
+
+#pragma mark - ImageViewSnapshot delegate methods
 
 - (void)imageViewWithSnapshot:(ImageViewWithSnapshot *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
     [self presentMoviePlayerViewControllerAnimated:player];
@@ -145,25 +178,21 @@
     [self dismissMoviePlayerViewControllerAnimated];
 }
 
+#pragma mark - misc helper methods
 
-- (void)startMediaBrowserFromViewController: (UIViewController*) controller
-                               usingDelegate: (id <UIImagePickerControllerDelegate,
-                                               UINavigationControllerDelegate>) delegate {
-    UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    if (([UIImagePickerController isSourceTypeAvailable: type] == NO)
-        || (delegate == nil)
-        || (controller == nil)) {
-        return;
+- (BOOL)snapshotIsBaseline {
+    return [self numberOfSnapshotsForMove] == 1;
+}
+
+- (NSUInteger)numberOfSnapshotsForMove {
+    return [[self.currentSnapshot move] snapshots].count;
+}
+
+- (void)updateActiveProgressPicker {
+    for (ProgressPickerButton *progressView in @[self.improvedProgressView, self.sameProgressView, self.regressionProgressView]) {
+        BOOL shouldBeActive = self.currentSnapshot.progressTypeRaw == progressView.type;
+        [progressView setActive:shouldBeActive];
     }
-    
-    UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
-    mediaUI.sourceType = type;
-    mediaUI.view.tintColor = self.view.tintColor;
-    mediaUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-    mediaUI.allowsEditing = YES;
-    mediaUI.delegate = delegate;
-    [controller presentViewController:mediaUI animated:YES completion:nil];
 }
 
 @end
