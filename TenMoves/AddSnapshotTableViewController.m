@@ -117,54 +117,22 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSURL *mediaUrl = info[UIImagePickerControllerMediaURL];
+    NSURL *referenceUrl = info[UIImagePickerControllerReferenceURL];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = paths[0];
-    
-    NSString *videosPath = [documentsDirectory stringByAppendingPathComponent:@"/snapshot-videos"];
-    NSString *imagesPath = [documentsDirectory stringByAppendingPathComponent:@"/snapshot-images"];
-    
-    NSFileManager *manager = [[NSFileManager alloc] init];
-    
-    if (![manager fileExistsAtPath:videosPath]) {
-        [manager createDirectoryAtPath:videosPath withIntermediateDirectories:NO attributes:nil error:nil];
-    }
-    
-    if (![manager fileExistsAtPath:imagesPath]) {
-        [manager createDirectoryAtPath:imagesPath withIntermediateDirectories:NO attributes:nil error:nil];
-    }
-    
-    NSString *uuid = [self uuidString];
-    NSString *filename = [NSString stringWithFormat:@"/%@.%@", uuid, mediaUrl.pathExtension];
-    NSURL *videoDestinationUrl = [NSURL fileURLWithPath:[videosPath stringByAppendingString:filename]];
-    
-    [manager copyItemAtURL:mediaUrl toURL:videoDestinationUrl error:nil];
-    
-    self.currentSnapshot.videoPath = videoDestinationUrl.absoluteString;
-    
-    [self.pickVideoButton setTitle:@"Pick different video" forState:UIControlStateNormal];
-    
-    int offset = 5;
-    CGFloat size = self.pickVideoButton.superview.frame.size.height-offset*2;
-    ImageViewWithSnapshot *thumbnail = [[ImageViewWithSnapshot alloc] initWithFrame:CGRectMake(offset, offset, size, size)];
-    
-    [ALAssetsLibrary assetForURL:info[UIImagePickerControllerReferenceURL] resultBlock:^(ALAsset *asset) {
-        UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
-        NSData *imageData = UIImagePNGRepresentation(image);
+    [self.currentSnapshot saveVideoAtMediaUrl:mediaUrl withReferenceUrl:referenceUrl completionBlock:^{
+        [self.pickVideoButton setTitle:@"Pick different video" forState:UIControlStateNormal];
         
-        NSString *filename = [NSString stringWithFormat:@"/%@.png", uuid];
-        NSURL *imageDestinationUrl = [NSURL fileURLWithPath:[imagesPath stringByAppendingString:filename]];
-        
-        self.currentSnapshot.imagePath = imageDestinationUrl.absoluteString;
-        
-        [imageData writeToURL:imageDestinationUrl atomically:YES];
-        
+        int offset = 5;
+        CGFloat size = self.pickVideoButton.superview.frame.size.height-offset*2;
+        ImageViewWithSnapshot *thumbnail = [[ImageViewWithSnapshot alloc] initWithFrame:CGRectMake(offset, offset, size, size)];
         thumbnail.snapshot = self.currentSnapshot;
         thumbnail.delegate = self;
+        [self.pickVideoButton.superview addSubview:thumbnail];
         [thumbnail awakeFromNib];
-    } failureBlock:nil];
-    
-    [self.pickVideoButton.superview addSubview:thumbnail];
+    } failureBlock:^(NSError *error) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed coying video" message:nil delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
+    }];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -197,14 +165,6 @@
     mediaUI.allowsEditing = NO;
     mediaUI.delegate = delegate;
     [controller presentViewController:mediaUI animated:YES completion:nil];
-}
-
-- (NSString *)uuidString {
-    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
-    NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
-    CFRelease(uuid);
-    
-    return uuidString;
 }
 
 @end
