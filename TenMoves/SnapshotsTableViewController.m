@@ -86,8 +86,6 @@
         snapshotCell.snapshot = snapshot;
         snapshotCell.thumbnailImageView.snapshot = snapshot;
         snapshotCell.thumbnailImageView.delegate = self;
-        NSLog(@"created at - %@", snapshot.createdAt);
-        NSLog(@"updated at - %@", snapshot.updatedAt);
         
         return snapshotCell;
     };

@@ -34,13 +34,7 @@
     
     [self setupProgressIndicator];
     
-    [ALAssetsLibrary assetForURL:snapshot.videoUrl resultBlock:^(ALAsset *asset) {
-        UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
-        self.thumbnailImageView.image = image;
-        self.thumbnailImageView.snapshot = snapshot;
-    } failureBlock:^(NSError *error) {
-        NSLog(@"image not found...");
-    }];
+    self.thumbnailImageView.snapshot = snapshot;
 }
 
 - (void)setTintColor:(UIColor *)tintColor {

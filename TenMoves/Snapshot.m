@@ -17,6 +17,7 @@ static NSString *ENTITY_NAME = @"Snapshot";
 @dynamic createdAt;
 @dynamic updatedAt;
 @dynamic videoPath;
+@dynamic imagePath;
 @dynamic move;
 @dynamic progress;
 
@@ -75,6 +76,10 @@ static NSString *ENTITY_NAME = @"Snapshot";
 
 - (NSURL *)videoUrl {
     return [NSURL URLWithString:self.videoPath];
+}
+
+- (NSURL *)imageUrl {
+    return [NSURL URLWithString:self.imagePath];
 }
 
 - (SnapshotProgress)progressTypeRaw {

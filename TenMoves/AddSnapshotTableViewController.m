@@ -8,6 +8,7 @@
 
 #import <MobileCoreServices/UTCoreTypes.h>
 @import AssetsLibrary;
+@import MediaPlayer;
 
 #import "AddSnapshotTableViewController.h"
 #import "Snapshot.h"
@@ -116,46 +117,66 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSURL *mediaUrl = info[UIImagePickerControllerMediaURL];
-    NSString *extension = [mediaUrl pathExtension];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = paths[0];
-    NSString *filename = [NSString stringWithFormat:@"/%@.%@", [self uuidString], extension];
-    NSURL *destinationUrl = [NSURL fileURLWithPath:[documentsDirectory stringByAppendingString:filename]];
+    
+    NSString *videosPath = [documentsDirectory stringByAppendingPathComponent:@"/snapshot-videos"];
+    NSString *imagesPath = [documentsDirectory stringByAppendingPathComponent:@"/snapshot-images"];
     
     NSFileManager *manager = [[NSFileManager alloc] init];
     
-    NSError *error;
-    [manager copyItemAtURL:mediaUrl toURL:destinationUrl error:&error];
-    if (error) {
-        [[[UIAlertView alloc] initWithTitle:@"Failed copying video"
-                                    message:nil
-                                   delegate:nil
-                          cancelButtonTitle:@"Okay"
-                          otherButtonTitles:nil] show];
-        NSLog(@"error - %@", [error userInfo]);
-    } else {
-        self.currentSnapshot.videoPath = destinationUrl.absoluteString;
-        [self.pickVideoButton setTitle:@"Pick different video" forState:UIControlStateNormal];
-//        TODO: save binary thumbnail image
-//        int offset = 5;
-//        CGFloat size = self.pickVideoButton.superview.frame.size.height-offset*2;
-//        ImageViewWithSnapshot *thumbnail = [[ImageViewWithSnapshot alloc] initWithFrame:CGRectMake(offset, offset, size, size)];
-//        
-//        [ALAssetsLibrary assetForURL:self.currentSnapshot.videoUrl resultBlock:^(ALAsset *asset) {
-//            UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
-//            thumbnail.image = image;
-//            thumbnail.snapshot = self.currentSnapshot;
-//            [thumbnail awakeFromNib];
-//        } failureBlock:^(NSError *error) {
-//            NSLog(@"image not found...");
-//        }];
-//        [self.pickVideoButton.superview addSubview:thumbnail];
+    if (![manager fileExistsAtPath:videosPath]) {
+        [manager createDirectoryAtPath:videosPath withIntermediateDirectories:NO attributes:nil error:nil];
     }
     
+    if (![manager fileExistsAtPath:imagesPath]) {
+        [manager createDirectoryAtPath:imagesPath withIntermediateDirectories:NO attributes:nil error:nil];
+    }
+    
+    NSString *uuid = [self uuidString];
+    NSString *filename = [NSString stringWithFormat:@"/%@.%@", uuid, mediaUrl.pathExtension];
+    NSURL *videoDestinationUrl = [NSURL fileURLWithPath:[videosPath stringByAppendingString:filename]];
+    
+    [manager copyItemAtURL:mediaUrl toURL:videoDestinationUrl error:nil];
+    
+    self.currentSnapshot.videoPath = videoDestinationUrl.absoluteString;
+    
+    [self.pickVideoButton setTitle:@"Pick different video" forState:UIControlStateNormal];
+    
+    int offset = 5;
+    CGFloat size = self.pickVideoButton.superview.frame.size.height-offset*2;
+    ImageViewWithSnapshot *thumbnail = [[ImageViewWithSnapshot alloc] initWithFrame:CGRectMake(offset, offset, size, size)];
+    
+    [ALAssetsLibrary assetForURL:info[UIImagePickerControllerReferenceURL] resultBlock:^(ALAsset *asset) {
+        UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
+        NSData *imageData = UIImagePNGRepresentation(image);
+        
+        NSString *filename = [NSString stringWithFormat:@"/%@.png", uuid];
+        NSURL *imageDestinationUrl = [NSURL fileURLWithPath:[imagesPath stringByAppendingString:filename]];
+        
+        self.currentSnapshot.imagePath = imageDestinationUrl.absoluteString;
+        
+        [imageData writeToURL:imageDestinationUrl atomically:YES];
+        
+        thumbnail.snapshot = self.currentSnapshot;
+        thumbnail.delegate = self;
+        [thumbnail awakeFromNib];
+    } failureBlock:nil];
+    
+    [self.pickVideoButton.superview addSubview:thumbnail];
+    
     [picker dismissViewControllerAnimated:YES completion:nil];
-
 }
+
+- (void)imageViewWithSnapshot:(ImageViewWithSnapshot *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
+    [self presentMoviePlayerViewControllerAnimated:player];
+}
+
+- (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(ImageViewWithSnapshot *)imageView {
+    [self dismissMoviePlayerViewControllerAnimated];
+}
+
 
 - (void)startMediaBrowserFromViewController: (UIViewController*) controller
                                usingDelegate: (id <UIImagePickerControllerDelegate,

@@ -79,6 +79,12 @@
     }
 }
 
+- (void)setSnapshot:(Snapshot *)snapshot {
+    _snapshot = snapshot;
+    self.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[self.snapshot imageUrl]]];
+    [self updateBackground];
+}
+
 - (void)updateBackground {
     self.overlay.backgroundColor = [self.tintColor colorWithAlphaComponent:0.5];
 }

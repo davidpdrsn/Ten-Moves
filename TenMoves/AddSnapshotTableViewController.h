@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "AddSnapshotTableViewControllerDelegate.h"
+#import "ImageViewWithSnapshotDelegate.h"
 
 @class Snapshot;
 
-@interface AddSnapshotTableViewController : UITableViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface AddSnapshotTableViewController : UITableViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageViewWithSnapshotDelegate>
 
 @property (nonatomic, strong) id<AddSnapshotTableViewControllerDelegate> delegate;
 @property (nonatomic, strong) Snapshot *currentSnapshot;

@@ -92,6 +92,7 @@
 		86A3F2651971578900E389A1 /* Repository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Repository.h; sourceTree = "<group>"; };
 		86A3F2661971578900E389A1 /* Repository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Repository.m; sourceTree = "<group>"; };
 		86EA19C119846F8F007B4813 /* ImageViewWithSnapshotDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewWithSnapshotDelegate.h; sourceTree = "<group>"; };
+		86EA19C2198475FC007B4813 /* TenMoves 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 5.xcdatamodel"; sourceTree = "<group>"; };
 		86ED30B0196F0F0F00FC738B /* TenMoves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TenMoves.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86ED30B3196F0F0F00FC738B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		86ED30B5196F0F0F00FC738B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -714,10 +715,11 @@
 			children = (
 				863B0EB0198426E500AAF919 /* TenMoves 3.xcdatamodel */,
 				866A0B6419842BD300FF11A6 /* TenMoves 4.xcdatamodel */,
+				86EA19C2198475FC007B4813 /* TenMoves 5.xcdatamodel */,
 				865E4D43198265FB0000CC30 /* TenMoves 2.xcdatamodel */,
 				86ED30C8196F0F0F00FC738B /* TenMoves.xcdatamodel */,
 			);
-			currentVersion = 866A0B6419842BD300FF11A6 /* TenMoves 4.xcdatamodel */;
+			currentVersion = 86EA19C2198475FC007B4813 /* TenMoves 5.xcdatamodel */;
 			path = TenMoves.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
