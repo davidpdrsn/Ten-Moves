@@ -32,7 +32,7 @@ typedef enum {
 @property (nonatomic, retain) Move *move;
 
 + (instancetype)newManagedObject;
-+ (NSFetchRequest *)fetchRequestForMove:(Move *)move;
++ (NSFetchRequest *)fetchRequestForSnapshotsBelongingToMove:(Move *)move;
 + (UIColor *)colorForProgressType:(SnapshotProgress)type;
 
 - (NSURL *)videoUrl;

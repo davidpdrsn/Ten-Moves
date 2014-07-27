@@ -31,7 +31,7 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return snapshot;
 }
 
-+ (NSFetchRequest *)fetchRequestForMove:(Move *)move {
++ (NSFetchRequest *)fetchRequestForSnapshotsBelongingToMove:(Move *)move {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:ENTITY_NAME inManagedObjectContext:[Repository managedObjectContext]];
     [fetchRequest setEntity:entity];

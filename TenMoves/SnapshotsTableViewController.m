@@ -90,7 +90,7 @@
         return snapshotCell;
     };
     
-    return [[ArrayDataSource alloc] initWithItems:[Snapshot fetchRequestForMove:self.move]
+    return [[ArrayDataSource alloc] initWithItems:[Snapshot fetchRequestForSnapshotsBelongingToMove:self.move]
                                    cellIdentifier:@"Snapshot"
                                configureCellBlock:configureCell];
 }
