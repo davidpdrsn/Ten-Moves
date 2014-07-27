@@ -96,6 +96,12 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return [self.class colorForProgressType:self.progressTypeRaw];
 }
 
+- (void)prepareForDeletion {
+    NSFileManager *manager = [[NSFileManager alloc] init];
+    [manager removeItemAtURL:self.videoUrl error:nil];
+    [manager removeItemAtURL:self.imageUrl error:nil];
+}
+
 - (NSString *)documentsDirectory {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = paths[0];
