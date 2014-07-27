@@ -49,8 +49,6 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return [NSSet setWithObject:@"progress"];
 }
 
-// TODO: delegate video when deleting snapshot
-
 + (UIColor *)colorForProgressType:(SnapshotProgress)type {
     switch (type) {
         case SnapshotProgressImproved:
