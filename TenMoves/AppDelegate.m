@@ -19,8 +19,6 @@
 {
     [Repository setManagedObjectContext:self.managedObjectContext];
     
-    [self registerForiCloudNotifications];
-    
     return YES;
 }
 
@@ -32,7 +30,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
@@ -108,8 +106,7 @@
     
     NSDictionary *config = @{
                              NSMigratePersistentStoresAutomaticallyOption: @YES,
-                             NSInferMappingModelAutomaticallyOption: @YES,
-                             NSPersistentStoreUbiquitousContentNameKey: @"TenMovesStore"
+                             NSInferMappingModelAutomaticallyOption: @YES
                              };
     
     NSError *error = nil;
@@ -153,63 +150,6 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-}
-
-#pragma mark - Notification Observers
-
-- (void)registerForiCloudNotifications {
-    NSLog(@"registered for icloud notifications");
-    
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-	
-    [notificationCenter addObserver:self
-                           selector:@selector(storesWillChange:)
-                               name:NSPersistentStoreCoordinatorStoresWillChangeNotification
-                             object:self.persistentStoreCoordinator];
-    
-    [notificationCenter addObserver:self
-                           selector:@selector(storesDidChange:)
-                               name:NSPersistentStoreCoordinatorStoresDidChangeNotification
-                             object:self.persistentStoreCoordinator];
-    
-    [notificationCenter addObserver:self
-                           selector:@selector(persistentStoreDidImportUbiquitousContentChanges:)
-                               name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
-                             object:self.persistentStoreCoordinator];
-}
-
-# pragma mark - iCloud Support
-
-- (void) persistentStoreDidImportUbiquitousContentChanges:(NSNotification *)changeNotification {
-    NSManagedObjectContext *context = self.managedObjectContext;
-	
-    [context performBlock:^{
-        [context mergeChangesFromContextDidSaveNotification:changeNotification];
-    }];
-}
-
-- (void)storesWillChange:(NSNotification *)notification {
-    NSManagedObjectContext *context = self.managedObjectContext;
-	
-    [context performBlockAndWait:^{
-        NSError *error;
-		
-        if ([context hasChanges]) {
-            BOOL success = [context save:&error];
-            
-            if (!success && error) {
-                // perform error handling
-                NSLog(@"%@",[error localizedDescription]);
-            }
-        }
-        
-        [context reset];
-    }];
-    
-    // Refresh your User Interface.
-}
-
-- (void)storesDidChange:(NSNotification *)notification {
 }
 
 @end
