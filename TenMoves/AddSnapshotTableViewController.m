@@ -161,8 +161,7 @@
     mediaUI.sourceType = type;
     mediaUI.view.tintColor = self.view.tintColor;
     mediaUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-    // TODO: set this to YES and figure out how to save the trimmed videos
-    mediaUI.allowsEditing = NO;
+    mediaUI.allowsEditing = YES;
     mediaUI.delegate = delegate;
     [controller presentViewController:mediaUI animated:YES completion:nil];
 }
