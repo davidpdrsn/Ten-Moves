@@ -7,7 +7,6 @@
 //
 
 #import "Repository.h"
-#import "ModelObjectWithTimeStamps.h"
 
 static NSManagedObjectContext *_managedObjectContext;
 

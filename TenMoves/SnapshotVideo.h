@@ -8,16 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ModelObject.h"
 
 @class Snapshot;
 
-@interface SnapshotVideo : NSManagedObject
+@interface SnapshotVideo : ModelObject
 
 @property (nonatomic, retain) NSString * path;
 @property (nonatomic, retain) Snapshot *snapshot;
 
 + (instancetype)newManagedObject;
-+ (instancetype)newManagedObjectForSnapshot:(Snapshot *)snapshot withVideoAtUrl:(NSURL *)url;
++ (void)newManagedObjectWithVideoAtUrl:(NSURL *)url success:(void (^)(SnapshotVideo *video))successBlock failure:(void (^)(NSError *error))failureBlock;
 
 - (NSURL *)url;
 

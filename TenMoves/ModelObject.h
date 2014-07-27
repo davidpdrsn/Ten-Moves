@@ -10,4 +10,7 @@
 
 @interface ModelObject : NSManagedObject
 
++ (NSString *)documentsDirectory;
++ (NSString *)createUuidString;
+
 @end

@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "ModelObjectWithTimeStamps.h"
 #import "ModelObject.h"
 
 // TODO: rename to SnapshotProgressType

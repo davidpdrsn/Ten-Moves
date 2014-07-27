@@ -130,7 +130,7 @@
         [self.pickVideoButton.superview addSubview:thumbnail];
         [thumbnail awakeFromNib];
     } failureBlock:^(NSError *error) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed coying video" message:nil delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed copying video" message:nil delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         [alert show];
     }];
     

@@ -63,7 +63,6 @@
 		8631D7401983E6680030195A /* TenMoves.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TenMoves.entitlements; sourceTree = "<group>"; };
 		863B0EAC1984237F00AAF919 /* ModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelObject.h; sourceTree = "<group>"; };
 		863B0EAD1984237F00AAF919 /* ModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelObject.m; sourceTree = "<group>"; };
-		863B0EAF1984252A00AAF919 /* ModelObjectWithTimeStamps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelObjectWithTimeStamps.h; sourceTree = "<group>"; };
 		863B0EB0198426E500AAF919 /* TenMoves 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 3.xcdatamodel"; sourceTree = "<group>"; };
 		865304BB197FD97D00EEE9E0 /* ProgressPickerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressPickerButton.h; sourceTree = "<group>"; };
 		865304BC197FD97D00EEE9E0 /* ProgressPickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressPickerButton.m; sourceTree = "<group>"; };
@@ -178,7 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				86EA19C119846F8F007B4813 /* ImageViewWithSnapshotDelegate.h */,
-				863B0EAF1984252A00AAF919 /* ModelObjectWithTimeStamps.h */,
 				8679AFF019804EE500052C30 /* AddMoveViewControllerDelegate.h */,
 				8679AFF119804F3000052C30 /* AddSnapshotTableViewControllerDelegate.h */,
 				8679AFEE19804E9300052C30 /* ArrayDataSourceDelegate.h */,

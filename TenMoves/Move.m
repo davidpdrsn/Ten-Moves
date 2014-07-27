@@ -36,4 +36,12 @@ static NSString *ENTITY_NAME = @"Move";
     return fetchRequest;
 }
 
+- (void)awakeFromInsert {
+    [super awakeFromInsert];
+    
+    NSDate *date = [NSDate date];
+    self.updatedAt = date;
+    self.createdAt = date;
+}
+
 @end

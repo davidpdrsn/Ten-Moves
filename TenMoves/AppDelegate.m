@@ -109,8 +109,6 @@
                              NSInferMappingModelAutomaticallyOption: @YES
                              };
     
-    [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
-    
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     

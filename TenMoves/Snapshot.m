@@ -73,6 +73,10 @@ static NSString *ENTITY_NAME = @"Snapshot";
 - (void)awakeFromInsert {
     [super awakeFromInsert];
     
+    NSDate *date = [NSDate date];
+    self.updatedAt = date;
+    self.createdAt = date;
+    
     [self setProgressTypeRaw:SnapshotProgressBaseline];
 }
 
@@ -88,27 +92,28 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return [self.class colorForProgressType:self.progressTypeRaw];
 }
 
-- (NSString *)documentsDirectory {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = paths[0];
-    return documentsDirectory;
-}
-
 - (void)saveVideoAtMediaUrl:(NSURL *)mediaUrl
            withReferenceUrl:(NSURL *)referenceUrl
             completionBlock:(void (^)())completionBlock
                failureBlock:(void (^)(NSError *error))failureBlock {
-    SnapshotVideo *video = [SnapshotVideo newManagedObjectForSnapshot:self withVideoAtUrl:mediaUrl];
-    self.video = video;
-    
-    [ALAssetsLibrary assetForURL:referenceUrl resultBlock:^(ALAsset *asset) {
-        UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
-        SnapshotImage *snapshotImage = [SnapshotImage newManagedObjectForSnapshot:self withImage:image];
-        self.image = snapshotImage;
-        completionBlock();
-    } failureBlock:^(NSError *error) {
+    [SnapshotVideo newManagedObjectWithVideoAtUrl:mediaUrl success:^(SnapshotVideo *video) {
+        [ALAssetsLibrary assetForURL:referenceUrl resultBlock:^(ALAsset *asset) {
+            UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
+            
+            [SnapshotImage newManagedObjectWithImage:image success:^(SnapshotImage *image) {
+                self.video = video;
+                self.image = image;
+                completionBlock();
+            } failure:^(NSError *error) {
+                failureBlock(error);
+            }];
+        } failureBlock:^(NSError *error) {
+            failureBlock(error);
+        }];
+    } failure:^(NSError *error) {
         failureBlock(error);
     }];
+    
 }
 
 

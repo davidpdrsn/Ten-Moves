@@ -9,6 +9,7 @@
 #import "SnapshotVideo.h"
 #import "Snapshot.h"
 #import "Repository.h"
+#import "AppDelegate.h"
 
 static NSString *ENTITY_NAME = @"SnapshotVideo";
 
@@ -24,29 +25,27 @@ static NSString *ENTITY_NAME = @"SnapshotVideo";
     return video;
 }
 
-// TODO move this method into base class
-+ (NSString *)documentsDirectory {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = paths[0];
-    return documentsDirectory;
-}
-
 + (NSString *)directory {
     NSString *imagesPath = [[self documentsDirectory] stringByAppendingPathComponent:@"/snapshot-videos"];
     return imagesPath;
 }
 
-+ (void)createDirectoryUnlessItsThere {
++ (void)createDirectoryUnlessItsThere:(NSError **)error {
     NSFileManager *manager = [NSFileManager defaultManager];
+    
     if (![manager fileExistsAtPath:[self directory]]) {
-        [manager createDirectoryAtPath:[self directory] withIntermediateDirectories:NO
-                            attributes:nil
-                                 error:nil];
+        [manager createDirectoryAtPath:[self directory] withIntermediateDirectories:NO attributes:nil error:error];
     }
 }
 
-+ (instancetype)newManagedObjectForSnapshot:(Snapshot *)snapshot withVideoAtUrl:(NSURL *)url {
-    [self createDirectoryUnlessItsThere];
++ (void)newManagedObjectWithVideoAtUrl:(NSURL *)url success:(void (^)(SnapshotVideo *video))successBlock failure:(void (^)(NSError *error))failureBlock {
+    NSError *createDirectoryError;
+    [self createDirectoryUnlessItsThere:&createDirectoryError];
+    if (createDirectoryError) {
+        failureBlock(createDirectoryError);
+        return;
+    }
+    
     SnapshotVideo *instance = [self newManagedObject];
     
     NSFileManager *manager = [NSFileManager defaultManager];
@@ -54,11 +53,15 @@ static NSString *ENTITY_NAME = @"SnapshotVideo";
     NSString *filename = [NSString stringWithFormat:@"/%@.%@", [self createUuidString], url.pathExtension];
     NSURL *videoDestinationUrl = [NSURL fileURLWithPath:[[self directory] stringByAppendingString:filename]];
     
-    instance.path = videoDestinationUrl.absoluteString;
+    NSError *error;
+    [manager copyItemAtURL:url toURL:videoDestinationUrl error:&error];
     
-    [manager copyItemAtURL:url toURL:videoDestinationUrl error:nil];
-    
-    return instance;
+    if (error) {
+        failureBlock(error);
+    } else {
+        instance.path = videoDestinationUrl.absoluteString;
+        successBlock(instance);
+    }
 }
 
 - (NSURL *)url {
@@ -67,14 +70,6 @@ static NSString *ENTITY_NAME = @"SnapshotVideo";
 
 - (void)prepareForDeletion {
     [[NSFileManager defaultManager] removeItemAtURL:self.url error:nil];
-}
-
-+ (NSString *)createUuidString {
-    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
-    NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
-    CFRelease(uuid);
-    
-    return uuidString;
 }
 
 @end

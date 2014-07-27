@@ -9,11 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "ModelObject.h"
-#import "ModelObjectWithTimeStamps.h"
 
 @class Snapshot;
 
-@interface Move : ModelObject <ModelObjectWithTimeStamps>
+@interface Move : ModelObject
 
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSDate * updatedAt;

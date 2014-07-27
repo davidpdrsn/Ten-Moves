@@ -24,29 +24,26 @@ static NSString *ENTITY_NAME = @"SnapshotImage";
     return image;
 }
 
-// TODO move this method into base class
-+ (NSString *)documentsDirectory {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = paths[0];
-    return documentsDirectory;
-}
-
 + (NSString *)directory {
     NSString *imagesPath = [[self documentsDirectory] stringByAppendingPathComponent:@"/snapshot-images"];
     return imagesPath;
 }
 
-+ (void)createDirectoryUnlessItsThere {
++ (void)createDirectoryUnlessItsThere:(NSError **)error {
     NSFileManager *manager = [NSFileManager defaultManager];
+    
     if (![manager fileExistsAtPath:[self directory]]) {
-        [manager createDirectoryAtPath:[self directory] withIntermediateDirectories:NO
-                            attributes:nil
-                                 error:nil];
+        [manager createDirectoryAtPath:[self directory] withIntermediateDirectories:NO attributes:nil error:error];
     }
 }
 
-+ (instancetype)newManagedObjectForSnapshot:(Snapshot *)snapshot withImage:(UIImage *)image {
-    [self createDirectoryUnlessItsThere];
++ (void)newManagedObjectWithImage:(UIImage *)image success:(void (^)(SnapshotImage *image))successBlock failure:(void (^)(NSError *error))failureBlock {
+    NSError *createDirectoryError;
+    [self createDirectoryUnlessItsThere:&createDirectoryError];
+    if (createDirectoryError) {
+        failureBlock(createDirectoryError);
+        return;
+    }
     
     SnapshotImage *instance = [self newManagedObject];
     
@@ -55,11 +52,15 @@ static NSString *ENTITY_NAME = @"SnapshotImage";
     NSString *filename = [NSString stringWithFormat:@"/%@.png", [self createUuidString]];
     NSURL *imageDestinationUrl = [NSURL fileURLWithPath:[[SnapshotImage directory] stringByAppendingString:filename]];
     
-    [imageData writeToURL:imageDestinationUrl options:NSDataWritingAtomic error:nil];
+    NSError *error;
+    [imageData writeToURL:imageDestinationUrl options:NSDataWritingAtomic error:&error];
     
-    instance.path = imageDestinationUrl.absoluteString;
-    instance.snapshot = snapshot;
-    return instance;
+    if (error) {
+        failureBlock(error);
+    } else {
+        instance.path = imageDestinationUrl.absoluteString;
+        successBlock(instance);
+    }
 }
 
 - (NSURL *)url {
@@ -74,14 +75,6 @@ static NSString *ENTITY_NAME = @"SnapshotImage";
 
 - (UIImage *)image {
     return [UIImage imageWithData:[NSData dataWithContentsOfURL:[self url]]];
-}
-
-+ (NSString *)createUuidString {
-    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
-    NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
-    CFRelease(uuid);
-    
-    return uuidString;
 }
 
 @end
