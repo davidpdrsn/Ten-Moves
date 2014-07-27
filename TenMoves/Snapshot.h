@@ -19,23 +19,20 @@ typedef enum {
     SnapshotProgressBaseline = 3
 } SnapshotProgress;
 
-@class Move, SnapshotImage;
+@class Move, SnapshotImage, SnapshotVideo;
 
 @interface Snapshot : NSManagedObject
 
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSNumber * progress;
 @property (nonatomic, retain) NSDate * updatedAt;
-@property (nonatomic, retain) NSString * videoPath;
-@property (nonatomic, retain) NSString * uuid;
 @property (nonatomic, retain) Move *move;
 @property (nonatomic, retain) SnapshotImage *image;
+@property (nonatomic, retain) SnapshotVideo *video;
 
 + (instancetype)newManagedObject;
 + (NSFetchRequest *)fetchRequestForSnapshotsBelongingToMove:(Move *)move;
 + (UIColor *)colorForProgressType:(SnapshotProgress)type;
-
-- (NSURL *)videoUrl;
 
 - (SnapshotProgress)progressTypeRaw;
 - (void)setProgressTypeRaw:(SnapshotProgress)type;

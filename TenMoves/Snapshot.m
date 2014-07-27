@@ -12,6 +12,7 @@
 @import AssetsLibrary;
 #import "ALAssetsLibrary+HelperMethods.h"
 #import "SnapshotImage.h"
+#import "SnapshotVideo.h"
 
 static NSString *ENTITY_NAME = @"Snapshot";
 
@@ -20,10 +21,9 @@ static NSString *ENTITY_NAME = @"Snapshot";
 @dynamic createdAt;
 @dynamic progress;
 @dynamic updatedAt;
-@dynamic videoPath;
-@dynamic uuid;
 @dynamic move;
 @dynamic image;
+@dynamic video;
 
 + (instancetype)newManagedObject {
     Snapshot *snapshot = (Snapshot *) [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
@@ -74,11 +74,6 @@ static NSString *ENTITY_NAME = @"Snapshot";
     [super awakeFromInsert];
     
     [self setProgressTypeRaw:SnapshotProgressBaseline];
-    self.uuid = [self createUuidString];
-}
-
-- (NSURL *)videoUrl {
-    return [NSURL URLWithString:self.videoPath];
 }
 
 - (SnapshotProgress)progressTypeRaw {
@@ -93,11 +88,6 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return [self.class colorForProgressType:self.progressTypeRaw];
 }
 
-- (void)prepareForDeletion {
-    NSFileManager *manager = [[NSFileManager alloc] init];
-    [manager removeItemAtURL:self.videoUrl error:nil];
-}
-
 - (NSString *)documentsDirectory {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = paths[0];
@@ -108,55 +98,18 @@ static NSString *ENTITY_NAME = @"Snapshot";
            withReferenceUrl:(NSURL *)referenceUrl
             completionBlock:(void (^)())completionBlock
                failureBlock:(void (^)(NSError *error))failureBlock {
-    
-    NSString *documentsDirectory = [self documentsDirectory];
-    
-    NSString *videosPath = [documentsDirectory stringByAppendingPathComponent:@"/snapshot-videos"];
-    
-    NSFileManager *manager = [NSFileManager defaultManager];
-    
-    NSError *createVideoDirectoryError;
-    if (![manager fileExistsAtPath:videosPath]) {
-        [manager createDirectoryAtPath:videosPath withIntermediateDirectories:NO attributes:nil error:&createVideoDirectoryError];
-        if (createVideoDirectoryError) {
-            failureBlock(createVideoDirectoryError);
-            return;
-        }
-    }
-    
-    NSString *filename = [NSString stringWithFormat:@"/%@.%@", self.uuid, mediaUrl.pathExtension];
-    NSURL *videoDestinationUrl = [NSURL fileURLWithPath:[videosPath stringByAppendingString:filename]];
-    
-    NSError *copyVideoError;
-    [manager copyItemAtURL:mediaUrl toURL:videoDestinationUrl error:&copyVideoError];
-    if (copyVideoError) {
-        failureBlock(copyVideoError);
-        return;
-    }
-    
-    self.videoPath = videoDestinationUrl.absoluteString;
+    SnapshotVideo *video = [SnapshotVideo newManagedObjectForSnapshot:self withVideoAtUrl:mediaUrl];
+    self.video = video;
     
     [ALAssetsLibrary assetForURL:referenceUrl resultBlock:^(ALAsset *asset) {
         UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
         SnapshotImage *snapshotImage = [SnapshotImage newManagedObjectForSnapshot:self withImage:image];
-        
-        if (snapshotImage) {
-            self.image = snapshotImage;
-            completionBlock();
-        } else {
-            failureBlock(nil);
-        }
+        self.image = snapshotImage;
+        completionBlock();
     } failureBlock:^(NSError *error) {
         failureBlock(error);
     }];
 }
 
-- (NSString *)createUuidString {
-    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
-    NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
-    CFRelease(uuid);
-    
-    return uuidString;
-}
 
 @end

@@ -17,6 +17,7 @@
 		865E4D461982737A0000CC30 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 865E4D451982737A0000CC30 /* Constants.m */; };
 		8676880A198525D5005679ED /* SnapshotImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 86768809198525D5005679ED /* SnapshotImage.m */; };
 		86768810198526FA005679ED /* Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676880F198526FA005679ED /* Snapshot.m */; };
+		8676881419852FAF005679ED /* SnapshotVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676881319852FAF005679ED /* SnapshotVideo.m */; };
 		8685E3B4196F595E00A97585 /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B3196F595E00A97585 /* Move.m */; };
 		8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B6196F5B0900A97585 /* MoveTableViewCell.m */; };
 		8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3BA196F60E200A97585 /* SnapshotsTableViewController.m */; };
@@ -80,6 +81,9 @@
 		86768809198525D5005679ED /* SnapshotImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotImage.m; sourceTree = "<group>"; };
 		8676880E198526FA005679ED /* Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snapshot.h; sourceTree = "<group>"; };
 		8676880F198526FA005679ED /* Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snapshot.m; sourceTree = "<group>"; };
+		8676881119852F52005679ED /* TenMoves 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 7.xcdatamodel"; sourceTree = "<group>"; };
+		8676881219852FAF005679ED /* SnapshotVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotVideo.h; sourceTree = "<group>"; };
+		8676881319852FAF005679ED /* SnapshotVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotVideo.m; sourceTree = "<group>"; };
 		8679AFEE19804E9300052C30 /* ArrayDataSourceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayDataSourceDelegate.h; sourceTree = "<group>"; };
 		8679AFF019804EE500052C30 /* AddMoveViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMoveViewControllerDelegate.h; sourceTree = "<group>"; };
 		8679AFF119804F3000052C30 /* AddSnapshotTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSnapshotTableViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -326,6 +330,8 @@
 		86EE8D96196F504200EE4DCF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8676881219852FAF005679ED /* SnapshotVideo.h */,
+				8676881319852FAF005679ED /* SnapshotVideo.m */,
 				8676880E198526FA005679ED /* Snapshot.h */,
 				8676880F198526FA005679ED /* Snapshot.m */,
 				86768808198525D5005679ED /* SnapshotImage.h */,
@@ -491,6 +497,7 @@
 				86A3F26319712D7900E389A1 /* ArrayDataSource.m in Sources */,
 				86ED30C2196F0F0F00FC738B /* main.m in Sources */,
 				863B0EAE1984237F00AAF919 /* ModelObject.m in Sources */,
+				8676881419852FAF005679ED /* SnapshotVideo.m in Sources */,
 				8685E3BE196F6A9200A97585 /* AddSnapshotTableViewController.m in Sources */,
 				8658D100197317A000A2B36C /* ImageViewWithSnapshot.m in Sources */,
 				8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */,
@@ -718,6 +725,7 @@
 		86ED30C7196F0F0F00FC738B /* TenMoves.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				8676881119852F52005679ED /* TenMoves 7.xcdatamodel */,
 				863B0EB0198426E500AAF919 /* TenMoves 3.xcdatamodel */,
 				866A0B6419842BD300FF11A6 /* TenMoves 4.xcdatamodel */,
 				86EA19C2198475FC007B4813 /* TenMoves 5.xcdatamodel */,
@@ -725,7 +733,7 @@
 				865E4D43198265FB0000CC30 /* TenMoves 2.xcdatamodel */,
 				86ED30C8196F0F0F00FC738B /* TenMoves.xcdatamodel */,
 			);
-			currentVersion = 867688071985173E005679ED /* TenMoves 6.xcdatamodel */;
+			currentVersion = 8676881119852F52005679ED /* TenMoves 7.xcdatamodel */;
 			path = TenMoves.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

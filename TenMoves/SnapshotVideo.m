@@ -1,27 +1,27 @@
 //
-//  SnapshotImage.m
+//  SnapshotVideo.m
 //  TenMoves
 //
 //  Created by David Pedersen on 27/07/14.
 //  Copyright (c) 2014 David Pedersen. All rights reserved.
 //
 
-#import "SnapshotImage.h"
+#import "SnapshotVideo.h"
 #import "Snapshot.h"
 #import "Repository.h"
 
-static NSString *ENTITY_NAME = @"SnapshotImage";
+static NSString *ENTITY_NAME = @"SnapshotVideo";
 
-@implementation SnapshotImage
+@implementation SnapshotVideo
 
 @dynamic path;
 @dynamic snapshot;
 
 + (instancetype)newManagedObject {
-    SnapshotImage *image = (SnapshotImage *) [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
+    SnapshotVideo *video = (SnapshotVideo *) [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
                                                                     inManagedObjectContext:[Repository managedObjectContext]];
     
-    return image;
+    return video;
 }
 
 // TODO move this method into base class
@@ -32,7 +32,7 @@ static NSString *ENTITY_NAME = @"SnapshotImage";
 }
 
 + (NSString *)directory {
-    NSString *imagesPath = [[self documentsDirectory] stringByAppendingPathComponent:@"/snapshot-images"];
+    NSString *imagesPath = [[self documentsDirectory] stringByAppendingPathComponent:@"/snapshot-videos"];
     return imagesPath;
 }
 
@@ -45,20 +45,19 @@ static NSString *ENTITY_NAME = @"SnapshotImage";
     }
 }
 
-+ (instancetype)newManagedObjectForSnapshot:(Snapshot *)snapshot withImage:(UIImage *)image {
++ (instancetype)newManagedObjectForSnapshot:(Snapshot *)snapshot withVideoAtUrl:(NSURL *)url {
     [self createDirectoryUnlessItsThere];
+    SnapshotVideo *instance = [self newManagedObject];
     
-    SnapshotImage *instance = [self newManagedObject];
+    NSFileManager *manager = [NSFileManager defaultManager];
     
-    NSData *imageData = UIImagePNGRepresentation(image);
+    NSString *filename = [NSString stringWithFormat:@"/%@.%@", [self createUuidString], url.pathExtension];
+    NSURL *videoDestinationUrl = [NSURL fileURLWithPath:[[self directory] stringByAppendingString:filename]];
     
-    NSString *filename = [NSString stringWithFormat:@"/%@.png", [self createUuidString]];
-    NSURL *imageDestinationUrl = [NSURL fileURLWithPath:[[SnapshotImage directory] stringByAppendingString:filename]];
+    instance.path = videoDestinationUrl.absoluteString;
     
-    [imageData writeToURL:imageDestinationUrl options:NSDataWritingAtomic error:nil];
+    [manager copyItemAtURL:url toURL:videoDestinationUrl error:nil];
     
-    instance.path = imageDestinationUrl.absoluteString;
-    instance.snapshot = snapshot;
     return instance;
 }
 
@@ -67,13 +66,7 @@ static NSString *ENTITY_NAME = @"SnapshotImage";
 }
 
 - (void)prepareForDeletion {
-    [super prepareForDeletion];
-    
-    [[NSFileManager defaultManager] removeItemAtPath:self.path error:nil];
-}
-
-- (UIImage *)image {
-    return [UIImage imageWithData:[NSData dataWithContentsOfURL:[self url]]];
+    [[NSFileManager defaultManager] removeItemAtURL:self.url error:nil];
 }
 
 + (NSString *)createUuidString {

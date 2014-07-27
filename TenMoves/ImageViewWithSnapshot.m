@@ -9,6 +9,7 @@
 #import "ImageViewWithSnapshot.h"
 #import "Snapshot.h"
 #import "SnapshotImage.h"
+#import "SnapshotVideo.h"
 @import MediaPlayer;
 
 @interface ImageViewWithSnapshot ()
@@ -49,7 +50,7 @@
     ImageViewWithSnapshot *imageView = (ImageViewWithSnapshot *)gesture.view;
     Snapshot *snapshot = imageView.snapshot;
     
-    MPMoviePlayerViewController *player = [[MPMoviePlayerViewController alloc] initWithContentURL:[snapshot videoUrl]];
+    MPMoviePlayerViewController *player = [[MPMoviePlayerViewController alloc] initWithContentURL:[snapshot.video url]];
     
     [[NSNotificationCenter defaultCenter] removeObserver:player
                                                     name:MPMoviePlayerPlaybackDidFinishNotification
