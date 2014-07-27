@@ -69,6 +69,8 @@ static NSString *ENTITY_NAME = @"SnapshotVideo";
 }
 
 - (void)prepareForDeletion {
+    [super prepareForDeletion];
+    
     [[NSFileManager defaultManager] removeItemAtURL:self.url error:nil];
 }
 
