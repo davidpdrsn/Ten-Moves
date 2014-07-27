@@ -42,6 +42,9 @@
     UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     self.userInteractionEnabled = YES;
     [self addGestureRecognizer:tapper];
+    
+    self.contentMode = UIViewContentModeScaleAspectFill;
+    self.clipsToBounds = YES;
 }
 
 - (void)tapped:(UIGestureRecognizer *)gesture {
