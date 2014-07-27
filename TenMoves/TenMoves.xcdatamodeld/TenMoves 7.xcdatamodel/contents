@@ -10,9 +10,9 @@
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="progress" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SnapshotImage" inverseName="snapshot" inverseEntity="SnapshotImage" syncable="YES"/>
+        <relationship name="image" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SnapshotImage" inverseName="snapshot" inverseEntity="SnapshotImage" syncable="YES"/>
         <relationship name="move" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Move" inverseName="snapshots" inverseEntity="Move" syncable="YES"/>
-        <relationship name="video" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SnapshotVideo" inverseName="snapshot" inverseEntity="SnapshotVideo" syncable="YES"/>
+        <relationship name="video" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SnapshotVideo" inverseName="snapshot" inverseEntity="SnapshotVideo" syncable="YES"/>
     </entity>
     <entity name="SnapshotImage" representedClassName="SnapshotImage" syncable="YES">
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
