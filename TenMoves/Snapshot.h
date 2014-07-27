@@ -27,6 +27,7 @@ typedef enum {
 @property (nonatomic, retain) NSDate * updatedAt;
 @property (nonatomic, retain) NSString * imagePath;
 @property (nonatomic, retain) NSString * videoPath;
+@property (nonatomic, retain) NSString * uuid;
 @property (nonatomic, retain) NSNumber * progress;
 @property (nonatomic, retain) Move *move;
 

@@ -76,6 +76,7 @@
 		865E4D451982737A0000CC30 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		866A0B6419842BD300FF11A6 /* TenMoves 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 4.xcdatamodel"; sourceTree = "<group>"; };
 		8671A8B7197181CA00C7C0F6 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		867688071985173E005679ED /* TenMoves 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 6.xcdatamodel"; sourceTree = "<group>"; };
 		8679AFEE19804E9300052C30 /* ArrayDataSourceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayDataSourceDelegate.h; sourceTree = "<group>"; };
 		8679AFF019804EE500052C30 /* AddMoveViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMoveViewControllerDelegate.h; sourceTree = "<group>"; };
 		8679AFF119804F3000052C30 /* AddSnapshotTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSnapshotTableViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -714,10 +715,11 @@
 				863B0EB0198426E500AAF919 /* TenMoves 3.xcdatamodel */,
 				866A0B6419842BD300FF11A6 /* TenMoves 4.xcdatamodel */,
 				86EA19C2198475FC007B4813 /* TenMoves 5.xcdatamodel */,
+				867688071985173E005679ED /* TenMoves 6.xcdatamodel */,
 				865E4D43198265FB0000CC30 /* TenMoves 2.xcdatamodel */,
 				86ED30C8196F0F0F00FC738B /* TenMoves.xcdatamodel */,
 			);
-			currentVersion = 86EA19C2198475FC007B4813 /* TenMoves 5.xcdatamodel */;
+			currentVersion = 867688071985173E005679ED /* TenMoves 6.xcdatamodel */;
 			path = TenMoves.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

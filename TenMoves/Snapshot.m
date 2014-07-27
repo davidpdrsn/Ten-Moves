@@ -20,6 +20,7 @@ static NSString *ENTITY_NAME = @"Snapshot";
 @dynamic updatedAt;
 @dynamic videoPath;
 @dynamic imagePath;
+@dynamic uuid;
 @dynamic move;
 @dynamic progress;
 
@@ -74,6 +75,7 @@ static NSString *ENTITY_NAME = @"Snapshot";
     [super awakeFromInsert];
     
     [self setProgressTypeRaw:SnapshotProgressBaseline];
+    self.uuid = [self createUuidString];
 }
 
 - (NSURL *)videoUrl {
@@ -138,8 +140,7 @@ static NSString *ENTITY_NAME = @"Snapshot";
         }
     }
     
-    NSString *uuid = [self uuidString];
-    NSString *filename = [NSString stringWithFormat:@"/%@.%@", uuid, mediaUrl.pathExtension];
+    NSString *filename = [NSString stringWithFormat:@"/%@.%@", self.uuid, mediaUrl.pathExtension];
     NSURL *videoDestinationUrl = [NSURL fileURLWithPath:[videosPath stringByAppendingString:filename]];
     
     NSError *copyVideoError;
@@ -155,7 +156,7 @@ static NSString *ENTITY_NAME = @"Snapshot";
         UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
         NSData *imageData = UIImagePNGRepresentation(image);
         
-        NSString *filename = [NSString stringWithFormat:@"/%@.png", uuid];
+        NSString *filename = [NSString stringWithFormat:@"/%@.png", self.uuid];
         NSURL *imageDestinationUrl = [NSURL fileURLWithPath:[imagesPath stringByAppendingString:filename]];
         
         self.imagePath = imageDestinationUrl.absoluteString;
@@ -172,7 +173,7 @@ static NSString *ENTITY_NAME = @"Snapshot";
     }];
 }
 
-- (NSString *)uuidString {
+- (NSString *)createUuidString {
     CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
     NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
     CFRelease(uuid);
