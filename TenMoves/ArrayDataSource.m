@@ -36,25 +36,8 @@
         if (![_fetchedResultsController performFetch:&error]) {
             NSLog(@"Error - %@", [error userInfo]);
         }
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(storesDidChange:)
-                                                     name:NSPersistentStoreCoordinatorStoresDidChangeNotification
-                                                   object:[Repository managedObjectContext].persistentStoreCoordinator];
     }
     return self;
-}
-
-- (void)storesDidChange:(NSNotification *)notification {
-    NSLog(@"reloading");
-    NSError *error;
-    if (![self.fetchedResultsController performFetch:&error]) {
-        NSLog(@"Error - %@", [error userInfo]);
-    }
-    
-    if (self.table) {
-        [self.table reloadData];
-    }
 }
 
 - (NSUInteger)totalNumberOfObjects {
