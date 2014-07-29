@@ -22,6 +22,8 @@
 
 @interface AddSnapshotTableViewController ()
 
+@property (strong, nonatomic) ImageViewWithSnapshot *thumbnail;
+
 @property (weak, nonatomic) IBOutlet UITableViewCell *progressCell;
 @property (weak, nonatomic) IBOutlet UIButton *pickVideoButton;
 
@@ -210,13 +212,15 @@
 - (void)showThumbnailOfVideo {
     int offset = 5;
     CGFloat size = self.pickVideoButton.superview.frame.size.height-offset*2;
-    ImageViewWithSnapshot *thumbnail = [[ImageViewWithSnapshot alloc] initWithFrame:CGRectMake(offset, offset, size, size)];
     
-    thumbnail.snapshot = self.currentSnapshot;
-    thumbnail.delegate = self;
+    CGRect frame = CGRectMake(offset, offset, size, size);
+    self.thumbnail = [[ImageViewWithSnapshot alloc] initWithFrame:frame];
     
-    [self.pickVideoButton.superview addSubview:thumbnail];
-    [thumbnail awakeFromNib];
+    self.thumbnail.snapshot = self.currentSnapshot;
+    self.thumbnail.delegate = self;
+    
+    [self.pickVideoButton.superview addSubview:self.thumbnail];
+    [self.thumbnail awakeFromNib];
 }
 
 #pragma mark - ImageViewSnapshot delegate methods
