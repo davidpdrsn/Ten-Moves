@@ -9,6 +9,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 @import AssetsLibrary;
 @import MediaPlayer;
+@import AVFoundation;
 
 #import "AddSnapshotTableViewController.h"
 #import "Snapshot.h"
@@ -26,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet ProgressPickerButton *improvedProgressView;
 @property (weak, nonatomic) IBOutlet ProgressPickerButton *sameProgressView;
 @property (weak, nonatomic) IBOutlet ProgressPickerButton *regressionProgressView;
+
+@property (strong, nonatomic) UIView *loadingView;
 
 @end
 
@@ -142,16 +145,137 @@
     [controller presentViewController:mediaUI animated:YES completion:nil];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSURL *mediaUrl = info[UIImagePickerControllerMediaURL];
-    
+- (void)showVideoCopyAlert {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed copying video" message:nil delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)addVideoToSnapshotAtUrl:(NSURL *)mediaUrl {
     [self.currentSnapshot saveVideoAtFileUrl:mediaUrl completionBlock:^{
         [self.pickVideoButton setTitle:@"Add different video" forState:UIControlStateNormal];
         [self showThumbnailOfVideo];
     } failureBlock:^(NSError *error) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed copying video" message:nil delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-        [alert show];
+        [self showVideoCopyAlert];
     }];
+}
+
+- (void)saveEditedVideoAtUrl:(NSURL *)mediaUrl start:(NSNumber *)start end:(NSNumber *)end {
+    int startMilliseconds = ([start doubleValue] * 1000);
+    int endMilliseconds = ([end doubleValue] * 1000);
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSFileManager *manager = [NSFileManager defaultManager];
+    
+    NSString *outputURL = [documentsDirectory stringByAppendingPathComponent:@"output"] ;
+    [manager createDirectoryAtPath:outputURL withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    outputURL = [outputURL stringByAppendingPathComponent:@"output.mp4"];
+    [manager removeItemAtPath:outputURL error:nil];
+    
+    AVURLAsset *videoAsset = [AVURLAsset URLAssetWithURL:mediaUrl options:nil];
+    
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:videoAsset presetName:AVAssetExportPresetHighestQuality];
+    exportSession.outputURL = [NSURL fileURLWithPath:outputURL];
+    exportSession.outputFileType = AVFileTypeQuickTimeMovie;
+    CMTimeRange timeRange = CMTimeRangeMake(CMTimeMake(startMilliseconds, 1000), CMTimeMake(endMilliseconds - startMilliseconds, 1000));
+    exportSession.timeRange = timeRange;
+    
+    [self startLoading];
+    [exportSession exportAsynchronouslyWithCompletionHandler:^{
+        switch (exportSession.status) {
+            case AVAssetExportSessionStatusCompleted:
+                [self endLoading];
+                [self addVideoToSnapshotAtUrl:exportSession.outputURL];
+                break;
+            default:
+                [self endLoading];
+                [self showVideoCopyAlert];
+                break;
+        }
+    }];
+}
+
+- (void)startLoading {
+    self.navigationController.view.userInteractionEnabled = NO;
+    
+    CGRect frame = CGRectMake(0, 0, 120, 120);
+    self.loadingView = [[UIView alloc] initWithFrame:frame];
+    self.loadingView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.75];
+    self.loadingView.layer.cornerRadius = 5;
+    
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.hidden = NO;
+    
+    [spinner startAnimating];
+    [self addViewCentered:spinner inSuperView:self.view];
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.text = @"Importing";
+    label.font = [UIFont boldSystemFontOfSize:label.font.pointSize];
+    label.textColor = [UIColor whiteColor];
+    [label sizeToFit];
+    
+    [self addViewCentered:label inSuperView:self.loadingView];
+    
+    [self addViewCentered:spinner inSuperView:self.loadingView];
+    [self addViewCentered:self.loadingView inSuperView:self.navigationController.view];
+    
+    [self adjustCenterX:0 y:35 inView:label];
+    [self adjustCenterX:0 y:-5 inView:spinner];
+    double delta = -7;
+    [self adjustCenterX:0 y:delta inView:label];
+    [self adjustCenterX:0 y:delta inView:spinner];
+    [self adjustCenterX:0 y:-13 inView:self.loadingView];
+}
+
+- (void)adjustCenterX:(double)deltaX y:(double)deltaY inView:(UIView *)view {
+    view.center = CGPointMake(view.center.x+deltaX, view.center.y+deltaY);
+}
+
+- (void)addViewCentered:(UIView *)view inSuperView:(UIView *)superView {
+    [superView addSubview:view];
+    
+    CGRect oldFrame = view.bounds;
+    CGRect superFrame = superView.bounds;
+    
+    view.frame = CGRectMake(superFrame.size.width/2 - oldFrame.size.width/2,
+                            superFrame.size.height/2 - oldFrame.size.height/2,
+                            oldFrame.size.width, oldFrame.size.height);
+}
+
+- (void)endLoading {
+    [UIView animateWithDuration:.13 animations:^{
+        self.loadingView.frame = CGRectMake(self.loadingView.frame.origin.x,
+                                            self.loadingView.frame.origin.y - 20,
+                                            self.loadingView.frame.size.width,
+                                            self.loadingView.frame.size.height);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.4 animations:^{
+            self.loadingView.frame = CGRectMake(self.loadingView.frame.origin.x,
+                                                self.loadingView.frame.origin.y + self.view.frame.size.height*.75,
+                                                self.loadingView.frame.size.width,
+                                                self.loadingView.frame.size.height);
+        } completion:^(BOOL finished) {
+            [self.loadingView removeFromSuperview];
+            self.navigationController.view.userInteractionEnabled = YES;
+        }];
+    }];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    NSURL *mediaUrl = info[UIImagePickerControllerMediaURL];
+    
+    BOOL videoWasEdited = info[@"_UIImagePickerControllerVideoEditingStart"] && info[@"_UIImagePickerControllerVideoEditingEnd"];
+    if (videoWasEdited) {
+        NSNumber *start = [info objectForKey:@"_UIImagePickerControllerVideoEditingStart"];
+        NSNumber *end = [info objectForKey:@"_UIImagePickerControllerVideoEditingEnd"];
+        
+        [self saveEditedVideoAtUrl:mediaUrl start:start end:end];
+    } else {
+        [self addVideoToSnapshotAtUrl:mediaUrl];
+    }
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
