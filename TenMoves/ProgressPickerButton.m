@@ -106,8 +106,16 @@
 
 - (void)setEnabled:(BOOL)enabled {
     [super setEnabled:enabled];
-    self.circle.backgroundColor = [[Snapshot colorForProgressType:SnapshotProgressBaseline] colorWithAlphaComponent:.33333];
-    self.label.textColor = [Snapshot colorForProgressType:SnapshotProgressBaseline];
+    
+    [UIView animateWithDuration:.125 animations:^{
+        if (enabled) {
+            self.circle.backgroundColor = [Snapshot colorForProgressType:self.type];
+            self.label.textColor = [UIColor blackColor];
+        } else {
+            self.circle.backgroundColor = [[Snapshot colorForProgressType:SnapshotProgressBaseline] colorWithAlphaComponent:.33333];
+            self.label.textColor = [Snapshot colorForProgressType:SnapshotProgressBaseline];
+        }
+    }];
 }
 
 @end

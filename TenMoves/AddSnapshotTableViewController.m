@@ -102,6 +102,18 @@
 
 #pragma mark - UIActionSheetDelegate
 
+- (void)willPresentActionSheet:(UIActionSheet *)actionSheet {
+    for (ProgressPickerButton *progress in @[self.sameProgressView, self.improvedProgressView, self.regressionProgressView]) {
+        [progress setEnabled:NO];
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex {
+    for (ProgressPickerButton *progress in @[self.sameProgressView, self.improvedProgressView, self.regressionProgressView]) {
+        [progress setEnabled:YES];
+    }
+}
+
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 0:
