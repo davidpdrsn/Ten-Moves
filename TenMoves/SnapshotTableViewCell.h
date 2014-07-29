@@ -19,4 +19,6 @@
 @property (strong, nonatomic) IBOutlet ImageViewWithSnapshot *thumbnailImageView;
 @property (strong, nonatomic) IBOutlet UIView *progressIndicator;
 
+- (void)setProgressIndicatorBackground;
+
 @end
