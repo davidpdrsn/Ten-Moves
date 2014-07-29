@@ -146,7 +146,7 @@
     NSURL *mediaUrl = info[UIImagePickerControllerMediaURL];
     
     [self.currentSnapshot saveVideoAtFileUrl:mediaUrl completionBlock:^{
-        [self.pickVideoButton setTitle:@"Pick different video" forState:UIControlStateNormal];
+        [self.pickVideoButton setTitle:@"Add different video" forState:UIControlStateNormal];
         [self showThumbnailOfVideo];
     } failureBlock:^(NSError *error) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed copying video" message:nil delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
