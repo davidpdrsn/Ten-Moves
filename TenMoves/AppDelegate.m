@@ -15,6 +15,8 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+#pragma mark - app life cycle
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Repository setManagedObjectContext:self.managedObjectContext];
@@ -50,6 +52,8 @@
     [self saveContext];
 }
 
+#pragma mark - Core Data stack
+
 - (void)saveContext
 {
     NSError *error = nil;
@@ -63,8 +67,6 @@
         } 
     }
 }
-
-#pragma mark - Core Data stack
 
 // Returns the managed object context for the application.
 // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
