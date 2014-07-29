@@ -11,6 +11,7 @@
 		8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 860129991972886A0053C71D /* UITableViewCell+HelperMethods.m */; };
 		8601299E197297280053C71D /* ALAssetsLibrary+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */; };
 		863B0EAE1984237F00AAF919 /* ModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 863B0EAD1984237F00AAF919 /* ModelObject.m */; };
+		86405D681987D0D300136C9C /* VideoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 86405D671987D0D300136C9C /* VideoEditor.m */; };
 		865304BD197FD97D00EEE9E0 /* ProgressPickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 865304BC197FD97D00EEE9E0 /* ProgressPickerButton.m */; };
 		8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */; };
 		8658D100197317A000A2B36C /* ImageViewWithSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FF197317A000A2B36C /* ImageViewWithSnapshot.m */; };
@@ -64,6 +65,8 @@
 		863B0EAC1984237F00AAF919 /* ModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelObject.h; sourceTree = "<group>"; };
 		863B0EAD1984237F00AAF919 /* ModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelObject.m; sourceTree = "<group>"; };
 		863B0EB0198426E500AAF919 /* TenMoves 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 3.xcdatamodel"; sourceTree = "<group>"; };
+		86405D661987D0D300136C9C /* VideoEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoEditor.h; sourceTree = "<group>"; };
+		86405D671987D0D300136C9C /* VideoEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoEditor.m; sourceTree = "<group>"; };
 		865304BB197FD97D00EEE9E0 /* ProgressPickerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressPickerButton.h; sourceTree = "<group>"; };
 		865304BC197FD97D00EEE9E0 /* ProgressPickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressPickerButton.m; sourceTree = "<group>"; };
 		8658D0FB197302FB00A2B36C /* SnapshotTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotTableViewCell.h; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 		863B0EAB1984227800AAF919 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				86405D661987D0D300136C9C /* VideoEditor.h */,
+				86405D671987D0D300136C9C /* VideoEditor.m */,
 				86A3F2651971578900E389A1 /* Repository.h */,
 				86A3F2661971578900E389A1 /* Repository.m */,
 			);
@@ -487,6 +492,7 @@
 				86ED30F2196F193200FC738B /* AddMoveViewController.m in Sources */,
 				8685E3B4196F595E00A97585 /* Move.m in Sources */,
 				8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */,
+				86405D681987D0D300136C9C /* VideoEditor.m in Sources */,
 				86ED30C6196F0F0F00FC738B /* AppDelegate.m in Sources */,
 				86ED30C9196F0F0F00FC738B /* TenMoves.xcdatamodeld in Sources */,
 				86A3F2671971578900E389A1 /* Repository.m in Sources */,

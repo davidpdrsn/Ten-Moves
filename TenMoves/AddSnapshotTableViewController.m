@@ -9,7 +9,6 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 @import AssetsLibrary;
 @import MediaPlayer;
-@import AVFoundation;
 
 #import "AddSnapshotTableViewController.h"
 #import "Snapshot.h"
@@ -18,6 +17,7 @@
 #import "ImageViewWithSnapshot.h"
 #import "ALAssetsLibrary+HelperMethods.h"
 #import "Move.h"
+#import "VideoEditor.h"
 
 @interface AddSnapshotTableViewController ()
 
@@ -171,44 +171,6 @@
     }];
 }
 
-- (void)saveEditedVideoAtUrl:(NSURL *)mediaUrl start:(NSNumber *)start end:(NSNumber *)end {
-    int startMilliseconds = ([start doubleValue] * 1000);
-    int endMilliseconds = ([end doubleValue] * 1000);
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    
-    NSFileManager *manager = [NSFileManager defaultManager];
-    
-    NSString *outputURL = [documentsDirectory stringByAppendingPathComponent:@"output"] ;
-    [manager createDirectoryAtPath:outputURL withIntermediateDirectories:YES attributes:nil error:nil];
-    
-    outputURL = [outputURL stringByAppendingPathComponent:@"output.mp4"];
-    [manager removeItemAtPath:outputURL error:nil];
-    
-    AVURLAsset *videoAsset = [AVURLAsset URLAssetWithURL:mediaUrl options:nil];
-    
-    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:videoAsset presetName:AVAssetExportPresetHighestQuality];
-    exportSession.outputURL = [NSURL fileURLWithPath:outputURL];
-    exportSession.outputFileType = AVFileTypeQuickTimeMovie;
-    CMTimeRange timeRange = CMTimeRangeMake(CMTimeMake(startMilliseconds, 1000), CMTimeMake(endMilliseconds - startMilliseconds, 1000));
-    exportSession.timeRange = timeRange;
-    
-    [self startLoading];
-    [exportSession exportAsynchronouslyWithCompletionHandler:^{
-        switch (exportSession.status) {
-            case AVAssetExportSessionStatusCompleted:
-                [self endLoading];
-                [self addVideoToSnapshotAtUrl:exportSession.outputURL];
-                break;
-            default:
-                [self endLoading];
-                [self showVideoCopyAlert];
-                break;
-        }
-    }];
-}
-
 - (void)startLoading {
     self.navigationController.view.userInteractionEnabled = NO;
     
@@ -284,7 +246,16 @@
         NSNumber *start = [info objectForKey:@"_UIImagePickerControllerVideoEditingStart"];
         NSNumber *end = [info objectForKey:@"_UIImagePickerControllerVideoEditingEnd"];
         
-        [self saveEditedVideoAtUrl:mediaUrl start:start end:end];
+        [self startLoading];
+        
+        VideoEditor *editor = [[VideoEditor alloc] init];
+        [editor trimVideoAtUrl:mediaUrl start:start end:end completionBlock:^(NSURL *urlOfTrimmedVideo) {
+            [self addVideoToSnapshotAtUrl:urlOfTrimmedVideo];
+            [self endLoading];
+        } failureBlock:^(NSError *error) {
+            [self endLoading];
+            [self showVideoCopyAlert];
+        }];
     } else {
         [self addVideoToSnapshotAtUrl:mediaUrl];
     }
