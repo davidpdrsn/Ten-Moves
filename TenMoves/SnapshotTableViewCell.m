@@ -21,7 +21,7 @@
 
 - (void)setupProgressIndicator {
     self.progressIndicator.layer.cornerRadius = self.progressIndicator.frame.size.height/2;
-    self.progressIndicator.backgroundColor = [self.snapshot colorForProgressType];
+    [self setProgressIndicatorBackground];
 }
 
 - (void)setSnapshot:(Snapshot *)snapshot {
@@ -40,6 +40,15 @@
 - (void)setTintColor:(UIColor *)tintColor {
     [super setTintColor:tintColor];
     self.thumbnailImageView.tintColor = tintColor;
+}
+
+- (void)setProgressIndicatorBackground {
+    self.progressIndicator.backgroundColor = [self.snapshot colorForProgressType];
+}
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:highlighted animated:animated];
+    [self setProgressIndicatorBackground];
 }
 
 @end
