@@ -24,6 +24,8 @@
 
 @implementation MovesTableViewController
 
+#pragma mark - view life cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -38,14 +40,6 @@
     self.tableView.dataSource = self.dataSource;
     self.tableView.emptyDataSetDelegate = self.dataSource;
     self.tableView.emptyDataSetSource = self.dataSource;
-}
-
-- (void)enableOrDisableAddButton {
-    if ([self.dataSource totalNumberOfObjects] >= MAX_NUMBER_OF_MOVES) {
-        self.addButton.enabled = NO;
-    } else {
-        self.addButton.enabled = YES;
-    }
 }
 
 #pragma mark - segue
@@ -124,6 +118,16 @@
 
 - (void)arrayDataSourceDidChangeData:(ArrayDataSource *)arrayDataSource {
     [self enableOrDisableAddButton];
+}
+
+#pragma mark - misc helper methods
+
+- (void)enableOrDisableAddButton {
+    if ([self.dataSource totalNumberOfObjects] >= MAX_NUMBER_OF_MOVES) {
+        self.addButton.enabled = NO;
+    } else {
+        self.addButton.enabled = YES;
+    }
 }
 
 @end
