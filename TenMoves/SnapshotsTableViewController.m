@@ -31,6 +31,8 @@
 
 @synthesize formatter = __formatter;
 
+#pragma mark - view life cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -46,6 +48,8 @@
     [super viewWillAppear:animated];
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
 }
+
+#pragma mark - segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"AddSnapshot"]) {
@@ -82,6 +86,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - array datasource
+
 - (ArrayDataSource *)createDataSource {
     ConfigureCellBlock configureCell = ^UITableViewCell *(UITableViewCell *cell, Snapshot *snapshot) {
         SnapshotTableViewCell *snapshotCell = (SnapshotTableViewCell *)cell;
@@ -98,13 +104,6 @@
                                configureCellBlock:configureCell];
 }
 
-- (NSDateFormatter *)formatter {
-    if (__formatter) return __formatter;
-    __formatter = [[NSDateFormatter alloc] init];
-    [__formatter setDateStyle:NSDateFormatterMediumStyle];
-    return  __formatter;
-}
-
 #pragma mark - image view with snapshot delegate methods
 
 - (void)imageViewWithSnapshot:(ImageViewWithSnapshot *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
@@ -113,6 +112,15 @@
 
 - (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(ImageViewWithSnapshot *)imageView {
     [self dismissMoviePlayerViewControllerAnimated];
+}
+
+#pragma mark - misc helper methods
+
+- (NSDateFormatter *)formatter {
+    if (__formatter) return __formatter;
+    __formatter = [[NSDateFormatter alloc] init];
+    [__formatter setDateStyle:NSDateFormatterMediumStyle];
+    return  __formatter;
 }
 
 @end
