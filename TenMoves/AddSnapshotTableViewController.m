@@ -201,7 +201,7 @@
     double delta = -7;
     [self adjustCenterX:0 y:delta inView:label];
     [self adjustCenterX:0 y:delta inView:spinner];
-    [self adjustCenterX:0 y:-13 inView:self.loadingView];
+    [self adjustCenterX:0 y:-5 inView:self.loadingView];
 }
 
 - (void)adjustCenterX:(double)deltaX y:(double)deltaY inView:(UIView *)view {
