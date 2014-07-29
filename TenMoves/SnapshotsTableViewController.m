@@ -42,6 +42,11 @@
     self.tableView.dataSource = self.dataSource;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
