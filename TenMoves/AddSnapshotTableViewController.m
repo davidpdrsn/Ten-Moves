@@ -18,6 +18,7 @@
 #import "ALAssetsLibrary+HelperMethods.h"
 #import "Move.h"
 #import "VideoEditor.h"
+#import "LoadingView.h"
 
 @interface AddSnapshotTableViewController ()
 
@@ -28,7 +29,7 @@
 @property (weak, nonatomic) IBOutlet ProgressPickerButton *sameProgressView;
 @property (weak, nonatomic) IBOutlet ProgressPickerButton *regressionProgressView;
 
-@property (strong, nonatomic) UIView *loadingView;
+@property (strong, nonatomic) LoadingView *loadingView;
 
 @end
 
@@ -172,70 +173,13 @@
 }
 
 - (void)startLoading {
-    self.navigationController.view.userInteractionEnabled = NO;
-    
-    CGRect frame = CGRectMake(0, 0, 120, 120);
-    self.loadingView = [[UIView alloc] initWithFrame:frame];
-    self.loadingView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.75];
-    self.loadingView.layer.cornerRadius = 5;
-    
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    spinner.hidden = NO;
-    
-    [spinner startAnimating];
-    [self addViewCentered:spinner inSuperView:self.view];
-    
-    UILabel *label = [[UILabel alloc] init];
-    label.text = @"Importing";
-    label.font = [UIFont boldSystemFontOfSize:label.font.pointSize];
-    label.textColor = [UIColor whiteColor];
-    [label sizeToFit];
-    
-    [self addViewCentered:label inSuperView:self.loadingView];
-    
-    [self addViewCentered:spinner inSuperView:self.loadingView];
-    [self addViewCentered:self.loadingView inSuperView:self.navigationController.view];
-    
-    [self adjustCenterX:0 y:35 inView:label];
-    [self adjustCenterX:0 y:-5 inView:spinner];
-    double delta = -7;
-    [self adjustCenterX:0 y:delta inView:label];
-    [self adjustCenterX:0 y:delta inView:spinner];
-    [self adjustCenterX:0 y:-5 inView:self.loadingView];
-}
-
-- (void)adjustCenterX:(double)deltaX y:(double)deltaY inView:(UIView *)view {
-    view.center = CGPointMake(view.center.x+deltaX, view.center.y+deltaY);
-}
-
-- (void)addViewCentered:(UIView *)view inSuperView:(UIView *)superView {
-    [superView addSubview:view];
-    
-    CGRect oldFrame = view.bounds;
-    CGRect superFrame = superView.bounds;
-    
-    view.frame = CGRectMake(superFrame.size.width/2 - oldFrame.size.width/2,
-                            superFrame.size.height/2 - oldFrame.size.height/2,
-                            oldFrame.size.width, oldFrame.size.height);
+    self.loadingView = [[LoadingView alloc] init];
+    [self.navigationController.view addSubview:self.loadingView];
+    self.loadingView.hidden = NO;
 }
 
 - (void)endLoading {
-    [UIView animateWithDuration:.13 animations:^{
-        self.loadingView.frame = CGRectMake(self.loadingView.frame.origin.x,
-                                            self.loadingView.frame.origin.y - 20,
-                                            self.loadingView.frame.size.width,
-                                            self.loadingView.frame.size.height);
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:.4 animations:^{
-            self.loadingView.frame = CGRectMake(self.loadingView.frame.origin.x,
-                                                self.loadingView.frame.origin.y + self.view.frame.size.height*.75,
-                                                self.loadingView.frame.size.width,
-                                                self.loadingView.frame.size.height);
-        } completion:^(BOOL finished) {
-            [self.loadingView removeFromSuperview];
-            self.navigationController.view.userInteractionEnabled = YES;
-        }];
-    }];
+    self.loadingView.hidden = YES;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
