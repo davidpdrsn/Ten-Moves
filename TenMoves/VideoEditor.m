@@ -33,7 +33,7 @@
     
     AVURLAsset *videoAsset = [AVURLAsset URLAssetWithURL:url options:nil];
     
-    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:videoAsset presetName:AVAssetExportPresetHighestQuality];
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:videoAsset presetName:AVAssetExportPresetPassthrough];
     exportSession.outputURL = [NSURL fileURLWithPath:outputURL];
     exportSession.outputFileType = AVFileTypeQuickTimeMovie;
     CMTimeRange timeRange = CMTimeRangeMake(CMTimeMake(startMilliseconds, 1000), CMTimeMake(endMilliseconds - startMilliseconds, 1000));
