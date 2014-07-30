@@ -25,6 +25,7 @@ static NSString *ENTITY_NAME = @"Snapshot";
 @dynamic move;
 @dynamic image;
 @dynamic video;
+@dynamic notes;
 
 + (instancetype)newManagedObject {
     Snapshot *snapshot = (Snapshot *) [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME

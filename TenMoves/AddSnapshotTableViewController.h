@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AddSnapshotTableViewControllerDelegate.h"
 #import "ImageViewWithSnapshotDelegate.h"
+#import "JTSTextView.h"
 
 @class Snapshot;
 
@@ -17,7 +18,8 @@
     UIImagePickerControllerDelegate,
     UINavigationControllerDelegate,
     ImageViewWithSnapshotDelegate,
-    UIActionSheetDelegate
+    UIActionSheetDelegate,
+    JTSTextViewDelegate
 >
 
 @property (nonatomic, strong) id<AddSnapshotTableViewControllerDelegate> delegate;

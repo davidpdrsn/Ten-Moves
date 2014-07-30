@@ -26,6 +26,7 @@
 		8685E3BE196F6A9200A97585 /* AddSnapshotTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3BD196F6A9200A97585 /* AddSnapshotTableViewController.m */; };
 		86A3F26319712D7900E389A1 /* ArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A3F26219712D7900E389A1 /* ArrayDataSource.m */; };
 		86A3F2671971578900E389A1 /* Repository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A3F2661971578900E389A1 /* Repository.m */; };
+		86A50456198917AD00E3FC8A /* JTSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A50455198917AD00E3FC8A /* JTSTextView.m */; };
 		86ED30B4196F0F0F00FC738B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B3196F0F0F00FC738B /* Foundation.framework */; };
 		86ED30B6196F0F0F00FC738B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B5196F0F0F00FC738B /* CoreGraphics.framework */; };
 		86ED30B8196F0F0F00FC738B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B7196F0F0F00FC738B /* UIKit.framework */; };
@@ -104,6 +105,9 @@
 		86A3F26219712D7900E389A1 /* ArrayDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayDataSource.m; sourceTree = "<group>"; };
 		86A3F2651971578900E389A1 /* Repository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Repository.h; sourceTree = "<group>"; };
 		86A3F2661971578900E389A1 /* Repository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Repository.m; sourceTree = "<group>"; };
+		86A50454198917AD00E3FC8A /* JTSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTSTextView.h; sourceTree = "<group>"; };
+		86A50455198917AD00E3FC8A /* JTSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTSTextView.m; sourceTree = "<group>"; };
+		86A504581989276D00E3FC8A /* TenMoves 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 8.xcdatamodel"; sourceTree = "<group>"; };
 		86EA19C119846F8F007B4813 /* ImageViewWithSnapshotDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewWithSnapshotDelegate.h; sourceTree = "<group>"; };
 		86EA19C2198475FC007B4813 /* TenMoves 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 5.xcdatamodel"; sourceTree = "<group>"; };
 		86ED30B0196F0F0F00FC738B /* TenMoves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TenMoves.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +222,15 @@
 			name = DataSources;
 			sourceTree = "<group>";
 		};
+		86A50457198917B500E3FC8A /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				86A50454198917AD00E3FC8A /* JTSTextView.h */,
+				86A50455198917AD00E3FC8A /* JTSTextView.m */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
 		86D1380F1981B87700B32FC2 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +290,7 @@
 			children = (
 				865E4D441982737A0000CC30 /* Constants.h */,
 				865E4D451982737A0000CC30 /* Constants.m */,
+				86A50457198917B500E3FC8A /* Vendor */,
 				863B0EAB1984227800AAF919 /* Services */,
 				8679AFEF19804E9C00052C30 /* Protocols */,
 				8601299B19728FC90053C71D /* Categories */,
@@ -492,6 +506,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */,
+				86A50456198917AD00E3FC8A /* JTSTextView.m in Sources */,
 				86768810198526FA005679ED /* Snapshot.m in Sources */,
 				8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */,
 				86ED30F2196F193200FC738B /* AddMoveTableViewController.m in Sources */,
@@ -735,6 +750,7 @@
 		86ED30C7196F0F0F00FC738B /* TenMoves.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				86A504581989276D00E3FC8A /* TenMoves 8.xcdatamodel */,
 				8676881119852F52005679ED /* TenMoves 7.xcdatamodel */,
 				863B0EB0198426E500AAF919 /* TenMoves 3.xcdatamodel */,
 				866A0B6419842BD300FF11A6 /* TenMoves 4.xcdatamodel */,
@@ -743,7 +759,7 @@
 				865E4D43198265FB0000CC30 /* TenMoves 2.xcdatamodel */,
 				86ED30C8196F0F0F00FC738B /* TenMoves.xcdatamodel */,
 			);
-			currentVersion = 8676881119852F52005679ED /* TenMoves 7.xcdatamodel */;
+			currentVersion = 86A504581989276D00E3FC8A /* TenMoves 8.xcdatamodel */;
 			path = TenMoves.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

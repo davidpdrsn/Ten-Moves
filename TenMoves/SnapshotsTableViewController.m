@@ -66,7 +66,8 @@
         add.currentSnapshot = snapshot;
         add.delegate = self;
     } else if ([segue.identifier isEqualToString:@"showSnapshot"]) {
-//        Snapshot *snapshot = [self.dataSource itemAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        Snapshot *snapshot = [self.dataSource itemAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        NSLog(@"%@", snapshot.notes);
     }
 }
 

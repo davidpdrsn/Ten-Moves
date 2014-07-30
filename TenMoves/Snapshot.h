@@ -28,6 +28,7 @@ typedef enum {
 @property (nonatomic, retain) Move *move;
 @property (nonatomic, retain) SnapshotImage *image;
 @property (nonatomic, retain) SnapshotVideo *video;
+@property (nonatomic, retain) NSString *notes;
 
 + (instancetype)newManagedObject;
 + (NSFetchRequest *)fetchRequestForSnapshotsBelongingToMove:(Move *)move;

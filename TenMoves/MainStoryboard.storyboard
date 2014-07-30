@@ -222,6 +222,24 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Notes" id="sKq-Lh-QbB">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="88" id="u44-qg-59x">
+                                        <rect key="frame" x="0.0" y="342" width="320" height="88"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u44-qg-59x" id="vN2-7G-3VE">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Mje-g9-PDM" customClass="JTSTextView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </scrollView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="wiI-IE-4lp" id="aly-Ky-mZb"/>
@@ -246,6 +264,7 @@
                         <outlet property="progressCell" destination="la3-SE-8Al" id="Dvd-Yj-8xb"/>
                         <outlet property="regressionProgressView" destination="jus-tY-ZeZ" id="cKh-AZ-N8T"/>
                         <outlet property="sameProgressView" destination="KGO-mc-uwP" id="UCV-F1-WDZ"/>
+                        <outlet property="textView" destination="Mje-g9-PDM" id="UnU-oO-QYJ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J6w-Au-orM" userLabel="First Responder" sceneMemberID="firstResponder"/>

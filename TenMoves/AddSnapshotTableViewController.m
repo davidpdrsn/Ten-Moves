@@ -34,11 +34,21 @@
 
 @property (strong, nonatomic) LoadingView *loadingView;
 
+@property (weak, nonatomic) IBOutlet JTSTextView *textView;
+@property (assign, nonatomic) CGFloat initialTextViewHeight;
+
 @end
 
 @implementation AddSnapshotTableViewController
 
 #pragma mark - view life cycle
+
+- (void)configureTextView {
+    self.textView.textViewDelegate = self;
+    self.textView.automaticallyAdjustsContentInsetForKeyboard = NO;
+    self.initialTextViewHeight = self.textView.frame.size.height;
+    self.textView.textContainerInset = UIEdgeInsetsMake(7, 7, 7, 7);
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -68,6 +78,19 @@
     }
     
     [self updateActiveProgressPicker];
+    
+    [self configureTextView];
+    
+    UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEditing)];
+    [self.tableView addGestureRecognizer:tapper];
+}
+
+- (void)endEditing {
+    [self.tableView endEditing:YES];
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    [self endEditing];
 }
 
 #pragma mark - IBActions
@@ -259,9 +282,59 @@
 }
 
 - (void)updateActiveProgressPicker {
+    [self endEditing];
+    
     for (ProgressPickerButton *progressView in @[self.improvedProgressView, self.sameProgressView, self.regressionProgressView]) {
         BOOL shouldBeActive = self.currentSnapshot.progressTypeRaw == progressView.type;
         [progressView setActive:shouldBeActive];
+    }
+}
+
+#pragma mark - text view methods
+
+- (void)textViewDidBeginEditing:(JTSTextView *)textView {
+    if ([textView.text isEqualToString:@" "]) {
+        textView.text = @"";
+    }
+}
+
+- (void)textViewDidChange:(JTSTextView *)textView {
+    CGRect frame = textView.frame;
+    
+    if (textView.contentSize.height < self.initialTextViewHeight) {
+        frame.size.height = self.initialTextViewHeight;
+    } else {
+        frame.size.height = textView.contentSize.height;
+    }
+    
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+    
+    self.textView.frame = frame;
+    
+    [self tableViewScrollToBottomAnimated:YES];
+    
+    self.currentSnapshot.notes = textView.text;
+}
+
+- (void)tableViewScrollToBottomAnimated:(BOOL)animated {
+    NSInteger numberOfRows = [self.tableView numberOfRowsInSection:2];
+    if (numberOfRows) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:numberOfRows-1 inSection:2] atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2) {
+        CGFloat height = self.textView.contentSize.height;
+        
+        if (height < self.initialTextViewHeight) {
+            return self.initialTextViewHeight;
+        } else {
+            return height;
+        }
+    } else {
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
     }
 }
 
