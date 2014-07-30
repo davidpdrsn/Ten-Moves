@@ -23,6 +23,7 @@
 @interface AddSnapshotTableViewController ()
 
 @property (strong, nonatomic) ImageViewWithSnapshot *thumbnail;
+@property (assign, nonatomic) BOOL resizedButton;
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *progressCell;
 @property (weak, nonatomic) IBOutlet UIButton *pickVideoButton;
@@ -209,6 +210,15 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)resizeAddVideoButton:(int)offset size:(CGFloat)size {
+    CGRect currentFrame = self.pickVideoButton.frame;
+    CGFloat delta = size + offset*2;
+    self.pickVideoButton.frame = CGRectMake(currentFrame.origin.x + delta,
+                                            currentFrame.origin.y,
+                                            currentFrame.size.width - delta,
+                                            currentFrame.size.height);
+}
+
 - (void)showThumbnailOfVideo {
     int offset = 5;
     CGFloat size = self.pickVideoButton.superview.frame.size.height-offset*2;
@@ -218,6 +228,11 @@
     
     self.thumbnail.snapshot = self.currentSnapshot;
     self.thumbnail.delegate = self;
+    
+    if (!self.resizedButton) {
+        [self resizeAddVideoButton:offset size:size];
+        self.resizedButton = YES;
+    }
     
     [self.pickVideoButton.superview addSubview:self.thumbnail];
     [self.thumbnail awakeFromNib];
