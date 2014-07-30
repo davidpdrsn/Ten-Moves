@@ -43,7 +43,7 @@
 		86ED30DF196F0F1000FC738B /* TenMovesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30DE196F0F1000FC738B /* TenMovesTests.m */; };
 		86ED30EC196F114D00FC738B /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86ED30EB196F114D00FC738B /* MainStoryboard.storyboard */; };
 		86ED30EF196F120700FC738B /* MovesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30EE196F120700FC738B /* MovesTableViewController.m */; };
-		86ED30F2196F193200FC738B /* AddMoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30F1196F193200FC738B /* AddMoveViewController.m */; };
+		86ED30F2196F193200FC738B /* AddMoveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86ED30F1196F193200FC738B /* AddMoveTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,7 +90,7 @@
 		8676881219852FAF005679ED /* SnapshotVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotVideo.h; sourceTree = "<group>"; };
 		8676881319852FAF005679ED /* SnapshotVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotVideo.m; sourceTree = "<group>"; };
 		8679AFEE19804E9300052C30 /* ArrayDataSourceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayDataSourceDelegate.h; sourceTree = "<group>"; };
-		8679AFF019804EE500052C30 /* AddMoveViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMoveViewControllerDelegate.h; sourceTree = "<group>"; };
+		8679AFF019804EE500052C30 /* AddMoveTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMoveTableViewControllerDelegate.h; sourceTree = "<group>"; };
 		8679AFF119804F3000052C30 /* AddSnapshotTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSnapshotTableViewControllerDelegate.h; sourceTree = "<group>"; };
 		8685E3B2196F595E00A97585 /* Move.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Move.h; sourceTree = "<group>"; };
 		8685E3B3196F595E00A97585 /* Move.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Move.m; sourceTree = "<group>"; };
@@ -127,8 +127,8 @@
 		86ED30EB196F114D00FC738B /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		86ED30ED196F120700FC738B /* MovesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovesTableViewController.h; sourceTree = "<group>"; };
 		86ED30EE196F120700FC738B /* MovesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovesTableViewController.m; sourceTree = "<group>"; };
-		86ED30F0196F193200FC738B /* AddMoveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMoveViewController.h; sourceTree = "<group>"; };
-		86ED30F1196F193200FC738B /* AddMoveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMoveViewController.m; sourceTree = "<group>"; };
+		86ED30F0196F193200FC738B /* AddMoveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMoveTableViewController.h; sourceTree = "<group>"; };
+		86ED30F1196F193200FC738B /* AddMoveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMoveTableViewController.m; sourceTree = "<group>"; };
 		CE63772FF7C54DF5B88E07D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -185,7 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				86EA19C119846F8F007B4813 /* ImageViewWithSnapshotDelegate.h */,
-				8679AFF019804EE500052C30 /* AddMoveViewControllerDelegate.h */,
+				8679AFF019804EE500052C30 /* AddMoveTableViewControllerDelegate.h */,
 				8679AFF119804F3000052C30 /* AddSnapshotTableViewControllerDelegate.h */,
 				8679AFEE19804E9300052C30 /* ArrayDataSourceDelegate.h */,
 			);
@@ -325,8 +325,8 @@
 			children = (
 				8685E3BC196F6A9200A97585 /* AddSnapshotTableViewController.h */,
 				8685E3BD196F6A9200A97585 /* AddSnapshotTableViewController.m */,
-				86ED30F0196F193200FC738B /* AddMoveViewController.h */,
-				86ED30F1196F193200FC738B /* AddMoveViewController.m */,
+				86ED30F0196F193200FC738B /* AddMoveTableViewController.h */,
+				86ED30F1196F193200FC738B /* AddMoveTableViewController.m */,
 				86ED30ED196F120700FC738B /* MovesTableViewController.h */,
 				86ED30EE196F120700FC738B /* MovesTableViewController.m */,
 				8685E3B9196F60E200A97585 /* SnapshotsTableViewController.h */,
@@ -494,7 +494,7 @@
 				8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */,
 				86768810198526FA005679ED /* Snapshot.m in Sources */,
 				8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */,
-				86ED30F2196F193200FC738B /* AddMoveViewController.m in Sources */,
+				86ED30F2196F193200FC738B /* AddMoveTableViewController.m in Sources */,
 				8685E3B4196F595E00A97585 /* Move.m in Sources */,
 				8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */,
 				86405D681987D0D300136C9C /* VideoEditor.m in Sources */,

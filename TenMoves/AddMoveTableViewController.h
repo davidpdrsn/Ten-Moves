@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AddMoveViewControllerDelegate.h"
+#import "AddMoveTableViewControllerDelegate.h"
 
 @class Move;
 
-@interface AddMoveViewController : UIViewController <UITextFieldDelegate>
+@interface AddMoveTableViewController : UITableViewController <UITextFieldDelegate>
 
 @property (nonatomic, strong) Move *currentMove;
-@property (nonatomic, strong) id<AddMoveViewControllerDelegate> delegate;
+@property (nonatomic, strong) id<AddMoveTableViewControllerDelegate> delegate;
 
 @end

@@ -10,7 +10,7 @@
 
 @class Move;
 
-@protocol AddMoveViewControllerDelegate
+@protocol AddMoveTableViewControllerDelegate
 
 - (void)addMoveViewControllerDidSave;
 - (void)addMoveViewControllerDidCancel:(Move *)moveToDelete;

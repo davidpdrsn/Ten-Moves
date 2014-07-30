@@ -13,7 +13,7 @@
 
 @class Snapshot;
 @class Move;
-@class AddMoveViewController;
+@class AddMoveTableViewController;
 
 @interface SnapshotsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddSnapshotTableViewControllerDelegate, ImageViewWithSnapshotDelegate>
 

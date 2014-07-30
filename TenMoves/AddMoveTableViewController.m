@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 David Pedersen. All rights reserved.
 //
 
-#import "AddMoveViewController.h"
+#import "AddMoveTableViewController.h"
 #import "Move.h"
 
-@interface AddMoveViewController () {
+@interface AddMoveTableViewController () {
     UIBarButtonItem *addButton;
 }
 
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation AddMoveViewController
+@implementation AddMoveTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

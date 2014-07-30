@@ -12,7 +12,7 @@
 #import "SnapshotsTableViewController.h"
 #import "Repository.h"
 #import "Constants.h"
-#import "AddMoveViewController.h"
+#import "AddMoveTableViewController.h"
 #import "ArrayDataSource.h"
 
 @interface MovesTableViewController ()
@@ -57,7 +57,7 @@
     } else if ([segue.identifier isEqualToString:@"AddMove"]) {
         Move *move = [Move newManagedObject];
         UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
-        AddMoveViewController *add = (AddMoveViewController *)nav.topViewController;
+        AddMoveTableViewController *add = (AddMoveTableViewController *)nav.topViewController;
         add.currentMove = move;
         add.delegate = self;
     }

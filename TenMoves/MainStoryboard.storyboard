@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fdZ-9A-wJ3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fdZ-9A-wJ3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Moves-->
+        <!--Moves Table View Controller - Moves-->
         <scene sceneID="diZ-eT-x4E">
             <objects>
                 <tableViewController id="5LR-3t-n7x" customClass="MovesTableViewController" sceneMemberID="viewController">
@@ -56,7 +56,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="tmr-o6-BL7">
                             <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
-                                <segue destination="j5F-8J-PbX" kind="modal" identifier="AddMove" id="dbz-sO-qpv"/>
+                                <segue destination="cGj-6s-1db" kind="modal" identifier="AddMove" id="GqP-GM-bs0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -68,7 +68,7 @@
             </objects>
             <point key="canvasLocation" x="-871" y="-456"/>
         </scene>
-        <!--Snapshots-->
+        <!--Snapshots Table View Controller - Snapshots-->
         <scene sceneID="NPd-Yb-UYS">
             <objects>
                 <tableViewController id="3jC-hk-gaG" customClass="SnapshotsTableViewController" sceneMemberID="viewController">
@@ -159,7 +159,7 @@
             </objects>
             <point key="canvasLocation" x="177" y="-438"/>
         </scene>
-        <!--Add snapshot-->
+        <!--Add Snapshot Table View Controller - Add snapshot-->
         <scene sceneID="BPQ-X1-JxN">
             <objects>
                 <tableViewController storyboardIdentifier="AddSnapshotTableViewController" id="wiI-IE-4lp" customClass="AddSnapshotTableViewController" sceneMemberID="viewController">
@@ -266,57 +266,6 @@
             </objects>
             <point key="canvasLocation" x="601" y="-1196"/>
         </scene>
-        <!--Add Move-->
-        <scene sceneID="lcK-Ha-Rtw">
-            <objects>
-                <viewController storyboardIdentifier="AddMoveViewController" id="F53-gR-d7q" customClass="AddMoveViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nFa-kQ-Qnl"/>
-                        <viewControllerLayoutGuide type="bottom" id="zE4-Ac-0rC"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="A8b-Pq-g08">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hW0-eV-c95">
-                                <rect key="frame" x="20" y="89" width="46" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b5c-BX-7eV">
-                                <rect key="frame" x="74" y="85" width="226" height="30"/>
-                                <gestureRecognizers/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Add Move" id="V7q-eX-2e1">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XK5-mS-KLm">
-                            <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
-                            <connections>
-                                <action selector="cancel:" destination="F53-gR-d7q" id="rtC-OV-xvf"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="oA6-oV-yoa">
-                            <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
-                            <connections>
-                                <action selector="done:" destination="F53-gR-d7q" id="Aey-iC-Hnc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <connections>
-                        <outlet property="nameField" destination="b5c-BX-7eV" id="4AR-yE-fLr"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="svD-2n-slO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-361" y="-1203"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="zuJ-1d-axa">
             <objects>
@@ -335,24 +284,69 @@
             </objects>
             <point key="canvasLocation" x="-1391" y="-456"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="i4x-x7-5MG">
+        <!--Add Move Table View Controller - Add Move-->
+        <scene sceneID="pI4-QU-lJk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="j5F-8J-PbX" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oFf-lI-7CB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                <tableViewController id="Fma-3G-TG3" customClass="AddMoveTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Bw8-ph-FAN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
+                        <sections>
+                            <tableViewSection id="dNF-cM-KKA">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="yUv-pC-Ysl">
+                                        <rect key="frame" x="0.0" y="99" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yUv-pC-Ysl" id="PlI-6z-cqt">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K8D-J7-o8N">
+                                                    <rect key="frame" x="20" y="7" width="280" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="K8D-J7-o8N" secondAttribute="bottom" constant="6" id="dSB-NI-bJf"/>
+                                                <constraint firstItem="K8D-J7-o8N" firstAttribute="leading" secondItem="PlI-6z-cqt" secondAttribute="leading" constant="20" id="hmL-4M-Saq"/>
+                                                <constraint firstItem="K8D-J7-o8N" firstAttribute="top" secondItem="PlI-6z-cqt" secondAttribute="top" constant="7" id="wNd-QZ-INU"/>
+                                                <constraint firstAttribute="trailing" secondItem="K8D-J7-o8N" secondAttribute="trailing" constant="20" id="zhl-lF-d3x"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Fma-3G-TG3" id="z4p-Xj-0JS"/>
+                            <outlet property="delegate" destination="Fma-3G-TG3" id="Zka-X2-TX2"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Add Move" id="OgG-aq-hJG">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="7Sm-dl-l1q">
+                            <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
+                            <connections>
+                                <action selector="cancel:" destination="Fma-3G-TG3" id="lEc-Tk-hxR"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="YxL-ng-3fz">
+                            <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
+                            <connections>
+                                <action selector="done:" destination="Fma-3G-TG3" id="vVB-J6-aPd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <segue destination="F53-gR-d7q" kind="relationship" relationship="rootViewController" id="neF-ws-JtI"/>
+                        <outlet property="nameField" destination="K8D-J7-o8N" id="WHb-zN-b53"/>
                     </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dG1-h3-Jxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="40Z-i2-frb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-887" y="-1203"/>
+            <point key="canvasLocation" x="-454" y="-1216"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Fz2-v6-nAq">
@@ -373,13 +367,28 @@
             </objects>
             <point key="canvasLocation" x="75" y="-1196"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ccm-W4-tse">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cGj-6s-1db" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nuv-pC-6Jj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Fma-3G-TG3" kind="relationship" relationship="rootViewController" id="MJK-yk-MJA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ccs-sx-YaA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-980" y="-1216"/>
+        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4">
-            <size key="portraitSize" width="320" height="568"/>
-            <size key="landscapeSize" width="568" height="320"/>
-        </simulatedScreenMetrics>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
 </document>
