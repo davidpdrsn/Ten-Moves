@@ -24,8 +24,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    // TODO: why does the date label not show up?!
-    
     _backgroundColor = [self.tintColor colorWithAlphaComponent:0.5];
     
     self.overlay = [[UIView alloc] initWithFrame:self.bounds];
