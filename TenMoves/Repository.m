@@ -30,4 +30,17 @@ static NSManagedObjectContext *_managedObjectContext;
     completionHandler(error);
 }
 
++ (void)executeFetch:(NSFetchRequest *)request completionBlock:(void (^)(NSArray *results))completion failureBlock:(void (^)(NSError *error))failure {
+    [_managedObjectContext performBlock:^{
+        NSError *error;
+        NSArray *results = [_managedObjectContext executeFetchRequest:request error:&error];
+        
+        if (error) {
+            failure(error);
+        } else {
+            completion(results);
+        }
+    }];
+}
+
 @end

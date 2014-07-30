@@ -54,15 +54,15 @@
     [super viewDidLoad];
     
     [self.improvedProgressView setProgressType:SnapshotProgressImproved];
-    [self.improvedProgressView setLabelText:@"Better"];
+    [self.improvedProgressView setLabelText:[Snapshot textForProgressType:SnapshotProgressImproved]];
     [self.improvedProgressView setShowBorder:YES];
     
     [self.sameProgressView setProgressType:SnapshotProgressSame];
-    [self.sameProgressView setLabelText:@"Same"];
+    [self.sameProgressView setLabelText:[Snapshot textForProgressType:SnapshotProgressSame]];
     [self.sameProgressView setShowBorder:YES];
     
     [self.regressionProgressView setProgressType:SnapshotProgressRegressed];
-    [self.regressionProgressView setLabelText:@"Worse"];
+    [self.regressionProgressView setLabelText:[Snapshot textForProgressType:SnapshotProgressRegressed]];
     [self.regressionProgressView setShowBorder:NO];
     
     if ([self snapshotIsBaseline]) {
@@ -87,10 +87,6 @@
 
 - (void)endEditing {
     [self.tableView endEditing:YES];
-}
-
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    [self endEditing];
 }
 
 #pragma mark - IBActions

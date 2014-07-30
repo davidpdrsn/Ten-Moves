@@ -122,24 +122,71 @@
             </objects>
             <point key="canvasLocation" x="-361" y="-438"/>
         </scene>
-        <!--View Controller-->
+        <!--Show Snapshot View Controller-->
         <scene sceneID="Pav-hT-9le">
             <objects>
-                <viewController id="Rdj-AS-qii" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShowMoveViewController" id="Rdj-AS-qii" customClass="ShowSnapshotViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yWg-ji-MDh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not implemented yet..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VNu-Yo-SKg">
-                                <rect key="frame" x="20" y="273" width="280" height="21"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="da0-Bg-aIE" customClass="ImageViewWithSnapshot">
+                                <rect key="frame" x="0.0" y="74" width="113" height="113"/>
+                                <gestureRecognizers/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dTP-bT-tez">
+                                <rect key="frame" x="121" y="101" width="179" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" id="q43-vJ-Td2">
+                                <rect key="frame" x="121" y="140" width="20" height="20"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Ce-J8-qrM">
+                                <rect key="frame" x="149" y="139" width="151" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="2Nq-at-D1O">
+                                <rect key="frame" x="0.0" y="195" width="320" height="329"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="HkX-wv-m0b">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Newer" id="HFa-Nw-uvF">
+                                        <connections>
+                                            <action selector="prev:" destination="Rdj-AS-qii" id="v9e-PC-bCf"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="txn-bh-UxQ"/>
+                                    <barButtonItem title="Older" id="uZ8-sB-v1e">
+                                        <connections>
+                                            <action selector="next:" destination="Rdj-AS-qii" id="Q99-cx-SRe"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="mc5-Bv-7Nd"/>
+                    <connections>
+                        <outlet property="dateLabel" destination="dTP-bT-tez" id="9Bi-na-8EA"/>
+                        <outlet property="nextButton" destination="uZ8-sB-v1e" id="Vhu-nm-4g5"/>
+                        <outlet property="notesTextView" destination="2Nq-at-D1O" id="vjp-L5-jb1"/>
+                        <outlet property="prevButton" destination="HFa-Nw-uvF" id="6Jq-m1-BIo"/>
+                        <outlet property="progressCircle" destination="q43-vJ-Td2" id="PBe-R4-9mC"/>
+                        <outlet property="progressLabel" destination="8Ce-J8-qrM" id="m0H-hT-aVV"/>
+                        <outlet property="thumbnail" destination="da0-Bg-aIE" id="ZQo-gR-NiX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kd1-BE-aiJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

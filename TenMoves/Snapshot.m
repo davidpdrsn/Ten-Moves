@@ -72,6 +72,30 @@ static NSString *ENTITY_NAME = @"Snapshot";
     }
 }
 
++ (NSString *)textForProgressType:(SnapshotProgress)type {
+    switch (type) {
+        case SnapshotProgressImproved:
+            return @"Better";
+            break;
+        case SnapshotProgressSame:
+            return @"Same";
+            break;
+        case SnapshotProgressRegressed:
+            return @"Worse";
+            break;
+        case SnapshotProgressBaseline:
+            return @"Baseline";
+            break;
+        default:
+            // can't be reached
+            break;
+    }
+}
+
+- (NSString *)textForProgressType {
+    return [Snapshot textForProgressType:[self progressTypeRaw]];
+}
+
 - (void)awakeFromInsert {
     [super awakeFromInsert];
     

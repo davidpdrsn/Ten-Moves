@@ -16,6 +16,7 @@
 #import "Snapshot.h"
 #import "Move.h"
 #import "AddSnapshotTableViewController.h"
+#import "ShowSnapshotViewController.h"
 @import MediaPlayer;
 @import AssetsLibrary;
 @import AVFoundation;
@@ -67,7 +68,8 @@
         add.delegate = self;
     } else if ([segue.identifier isEqualToString:@"showSnapshot"]) {
         Snapshot *snapshot = [self.dataSource itemAtIndexPath:[self.tableView indexPathForSelectedRow]];
-        NSLog(@"%@", snapshot.notes);
+        ShowSnapshotViewController *destination = (ShowSnapshotViewController *)segue.destinationViewController;
+        destination.snapshot = snapshot;
     }
 }
 

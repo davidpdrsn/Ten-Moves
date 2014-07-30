@@ -32,11 +32,14 @@ typedef enum {
 
 + (instancetype)newManagedObject;
 + (NSFetchRequest *)fetchRequestForSnapshotsBelongingToMove:(Move *)move;
+
 + (UIColor *)colorForProgressType:(SnapshotProgress)type;
++ (NSString *)textForProgressType:(SnapshotProgress)type;
 
 - (SnapshotProgress)progressTypeRaw;
 - (void)setProgressTypeRaw:(SnapshotProgress)type;
 - (UIColor *)colorForProgressType;
+- (NSString *)textForProgressType;
 
 - (void)saveVideoAtFileUrl:(NSURL *)mediaUrl
             completionBlock:(void (^)())completionBlock

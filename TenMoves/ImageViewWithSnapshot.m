@@ -15,6 +15,8 @@
 @interface ImageViewWithSnapshot ()
 
 @property (strong, nonatomic) UIView *overlay;
+@property (strong, nonatomic) UIImageView *triangle;
+
 @property (strong, nonatomic) UIColor *backgroundColor;
 
 @end
@@ -26,20 +28,24 @@
     
     _backgroundColor = [self.tintColor colorWithAlphaComponent:0.5];
     
-    self.overlay = [[UIView alloc] initWithFrame:self.bounds];
-    [self updateBackground];
-    [self addSubview:self.overlay];
+    if (!self.overlay) {
+        self.overlay = [[UIView alloc] initWithFrame:self.bounds];
+        [self updateBackground];
+        [self addSubview:self.overlay];
+        
+        UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+        self.userInteractionEnabled = YES;
+        [self addGestureRecognizer:tapper];
+    }
     
-    CGFloat width = self.frame.size.height/3.0;
-    UIImageView *triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-    triangle.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2);
-    triangle.image = [UIImage imageNamed:@"triangle"];
-    
-    [self addSubview:triangle];
-    
-    UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
-    self.userInteractionEnabled = YES;
-    [self addGestureRecognizer:tapper];
+    if (!self.triangle) {
+        CGFloat width = self.frame.size.height/3.0;
+        self.triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+        self.triangle.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2);
+        self.triangle.image = [UIImage imageNamed:@"triangle"];
+        
+        [self addSubview:self.triangle];
+    }
     
     self.contentMode = UIViewContentModeScaleAspectFill;
     self.clipsToBounds = YES;

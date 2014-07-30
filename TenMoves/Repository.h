@@ -19,4 +19,6 @@ typedef void (^CompletionWithPossibleErrorBlock)(NSError *);
 
 + (void)saveWithCompletionHandler:(CompletionWithPossibleErrorBlock)completionHandler;
 
++ (void)executeFetch:(NSFetchRequest *)request completionBlock:(void (^)(NSArray *results))completion failureBlock:(void (^)(NSError *error))failure;
+
 @end
