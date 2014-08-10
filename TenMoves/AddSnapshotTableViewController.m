@@ -119,38 +119,42 @@
 
 - (IBAction)pickPhoto:(id)sender {
     if (!self.sheet) {
-        self.sheet = [[LPBlockActionSheet alloc] init];
-        
-        __weak AddSnapshotTableViewController *_self = self;
-        
-        [self.sheet setCancelButtonTitle:@"Cancel" block:nil];
-        
-        [self.sheet addButtonWithTitle:@"Take Video" block:^{
-            [_self startMediaBrowserFromViewController:_self usingDelegate:_self type:UIImagePickerControllerSourceTypeCamera];
-        }];
-        
-        [self.sheet addButtonWithTitle:@"Choose Existing" block:^{
-            [_self startMediaBrowserFromViewController:_self usingDelegate:_self type:UIImagePickerControllerSourceTypePhotoLibrary];
-        }];
-        
-        NSArray *progressViews = @[_self.sameProgressView, _self.improvedProgressView, _self.regressionProgressView];
-        
-        self.sheet.willPresentCallBack = ^{
-            for (ProgressPickerButton *progress in progressViews) {
-                [progress setEnabled:NO];
-            }
-        };
-        
-        self.sheet.willDismissCallBack = ^{
-            for (ProgressPickerButton *progress in progressViews) {
-                if (![_self snapshotIsBaseline]) {
-                    [progress setEnabled:YES];
-                }
-            }
-        };
+        [self configureActionSheet];
     }
     
     [self.sheet showInView:self.view];
+}
+
+- (void)configureActionSheet {
+    self.sheet = [[LPBlockActionSheet alloc] init];
+    
+    __weak AddSnapshotTableViewController *_self = self;
+    
+    [self.sheet setCancelButtonTitle:@"Cancel" block:nil];
+    
+    [self.sheet addButtonWithTitle:@"Take Video" block:^{
+        [_self startMediaBrowserFromViewController:_self usingDelegate:_self type:UIImagePickerControllerSourceTypeCamera];
+    }];
+    
+    [self.sheet addButtonWithTitle:@"Choose Existing" block:^{
+        [_self startMediaBrowserFromViewController:_self usingDelegate:_self type:UIImagePickerControllerSourceTypePhotoLibrary];
+    }];
+    
+    NSArray *progressViews = @[_self.sameProgressView, _self.improvedProgressView, _self.regressionProgressView];
+    
+    self.sheet.willPresentCallBack = ^{
+        for (ProgressPickerButton *progress in progressViews) {
+            [progress setEnabled:NO];
+        }
+    };
+    
+    self.sheet.willDismissCallBack = ^{
+        for (ProgressPickerButton *progress in progressViews) {
+            if (![_self snapshotIsBaseline]) {
+                [progress setEnabled:YES];
+            }
+        }
+    };
 }
 
 #pragma mark - table view
