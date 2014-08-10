@@ -19,6 +19,7 @@
 #import "Move.h"
 #import "VideoEditor.h"
 #import "LoadingView.h"
+#import "LPBlockActionSheet.h"
 
 @interface AddSnapshotTableViewController ()
 
@@ -36,6 +37,8 @@
 
 @property (weak, nonatomic) IBOutlet JTSTextView *textView;
 @property (assign, nonatomic) CGFloat initialTextViewHeight;
+
+@property (strong, nonatomic) LPBlockActionSheet *sheet;
 
 @end
 
@@ -115,41 +118,39 @@
 }
 
 - (IBAction)pickPhoto:(id)sender {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                       delegate:self
-                                              cancelButtonTitle:@"Cancel"
-                                         destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Take Video", @"Choose Existing", nil];
-    [sheet showInView:self.view];
-}
-
-#pragma mark - UIActionSheetDelegate
-
-- (void)willPresentActionSheet:(UIActionSheet *)actionSheet {
-    for (ProgressPickerButton *progress in @[self.sameProgressView, self.improvedProgressView, self.regressionProgressView]) {
-        [progress setEnabled:NO];
+    if (!self.sheet) {
+        self.sheet = [[LPBlockActionSheet alloc] init];
+        
+        __weak AddSnapshotTableViewController *_self = self;
+        
+        [self.sheet setCancelButtonTitle:@"Cancel" block:^{}];
+        
+        [self.sheet addButtonWithTitle:@"Take Video" block:^{
+            [_self startMediaBrowserFromViewController:_self usingDelegate:_self type:UIImagePickerControllerSourceTypeCamera];
+        }];
+        
+        [self.sheet addButtonWithTitle:@"Choose Existing" block:^{
+            [_self startMediaBrowserFromViewController:_self usingDelegate:_self type:UIImagePickerControllerSourceTypePhotoLibrary];
+        }];
+        
+        NSArray *progressViews = @[_self.sameProgressView, _self.improvedProgressView, _self.regressionProgressView];
+        
+        self.sheet.willPresentCallBack = ^{
+            for (ProgressPickerButton *progress in progressViews) {
+                [progress setEnabled:NO];
+            }
+        };
+        
+        self.sheet.willDismissCallBack = ^{
+            for (ProgressPickerButton *progress in progressViews) {
+                if (![_self snapshotIsBaseline]) {
+                    [progress setEnabled:YES];
+                }
+            }
+        };
     }
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex {
-    for (ProgressPickerButton *progress in @[self.sameProgressView, self.improvedProgressView, self.regressionProgressView]) {
-        [progress setEnabled:YES];
-    }
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    switch (buttonIndex) {
-        case 0:
-            [self startMediaBrowserFromViewController:self usingDelegate:self type:UIImagePickerControllerSourceTypeCamera];
-            break;
-            
-        case 1:
-            [self startMediaBrowserFromViewController:self usingDelegate:self type:UIImagePickerControllerSourceTypePhotoLibrary];
-            break;
-            
-        default:
-            break;
-    }
+    
+    [self.sheet showInView:self.view];
 }
 
 #pragma mark - table view
@@ -173,7 +174,6 @@
     
     UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
     mediaUI.sourceType = type;
-    mediaUI.view.tintColor = self.view.tintColor;
     mediaUI.mediaTypes = @[(NSString *)kUTTypeMovie];
     mediaUI.allowsEditing = YES;
     mediaUI.delegate = delegate;

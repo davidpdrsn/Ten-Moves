@@ -18,7 +18,6 @@
     UIImagePickerControllerDelegate,
     UINavigationControllerDelegate,
     ImageViewWithSnapshotDelegate,
-    UIActionSheetDelegate,
     JTSTextViewDelegate
 >
 
