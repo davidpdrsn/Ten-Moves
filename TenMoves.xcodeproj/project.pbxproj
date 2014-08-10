@@ -28,7 +28,7 @@
 		86A3F2671971578900E389A1 /* Repository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A3F2661971578900E389A1 /* Repository.m */; };
 		86A50456198917AD00E3FC8A /* JTSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A50455198917AD00E3FC8A /* JTSTextView.m */; };
 		86A5045B1989294800E3FC8A /* ShowSnapshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A5045A1989294800E3FC8A /* ShowSnapshotViewController.m */; };
-		86CE5B36199767DC00D34095 /* LPBlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CE5B35199767DC00D34095 /* LPBlockActionSheet.m */; };
+		86CE5B3C1997709700D34095 /* LPBlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CE5B3B1997709700D34095 /* LPBlockActionSheet.m */; };
 		86ED30B4196F0F0F00FC738B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B3196F0F0F00FC738B /* Foundation.framework */; };
 		86ED30B6196F0F0F00FC738B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B5196F0F0F00FC738B /* CoreGraphics.framework */; };
 		86ED30B8196F0F0F00FC738B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86ED30B7196F0F0F00FC738B /* UIKit.framework */; };
@@ -112,8 +112,8 @@
 		86A504581989276D00E3FC8A /* TenMoves 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 8.xcdatamodel"; sourceTree = "<group>"; };
 		86A504591989294800E3FC8A /* ShowSnapshotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowSnapshotViewController.h; sourceTree = "<group>"; };
 		86A5045A1989294800E3FC8A /* ShowSnapshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowSnapshotViewController.m; sourceTree = "<group>"; };
-		86CE5B34199767DC00D34095 /* LPBlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPBlockActionSheet.h; path = ../LPBlockActionSheet.h; sourceTree = "<group>"; };
-		86CE5B35199767DC00D34095 /* LPBlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPBlockActionSheet.m; path = ../LPBlockActionSheet.m; sourceTree = "<group>"; };
+		86CE5B3A1997709700D34095 /* LPBlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBlockActionSheet.h; sourceTree = "<group>"; };
+		86CE5B3B1997709700D34095 /* LPBlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBlockActionSheet.m; sourceTree = "<group>"; };
 		86EA19C119846F8F007B4813 /* ImageViewWithSnapshotDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewWithSnapshotDelegate.h; sourceTree = "<group>"; };
 		86EA19C2198475FC007B4813 /* TenMoves 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 5.xcdatamodel"; sourceTree = "<group>"; };
 		86ED30B0196F0F0F00FC738B /* TenMoves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TenMoves.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,8 +183,8 @@
 		863B0EAB1984227800AAF919 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				86CE5B34199767DC00D34095 /* LPBlockActionSheet.h */,
-				86CE5B35199767DC00D34095 /* LPBlockActionSheet.m */,
+				86CE5B3A1997709700D34095 /* LPBlockActionSheet.h */,
+				86CE5B3B1997709700D34095 /* LPBlockActionSheet.m */,
 				86405D661987D0D300136C9C /* VideoEditor.h */,
 				86405D671987D0D300136C9C /* VideoEditor.m */,
 				86A3F2651971578900E389A1 /* Repository.h */,
@@ -540,7 +540,7 @@
 				86ED30EF196F120700FC738B /* MovesTableViewController.m in Sources */,
 				86405D6B1987E1CC00136C9C /* LoadingView.m in Sources */,
 				865E4D461982737A0000CC30 /* Constants.m in Sources */,
-				86CE5B36199767DC00D34095 /* LPBlockActionSheet.m in Sources */,
+				86CE5B3C1997709700D34095 /* LPBlockActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,7 +664,7 @@
 				GCC_PREFIX_HEADER = "TenMoves/TenMoves-Prefix.pch";
 				INFOPLIST_FILE = "TenMoves/TenMoves-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2A56BF19-BACA-4627-AE86-035FF6F2A964";
+				PROVISIONING_PROFILE = "C1434404-5E1C-4A6A-A46D-D44D0130DCE3";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -681,7 +681,7 @@
 				GCC_PREFIX_HEADER = "TenMoves/TenMoves-Prefix.pch";
 				INFOPLIST_FILE = "TenMoves/TenMoves-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2A56BF19-BACA-4627-AE86-035FF6F2A964";
+				PROVISIONING_PROFILE = "C1434404-5E1C-4A6A-A46D-D44D0130DCE3";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
