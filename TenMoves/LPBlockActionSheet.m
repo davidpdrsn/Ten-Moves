@@ -42,17 +42,17 @@
 
 - (void)setDesctructiveButtonTitle:(NSString *)title block:(void (^)())block {
     self.destructiveButtonTitle = title;
-    self.destructiveBlock = block;
+    self.destructiveBlock = (block) ? block : ^{};
 }
 
 - (void)setCancelButtonTitle:(NSString *)title block:(void (^)())block {
     self.cancelButtonTitle = title;
-    self.cancelBlock = block;
+    self.cancelBlock = (block) ? block : ^{};
 }
 
 - (void)addButtonWithTitle:(NSString *)title block:(void (^)())block {
     [self.buttonTitles addObject:title];
-    [self.buttonBlocks addObject:block];
+    [self.buttonBlocks addObject:((block) ? block : ^{})];
 }
 
 - (void)showInView:(UIView *)view {

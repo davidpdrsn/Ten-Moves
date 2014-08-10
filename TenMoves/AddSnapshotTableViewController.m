@@ -123,7 +123,7 @@
         
         __weak AddSnapshotTableViewController *_self = self;
         
-        [self.sheet setCancelButtonTitle:@"Cancel" block:^{}];
+        [self.sheet setCancelButtonTitle:@"Cancel" block:nil];
         
         [self.sheet addButtonWithTitle:@"Take Video" block:^{
             [_self startMediaBrowserFromViewController:_self usingDelegate:_self type:UIImagePickerControllerSourceTypeCamera];
