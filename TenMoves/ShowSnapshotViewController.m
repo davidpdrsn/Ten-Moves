@@ -60,7 +60,7 @@
     
     self.progressLabel.text = [self.snapshot textForProgressType];
     
-    if (self.snapshot.notes) {
+    if ([self.snapshot hasNotes]) {
         self.notesTextView.text = self.snapshot.notes;
         self.notesTextView.textColor = [UIColor blackColor];
     } else {

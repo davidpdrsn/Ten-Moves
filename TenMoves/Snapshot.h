@@ -45,4 +45,6 @@ typedef enum {
             completionBlock:(void (^)())completionBlock
                failureBlock:(void (^)(NSError *error))failureBlock;
 
+- (BOOL)hasNotes;
+
 @end

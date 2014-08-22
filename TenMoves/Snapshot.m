@@ -147,4 +147,11 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return thumbnail;
 }
 
+- (BOOL)hasNotes {
+    NSCharacterSet *set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    BOOL noteIsBlank = [self.notes stringByTrimmingCharactersInSet: set].length == 0;
+    
+    return self.notes.length && !noteIsBlank;
+}
+
 @end
