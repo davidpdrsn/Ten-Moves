@@ -18,7 +18,6 @@
 #import "ALAssetsLibrary+HelperMethods.h"
 #import "Move.h"
 #import "VideoEditor.h"
-#import "LoadingView.h"
 #import "LPBlockActionSheet.h"
 
 @interface AddSnapshotTableViewController ()
@@ -32,8 +31,6 @@
 @property (weak, nonatomic) IBOutlet ProgressPickerButton *improvedProgressView;
 @property (weak, nonatomic) IBOutlet ProgressPickerButton *sameProgressView;
 @property (weak, nonatomic) IBOutlet ProgressPickerButton *regressionProgressView;
-
-@property (strong, nonatomic) LoadingView *loadingView;
 
 @property (weak, nonatomic) IBOutlet JTSTextView *textView;
 @property (assign, nonatomic) CGFloat initialTextViewHeight;
@@ -191,21 +188,10 @@
 
 - (void)addVideoToSnapshotAtUrl:(NSURL *)mediaUrl {
     [self.currentSnapshot saveVideoAtFileUrl:mediaUrl completionBlock:^{
-        [self.pickVideoButton setTitle:@"Add different video" forState:UIControlStateNormal];
         [self showThumbnailOfVideo];
     } failureBlock:^(NSError *error) {
         [self showVideoCopyAlert];
     }];
-}
-
-- (void)startLoading {
-    self.loadingView = [[LoadingView alloc] init];
-    [self.navigationController.view addSubview:self.loadingView];
-    self.loadingView.hidden = NO;
-}
-
-- (void)endLoading {
-    self.loadingView.hidden = YES;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -216,14 +202,10 @@
         NSNumber *start = [info objectForKey:@"_UIImagePickerControllerVideoEditingStart"];
         NSNumber *end = [info objectForKey:@"_UIImagePickerControllerVideoEditingEnd"];
         
-        [self startLoading];
-        
         VideoEditor *editor = [[VideoEditor alloc] init];
         [editor trimVideoAtUrl:mediaUrl start:start end:end completionBlock:^(NSURL *urlOfTrimmedVideo) {
             [self addVideoToSnapshotAtUrl:urlOfTrimmedVideo];
-            [self endLoading];
         } failureBlock:^(NSError *error) {
-            [self endLoading];
             [self showVideoCopyAlert];
         }];
     } else {
@@ -252,13 +234,21 @@
     self.thumbnail.snapshot = self.currentSnapshot;
     self.thumbnail.delegate = self;
     
-    if (!self.resizedButton) {
-        [self resizeAddVideoButton:offset size:size];
-        self.resizedButton = YES;
-    }
-    
     [self.pickVideoButton.superview addSubview:self.thumbnail];
+    
     [self.thumbnail awakeFromNib];
+    
+    if (!self.resizedButton) {
+        self.resizedButton = YES;
+        
+        CGPoint destination = self.thumbnail.center;
+        self.thumbnail.center = CGPointMake(self.thumbnail.center.x-(self.thumbnail.frame.size.width+offset), self.thumbnail.center.y);
+        
+        [UIView animateWithDuration:.5 delay:.5 usingSpringWithDamping:.5 initialSpringVelocity:20 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.thumbnail.center = destination;
+            [self resizeAddVideoButton:offset size:size];
+        } completion:nil];
+    }
 }
 
 #pragma mark - ImageViewSnapshot delegate methods
