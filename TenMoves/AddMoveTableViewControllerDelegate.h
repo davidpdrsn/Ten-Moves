@@ -13,6 +13,7 @@
 @protocol AddMoveTableViewControllerDelegate
 
 - (void)addMoveViewControllerDidSave;
+- (void)dismissAddMoveViewController;
 - (void)addMoveViewControllerDidCancel:(Move *)moveToDelete;
 
 @end

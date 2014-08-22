@@ -40,6 +40,16 @@
     self.tableView.dataSource = self.dataSource;
     self.tableView.emptyDataSetDelegate = self.dataSource;
     self.tableView.emptyDataSetSource = self.dataSource;
+    
+    self.editButtonItem.tintColor = self.view.tintColor;
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    self.tableView.allowsSelectionDuringEditing = YES;
+    
+    self.tableView.delegate = self;
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
 }
 
 -  (void)viewWillAppear:(BOOL)animated {
@@ -49,17 +59,32 @@
 
 #pragma mark - segue
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableView.isEditing) {
+        [self performSegueWithIdentifier:@"editMove" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"showSnapshots" sender:self];
+    }
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    BOOL isEditingSegue = [segue.identifier isEqualToString:@"editMove"];
+    
     if ([segue.identifier isEqualToString:@"showSnapshots"]) {
         SnapshotsTableViewController *destination = (SnapshotsTableViewController *) segue.destinationViewController;
         Move *move = [self.dataSource itemAtIndexPath:[self.tableView indexPathForSelectedRow]];
         destination.move = move;
-    } else if ([segue.identifier isEqualToString:@"AddMove"]) {
-        Move *move = [Move newManagedObject];
+    } else if ([segue.identifier isEqualToString:@"AddMove"] || isEditingSegue) {
         UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
         AddMoveTableViewController *add = (AddMoveTableViewController *)nav.topViewController;
-        add.currentMove = move;
         add.delegate = self;
+        
+        if (isEditingSegue) {
+            add.editingMove = YES;
+            add.currentMove = (Move *)[self.dataSource itemAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        } else {
+            add.currentMove = [Move newManagedObject];
+        }
     }
 }
 
@@ -75,7 +100,7 @@
                                                   otherButtonTitles:nil];
             [alert show];
         } else {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self dismissAddMoveViewController];
         }
     }];
     
@@ -84,14 +109,21 @@
 
 - (void)addMoveViewControllerDidCancel:(Move *)moveToDelete {
     [Repository deleteObject:moveToDelete];
+    [self dismissAddMoveViewController];
+}
+
+- (void)dismissAddMoveViewController {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - array data source delegate
 
 - (ArrayDataSource *)createDataSource {
     ConfigureCellBlock configureCell = ^UITableViewCell *(UITableViewCell *cell, Move *move) {
         MoveTableViewCell *moveCell = (MoveTableViewCell *)cell;
         moveCell.nameLabel.text = move.name;
         moveCell.countLabel.text = [NSString stringWithFormat:@"%i", (int)move.snapshots.count];
+        moveCell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -104,8 +136,6 @@
                                    cellIdentifier:@"Move"
                                configureCellBlock:configureCell];
 }
-
-#pragma mark - array data source delegate
 
 - (NSString *)arrayDataSource:(ArrayDataSource *)arrayDataSource textForFooterView:(NSArray *)objects {
     if (objects.count == 0) {

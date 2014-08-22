@@ -39,7 +39,6 @@
                                 <connections>
                                     <outlet property="countLabel" destination="9yz-Za-0fR" id="MVk-zX-eHD"/>
                                     <outlet property="nameLabel" destination="ukn-ZS-1R2" id="frU-cC-lNz"/>
-                                    <segue destination="3jC-hk-gaG" kind="push" identifier="showSnapshots" id="g4j-Bb-R8y"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -58,6 +57,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="tmr-o6-BL7" id="epW-as-Rtn"/>
+                        <segue destination="cGj-6s-1db" kind="modal" identifier="editMove" id="Y3l-Y7-ArY"/>
+                        <segue destination="3jC-hk-gaG" kind="push" identifier="showSnapshots" id="mUS-vH-G5l"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nNP-bd-A4k" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -379,7 +380,7 @@
                                 <action selector="cancel:" destination="Fma-3G-TG3" id="lEc-Tk-hxR"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="YxL-ng-3fz">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="YxL-ng-3fz">
                             <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="done:" destination="Fma-3G-TG3" id="vVB-J6-aPd"/>
@@ -437,4 +438,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Y3l-Y7-ArY"/>
+    </inferredMetricsTieBreakers>
 </document>

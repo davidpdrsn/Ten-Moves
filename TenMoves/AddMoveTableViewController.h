@@ -16,4 +16,6 @@
 @property (nonatomic, strong) Move *currentMove;
 @property (nonatomic, strong) id<AddMoveTableViewControllerDelegate> delegate;
 
+@property (nonatomic, assign) BOOL editingMove;
+
 @end

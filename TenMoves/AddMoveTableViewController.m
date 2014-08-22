@@ -23,6 +23,10 @@
     [super viewDidLoad];
     
     [self setupNameField];
+    
+    if (self.editingMove) {
+        self.title = @"Edit move";
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -32,7 +36,7 @@
 #pragma mark - setup view elements
 
 - (void)setupNameField {
-    self.nameField.text = [self.currentMove name];
+    self.nameField.text = self.currentMove.name;
     self.nameField.delegate = self;
 }
 
@@ -47,7 +51,11 @@
 }
 
 - (IBAction)cancel:(id)sender {
-    [self.delegate addMoveViewControllerDidCancel:self.currentMove];
+    if (self.editingMove) {
+        [self.delegate dismissAddMoveViewController];
+    } else {
+        [self.delegate addMoveViewControllerDidCancel:self.currentMove];
+    }
 }
 
 #pragma mark - text field delegate

@@ -28,4 +28,16 @@
     // Configure the view for the selected state
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    
+    [UIView animateWithDuration:.25 animations:^{
+        if (editing) {
+            self.countLabel.layer.opacity = 0;
+        } else {
+            self.countLabel.layer.opacity = 1;
+        }
+    }];
+}
+
 @end
