@@ -41,11 +41,17 @@
     
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
         switch (exportSession.status) {
-            case AVAssetExportSessionStatusCompleted:
-                completionBlock(exportSession.outputURL);
+            case AVAssetExportSessionStatusCompleted: {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completionBlock(exportSession.outputURL);
+                });
+            }
                 break;
-            default:
-                failureBlock(exportSession.error);
+            default: {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    failureBlock(exportSession.error);
+                });
+            }
                 break;
         }
     }];
