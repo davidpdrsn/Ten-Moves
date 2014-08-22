@@ -48,23 +48,35 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return fetchRequest;
 }
 
-+(NSSet *)keyPathsForValuesAffectingItemTypeRaw {
++ (NSSet *)keyPathsForValuesAffectingItemTypeRaw {
     return [NSSet setWithObject:@"progress"];
 }
 
-+ (UIColor *)colorForProgressType:(SnapshotProgress)type {
++ (NSDictionary *)propertiesForProgressType:(SnapshotProgress)type {
     switch (type) {
         case SnapshotProgressImproved:
-            return [UIColor colorWithRed:0.225 green:0.848 blue:0.423 alpha:1.000];
+            return @{
+              @"color": [UIColor colorWithRed:0.225 green:0.848 blue:0.423 alpha:1.000],
+              @"text": @"Better"
+              };
             break;
         case SnapshotProgressSame:
-            return [UIColor colorWithRed:1.000 green:0.780 blue:0.153 alpha:1.000];
+            return @{
+              @"color": [UIColor colorWithRed:1.000 green:0.780 blue:0.153 alpha:1.000],
+              @"text": @"Same"
+              };
             break;
         case SnapshotProgressRegressed:
-            return [UIColor colorWithRed:0.945 green:0.233 blue:0.221 alpha:1.000];
+            return @{
+              @"color": [UIColor colorWithRed:0.945 green:0.233 blue:0.221 alpha:1.000],
+              @"text": @"Worse"
+              };
             break;
         case SnapshotProgressBaseline:
-            return [UIColor colorWithRed:0.707 green:0.775 blue:0.785 alpha:1.000];
+            return @{
+              @"color": [UIColor colorWithRed:0.707 green:0.775 blue:0.785 alpha:1.000],
+              @"text": @"Baseline"
+              };
             break;
         default:
             // can't be reached
@@ -72,24 +84,12 @@ static NSString *ENTITY_NAME = @"Snapshot";
     }
 }
 
++ (UIColor *)colorForProgressType:(SnapshotProgress)type {
+    return [self propertiesForProgressType:type][@"color"];
+}
+
 + (NSString *)textForProgressType:(SnapshotProgress)type {
-    switch (type) {
-        case SnapshotProgressImproved:
-            return @"Better";
-            break;
-        case SnapshotProgressSame:
-            return @"Same";
-            break;
-        case SnapshotProgressRegressed:
-            return @"Worse";
-            break;
-        case SnapshotProgressBaseline:
-            return @"Baseline";
-            break;
-        default:
-            // can't be reached
-            break;
-    }
+    return [self propertiesForProgressType:type][@"text"];
 }
 
 - (NSString *)textForProgressType {
