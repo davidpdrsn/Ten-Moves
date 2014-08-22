@@ -28,4 +28,6 @@ typedef UITableViewCell* (^ConfigureCellBlock)(UITableViewCell *cell, id item);
 
 - (NSUInteger)totalNumberOfObjects;
 
+- (void)reload;
+
 @end

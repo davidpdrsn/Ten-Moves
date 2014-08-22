@@ -92,6 +92,7 @@
 - (void)addSnapshotTableViewControllerDidCancel:(Snapshot *)snapshotToDelete {
     [self.move removeSnapshotsObject:snapshotToDelete];
     [Repository deleteObject:snapshotToDelete];
+    [self.dataSource reload];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

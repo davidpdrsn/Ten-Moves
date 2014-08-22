@@ -20,6 +20,15 @@
 
 @implementation ArrayDataSource
 
+- (void)reload {
+    NSError *error;
+    if (![_fetchedResultsController performFetch:&error]) {
+        NSLog(@"Error - %@", [error userInfo]);
+    }
+    
+    [self.table reloadData];
+}
+
 - (instancetype)initWithItems:(NSFetchRequest *)fetchRequest
                cellIdentifier:(NSString *)cellIdentifier
            configureCellBlock:(ConfigureCellBlock)configureCellBlock {
@@ -32,10 +41,7 @@
         
         _fetchedResultsController.delegate = self;
         
-        NSError *error;
-        if (![_fetchedResultsController performFetch:&error]) {
-            NSLog(@"Error - %@", [error userInfo]);
-        }
+        [self reload];
     }
     return self;
 }
