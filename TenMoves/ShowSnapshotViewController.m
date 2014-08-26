@@ -12,6 +12,7 @@
 #import "ImageViewWithSnapshot.h"
 #import "Repository.h"
 #import "NSDate+Helpers.h"
+#import "AddSnapshotTableViewController.h"
 
 @interface ShowSnapshotViewController ()
 
@@ -141,6 +142,30 @@
 
 - (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(ImageViewWithSnapshot *)imageView {
     [self dismissMoviePlayerViewControllerAnimated];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"editSnapshot"]) {
+        UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
+        AddSnapshotTableViewController *add = (AddSnapshotTableViewController *)nav.topViewController;
+        add.currentSnapshot = self.snapshot;
+        add.delegate = self;
+        add.editingSnapshot = YES;
+    }
+}
+
+- (void)addSnapshotTableViewControllerDidSave {
+    [Repository saveWithCompletionHandler:nil];
+    [self dismissAddSnapshotTableViewController];
+}
+
+- (void)addSnapshotTableViewControllerDidCancel:(Snapshot *)snapshotToDelete {
+    [self dismissAddSnapshotTableViewController];
+}
+
+- (void)dismissAddSnapshotTableViewController {
+    [self viewDidLoad];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

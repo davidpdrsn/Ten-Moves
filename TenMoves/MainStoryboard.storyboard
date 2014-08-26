@@ -178,7 +178,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="mc5-Bv-7Nd"/>
+                    <navigationItem key="navigationItem" id="mc5-Bv-7Nd">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="wSG-oL-48h">
+                            <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
+                            <connections>
+                                <segue destination="Ngb-hy-wIt" kind="modal" identifier="editSnapshot" id="i0l-NV-oKI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="dateLabel" destination="dTP-bT-tez" id="9Bi-na-8EA"/>
                         <outlet property="nextButton" destination="uZ8-sB-v1e" id="Vhu-nm-4g5"/>
@@ -300,7 +307,7 @@
                                 <action selector="cancel:" destination="wiI-IE-4lp" id="GxA-36-jeI"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="quI-vM-hOA">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="quI-vM-hOA">
                             <connections>
                                 <action selector="done:" destination="wiI-IE-4lp" id="kDf-7F-OMd"/>
                             </connections>
@@ -439,6 +446,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="i0l-NV-oKI"/>
         <segue reference="Y3l-Y7-ArY"/>
     </inferredMetricsTieBreakers>
 </document>

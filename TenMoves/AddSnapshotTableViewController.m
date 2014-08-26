@@ -32,6 +32,9 @@
 @property (weak, nonatomic) IBOutlet ProgressPickerButton *sameProgressView;
 @property (weak, nonatomic) IBOutlet ProgressPickerButton *regressionProgressView;
 
+@property (assign, nonatomic) SnapshotProgress selectedProgress;
+@property (strong, nonatomic) NSURL *urlOfSelectedVideo;
+
 @property (weak, nonatomic) IBOutlet JTSTextView *textView;
 @property (assign, nonatomic) CGFloat initialTextViewHeight;
 
@@ -42,13 +45,6 @@
 @implementation AddSnapshotTableViewController
 
 #pragma mark - view life cycle
-
-- (void)configureTextView {
-    self.textView.textViewDelegate = self;
-    self.textView.automaticallyAdjustsContentInsetForKeyboard = NO;
-    self.initialTextViewHeight = self.textView.frame.size.height;
-    self.textView.textContainerInset = UIEdgeInsetsMake(7, 7, 7, 7);
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -74,7 +70,11 @@
         
         self.progressCell.userInteractionEnabled = NO;
     } else {
-        [self.currentSnapshot setProgressTypeRaw:SnapshotProgressImproved];
+        self.selectedProgress = (self.currentSnapshot.progressTypeRaw == SnapshotProgressBaseline) ?
+                                SnapshotProgressImproved :
+                                self.currentSnapshot.progressTypeRaw;
+        
+        [self updateActiveProgressPicker];
     }
     
     [self updateActiveProgressPicker];
@@ -83,6 +83,14 @@
     
     UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEditing)];
     [self.tableView addGestureRecognizer:tapper];
+    
+    if (self.currentSnapshot.video) {
+        [self showThumbnailOfVideoAnimated:NO];
+    }
+    
+    if (self.editingSnapshot) {
+        self.title = @"Edit snapshot";
+    }
 }
 
 - (void)endEditing {
@@ -91,26 +99,34 @@
 
 #pragma mark - IBActions
 
+// TODO: remove duplication
 - (IBAction)improvedTapped:(ProgressPickerButton *)sender {
-    [self.currentSnapshot setProgressTypeRaw:sender.type];
+    self.selectedProgress = sender.type;
     [self updateActiveProgressPicker];
 }
 
 - (IBAction)sameTapped:(ProgressPickerButton *)sender {
-    [self.currentSnapshot setProgressTypeRaw:sender.type];
+    self.selectedProgress = sender.type;
     [self updateActiveProgressPicker];
 }
 
 - (IBAction)regressedTapped:(ProgressPickerButton *)sender {
-    [self.currentSnapshot setProgressTypeRaw:sender.type];
+    self.selectedProgress = sender.type;
     [self updateActiveProgressPicker];
 }
 
 - (IBAction)cancel:(id)sender {
-    [self.delegate addSnapshotTableViewControllerDidCancel:self.currentSnapshot];
+    if (self.editingSnapshot) {
+        [self.delegate dismissAddSnapshotTableViewController];
+    } else {
+        [self.delegate addSnapshotTableViewControllerDidCancel:self.currentSnapshot];
+    }
 }
 
 - (IBAction)done:(id)sender {
+    self.currentSnapshot.notes = self.textView.text;
+    [self.currentSnapshot setProgressTypeRaw:self.selectedProgress];
+    
     [self.delegate addSnapshotTableViewControllerDidSave];
 }
 
@@ -188,7 +204,7 @@
 
 - (void)addVideoToSnapshotAtUrl:(NSURL *)mediaUrl {
     [self.currentSnapshot saveVideoAtFileUrl:mediaUrl completionBlock:^{
-        [self showThumbnailOfVideo];
+        [self showThumbnailOfVideoAnimated:YES];
     } failureBlock:^(NSError *error) {
         [self showVideoCopyAlert];
     }];
@@ -205,11 +221,13 @@
         VideoEditor *editor = [[VideoEditor alloc] init];
         [editor trimVideoAtUrl:mediaUrl start:start end:end completionBlock:^(NSURL *urlOfTrimmedVideo) {
             [self addVideoToSnapshotAtUrl:urlOfTrimmedVideo];
+//            self.urlOfSelectedVideo = urlOfTrimmedVideo;
         } failureBlock:^(NSError *error) {
             [self showVideoCopyAlert];
         }];
     } else {
         [self addVideoToSnapshotAtUrl:mediaUrl];
+//        self.urlOfSelectedVideo = mediaUrl;
     }
     
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -224,12 +242,18 @@
                                             currentFrame.size.height);
 }
 
-- (void)showThumbnailOfVideo {
+- (void)showThumbnailOfVideoAnimated:(BOOL)animated {
     int offset = 5;
     CGFloat size = self.pickVideoButton.superview.frame.size.height-offset*2;
     
     CGRect frame = CGRectMake(offset, offset, size, size);
+    
+    if (self.thumbnail) {
+        [self.thumbnail removeFromSuperview];
+    }
+    
     self.thumbnail = [[ImageViewWithSnapshot alloc] initWithFrame:frame];
+    self.thumbnail.tintColor = self.view.tintColor;
     
     self.thumbnail.snapshot = self.currentSnapshot;
     self.thumbnail.delegate = self;
@@ -244,10 +268,22 @@
         CGPoint destination = self.thumbnail.center;
         self.thumbnail.center = CGPointMake(self.thumbnail.center.x-(self.thumbnail.frame.size.width+offset), self.thumbnail.center.y);
         
-        [UIView animateWithDuration:.5 delay:.5 usingSpringWithDamping:.5 initialSpringVelocity:20 options:UIViewAnimationOptionCurveLinear animations:^{
+        void (^showThumbnail)() = ^void() {
             self.thumbnail.center = destination;
             [self resizeAddVideoButton:offset size:size];
-        } completion:nil];
+        };
+        
+        if (animated) {
+            [UIView animateWithDuration:.5
+                                  delay:.5
+                 usingSpringWithDamping:.5
+                  initialSpringVelocity:20
+                                options:UIViewAnimationOptionCurveLinear
+                             animations:showThumbnail
+                             completion:nil];
+        } else {
+            showThumbnail();
+        }
     }
 }
 
@@ -264,23 +300,31 @@
 #pragma mark - misc helper methods
 
 - (BOOL)snapshotIsBaseline {
-    return [self numberOfSnapshotsForMove] == 1;
-}
-
-- (NSUInteger)numberOfSnapshotsForMove {
-    return [[self.currentSnapshot move] snapshots].count;
+    return [self.currentSnapshot isBaseline];
 }
 
 - (void)updateActiveProgressPicker {
     [self endEditing];
     
     for (ProgressPickerButton *progressView in @[self.improvedProgressView, self.sameProgressView, self.regressionProgressView]) {
-        BOOL shouldBeActive = self.currentSnapshot.progressTypeRaw == progressView.type;
+        BOOL shouldBeActive = self.selectedProgress == progressView.type;
         [progressView setActive:shouldBeActive];
     }
 }
 
 #pragma mark - text view methods
+
+- (void)configureTextView {
+    self.textView.textViewDelegate = self;
+    self.textView.automaticallyAdjustsContentInsetForKeyboard = NO;
+    self.initialTextViewHeight = self.textView.frame.size.height;
+    self.textView.textContainerInset = UIEdgeInsetsMake(7, 7, 7, 7);
+    
+    if (self.currentSnapshot.notes) {
+        self.textView.text = self.currentSnapshot.notes;
+        [self textViewDidChange:self.textView];
+    }
+}
 
 - (void)textViewDidBeginEditing:(JTSTextView *)textView {
     if ([textView.text isEqualToString:@" "]) {
@@ -303,8 +347,6 @@
     self.textView.frame = frame;
     
     [self tableViewScrollToBottomAnimated:YES];
-    
-    self.currentSnapshot.notes = textView.text;
 }
 
 - (void)tableViewScrollToBottomAnimated:(BOOL)animated {

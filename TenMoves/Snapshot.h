@@ -47,4 +47,6 @@ typedef enum {
 
 - (BOOL)hasNotes;
 
+- (BOOL)isBaseline;
+
 @end

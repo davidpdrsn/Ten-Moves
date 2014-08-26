@@ -154,4 +154,17 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return self.notes.length && !noteIsBlank;
 }
 
+- (BOOL)isBaseline {
+    NSSet *allSnapshots = self.move.snapshots;
+    
+    if (allSnapshots.count < 2) {
+        return YES;
+    } else {
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES];
+        NSArray *sortedSnapshots = [allSnapshots sortedArrayUsingDescriptors:@[sortDescriptor]];
+        Snapshot *first = [sortedSnapshots firstObject];
+        return [first.createdAt isEqualToDate:self.createdAt];
+    }
+}
+
 @end

@@ -24,4 +24,6 @@
 @property (nonatomic, strong) id<AddSnapshotTableViewControllerDelegate> delegate;
 @property (nonatomic, strong) Snapshot *currentSnapshot;
 
+@property (nonatomic, assign) BOOL editingSnapshot;
+
 @end

@@ -27,7 +27,7 @@ static NSManagedObjectContext *_managedObjectContext;
 + (void)saveWithCompletionHandler:(CompletionWithPossibleErrorBlock)completionHandler {
     NSError *error;
     [_managedObjectContext save:&error];
-    completionHandler(error);
+    if (completionHandler) completionHandler(error);
 }
 
 + (void)executeFetch:(NSFetchRequest *)request completionBlock:(void (^)(NSArray *results))completion failureBlock:(void (^)(NSError *error))failure {
@@ -36,9 +36,9 @@ static NSManagedObjectContext *_managedObjectContext;
         NSArray *results = [_managedObjectContext executeFetchRequest:request error:&error];
         
         if (error) {
-            failure(error);
+            if (failure) failure(error);
         } else {
-            completion(results);
+            if (completion) completion(results);
         }
     }];
 }

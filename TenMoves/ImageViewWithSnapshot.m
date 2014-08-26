@@ -101,6 +101,7 @@
 }
 
 - (void)setTintColor:(UIColor *)tintColor {
+    [super setTintColor:tintColor];
     _backgroundColor = tintColor;
     [self updateBackground];
 }

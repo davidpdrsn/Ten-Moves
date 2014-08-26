@@ -15,4 +15,8 @@
 - (void)addSnapshotTableViewControllerDidSave;
 - (void)addSnapshotTableViewControllerDidCancel:(Snapshot *)snapshotToDelete;
 
+@optional
+
+- (void)dismissAddSnapshotTableViewController;
+
 @end
