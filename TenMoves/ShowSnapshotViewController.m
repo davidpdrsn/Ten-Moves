@@ -11,6 +11,7 @@
 #import "Snapshot.h"
 #import "ImageViewWithSnapshot.h"
 #import "Repository.h"
+#import "NSDate+Helpers.h"
 
 @interface ShowSnapshotViewController ()
 
@@ -30,18 +31,6 @@
 
 @implementation ShowSnapshotViewController
 
-- (void)configureNextAndPrev {
-    if (!self.nextSnapshot)
-        self.nextButton.enabled = NO;
-    else
-        self.nextButton.enabled = YES;
-    
-    if (!self.prevSnapshot)
-        self.prevButton.enabled = NO;
-    else
-        self.prevButton.enabled = YES;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -60,6 +49,40 @@
     
     self.progressLabel.text = [self.snapshot textForProgressType];
     
+    [self showNotesIfThereAreAny];
+    
+    [self configureNextAndPrev];
+    
+    [self configureTitle];
+}
+
+- (void)configureTitle {
+    NSDate *date = self.snapshot.createdAt;
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"MMM";
+    
+    NSString *month = [formatter stringFromDate:date];
+    
+    formatter.dateFormat = @"dd";
+    NSString *day = [NSString stringWithFormat:@"%@%@", [formatter stringFromDate:date], [date daySuffix]];
+    
+    self.title = [NSString stringWithFormat:@"%@ %@", month, day];
+}
+
+- (void)configureNextAndPrev {
+    if (!self.nextSnapshot)
+        self.nextButton.enabled = NO;
+    else
+        self.nextButton.enabled = YES;
+    
+    if (!self.prevSnapshot)
+        self.prevButton.enabled = NO;
+    else
+        self.prevButton.enabled = YES;
+}
+
+- (void)showNotesIfThereAreAny {
     if ([self.snapshot hasNotes]) {
         self.notesTextView.text = self.snapshot.notes;
         self.notesTextView.textColor = [UIColor blackColor];
@@ -67,8 +90,6 @@
         self.notesTextView.text = @"This snapshot has no notes...";
         self.notesTextView.textColor = [UIColor lightGrayColor];
     }
-    
-    [self configureNextAndPrev];
 }
 
 - (void)showSnapshot:(Snapshot *)snapshot {
