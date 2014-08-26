@@ -18,6 +18,7 @@
 #import "AddSnapshotTableViewController.h"
 #import "ShowSnapshotViewController.h"
 #import "SnapshotVideo.h"
+#import "SnapshotImage.h"
 @import MediaPlayer;
 @import AssetsLibrary;
 @import AVFoundation;
@@ -49,6 +50,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+    
+    // The selected cell doesn't have the progress cirlce showing when swiping back
+    // this code fixes that
+    for (SnapshotTableViewCell *cell in self.tableView.visibleCells) {
+        [cell setProgressIndicatorBackground];
+    }
 }
 
 #pragma mark - segue
@@ -98,7 +105,7 @@
         SnapshotTableViewCell *snapshotCell = (SnapshotTableViewCell *)cell;
         snapshotCell.tintColor = self.view.tintColor;
         snapshotCell.snapshot = snapshot;
-        snapshotCell.thumbnailImageView.videoUrl = [snapshot.video url];
+        [snapshotCell.thumbnailImageView setVideoAndImageFromSnapshot:snapshot];
         snapshotCell.thumbnailImageView.delegate = self;
         
         return snapshotCell;

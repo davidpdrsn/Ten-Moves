@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "ImageViewWithSnapshotDelegate.h"
 
+@class Snapshot;
+
 @interface VideoPreview : UIImageView
 
 @property (strong, nonatomic) NSURL *videoUrl;
 @property (strong, nonatomic) id<ImageViewWithSnapshotDelegate> delegate;
 
 - (void)updateBackground;
+
+- (void)setVideoAndImageFromSnapshot:(Snapshot *)snapshot;
 
 @end

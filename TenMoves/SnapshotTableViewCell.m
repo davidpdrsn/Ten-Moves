@@ -34,8 +34,6 @@
     self.dateLabel.text = [formatter stringFromDate:snapshot.createdAt];
     
     [self setupProgressIndicator];
-    
-    self.thumbnailImageView.videoUrl = [snapshot.video url];
 }
 
 - (void)setTintColor:(UIColor *)tintColor {

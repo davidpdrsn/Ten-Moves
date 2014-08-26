@@ -41,7 +41,7 @@
     
     self.dateLabel.text = [formatter stringFromDate:self.snapshot.createdAt];
     
-    self.thumbnail.videoUrl = [self.snapshot.video url];
+    [self.thumbnail setVideoAndImageFromSnapshot:self.snapshot];
     self.thumbnail.tintColor = self.view.tintColor;
     [self.thumbnail awakeFromNib];
     self.thumbnail.delegate = self;

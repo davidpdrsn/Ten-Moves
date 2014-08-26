@@ -91,8 +91,11 @@
 - (void)setVideoUrl:(NSURL *)videoUrl {
     _videoUrl = videoUrl;
     
-    VideoEditor *editor = [[VideoEditor alloc] init];
-    self.image = [editor thumbnailForVideoAtUrl:videoUrl];
+    [self updateBackground];
+}
+
+- (void)setImage:(UIImage *)image {
+    [super setImage:image];
     
     [self updateBackground];
 }
@@ -109,6 +112,11 @@
 
 - (void)setHighlighted:(BOOL)highlighted {
     [self updateBackground];
+}
+
+- (void)setVideoAndImageFromSnapshot:(Snapshot *)snapshot {
+    self.image = [snapshot.image image];
+    self.videoUrl = [snapshot.video url];
 }
 
 @end

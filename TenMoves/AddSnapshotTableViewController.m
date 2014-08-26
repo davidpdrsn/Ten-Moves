@@ -254,6 +254,8 @@
     self.videoPreview = [[VideoPreview alloc] initWithFrame:frame];
     self.videoPreview.tintColor = self.view.tintColor;
     
+    VideoEditor *editor = [[VideoEditor alloc] init];
+    self.videoPreview.image = [editor thumbnailForVideoAtUrl:self.urlOfSelectedVideo];
     self.videoPreview.videoUrl = self.urlOfSelectedVideo;
     self.videoPreview.delegate = self;
     
