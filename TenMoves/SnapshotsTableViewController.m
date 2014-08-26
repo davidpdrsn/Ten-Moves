@@ -12,11 +12,12 @@
 #import "UITableViewCell+HelperMethods.h"
 #import "ALAssetsLibrary+HelperMethods.h"
 #import "SnapshotTableViewCell.h"
-#import "ImageViewWithSnapshot.h"
+#import "VideoPreview.h"
 #import "Snapshot.h"
 #import "Move.h"
 #import "AddSnapshotTableViewController.h"
 #import "ShowSnapshotViewController.h"
+#import "SnapshotVideo.h"
 @import MediaPlayer;
 @import AssetsLibrary;
 @import AVFoundation;
@@ -48,12 +49,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
-    
-    // The selected cell doesn't have the progress cirlce showing when swiping back
-    // this code fixes that
-    for (SnapshotTableViewCell *cell in self.tableView.visibleCells) {
-        [cell setProgressIndicatorBackground];
-    }
 }
 
 #pragma mark - segue
@@ -103,7 +98,7 @@
         SnapshotTableViewCell *snapshotCell = (SnapshotTableViewCell *)cell;
         snapshotCell.tintColor = self.view.tintColor;
         snapshotCell.snapshot = snapshot;
-        snapshotCell.thumbnailImageView.snapshot = snapshot;
+        snapshotCell.thumbnailImageView.videoUrl = [snapshot.video url];
         snapshotCell.thumbnailImageView.delegate = self;
         
         return snapshotCell;
@@ -116,11 +111,11 @@
 
 #pragma mark - image view with snapshot delegate methods
 
-- (void)imageViewWithSnapshot:(ImageViewWithSnapshot *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
+- (void)imageViewWithSnapshot:(VideoPreview *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
     [self presentMoviePlayerViewControllerAnimated:player];
 }
 
-- (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(ImageViewWithSnapshot *)imageView {
+- (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(VideoPreview *)imageView {
     [self dismissMoviePlayerViewControllerAnimated];
 }
 

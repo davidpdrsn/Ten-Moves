@@ -8,9 +8,10 @@
 
 #import "SnapshotTableViewCell.h"
 #import "ALAssetsLibrary+HelperMethods.h"
-#import "ImageViewWithSnapshot.h"
+#import "VideoPreview.h"
 #import "Snapshot.h"
 #import "Constants.h"
+#import "SnapshotVideo.h"
 @import AssetsLibrary;
 
 @interface SnapshotTableViewCell ()
@@ -34,7 +35,7 @@
     
     [self setupProgressIndicator];
     
-    self.thumbnailImageView.snapshot = snapshot;
+    self.thumbnailImageView.videoUrl = [snapshot.video url];
 }
 
 - (void)setTintColor:(UIColor *)tintColor {

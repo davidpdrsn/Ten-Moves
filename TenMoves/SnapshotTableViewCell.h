@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class ImageViewWithSnapshot;
+@class VideoPreview;
 @class Snapshot;
 
 @interface SnapshotTableViewCell : UITableViewCell
@@ -16,7 +16,7 @@
 @property (strong, nonatomic) Snapshot *snapshot;
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (strong, nonatomic) IBOutlet ImageViewWithSnapshot *thumbnailImageView;
+@property (strong, nonatomic) IBOutlet VideoPreview *thumbnailImageView;
 @property (strong, nonatomic) IBOutlet UIView *progressIndicator;
 
 - (void)setProgressIndicatorBackground;

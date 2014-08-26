@@ -16,4 +16,6 @@
        completionBlock:(void (^)(NSURL *urlOfTrimmedVideo))completionHandler
           failureBlock:(void (^)(NSError *error))failureBlock;
 
+- (UIImage*)thumbnailForVideoAtUrl:(NSURL *)url;
+
 @end

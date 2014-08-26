@@ -91,7 +91,7 @@
                                             <rect key="frame" x="267" y="34" width="20" height="20"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="hJ1-UY-VhF" customClass="ImageViewWithSnapshot">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="hJ1-UY-VhF" customClass="VideoPreview">
                                             <rect key="frame" x="8" y="8" width="71" height="71"/>
                                             <gestureRecognizers/>
                                         </imageView>
@@ -131,7 +131,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="da0-Bg-aIE" customClass="ImageViewWithSnapshot">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="da0-Bg-aIE" customClass="VideoPreview">
                                 <rect key="frame" x="0.0" y="74" width="113" height="113"/>
                                 <gestureRecognizers/>
                             </imageView>

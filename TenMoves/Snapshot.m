@@ -14,6 +14,7 @@
 #import "ALAssetsLibrary+HelperMethods.h"
 #import "SnapshotImage.h"
 #import "SnapshotVideo.h"
+#import "VideoEditor.h"
 
 static NSString *ENTITY_NAME = @"Snapshot";
 
@@ -123,7 +124,8 @@ static NSString *ENTITY_NAME = @"Snapshot";
                failureBlock:(void (^)(NSError *error))failureBlock {
     
     [SnapshotVideo newManagedObjectWithVideoAtUrl:mediaUrl success:^(SnapshotVideo *video) {
-        UIImage *image = [self thumbnailForVideoAtUrl:mediaUrl];
+        VideoEditor *editor = [[VideoEditor alloc] init];
+        UIImage *image = [editor thumbnailForVideoAtUrl:mediaUrl];
         
         [SnapshotImage newManagedObjectWithImage:image success:^(SnapshotImage *image) {
             self.video = video;
@@ -135,16 +137,6 @@ static NSString *ENTITY_NAME = @"Snapshot";
     } failure:^(NSError *error) {
         failureBlock(error);
     }];
-}
-
-- (UIImage*)thumbnailForVideoAtUrl:(NSURL *)url {
-    AVAsset *asset = [AVAsset assetWithURL:url];
-    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc]initWithAsset:asset];
-    imageGenerator.appliesPreferredTrackTransform = YES;
-    CMTime time = CMTimeMake(1, 1);
-    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:NULL error:NULL];
-    UIImage *thumbnail = [UIImage imageWithCGImage:imageRef];
-    return thumbnail;
 }
 
 - (BOOL)hasNotes {

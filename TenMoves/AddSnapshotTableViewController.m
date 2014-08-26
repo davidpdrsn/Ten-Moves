@@ -14,15 +14,16 @@
 #import "Snapshot.h"
 #import "Constants.h"
 #import "ProgressPickerButton.h"
-#import "ImageViewWithSnapshot.h"
+#import "VideoPreview.h"
 #import "ALAssetsLibrary+HelperMethods.h"
 #import "Move.h"
 #import "VideoEditor.h"
 #import "LPBlockActionSheet.h"
+#import "SnapshotVideo.h"
 
 @interface AddSnapshotTableViewController ()
 
-@property (strong, nonatomic) ImageViewWithSnapshot *thumbnail;
+@property (strong, nonatomic) VideoPreview *videoPreview;
 @property (assign, nonatomic) BOOL resizedButton;
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *progressCell;
@@ -85,6 +86,7 @@
     [self.tableView addGestureRecognizer:tapper];
     
     if (self.currentSnapshot.video) {
+        self.urlOfSelectedVideo = [self.currentSnapshot.video url];
         [self showThumbnailOfVideoAnimated:NO];
     }
     
@@ -126,6 +128,7 @@
 - (IBAction)done:(id)sender {
     self.currentSnapshot.notes = self.textView.text;
     [self.currentSnapshot setProgressTypeRaw:self.selectedProgress];
+    [self addVideoToSnapshotAtUrl:self.urlOfSelectedVideo];
     
     [self.delegate addSnapshotTableViewControllerDidSave];
 }
@@ -203,11 +206,7 @@
 }
 
 - (void)addVideoToSnapshotAtUrl:(NSURL *)mediaUrl {
-    [self.currentSnapshot saveVideoAtFileUrl:mediaUrl completionBlock:^{
-        [self showThumbnailOfVideoAnimated:YES];
-    } failureBlock:^(NSError *error) {
-        [self showVideoCopyAlert];
-    }];
+    [self.currentSnapshot saveVideoAtFileUrl:mediaUrl completionBlock:^{} failureBlock:^(NSError *error) {}];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -220,14 +219,14 @@
         
         VideoEditor *editor = [[VideoEditor alloc] init];
         [editor trimVideoAtUrl:mediaUrl start:start end:end completionBlock:^(NSURL *urlOfTrimmedVideo) {
-            [self addVideoToSnapshotAtUrl:urlOfTrimmedVideo];
-//            self.urlOfSelectedVideo = urlOfTrimmedVideo;
+            self.urlOfSelectedVideo = urlOfTrimmedVideo;
+            [self showThumbnailOfVideoAnimated:YES];
         } failureBlock:^(NSError *error) {
             [self showVideoCopyAlert];
         }];
     } else {
-        [self addVideoToSnapshotAtUrl:mediaUrl];
-//        self.urlOfSelectedVideo = mediaUrl;
+        self.urlOfSelectedVideo = mediaUrl;
+        [self showThumbnailOfVideoAnimated:YES];
     }
     
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -248,28 +247,28 @@
     
     CGRect frame = CGRectMake(offset, offset, size, size);
     
-    if (self.thumbnail) {
-        [self.thumbnail removeFromSuperview];
+    if (self.videoPreview) {
+        [self.videoPreview removeFromSuperview];
     }
     
-    self.thumbnail = [[ImageViewWithSnapshot alloc] initWithFrame:frame];
-    self.thumbnail.tintColor = self.view.tintColor;
+    self.videoPreview = [[VideoPreview alloc] initWithFrame:frame];
+    self.videoPreview.tintColor = self.view.tintColor;
     
-    self.thumbnail.snapshot = self.currentSnapshot;
-    self.thumbnail.delegate = self;
+    self.videoPreview.videoUrl = self.urlOfSelectedVideo;
+    self.videoPreview.delegate = self;
     
-    [self.pickVideoButton.superview addSubview:self.thumbnail];
+    [self.pickVideoButton.superview addSubview:self.videoPreview];
     
-    [self.thumbnail awakeFromNib];
+    [self.videoPreview awakeFromNib];
     
     if (!self.resizedButton) {
         self.resizedButton = YES;
         
-        CGPoint destination = self.thumbnail.center;
-        self.thumbnail.center = CGPointMake(self.thumbnail.center.x-(self.thumbnail.frame.size.width+offset), self.thumbnail.center.y);
+        CGPoint destination = self.videoPreview.center;
+        self.videoPreview.center = CGPointMake(self.videoPreview.center.x-(self.videoPreview.frame.size.width+offset), self.videoPreview.center.y);
         
         void (^showThumbnail)() = ^void() {
-            self.thumbnail.center = destination;
+            self.videoPreview.center = destination;
             [self resizeAddVideoButton:offset size:size];
         };
         
@@ -289,11 +288,11 @@
 
 #pragma mark - ImageViewSnapshot delegate methods
 
-- (void)imageViewWithSnapshot:(ImageViewWithSnapshot *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
+- (void)imageViewWithSnapshot:(VideoPreview *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
     [self presentMoviePlayerViewControllerAnimated:player];
 }
 
-- (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(ImageViewWithSnapshot *)imageView {
+- (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(VideoPreview *)imageView {
     [self dismissMoviePlayerViewControllerAnimated];
 }
 

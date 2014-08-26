@@ -9,14 +9,15 @@
 #import "ShowSnapshotViewController.h"
 @import MediaPlayer;
 #import "Snapshot.h"
-#import "ImageViewWithSnapshot.h"
+#import "VideoPreview.h"
 #import "Repository.h"
 #import "NSDate+Helpers.h"
 #import "AddSnapshotTableViewController.h"
+#import "SnapshotVideo.h"
 
 @interface ShowSnapshotViewController ()
 
-@property (weak, nonatomic) IBOutlet ImageViewWithSnapshot *thumbnail;
+@property (weak, nonatomic) IBOutlet VideoPreview *thumbnail;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIView *progressCircle;
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
@@ -40,7 +41,7 @@
     
     self.dateLabel.text = [formatter stringFromDate:self.snapshot.createdAt];
     
-    self.thumbnail.snapshot = self.snapshot;
+    self.thumbnail.videoUrl = [self.snapshot.video url];
     self.thumbnail.tintColor = self.view.tintColor;
     [self.thumbnail awakeFromNib];
     self.thumbnail.delegate = self;
@@ -136,11 +137,11 @@
     }];
 }
 
-- (void)imageViewWithSnapshot:(ImageViewWithSnapshot *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
+- (void)imageViewWithSnapshot:(VideoPreview *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
     [self presentMoviePlayerViewControllerAnimated:player];
 }
 
-- (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(ImageViewWithSnapshot *)imageView {
+- (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(VideoPreview *)imageView {
     [self dismissMoviePlayerViewControllerAnimated];
 }
 

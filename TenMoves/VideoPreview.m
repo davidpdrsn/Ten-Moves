@@ -6,13 +6,14 @@
 //  Copyright (c) 2014 David Pedersen. All rights reserved.
 //
 
-#import "ImageViewWithSnapshot.h"
+#import "VideoPreview.h"
 #import "Snapshot.h"
 #import "SnapshotImage.h"
 #import "SnapshotVideo.h"
 @import MediaPlayer;
+#import "VideoEditor.h"
 
-@interface ImageViewWithSnapshot ()
+@interface VideoPreview ()
 
 @property (strong, nonatomic) UIView *overlay;
 @property (strong, nonatomic) UIImageView *triangle;
@@ -21,7 +22,7 @@
 
 @end
 
-@implementation ImageViewWithSnapshot
+@implementation VideoPreview
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -54,10 +55,7 @@
 - (void)tapped:(UIGestureRecognizer *)gesture {
     if (gesture.state != UIGestureRecognizerStateEnded) return;
     
-    ImageViewWithSnapshot *imageView = (ImageViewWithSnapshot *)gesture.view;
-    Snapshot *snapshot = imageView.snapshot;
-    
-    MPMoviePlayerViewController *player = [[MPMoviePlayerViewController alloc] initWithContentURL:[snapshot.video url]];
+    MPMoviePlayerViewController *player = [[MPMoviePlayerViewController alloc] initWithContentURL:self.videoUrl];
     
     [[NSNotificationCenter defaultCenter] removeObserver:player
                                                     name:MPMoviePlayerPlaybackDidFinishNotification
@@ -90,9 +88,12 @@
     }
 }
 
-- (void)setSnapshot:(Snapshot *)snapshot {
-    _snapshot = snapshot;
-    self.image = [snapshot.image image];
+- (void)setVideoUrl:(NSURL *)videoUrl {
+    _videoUrl = videoUrl;
+    
+    VideoEditor *editor = [[VideoEditor alloc] init];
+    self.image = [editor thumbnailForVideoAtUrl:videoUrl];
+    
     [self updateBackground];
 }
 

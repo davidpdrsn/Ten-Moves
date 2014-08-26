@@ -15,7 +15,7 @@
 		86405D6B1987E1CC00136C9C /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86405D6A1987E1CC00136C9C /* LoadingView.m */; };
 		865304BD197FD97D00EEE9E0 /* ProgressPickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 865304BC197FD97D00EEE9E0 /* ProgressPickerButton.m */; };
 		8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */; };
-		8658D100197317A000A2B36C /* ImageViewWithSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FF197317A000A2B36C /* ImageViewWithSnapshot.m */; };
+		8658D100197317A000A2B36C /* VideoPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FF197317A000A2B36C /* VideoPreview.m */; };
 		865E4D461982737A0000CC30 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 865E4D451982737A0000CC30 /* Constants.m */; };
 		8676880A198525D5005679ED /* SnapshotImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 86768809198525D5005679ED /* SnapshotImage.m */; };
 		86768810198526FA005679ED /* Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676880F198526FA005679ED /* Snapshot.m */; };
@@ -78,8 +78,8 @@
 		865304BC197FD97D00EEE9E0 /* ProgressPickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressPickerButton.m; sourceTree = "<group>"; };
 		8658D0FB197302FB00A2B36C /* SnapshotTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotTableViewCell.h; sourceTree = "<group>"; };
 		8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotTableViewCell.m; sourceTree = "<group>"; };
-		8658D0FE197317A000A2B36C /* ImageViewWithSnapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewWithSnapshot.h; sourceTree = "<group>"; };
-		8658D0FF197317A000A2B36C /* ImageViewWithSnapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewWithSnapshot.m; sourceTree = "<group>"; };
+		8658D0FE197317A000A2B36C /* VideoPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPreview.h; sourceTree = "<group>"; };
+		8658D0FF197317A000A2B36C /* VideoPreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPreview.m; sourceTree = "<group>"; };
 		865E4D43198265FB0000CC30 /* TenMoves 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 2.xcdatamodel"; sourceTree = "<group>"; };
 		865E4D441982737A0000CC30 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		865E4D451982737A0000CC30 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
@@ -217,8 +217,8 @@
 				86405D6A1987E1CC00136C9C /* LoadingView.m */,
 				865304BB197FD97D00EEE9E0 /* ProgressPickerButton.h */,
 				865304BC197FD97D00EEE9E0 /* ProgressPickerButton.m */,
-				8658D0FE197317A000A2B36C /* ImageViewWithSnapshot.h */,
-				8658D0FF197317A000A2B36C /* ImageViewWithSnapshot.m */,
+				8658D0FE197317A000A2B36C /* VideoPreview.h */,
+				8658D0FF197317A000A2B36C /* VideoPreview.m */,
 				8658D0FB197302FB00A2B36C /* SnapshotTableViewCell.h */,
 				8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */,
 				8685E3B5196F5B0900A97585 /* MoveTableViewCell.h */,
@@ -540,7 +540,7 @@
 				863B0EAE1984237F00AAF919 /* ModelObject.m in Sources */,
 				8676881419852FAF005679ED /* SnapshotVideo.m in Sources */,
 				8685E3BE196F6A9200A97585 /* AddSnapshotTableViewController.m in Sources */,
-				8658D100197317A000A2B36C /* ImageViewWithSnapshot.m in Sources */,
+				8658D100197317A000A2B36C /* VideoPreview.m in Sources */,
 				8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */,
 				8601299E197297280053C71D /* ALAssetsLibrary+HelperMethods.m in Sources */,
 				86A5045B1989294800E3FC8A /* ShowSnapshotViewController.m in Sources */,
