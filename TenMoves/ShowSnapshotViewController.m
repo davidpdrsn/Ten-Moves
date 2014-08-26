@@ -72,9 +72,6 @@
 }
 
 - (void)showSnapshot:(Snapshot *)snapshot {
-//    ShowSnapshotViewController *new = (ShowSnapshotViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ShowMoveViewController"];
-//    new.snapshot = snapshot;
-//    [self.navigationController pushViewController:new animated:YES];
     self.snapshot = snapshot;
     [self viewDidLoad];
     [self configureNextAndPrev];
