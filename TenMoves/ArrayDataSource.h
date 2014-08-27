@@ -30,4 +30,6 @@ typedef UITableViewCell* (^ConfigureCellBlock)(UITableViewCell *cell, id item);
 
 - (void)reload;
 
+- (NSArray *)objects;
+
 @end

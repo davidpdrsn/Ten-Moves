@@ -18,6 +18,13 @@
 
 static NSString *ENTITY_NAME = @"Snapshot";
 
+@interface Snapshot () {
+    UIImage *_cachedImage;
+    NSURL *_cachedVideoUrl;
+}
+
+@end
+
 @implementation Snapshot
 
 @dynamic createdAt;
@@ -97,6 +104,10 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return [Snapshot textForProgressType:[self progressTypeRaw]];
 }
 
+- (void)observeVideo {
+    [self addObserver:self forKeyPath:@"video" options:0 context:NULL];
+}
+
 - (void)awakeFromInsert {
     [super awakeFromInsert];
     
@@ -105,6 +116,47 @@ static NSString *ENTITY_NAME = @"Snapshot";
     self.createdAt = date;
     
     [self setProgressTypeRaw:SnapshotProgressBaseline];
+    
+    [self observeVideo];
+}
+
+- (void)awakeFromFetch {
+    [super awakeFromFetch];
+    [self observeVideo];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"video"]) {
+        [self invalidateCaches];
+    }
+}
+
+- (void)prepareCache {
+    [self cachedImage];
+    [self cachedVideo];
+}
+
+- (void)invalidateCaches {
+    _cachedVideoUrl = nil;
+    _cachedImage = nil;
+}
+
+- (UIImage *)cachedImage {
+    if (!_cachedImage) {
+        _cachedImage = self.image.image;
+    } else {
+        NSLog(@"cache was there for image");
+    }
+    return _cachedImage;
+}
+
+- (NSURL *)cachedVideo {
+    if (!_cachedVideoUrl) {
+        _cachedVideoUrl = [self.video url];
+    } else {
+        NSLog(@"cache was there for video");
+    }
+    return _cachedVideoUrl;
 }
 
 - (SnapshotProgress)progressTypeRaw {

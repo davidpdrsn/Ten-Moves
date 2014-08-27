@@ -45,6 +45,10 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self.dataSource;
+    
+    for (Snapshot *snapshot in [self.dataSource objects]) {
+        [snapshot prepareCache];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

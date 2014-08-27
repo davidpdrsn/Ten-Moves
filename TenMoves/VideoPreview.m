@@ -115,8 +115,8 @@
 }
 
 - (void)setVideoAndImageFromSnapshot:(Snapshot *)snapshot {
-    self.image = [snapshot.image image];
-    self.videoUrl = [snapshot.video url];
+    self.image = [snapshot cachedImage];
+    self.videoUrl = [snapshot cachedVideo];
 }
 
 @end

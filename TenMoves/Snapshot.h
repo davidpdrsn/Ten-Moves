@@ -49,4 +49,8 @@ typedef enum {
 
 - (BOOL)isBaseline;
 
+- (void)prepareCache;
+- (UIImage *)cachedImage;
+- (NSURL *)cachedVideo;
+
 @end

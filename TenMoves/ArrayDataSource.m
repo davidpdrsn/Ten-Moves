@@ -50,6 +50,10 @@
     return self.fetchedResultsController.fetchedObjects.count;
 }
 
+- (NSArray *)objects {
+    return self.fetchedResultsController.fetchedObjects;
+}
+
 #pragma mark - table view data source methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
