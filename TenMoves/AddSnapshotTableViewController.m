@@ -189,6 +189,8 @@
                                usingDelegate: (id <UIImagePickerControllerDelegate, UINavigationControllerDelegate>) delegate
                                        type:(UIImagePickerControllerSourceType)type {
     if (([UIImagePickerController isSourceTypeAvailable: type] == NO) || (delegate == nil) || (controller == nil)) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Video recording not supported" message:@"Your phone does not support video recording" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        [alert show];
         return;
     }
     
