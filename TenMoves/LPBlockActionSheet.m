@@ -110,4 +110,16 @@
     }
 }
 
+- (void)didPresentActionSheet:(UIActionSheet *)actionSheet {
+    if (self.didPresentCallBack) {
+        self.didPresentCallBack();
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (self.didDismissCallBack) {
+        self.didDismissCallBack();
+    }
+}
+
 @end
