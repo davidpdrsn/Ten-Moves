@@ -69,13 +69,13 @@
             progressPicker.enabled = NO;
         }
         
+        self.selectedProgress = SnapshotProgressBaseline;
+        
         self.progressCell.userInteractionEnabled = NO;
     } else {
         self.selectedProgress = (self.currentSnapshot.progressTypeRaw == SnapshotProgressBaseline) ?
                                 SnapshotProgressImproved :
                                 self.currentSnapshot.progressTypeRaw;
-        
-        [self updateActiveProgressPicker];
     }
     
     [self updateActiveProgressPicker];
