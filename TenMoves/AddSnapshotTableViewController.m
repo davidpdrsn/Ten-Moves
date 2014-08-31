@@ -203,7 +203,7 @@
 }
 
 - (void)showVideoCopyAlert {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed copying video" message:nil delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed importing video" message:nil delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
     [alert show];
 }
 
