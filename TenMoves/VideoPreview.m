@@ -49,7 +49,7 @@
 }
 
 - (void)tapped:(UIGestureRecognizer *)gesture {
-    if (gesture.state != UIGestureRecognizerStateEnded) return;
+    if (gesture.state != UIGestureRecognizerStateEnded || !self.enabled) return;
     
     MPMoviePlayerViewController *player = [[MPMoviePlayerViewController alloc] initWithContentURL:self.videoUrl];
     
@@ -112,6 +112,20 @@
 - (void)setVideoAndImageFromSnapshot:(Snapshot *)snapshot {
     self.image = [snapshot cachedImage];
     self.videoUrl = [snapshot cachedVideo];
+}
+
+- (void)setEnabled:(BOOL)enabled {
+    _enabled = enabled;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:.125 animations:^{
+            if (enabled) {
+                self.overlay.backgroundColor = [self.tintColor colorWithAlphaComponent:.5];
+            } else {
+                self.overlay.backgroundColor = [[Snapshot colorForProgressType:SnapshotProgressBaseline] colorWithAlphaComponent:.5];
+            }
+        }];
+    });
 }
 
 @end

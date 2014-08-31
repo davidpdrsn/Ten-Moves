@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) NSURL *videoUrl;
 @property (strong, nonatomic) id<ImageViewWithSnapshotDelegate> delegate;
+@property (assign, nonatomic) BOOL enabled;
 
 - (void)updateBackground;
 

@@ -162,6 +162,8 @@
         for (ProgressPickerButton *progress in progressViews) {
             [progress setEnabled:NO];
         }
+        
+        _self.videoPreview.enabled = NO;
     };
     
     self.sheet.willDismissCallBack = ^{
@@ -170,6 +172,8 @@
                 [progress setEnabled:YES];
             }
         }
+    
+        _self.videoPreview.enabled = YES;
     };
 }
 
