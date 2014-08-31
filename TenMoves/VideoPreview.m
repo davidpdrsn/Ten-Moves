@@ -18,16 +18,12 @@
 @property (strong, nonatomic) UIView *overlay;
 @property (strong, nonatomic) UIImageView *triangle;
 
-@property (strong, nonatomic) UIColor *backgroundColor;
-
 @end
 
 @implementation VideoPreview
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    _backgroundColor = [self.tintColor colorWithAlphaComponent:0.5];
     
     if (!self.overlay) {
         self.overlay = [[UIView alloc] initWithFrame:self.bounds];
@@ -106,7 +102,6 @@
 
 - (void)setTintColor:(UIColor *)tintColor {
     [super setTintColor:tintColor];
-    _backgroundColor = tintColor;
     [self updateBackground];
 }
 
