@@ -126,11 +126,16 @@
 }
 
 - (IBAction)done:(id)sender {
-    self.currentSnapshot.notes = self.textView.text;
-    [self.currentSnapshot setProgressTypeRaw:self.selectedProgress];
-    [self addVideoToSnapshotAtUrl:self.urlOfSelectedVideo];
-    
-    [self.delegate addSnapshotTableViewControllerDidSave];
+    if (self.urlOfSelectedVideo) {
+        self.currentSnapshot.notes = self.textView.text;
+        [self.currentSnapshot setProgressTypeRaw:self.selectedProgress];
+        [self addVideoToSnapshotAtUrl:self.urlOfSelectedVideo];
+        
+        [self.delegate addSnapshotTableViewControllerDidSave];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Snapshot must have video" message:nil delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (IBAction)pickPhoto:(id)sender {
