@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "ImageViewWithSnapshotDelegate.h"
 #import "AddSnapshotTableViewControllerDelegate.h"
+#import "JTSTextView.h"
 
 @class Snapshot;
 
-@interface ShowSnapshotViewController : UIViewController <ImageViewWithSnapshotDelegate, AddSnapshotTableViewControllerDelegate>
+@interface ShowSnapshotViewController : UITableViewController <ImageViewWithSnapshotDelegate, AddSnapshotTableViewControllerDelegate, JTSTextViewDelegate>
 
 @property (strong, nonatomic) Snapshot *snapshot;
 

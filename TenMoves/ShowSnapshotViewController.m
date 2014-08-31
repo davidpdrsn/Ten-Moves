@@ -14,6 +14,7 @@
 #import "NSDate+Helpers.h"
 #import "AddSnapshotTableViewController.h"
 #import "SnapshotVideo.h"
+#import "JTSTextView.h"
 
 @interface ShowSnapshotViewController ()
 
@@ -21,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIView *progressCircle;
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
-@property (weak, nonatomic) IBOutlet UITextView *notesTextView;
+@property (weak, nonatomic) IBOutlet JTSTextView *notesTextView;
 
 @property (strong, nonatomic) Snapshot *nextSnapshot;
 @property (strong, nonatomic) Snapshot *prevSnapshot;
@@ -51,11 +52,20 @@
     
     self.progressLabel.text = [self.snapshot textForProgressType];
     
-    [self showNotesIfThereAreAny];
+    [self configureNotesView];
     
     [self configureNextAndPrev];
     
     [self configureTitle];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureNotesView];
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 
 - (void)configureTitle {
@@ -84,13 +94,35 @@
         self.prevButton.enabled = YES;
 }
 
-- (void)showNotesIfThereAreAny {
+- (void)configureNotesView {
+    self.notesTextView.delegate = self;
+    self.notesTextView.scrollEnabled = NO;
+    self.notesTextView.textViewDelegate = self;
+    self.notesTextView.textContainerInset = UIEdgeInsetsMake(0,0,0,0);
+    
     if ([self.snapshot hasNotes]) {
         self.notesTextView.text = self.snapshot.notes;
         self.notesTextView.textColor = [UIColor blackColor];
     } else {
-        self.notesTextView.text = @"This snapshot has no notes...";
+        self.notesTextView.text = @"No notes";
         self.notesTextView.textColor = [UIColor lightGrayColor];
+    }
+    
+    [self.notesTextView sizeToFit];
+    [self textViewDidChange:self.notesTextView];
+}
+
+- (void)textViewDidChange:(JTSTextView *)textView {
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2 && indexPath.row == 0) {
+        CGFloat contentSize = self.notesTextView.contentSize.height + 8;
+        return (contentSize < 44) ? 44 : contentSize;
+    } else {
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
     }
 }
 
