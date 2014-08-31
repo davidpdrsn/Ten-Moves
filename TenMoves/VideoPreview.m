@@ -64,9 +64,7 @@
     
     [player.moviePlayer prepareToPlay];
     
-    if (self.delegate) {
-        [self.delegate imageViewWithSnapshot:self presentMoviePlayerViewControllerAnimated:player];
-    }
+    [self.delegate imageViewWithSnapshot:self presentMoviePlayerViewControllerAnimated:player];
 }
 - (void)movieFinishedCallback:(NSNotification *)notification {
     NSNumber *finishReason = [[notification userInfo] objectForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey];
@@ -78,9 +76,7 @@
                                                         name:MPMoviePlayerPlaybackDidFinishNotification
                                                       object:moviePlayer];
         
-        if (self.delegate) {
-            [self.delegate imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:self];
-        }
+        [self.delegate imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:self];
     }
 }
 
