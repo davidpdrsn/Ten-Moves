@@ -38,7 +38,7 @@
     self.dataSource.emptyTableViewHeaderText = @"Zero Moves";
     self.dataSource.emptyTableViewText = @"It seems you haven't added any moves yet. Tap the plus button to get started.";
     
-    [self enableOrDisableAddButton];
+    [self hideOrShowAdditionalControls];
     
     self.tableView.delegate = self.dataSource;
     self.tableView.dataSource = self.dataSource;
@@ -116,7 +116,7 @@
         }
     }];
     
-    [self enableOrDisableAddButton];
+    [self hideOrShowAdditionalControls];
 }
 
 - (void)addMoveViewControllerDidCancel:(Move *)moveToDelete {
@@ -164,16 +164,31 @@
 }
 
 - (void)arrayDataSourceDidChangeData:(ArrayDataSource *)arrayDataSource {
-    [self enableOrDisableAddButton];
+    [self hideOrShowAdditionalControls];
 }
 
 #pragma mark - misc helper methods
 
+- (void)hideOrShowAdditionalControls {
+    [self enableOrDisableAddButton];
+    [self hideOrShowBottomView];
+    [self enableOrDisableEditButton];
+}
+
 - (void)enableOrDisableAddButton {
-    if ([self.dataSource totalNumberOfObjects] >= MAX_NUMBER_OF_MOVES) {
-        self.addButton.enabled = NO;
+    self.addButton.enabled = [self.dataSource totalNumberOfObjects] < MAX_NUMBER_OF_MOVES;
+}
+
+- (void)hideOrShowBottomView {
+    self.bottomView.hidden = [self.dataSource totalNumberOfObjects] == 0;
+}
+
+- (void)enableOrDisableEditButton {
+    if ([self.dataSource totalNumberOfObjects] == 0) {
+        [self setEditing:NO animated:YES];
+        self.editButtonItem.enabled = NO;
     } else {
-        self.addButton.enabled = YES;
+        self.editButtonItem.enabled = YES;
     }
 }
 
