@@ -66,6 +66,7 @@
 
 -  (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self.dataSource reload];
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
 }
 
