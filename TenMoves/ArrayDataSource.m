@@ -93,11 +93,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(arrayDataSource:textForFooterView:)]) {
-        return [self.delegate arrayDataSource:self textForFooterView:self.fetchedResultsController.fetchedObjects];
-    } else {
-        return nil;
-    }
+    return [self.delegate arrayDataSource:self textForFooterView:self.fetchedResultsController.fetchedObjects];
 }
 
 #pragma mark - fetched results controller delegate methods
@@ -107,14 +103,10 @@
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(arrayDataSource:textForFooterView:)]) {
-        NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:0];
-        [self.table reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
+    NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:0];
+    [self.table reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(arrayDataSourceDidChangeData:)]) {
-        [self.delegate arrayDataSourceDidChangeData:self];
-    }
+    [self.delegate arrayDataSourceDidChangeData:self];
     
     [self.table endUpdates];
 }
