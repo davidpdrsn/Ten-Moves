@@ -46,6 +46,7 @@
     
     self.contentMode = UIViewContentModeScaleAspectFill;
     self.clipsToBounds = YES;
+    self.enabled = YES;
 }
 
 - (void)tapped:(UIGestureRecognizer *)gesture {
