@@ -144,8 +144,6 @@ static NSString *ENTITY_NAME = @"Snapshot";
 - (UIImage *)cachedImage {
     if (!_cachedImage) {
         _cachedImage = self.image.image;
-    } else {
-        NSLog(@"cache was there for image");
     }
     return _cachedImage;
 }
@@ -153,8 +151,6 @@ static NSString *ENTITY_NAME = @"Snapshot";
 - (NSURL *)cachedVideo {
     if (!_cachedVideoUrl) {
         _cachedVideoUrl = [self.video url];
-    } else {
-        NSLog(@"cache was there for video");
     }
     return _cachedVideoUrl;
 }
