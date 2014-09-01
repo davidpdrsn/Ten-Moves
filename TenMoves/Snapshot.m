@@ -34,7 +34,6 @@ static NSString *ENTITY_NAME = @"Snapshot";
 @dynamic image;
 @dynamic video;
 @dynamic notes;
-@dynamic isBaseline;
 
 + (instancetype)newManagedObject {
     Snapshot *snapshot = (Snapshot *) [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
@@ -117,25 +116,29 @@ static NSString *ENTITY_NAME = @"Snapshot";
     self.updatedAt = date;
     self.createdAt = date;
     
-    [self setProgressTypeRaw:SnapshotProgressBaseline];
+    [self setProgressTypeRaw:SnapshotProgressImproved];
     
     [self addObservers];
+}
+
+- (void)checkIfSnapshotHasBecomeBasline {
+    if ([self isBaselineRawCheck]) {
+        [self setProgressTypeRaw:SnapshotProgressBaseline];
+    }
 }
 
 - (void)awakeFromFetch {
     [super awakeFromFetch];
     [self addObservers];
     
-    if (self.isBaseline == nil) {
-        self.isBaseline = [NSNumber numberWithBool:[self isBaselineRawCheck]];
-    }
+    [self checkIfSnapshotHasBecomeBasline];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"video"]) {
         [self invalidateCaches];
     } else if ([keyPath isEqualToString:@"move"]) {
-        self.isBaseline = [NSNumber numberWithBool:[self isBaselineRawCheck]];
+        [self checkIfSnapshotHasBecomeBasline];
     }
 }
 
@@ -164,11 +167,7 @@ static NSString *ENTITY_NAME = @"Snapshot";
 }
 
 - (SnapshotProgress)progressTypeRaw {
-    if ([self isBaselineBool]) {
-        return SnapshotProgressBaseline;
-    } else {
-        return (SnapshotProgress)self.progress.intValue;
-    }
+    return (SnapshotProgress)self.progress.intValue;
 }
 
 - (void)setProgressTypeRaw:(SnapshotProgress)type {
@@ -224,17 +223,17 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return sortedSnapshots;
 }
 
-- (BOOL)isBaselineBool {
-    return [self.isBaseline boolValue];
+- (BOOL)isBaseline {
+    return [self progressTypeRaw] == SnapshotProgressBaseline;
 }
 
 - (void)prepareForDeletion {
-    if ([self isBaselineBool]) {
+    if ([self isBaseline]) {
         NSArray *sortedSnapshots = [self sortedRelatedSnapshots];
         
         if (1 < sortedSnapshots.count) {
             Snapshot *nextSnapshot = sortedSnapshots[1];
-            nextSnapshot.isBaseline = [NSNumber numberWithBool:YES];
+            [nextSnapshot setProgressTypeRaw:SnapshotProgressBaseline];
         }
     }
 }

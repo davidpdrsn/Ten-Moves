@@ -29,7 +29,6 @@ typedef enum {
 @property (nonatomic, retain) SnapshotImage *image;
 @property (nonatomic, retain) SnapshotVideo *video;
 @property (nonatomic, retain) NSString *notes;
-@property (nonatomic, retain) NSNumber *isBaseline;
 
 + (instancetype)newManagedObject;
 + (NSFetchRequest *)fetchRequestForSnapshotsBelongingToMove:(Move *)move;
@@ -52,6 +51,6 @@ typedef enum {
 - (UIImage *)cachedImage;
 - (NSURL *)cachedVideo;
 
-- (BOOL)isBaselineBool;
+- (BOOL)isBaseline;
 
 @end

@@ -62,7 +62,7 @@
     [self.regressionProgressView setLabelText:[Snapshot textForProgressType:SnapshotProgressRegressed]];
     [self.regressionProgressView setShowBorder:NO];
     
-    if ([self snapshotIsBaseline]) {
+    if ([self.currentSnapshot isBaseline]) {
         for (ProgressPickerButton *progressPicker in @[self.improvedProgressView,
                                                        self.sameProgressView,
                                                        self.regressionProgressView]) {
@@ -72,10 +72,6 @@
         self.selectedProgress = SnapshotProgressBaseline;
         
         self.progressCell.userInteractionEnabled = NO;
-    } else {
-        self.selectedProgress = (self.currentSnapshot.progressTypeRaw == SnapshotProgressBaseline) ?
-                                SnapshotProgressImproved :
-                                self.currentSnapshot.progressTypeRaw;
     }
     
     [self updateActiveProgressPicker];
@@ -173,7 +169,7 @@
     
     self.sheet.willDismissCallBack = ^{
         for (ProgressPickerButton *progress in progressViews) {
-            if (![_self snapshotIsBaseline]) {
+            if (![_self.currentSnapshot isBaseline]) {
                 [progress setEnabled:YES];
             }
         }
@@ -185,7 +181,7 @@
 #pragma mark - table view
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if (section == 1 && [self snapshotIsBaseline]) {
+    if (section == 1 && [self.currentSnapshot isBaseline]) {
         return @"The first snapshot is considered the baseline, so you can't rate it. You will be able to when you add the next snapshot.";
     }
     
@@ -307,12 +303,6 @@
 
 - (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(VideoPreview *)imageView {
     [self dismissMoviePlayerViewControllerAnimated];
-}
-
-#pragma mark - misc helper methods
-
-- (BOOL)snapshotIsBaseline {
-    return [self.currentSnapshot isBaselineBool];
 }
 
 - (void)updateActiveProgressPicker {
