@@ -64,10 +64,6 @@
     [[UIApplication sharedApplication] openURL:url];
 }
 
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-    [super setEditing:editing animated:animated];
-}
-
 -  (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
