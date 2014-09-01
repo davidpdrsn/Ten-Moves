@@ -53,14 +53,18 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self.dataSource reload];
+    
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     
-    // The selected cell doesn't have the progress cirlce showing when swiping back
-    // this code fixes that
-    for (SnapshotTableViewCell *cell in self.tableView.visibleCells) {
+    for (SnapshotTableViewCell *cell in [self.tableView visibleCells]) {
         [cell setProgressIndicatorBackground];
     }
 }
+
+#pragma mark - table view delegate methods
+
 
 #pragma mark - segue
 
