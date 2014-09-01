@@ -74,6 +74,7 @@
         AddSnapshotTableViewController *add = (AddSnapshotTableViewController *)nav.topViewController;
         Snapshot *snapshot = [Snapshot newManagedObject];
         [self.move addSnapshotsObject:snapshot];
+        snapshot.move = self.move;
         add.currentSnapshot = snapshot;
         add.delegate = self;
     } else if ([segue.identifier isEqualToString:@"showSnapshot"]) {

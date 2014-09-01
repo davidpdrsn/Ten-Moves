@@ -34,6 +34,7 @@ static NSString *ENTITY_NAME = @"Snapshot";
 @dynamic image;
 @dynamic video;
 @dynamic notes;
+@dynamic isBaseline;
 
 + (instancetype)newManagedObject {
     Snapshot *snapshot = (Snapshot *) [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
@@ -104,8 +105,9 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return [Snapshot textForProgressType:[self progressTypeRaw]];
 }
 
-- (void)observeVideo {
+- (void)addObservers {
     [self addObserver:self forKeyPath:@"video" options:0 context:NULL];
+    [self addObserver:self forKeyPath:@"move" options:0 context:NULL];
 }
 
 - (void)awakeFromInsert {
@@ -117,17 +119,23 @@ static NSString *ENTITY_NAME = @"Snapshot";
     
     [self setProgressTypeRaw:SnapshotProgressBaseline];
     
-    [self observeVideo];
+    [self addObservers];
 }
 
 - (void)awakeFromFetch {
     [super awakeFromFetch];
-    [self observeVideo];
+    [self addObservers];
+    
+    if (self.isBaseline == nil) {
+        self.isBaseline = [NSNumber numberWithBool:[self isBaselineRawCheck]];
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"video"]) {
         [self invalidateCaches];
+    } else if ([keyPath isEqualToString:@"move"]) {
+        self.isBaseline = [NSNumber numberWithBool:[self isBaselineRawCheck]];
     }
 }
 
@@ -156,7 +164,11 @@ static NSString *ENTITY_NAME = @"Snapshot";
 }
 
 - (SnapshotProgress)progressTypeRaw {
-    return (SnapshotProgress)self.progress.intValue;
+    if ([self isBaselineBool]) {
+        return SnapshotProgressBaseline;
+    } else {
+        return (SnapshotProgress)self.progress.intValue;
+    }
 }
 
 - (void)setProgressTypeRaw:(SnapshotProgress)type {
@@ -194,16 +206,36 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return self.notes.length && !noteIsBlank;
 }
 
-- (BOOL)isBaseline {
+- (BOOL)isBaselineRawCheck {
     NSSet *allSnapshots = self.move.snapshots;
     
     if (allSnapshots.count < 2) {
         return YES;
     } else {
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES];
-        NSArray *sortedSnapshots = [allSnapshots sortedArrayUsingDescriptors:@[sortDescriptor]];
-        Snapshot *first = [sortedSnapshots firstObject];
+        Snapshot *first = [[self sortedRelatedSnapshots] firstObject];
         return [first.createdAt isEqualToDate:self.createdAt];
+    }
+}
+
+- (NSArray *)sortedRelatedSnapshots {
+    NSSet *allSnapshots = self.move.snapshots;
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES];
+    NSArray *sortedSnapshots = [allSnapshots sortedArrayUsingDescriptors:@[sortDescriptor]];
+    return sortedSnapshots;
+}
+
+- (BOOL)isBaselineBool {
+    return [self.isBaseline boolValue];
+}
+
+- (void)prepareForDeletion {
+    if ([self isBaselineBool]) {
+        NSArray *sortedSnapshots = [self sortedRelatedSnapshots];
+        
+        if (1 < sortedSnapshots.count) {
+            Snapshot *nextSnapshot = sortedSnapshots[1];
+            nextSnapshot.isBaseline = [NSNumber numberWithBool:YES];
+        }
     }
 }
 

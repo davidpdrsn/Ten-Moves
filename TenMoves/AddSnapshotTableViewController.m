@@ -312,7 +312,7 @@
 #pragma mark - misc helper methods
 
 - (BOOL)snapshotIsBaseline {
-    return [self.currentSnapshot isBaseline];
+    return [self.currentSnapshot isBaselineBool];
 }
 
 - (void)updateActiveProgressPicker {
