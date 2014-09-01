@@ -20,6 +20,10 @@
 @property (strong, nonatomic) ArrayDataSource *dataSource;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIButton *websiteButton;
+@property (weak, nonatomic) IBOutlet UIButton *twitterButton;
+
 @end
 
 @implementation MovesTableViewController
@@ -46,6 +50,18 @@
     self.tableView.allowsSelectionDuringEditing = YES;
     
     self.tableView.delegate = self;
+    
+    self.bottomView.backgroundColor = [UIColor clearColor];
+}
+
+- (IBAction)websiteButtonTapped:(id)sender {
+    NSURL *url = [NSURL URLWithString:@"http://tenmoves.net"];
+    [[UIApplication sharedApplication] openURL:url];
+}
+
+- (IBAction)twitterButtonTapped:(id)sender {
+    NSURL *url = [NSURL URLWithString:@"http://twitter.com/tenmovesapp"];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
