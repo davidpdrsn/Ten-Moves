@@ -95,6 +95,7 @@
 }
 
 - (void)configureNotesView {
+    self.notesTextView.editable = NO;
     self.notesTextView.delegate = self;
     self.notesTextView.scrollEnabled = NO;
     self.notesTextView.textViewDelegate = self;
