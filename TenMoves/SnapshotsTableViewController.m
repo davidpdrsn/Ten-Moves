@@ -49,6 +49,8 @@
     for (Snapshot *snapshot in [self.dataSource objects]) {
         [snapshot prepareCache];
     }
+    
+    self.title = self.move.name;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
