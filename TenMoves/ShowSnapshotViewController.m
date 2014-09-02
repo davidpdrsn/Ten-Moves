@@ -15,6 +15,7 @@
 #import "AddSnapshotTableViewController.h"
 #import "SnapshotVideo.h"
 #import "JTSTextView.h"
+#import "Move.h"
 
 @interface ShowSnapshotViewController ()
 
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIView *progressCircle;
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
 @property (weak, nonatomic) IBOutlet JTSTextView *notesTextView;
+@property (weak, nonatomic) IBOutlet UILabel *moveLabel;
 
 @property (strong, nonatomic) Snapshot *nextSnapshot;
 @property (strong, nonatomic) Snapshot *prevSnapshot;
@@ -51,6 +53,8 @@
     self.progressCircle.backgroundColor = [self.snapshot colorForProgressType];
     
     self.progressLabel.text = [self.snapshot textForProgressType];
+    
+    self.moveLabel.text = self.snapshot.move.name;
     
     [self configureNotesView];
     
