@@ -8,6 +8,7 @@
 
 #import "ProgressPickerButton.h"
 #import "Snapshot.h"
+#import "UIView+Autolayout.h"
 
 @interface ProgressPickerButton ()
 
@@ -24,8 +25,10 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self resizeToFit:self.superview.frame];
-    self.backgroundColor = [UIColor clearColor];
+//    self.backgroundColor = [UIColor clearColor];
     self.isActive = NO;
+    
+    [self constrainWidthToEqual:10];
 }
 
 - (void)resizeToFit:(CGRect)parentFrame {
@@ -96,12 +99,10 @@
     label.text = text;
     label.font = [UIFont systemFontOfSize:12];
     [label sizeToFit];
-    label.frame = CGRectMake(0,
-                             self.frame.size.height - label.frame.size.height - 7,
-                             self.frame.size.width,
-                             label.frame.size.height);
     self.label = label;
     [self addSubview:label];
+    
+    [self.label constrainCenter];
 }
 
 - (void)setEnabled:(BOOL)enabled {

@@ -17,6 +17,7 @@
 		8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */; };
 		8658D100197317A000A2B36C /* VideoPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FF197317A000A2B36C /* VideoPreview.m */; };
 		865E4D461982737A0000CC30 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 865E4D451982737A0000CC30 /* Constants.m */; };
+		8660464819BC982A00DA6C3B /* UIView+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8660464719BC982A00DA6C3B /* UIView+Autolayout.m */; };
 		8676880A198525D5005679ED /* SnapshotImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 86768809198525D5005679ED /* SnapshotImage.m */; };
 		86768810198526FA005679ED /* Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676880F198526FA005679ED /* Snapshot.m */; };
 		8676881419852FAF005679ED /* SnapshotVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676881319852FAF005679ED /* SnapshotVideo.m */; };
@@ -83,6 +84,8 @@
 		865E4D43198265FB0000CC30 /* TenMoves 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 2.xcdatamodel"; sourceTree = "<group>"; };
 		865E4D441982737A0000CC30 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		865E4D451982737A0000CC30 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		8660464619BC982A00DA6C3B /* UIView+Autolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Autolayout.h"; sourceTree = "<group>"; };
+		8660464719BC982A00DA6C3B /* UIView+Autolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Autolayout.m"; sourceTree = "<group>"; };
 		866A0B6419842BD300FF11A6 /* TenMoves 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 4.xcdatamodel"; sourceTree = "<group>"; };
 		8671A8B7197181CA00C7C0F6 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		867688071985173E005679ED /* TenMoves 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 6.xcdatamodel"; sourceTree = "<group>"; };
@@ -178,6 +181,8 @@
 		8601299B19728FC90053C71D /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				8660464619BC982A00DA6C3B /* UIView+Autolayout.h */,
+				8660464719BC982A00DA6C3B /* UIView+Autolayout.m */,
 				868093DD19ACEDE300D5611E /* NSDate+Helpers.h */,
 				868093DE19ACEDE300D5611E /* NSDate+Helpers.m */,
 				8601299C197297280053C71D /* ALAssetsLibrary+HelperMethods.h */,
@@ -524,6 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */,
+				8660464819BC982A00DA6C3B /* UIView+Autolayout.m in Sources */,
 				86A50456198917AD00E3FC8A /* JTSTextView.m in Sources */,
 				86768810198526FA005679ED /* Snapshot.m in Sources */,
 				8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */,

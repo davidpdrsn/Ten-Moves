@@ -12,6 +12,7 @@
 #import "SnapshotVideo.h"
 @import MediaPlayer;
 #import "VideoEditor.h"
+#import "UIView+Autolayout.h"
 
 @interface VideoPreview ()
 
@@ -26,9 +27,12 @@
     [super awakeFromNib];
     
     if (!self.overlay) {
-        self.overlay = [[UIView alloc] initWithFrame:self.bounds];
+        self.overlay = [UIView autolayoutView];
+        
         [self updateBackground];
         [self addSubview:self.overlay];
+        
+        [self.overlay constrainFlush];
         
         UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
         self.userInteractionEnabled = YES;
@@ -36,12 +40,14 @@
     }
     
     if (!self.triangle) {
-        CGFloat width = self.frame.size.height/3.0;
-        self.triangle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, width)];
-        self.triangle.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2);
+        self.triangle = [UIImageView autolayoutView];
         self.triangle.image = [UIImage imageNamed:@"triangle"];
         
         [self addSubview:self.triangle];
+        
+        [self.triangle constrainHeightToRatio:.333];
+        [self.triangle constrainWidthToEqualHeight];
+        [self.triangle constrainCenter];
     }
     
     self.contentMode = UIViewContentModeScaleAspectFill;
