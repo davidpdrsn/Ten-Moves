@@ -20,18 +20,22 @@
 #import "VideoEditor.h"
 #import "LPBlockActionSheet.h"
 #import "SnapshotVideo.h"
+#import "UIView+Autolayout.h"
 
 @interface AddSnapshotTableViewController ()
 
 @property (strong, nonatomic) VideoPreview *videoPreview;
 @property (assign, nonatomic) BOOL resizedButton;
 
+@property (strong, nonatomic) NSArray *progressButtons;
+
+@property (strong, nonatomic) ProgressPickerButton *improved;
+@property (strong, nonatomic) ProgressPickerButton *same;
+@property (strong, nonatomic) ProgressPickerButton *regressed;
+
 @property (weak, nonatomic) IBOutlet UITableViewCell *progressCell;
 @property (weak, nonatomic) IBOutlet UIButton *pickVideoButton;
-
-@property (weak, nonatomic) IBOutlet ProgressPickerButton *improvedProgressView;
-@property (weak, nonatomic) IBOutlet ProgressPickerButton *sameProgressView;
-@property (weak, nonatomic) IBOutlet ProgressPickerButton *regressionProgressView;
+@property (weak, nonatomic) IBOutlet UIView *progressPickerContainer;
 
 @property (assign, nonatomic) SnapshotProgress selectedProgress;
 @property (strong, nonatomic) NSURL *urlOfSelectedVideo;
@@ -47,34 +51,68 @@
 
 #pragma mark - view life cycle
 
+- (void)setupProgressPickers {
+    ProgressPickerButton *improved = [ProgressPickerButton autolayoutView];
+    [self.progressPickerContainer addSubview:improved];
+    [improved constrainFlushTopBottom];
+    [improved constrainWidthToRatio:.333333];
+    [improved constrainFlushLeft];
+    improved.type = SnapshotProgressImproved;
+    improved.label.text = [Snapshot textForProgressType:SnapshotProgressImproved];
+    [improved addTarget:self action:@selector(tappedProgressPicker:) forControlEvents:UIControlEventTouchUpInside];
+    improved.hasBorder = YES;
+    
+    ProgressPickerButton *same = [ProgressPickerButton autolayoutView];
+    [self.progressPickerContainer addSubview:same];
+    [same constrainFlushTopBottom];
+    [same constrainWidthToRatio:.333333];
+    [same constrainCenterHorizontally];
+    same.type = SnapshotProgressSame;
+    same.label.text = [Snapshot textForProgressType:SnapshotProgressSame];
+    [same addTarget:self action:@selector(tappedProgressPicker:) forControlEvents:UIControlEventTouchUpInside];
+    same.hasBorder = YES;
+    
+    ProgressPickerButton *regressed = [ProgressPickerButton autolayoutView];
+    [self.progressPickerContainer addSubview:regressed];
+    [regressed constrainFlushTopBottom];
+    [regressed constrainWidthToRatio:.333333];
+    [regressed constrainFlushRight];
+    regressed.type = SnapshotProgressRegressed;
+    regressed.label.text = [Snapshot textForProgressType:SnapshotProgressRegressed];
+    [regressed addTarget:self action:@selector(tappedProgressPicker:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.improved = improved;
+    self.same = same;
+    self.regressed = regressed;
+    
+    self.progressButtons = @[self.improved, self.same, self.regressed];
+    
+    [self updateActiveProgressPicker];
+}
+
+- (void)tappedProgressPicker:(ProgressPickerButton *)button {
+    self.selectedProgress = button.type;
+    [self updateActiveProgressPicker];
+}
+
+- (void)updateActiveProgressPicker {
+    for (ProgressPickerButton *button in @[self.improved, self.same, self.regressed]) {
+        [button setActive:(self.selectedProgress == button.type) animated:YES];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.improvedProgressView setProgressType:SnapshotProgressImproved];
-    [self.improvedProgressView setLabelText:[Snapshot textForProgressType:SnapshotProgressImproved]];
-    [self.improvedProgressView setShowBorder:YES];
-    
-    [self.sameProgressView setProgressType:SnapshotProgressSame];
-    [self.sameProgressView setLabelText:[Snapshot textForProgressType:SnapshotProgressSame]];
-    [self.sameProgressView setShowBorder:YES];
-    
-    [self.regressionProgressView setProgressType:SnapshotProgressRegressed];
-    [self.regressionProgressView setLabelText:[Snapshot textForProgressType:SnapshotProgressRegressed]];
-    [self.regressionProgressView setShowBorder:NO];
+    [self setupProgressPickers];
     
     if ([self.currentSnapshot isBaseline]) {
-        for (ProgressPickerButton *progressPicker in @[self.improvedProgressView,
-                                                       self.sameProgressView,
-                                                       self.regressionProgressView]) {
-            progressPicker.enabled = NO;
-        }
-        
         self.selectedProgress = SnapshotProgressBaseline;
-        
         self.progressCell.userInteractionEnabled = NO;
+        for (ProgressPickerButton *button in self.progressButtons) {
+            button.enabled = NO;
+        }
     }
-    
-    [self updateActiveProgressPicker];
     
     [self configureTextView];
     
@@ -97,21 +135,6 @@
 
 #pragma mark - IBActions
 
-// TODO: remove duplication
-- (IBAction)improvedTapped:(ProgressPickerButton *)sender {
-    self.selectedProgress = sender.type;
-    [self updateActiveProgressPicker];
-}
-
-- (IBAction)sameTapped:(ProgressPickerButton *)sender {
-    self.selectedProgress = sender.type;
-    [self updateActiveProgressPicker];
-}
-
-- (IBAction)regressedTapped:(ProgressPickerButton *)sender {
-    self.selectedProgress = sender.type;
-    [self updateActiveProgressPicker];
-}
 
 - (IBAction)cancel:(id)sender {
     if (self.editingSnapshot) {
@@ -157,24 +180,18 @@
         [_self startMediaBrowserFromViewController:_self usingDelegate:_self type:UIImagePickerControllerSourceTypePhotoLibrary];
     }];
     
-    NSArray *progressViews = @[_self.sameProgressView, _self.improvedProgressView, _self.regressionProgressView];
-    
     self.sheet.willPresentCallBack = ^{
-        for (ProgressPickerButton *progress in progressViews) {
-            [progress setEnabled:NO];
-        }
-        
         _self.videoPreview.enabled = NO;
+        
+        for (ProgressPickerButton *button in _self.progressButtons) { button.enabled = NO; }
     };
     
     self.sheet.willDismissCallBack = ^{
-        for (ProgressPickerButton *progress in progressViews) {
-            if (![_self.currentSnapshot isBaseline]) {
-                [progress setEnabled:YES];
-            }
-        }
-    
         _self.videoPreview.enabled = YES;
+        
+        if (![_self.currentSnapshot isBaseline]) {
+            for (ProgressPickerButton *button in _self.progressButtons) { button.enabled = YES; }
+        }
     };
 }
 
@@ -303,15 +320,6 @@
 
 - (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(VideoPreview *)imageView {
     [self dismissMoviePlayerViewControllerAnimated];
-}
-
-- (void)updateActiveProgressPicker {
-    [self endEditing];
-    
-    for (ProgressPickerButton *progressView in @[self.improvedProgressView, self.sameProgressView, self.regressionProgressView]) {
-        BOOL shouldBeActive = self.selectedProgress == progressView.type;
-        [progressView setActive:shouldBeActive];
-    }
 }
 
 #pragma mark - text view methods

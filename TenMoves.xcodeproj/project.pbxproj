@@ -21,6 +21,7 @@
 		8676880A198525D5005679ED /* SnapshotImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 86768809198525D5005679ED /* SnapshotImage.m */; };
 		86768810198526FA005679ED /* Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676880F198526FA005679ED /* Snapshot.m */; };
 		8676881419852FAF005679ED /* SnapshotVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676881319852FAF005679ED /* SnapshotVideo.m */; };
+		8678734519BCE70000973FAE /* CALayer+SizingAndPositioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 8678734419BCE70000973FAE /* CALayer+SizingAndPositioning.m */; };
 		868093DF19ACEDE300D5611E /* NSDate+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 868093DE19ACEDE300D5611E /* NSDate+Helpers.m */; };
 		8685E3B4196F595E00A97585 /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B3196F595E00A97585 /* Move.m */; };
 		8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B6196F5B0900A97585 /* MoveTableViewCell.m */; };
@@ -96,6 +97,8 @@
 		8676881119852F52005679ED /* TenMoves 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 7.xcdatamodel"; sourceTree = "<group>"; };
 		8676881219852FAF005679ED /* SnapshotVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotVideo.h; sourceTree = "<group>"; };
 		8676881319852FAF005679ED /* SnapshotVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotVideo.m; sourceTree = "<group>"; };
+		8678734319BCE70000973FAE /* CALayer+SizingAndPositioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+SizingAndPositioning.h"; sourceTree = "<group>"; };
+		8678734419BCE70000973FAE /* CALayer+SizingAndPositioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+SizingAndPositioning.m"; sourceTree = "<group>"; };
 		8679AFEE19804E9300052C30 /* ArrayDataSourceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayDataSourceDelegate.h; sourceTree = "<group>"; };
 		8679AFF019804EE500052C30 /* AddMoveTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMoveTableViewControllerDelegate.h; sourceTree = "<group>"; };
 		8679AFF119804F3000052C30 /* AddSnapshotTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSnapshotTableViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -181,6 +184,8 @@
 		8601299B19728FC90053C71D /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				8678734319BCE70000973FAE /* CALayer+SizingAndPositioning.h */,
+				8678734419BCE70000973FAE /* CALayer+SizingAndPositioning.m */,
 				8660464619BC982A00DA6C3B /* UIView+Autolayout.h */,
 				8660464719BC982A00DA6C3B /* UIView+Autolayout.m */,
 				868093DD19ACEDE300D5611E /* NSDate+Helpers.h */,
@@ -548,6 +553,7 @@
 				863B0EAE1984237F00AAF919 /* ModelObject.m in Sources */,
 				8676881419852FAF005679ED /* SnapshotVideo.m in Sources */,
 				8685E3BE196F6A9200A97585 /* AddSnapshotTableViewController.m in Sources */,
+				8678734519BCE70000973FAE /* CALayer+SizingAndPositioning.m in Sources */,
 				8658D100197317A000A2B36C /* VideoPreview.m in Sources */,
 				8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */,
 				8601299E197297280053C71D /* ALAssetsLibrary+HelperMethods.m in Sources */,

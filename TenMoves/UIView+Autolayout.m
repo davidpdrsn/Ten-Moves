@@ -28,7 +28,7 @@
 }
 
 - (void)constrainCenterHorizontallyOffset:(CGFloat)offset {
-    self.translatesAutoresizingMaskIntoConstraints = NO;
+    [self prepare];
     
     NSLayoutConstraint *xCenterConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                          attribute:NSLayoutAttributeCenterX
@@ -45,7 +45,7 @@
 }
 
 - (void)constrainCenterVerticallyOffset:(CGFloat)offset {
-    self.translatesAutoresizingMaskIntoConstraints = NO;
+    [self prepare];
     
     NSLayoutConstraint *yCenterConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                          attribute:NSLayoutAttributeCenterY
@@ -60,7 +60,7 @@
 #pragma mark - Equal width and height
 
 - (void)constrainWidthToEqualHeight {
-    self.translatesAutoresizingMaskIntoConstraints = NO;
+    [self prepare];
     
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
                                                                   attribute:NSLayoutAttributeWidth
@@ -73,7 +73,7 @@
 }
 
 - (void)constrainHeightToEqualWidth {
-    self.translatesAutoresizingMaskIntoConstraints = NO;
+    [self prepare];
     
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
                                                                   attribute:NSLayoutAttributeHeight
@@ -88,7 +88,7 @@
 #pragma mark - Width and height
 
 - (void)constrainWidthToEqual:(CGFloat)width {
-    self.translatesAutoresizingMaskIntoConstraints = NO;
+    [self prepare];
     
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
                                                                   attribute:NSLayoutAttributeWidth
@@ -101,7 +101,7 @@
 }
 
 - (void)constrainHeightToEqual:(CGFloat)height {
-    self.translatesAutoresizingMaskIntoConstraints = NO;
+    [self prepare];
     
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
                                                                   attribute:NSLayoutAttributeHeight
@@ -114,7 +114,7 @@
 }
 
 - (void)constrainWidthToRatio:(CGFloat)ratio {
-    self.translatesAutoresizingMaskIntoConstraints = NO;
+    [self prepare];
     
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
                                                                   attribute:NSLayoutAttributeWidth
@@ -127,7 +127,7 @@
 }
 
 - (void)constrainHeightToRatio:(CGFloat)ratio {
-    self.translatesAutoresizingMaskIntoConstraints = NO;
+    [self prepare];
     
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
                                                                   attribute:NSLayoutAttributeHeight
@@ -147,21 +147,43 @@
 }
 
 - (void)constrainFlushLeftRight {
-    self.translatesAutoresizingMaskIntoConstraints = NO;
+    [self constrainFlushRight];
+    [self constrainFlushLeft];
+}
+
+- (void)constrainFlushLeft {
+    [self prepare];
     
-    [self.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"|[view]|"
+    [self.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"|[view]"
+                                                                 options:0
+                                                                 metrics:nil
+                                                                   views:@{@"view": self}]];
+}
+
+
+- (void)constrainFlushRight {
+    [self prepare];
+    
+    [self.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"[view]|"
                                                                  options:0
                                                                  metrics:nil
                                                                    views:@{@"view": self}]];
 }
 
 - (void)constrainFlushTopBottom {
-    self.translatesAutoresizingMaskIntoConstraints = NO;
+    [self prepare];
     
     [self.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"V:|[view]|"
                                                                  options:0
                                                                  metrics:nil
                                                                    views:@{@"view": self}]];
+}
+
+#pragma mark - Helpers
+
+- (void)prepare {
+    assert(self.superview != nil);
+    self.translatesAutoresizingMaskIntoConstraints = NO;
 }
 
 @end

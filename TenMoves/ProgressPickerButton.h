@@ -13,11 +13,9 @@
 @interface ProgressPickerButton : UIButton
 
 @property (assign, nonatomic) SnapshotProgress type;
+@property (strong, nonatomic) UILabel *label;
+@property (assign, nonatomic) BOOL hasBorder;
 
-- (void)resizeToFit:(CGRect)parentFrame;
-- (void)setProgressType:(SnapshotProgress)type;
-- (void)setLabelText:(NSString *)text;
-- (void)setShowBorder:(BOOL)shouldShowBorder;
-- (void)setActive:(BOOL)shouldBeActive;
+- (void)setActive:(BOOL)active animated:(BOOL)animated;
 
 @end

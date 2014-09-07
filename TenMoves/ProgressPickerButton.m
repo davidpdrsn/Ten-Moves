@@ -9,114 +9,109 @@
 #import "ProgressPickerButton.h"
 #import "Snapshot.h"
 #import "UIView+Autolayout.h"
+#import "CALayer+SizingAndPositioning.h"
 
-@interface ProgressPickerButton ()
+@interface ProgressPickerButton () {
+    BOOL _active;
+}
 
-@property (strong, nonatomic) CALayer *border;
+@property (strong, nonatomic) CALayer *circle;
 @property (strong, nonatomic) CALayer *innerCircle;
-@property (strong, nonatomic) UIImageView *circle;
-@property (strong, nonatomic) UILabel *label;
-@property (assign, nonatomic) BOOL isActive;
+@property (strong, nonatomic) CALayer *border;
+
+@property (strong, nonatomic) UIColor *circleColor;
 
 @end
 
 @implementation ProgressPickerButton
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    [self resizeToFit:self.superview.frame];
-//    self.backgroundColor = [UIColor clearColor];
-    self.isActive = NO;
-    
-    [self constrainWidthToEqual:10];
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _label = [UILabel autolayoutView];
+        _label.userInteractionEnabled = NO;
+        _label.textAlignment = NSTextAlignmentCenter;
+        _label.userInteractionEnabled = NO;
+        _label.text = @"Label";
+        _label.font = [UIFont systemFontOfSize:12];
+        
+        _circle = [CALayer layer];
+        _innerCircle = [CALayer layer];
+        _innerCircle.backgroundColor = [UIColor whiteColor].CGColor;
+        
+        _active = NO;
+        _hasBorder = NO;
+        
+        [self addSubview:_label];
+        [self.layer addSublayer:_circle];
+        [_circle addSublayer:_innerCircle];
+        
+        [self addObserver:self forKeyPath:@"type" options:NSKeyValueObservingOptionNew context:nil];
+        
+        [_label constrainCenterHorizontally];
+        [_label constrainCenterVerticallyOffset:25];
+    }
+    return self;
 }
 
-- (void)resizeToFit:(CGRect)parentFrame {
-    CGFloat width = parentFrame.size.width/3;
-    CGFloat height = parentFrame.size.height;
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, width, height);
-}
-
-- (void)setShowBorder:(BOOL)shouldShowBorder {
-    if (shouldShowBorder) {
-        CALayer *rightBorder = [CALayer layer];
-        rightBorder.frame = CGRectMake(self.frame.size.width, 0, 0.5f, [self superview].frame.size.height);
-        rightBorder.backgroundColor = [[UITableView alloc] init].separatorColor.CGColor;
-        
-        [self.layer addSublayer:rightBorder];
-        
-        self.border = rightBorder;
-    } else {
-        self.border = nil;
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"type"]) {
+        self.circle.backgroundColor = [Snapshot colorForProgressType:self.type].CGColor;
     }
 }
 
-- (void)setActive:(BOOL)shouldBeActive {
-    if (shouldBeActive == self.isActive) return;
-    _isActive = shouldBeActive;
-    
-    CGFloat toSize = (shouldBeActive) ? self.circle.frame.size.height-11 : 0;
-    
-    [CATransaction begin];
-    [CATransaction setValue:@(.2) forKey:kCATransactionAnimationDuration];
-    self.innerCircle.bounds = CGRectMake(self.innerCircle.bounds.origin.x,
-                                         self.innerCircle.bounds.origin.y,
-                                         toSize,
-                                         toSize);
-    self.innerCircle.cornerRadius = toSize/2;
-    [CATransaction commit];
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self layoutCircle];
+    [self layoutInnerCircle];
+    if (self.hasBorder) {
+        [self layoutBorder];
+    }
 }
 
-- (void)setProgressType:(SnapshotProgress)type {
-    _type = type;
-    
-    UIColor *color = [Snapshot colorForProgressType:type];
-    CGFloat size = self.frame.size.height/2;
-    CGRect frame = CGRectMake(self.frame.size.width/2 - size/2,
-                              self.frame.size.height/2 - size/2 - 7,
-                              size,
-                              size);
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.backgroundColor = color;
-    imageView.layer.cornerRadius = size/2;
-    
-    CALayer *innerCircle = [[CALayer alloc] init];
-    int innerCircleSize = 0;
-    innerCircle.frame = CGRectMake(size/2-innerCircleSize/2, size/2-innerCircleSize/2, innerCircleSize, innerCircleSize);
-    innerCircle.backgroundColor = [UIColor whiteColor].CGColor;
-    
-    self.circle = imageView;
-    self.innerCircle = innerCircle;
-    
-    [imageView.layer addSublayer:innerCircle];
-    [self addSubview:imageView];
+- (void)layoutCircle {
+    [self.circle setSize:self.frame.size.height/2];
+    [self.circle centerWithVerticalOffset:-10];
+    [self.circle centerWithHorizontalOffset:0];
+    [self.circle makeCircle];
 }
 
-- (void)setLabelText:(NSString *)text {
-    UILabel *label = [[UILabel alloc] init];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = text;
-    label.font = [UIFont systemFontOfSize:12];
-    [label sizeToFit];
-    self.label = label;
-    [self addSubview:label];
+- (void)layoutInnerCircle {
+    if (_active) {
+        [self.innerCircle setSizeToRatio:.75];
+    } else {
+        [self.innerCircle setSizeToRatio:0];
+    }
     
-    [self.label constrainCenter];
+    [self.innerCircle center];
+    [self.innerCircle makeCircle];
+}
+
+- (void)layoutBorder {
+    if (!self.border) {
+        self.border = [CALayer layer];
+        self.border.frame = CGRectMake(0, 0, .5, self.frame.size.height);
+        self.border.backgroundColor = [[UITableView alloc] init].separatorColor.CGColor;
+        [self.layer addSublayer:self.border];
+    }
+    
+    [self.border alignRight];
+}
+
+- (void)setActive:(BOOL)active animated:(BOOL)animated {
+    if (_active == active) return;
+    _active = active;
+    [self layoutInnerCircle];
 }
 
 - (void)setEnabled:(BOOL)enabled {
     [super setEnabled:enabled];
     
-    [UIView animateWithDuration:.125 animations:^{
-        if (enabled) {
-            self.circle.backgroundColor = [Snapshot colorForProgressType:self.type];
-            self.label.textColor = [UIColor blackColor];
-        } else {
-            self.circle.backgroundColor = [[Snapshot colorForProgressType:SnapshotProgressBaseline] colorWithAlphaComponent:.33333];
-            self.label.textColor = [Snapshot colorForProgressType:SnapshotProgressBaseline];
-        }
-    }];
+    if (enabled) {
+        self.circle.backgroundColor = [Snapshot colorForProgressType:self.type].CGColor;
+    } else {
+        self.circle.backgroundColor = [[Snapshot colorForProgressType:SnapshotProgressBaseline] colorWithAlphaComponent:.5].CGColor;
+    }
 }
 
 @end
