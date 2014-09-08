@@ -104,10 +104,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.selectedProgress = self.currentSnapshot.progressTypeRaw;
+    
     [self setupProgressPickers];
     
     if ([self.currentSnapshot isBaseline]) {
-        self.selectedProgress = SnapshotProgressBaseline;
         self.progressCell.userInteractionEnabled = NO;
         for (ProgressPickerButton *button in self.progressButtons) {
             button.enabled = NO;
@@ -256,15 +257,6 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)resizeAddVideoButton:(int)offset size:(CGFloat)size {
-    CGRect currentFrame = self.pickVideoButton.frame;
-    CGFloat delta = size + offset*2;
-    self.pickVideoButton.frame = CGRectMake(currentFrame.origin.x + delta,
-                                            currentFrame.origin.y,
-                                            currentFrame.size.width - delta,
-                                            currentFrame.size.height);
-}
-
 - (void)showThumbnailOfVideoAnimated:(BOOL)animated {
     int offset = 5;
     CGFloat size = self.pickVideoButton.superview.frame.size.height-offset*2;
@@ -295,7 +287,6 @@
         
         void (^showThumbnail)() = ^void() {
             self.videoPreview.center = destination;
-            [self resizeAddVideoButton:offset size:size];
         };
         
         if (animated) {
