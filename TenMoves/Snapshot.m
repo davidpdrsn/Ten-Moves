@@ -15,6 +15,7 @@
 #import "SnapshotImage.h"
 #import "SnapshotVideo.h"
 #import "VideoEditor.h"
+#import "AppDelegate.h"
 
 static NSString *ENTITY_NAME = @"Snapshot";
 
@@ -130,8 +131,31 @@ static NSString *ENTITY_NAME = @"Snapshot";
 - (void)awakeFromFetch {
     [super awakeFromFetch];
     [self addObservers];
-    
     [self checkIfSnapshotHasBecomeBasline];
+    [self correctUrls];
+}
+
+- (void)correctUrls {
+    NSString *imagePath = self.image.path;
+    NSString *videoPath = self.video.path;
+    
+    if ([imagePath rangeOfString:@"file:///"].location != NSNotFound) {
+        self.image.path = [self pathWithoutRoot:self.image.path];
+    }
+    
+    if ([videoPath rangeOfString:@"file:///"].location != NSNotFound) {
+        self.video.path = [self pathWithoutRoot:self.video.path];
+    }
+}
+
+- (NSString *)pathWithoutRoot:(NSString *)path {
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@".*documents/" options:NSRegularExpressionCaseInsensitive error:nil];
+    NSString *modifiedString = [regex stringByReplacingMatchesInString:path
+                                                               options:0
+                                                                 range:NSMakeRange(0, path.length)
+                                                          withTemplate:@""];
+    
+    return modifiedString;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

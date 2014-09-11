@@ -65,7 +65,10 @@ static NSString *ENTITY_NAME = @"SnapshotVideo";
 }
 
 - (NSURL *)url {
-    return [NSURL URLWithString:self.path];
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    NSString *documentsPath = [appDelegate applicationDocumentsDirectory].absoluteString;
+    NSString *pathWithDocumentsDirectory = [documentsPath stringByAppendingString:self.path];
+    return [NSURL URLWithString:pathWithDocumentsDirectory];
 }
 
 - (void)prepareForDeletion {

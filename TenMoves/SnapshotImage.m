@@ -9,6 +9,7 @@
 #import "SnapshotImage.h"
 #import "Snapshot.h"
 #import "Repository.h"
+#import "AppDelegate.h"
 
 static NSString *ENTITY_NAME = @"SnapshotImage";
 
@@ -64,7 +65,10 @@ static NSString *ENTITY_NAME = @"SnapshotImage";
 }
 
 - (NSURL *)url {
-    return [NSURL URLWithString:self.path];
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    NSString *documentsPath = [appDelegate applicationDocumentsDirectory].absoluteString;
+    NSString *pathWithDocumentsDirectory = [documentsPath stringByAppendingString:self.path];
+    return [NSURL URLWithString:pathWithDocumentsDirectory];
 }
 
 - (void)prepareForDeletion {
