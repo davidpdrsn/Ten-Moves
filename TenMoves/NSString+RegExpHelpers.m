@@ -10,7 +10,7 @@
 
 @implementation NSString (RegExpHelpers)
 
-- (NSString *)stringwithPatternReplacedBy:(NSString *)pattern replacement:(NSString *)replacement {
+- (NSString *)stringWithPatternReplacedBy:(NSString *)pattern replacement:(NSString *)replacement {
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];
     NSString *modifiedString = [regex stringByReplacingMatchesInString:self
                                                                options:0
@@ -20,8 +20,8 @@
     return modifiedString;
 }
 
-- (NSString *)stringwithPatternRemoved:(NSString *)pattern {
-    return [self stringwithPatternReplacedBy:pattern replacement:@""];
+- (NSString *)stringWithPatternRemoved:(NSString *)pattern {
+    return [self stringWithPatternReplacedBy:pattern replacement:@""];
 }
 
 @end

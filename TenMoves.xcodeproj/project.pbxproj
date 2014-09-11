@@ -24,7 +24,6 @@
 		86768810198526FA005679ED /* Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676880F198526FA005679ED /* Snapshot.m */; };
 		8676881419852FAF005679ED /* SnapshotVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8676881319852FAF005679ED /* SnapshotVideo.m */; };
 		8678734519BCE70000973FAE /* CALayer+SizingAndPositioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 8678734419BCE70000973FAE /* CALayer+SizingAndPositioning.m */; };
-		868093DF19ACEDE300D5611E /* NSDate+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 868093DE19ACEDE300D5611E /* NSDate+Helpers.m */; };
 		8685E3B4196F595E00A97585 /* Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B3196F595E00A97585 /* Move.m */; };
 		8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B6196F5B0900A97585 /* MoveTableViewCell.m */; };
 		8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3BA196F60E200A97585 /* SnapshotsTableViewController.m */; };
@@ -108,8 +107,6 @@
 		8679AFEE19804E9300052C30 /* ArrayDataSourceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayDataSourceDelegate.h; sourceTree = "<group>"; };
 		8679AFF019804EE500052C30 /* AddMoveTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMoveTableViewControllerDelegate.h; sourceTree = "<group>"; };
 		8679AFF119804F3000052C30 /* AddSnapshotTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSnapshotTableViewControllerDelegate.h; sourceTree = "<group>"; };
-		868093DD19ACEDE300D5611E /* NSDate+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helpers.h"; sourceTree = "<group>"; };
-		868093DE19ACEDE300D5611E /* NSDate+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helpers.m"; sourceTree = "<group>"; };
 		8685E3B2196F595E00A97585 /* Move.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Move.h; sourceTree = "<group>"; };
 		8685E3B3196F595E00A97585 /* Move.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Move.m; sourceTree = "<group>"; };
 		8685E3B5196F5B0900A97585 /* MoveTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveTableViewCell.h; sourceTree = "<group>"; };
@@ -198,8 +195,6 @@
 				8678734419BCE70000973FAE /* CALayer+SizingAndPositioning.m */,
 				8660464619BC982A00DA6C3B /* UIView+Autolayout.h */,
 				8660464719BC982A00DA6C3B /* UIView+Autolayout.m */,
-				868093DD19ACEDE300D5611E /* NSDate+Helpers.h */,
-				868093DE19ACEDE300D5611E /* NSDate+Helpers.m */,
 				8601299C197297280053C71D /* ALAssetsLibrary+HelperMethods.h */,
 				8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */,
 				860129981972886A0053C71D /* UITableViewCell+HelperMethods.h */,
@@ -552,7 +547,6 @@
 				86ED30F2196F193200FC738B /* AddMoveTableViewController.m in Sources */,
 				8685E3B4196F595E00A97585 /* Move.m in Sources */,
 				8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */,
-				868093DF19ACEDE300D5611E /* NSDate+Helpers.m in Sources */,
 				86405D681987D0D300136C9C /* VideoEditor.m in Sources */,
 				86ED30C6196F0F0F00FC738B /* AppDelegate.m in Sources */,
 				86ED30C9196F0F0F00FC738B /* TenMoves.xcdatamodeld in Sources */,
@@ -696,6 +690,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TenMoves/TenMoves-Prefix.pch";
 				INFOPLIST_FILE = "TenMoves/TenMoves-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "790B5FA1-89A6-4A9C-9A3E-8C788434F1DC";
 				WRAPPER_EXTENSION = app;
@@ -713,6 +708,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TenMoves/TenMoves-Prefix.pch";
 				INFOPLIST_FILE = "TenMoves/TenMoves-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "790B5FA1-89A6-4A9C-9A3E-8C788434F1DC";
 				WRAPPER_EXTENSION = app;

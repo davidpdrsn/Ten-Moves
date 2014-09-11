@@ -11,7 +11,7 @@
 #import "Snapshot.h"
 #import "VideoPreview.h"
 #import "Repository.h"
-#import "NSDate+Helpers.h"
+#import "NSString+RegExpHelpers.h"
 #import "AddSnapshotTableViewController.h"
 #import "SnapshotVideo.h"
 #import "JTSTextView.h"
@@ -77,17 +77,11 @@
 }
 
 - (void)configureTitle {
-    NSDate *date = self.snapshot.createdAt;
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"MMM";
-    
-    NSString *month = [formatter stringFromDate:date];
-    
-    formatter.dateFormat = @"dd";
-    NSString *day = [NSString stringWithFormat:@"%@%@", [formatter stringFromDate:date], [date daySuffix]];
-    
-    self.title = [NSString stringWithFormat:@"%@ %@", month, day];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    NSString *formattedDateString = [dateFormatter stringFromDate:self.snapshot.createdAt];
+    self.title = formattedDateString;
 }
 
 - (void)configureNextAndPrev {

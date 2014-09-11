@@ -13,7 +13,7 @@
 
 - (NSURL *)URLWithRootToDocumentsDirectoryRemoved {
     NSString *currentPath = self.absoluteString;
-    NSString *newPath = [currentPath stringwithPatternRemoved:@".*documents/"];
+    NSString *newPath = [currentPath stringWithPatternRemoved:@".*documents/"];
     return [NSURL URLWithString:newPath];
 }
 

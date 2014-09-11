@@ -10,7 +10,7 @@
 
 @interface NSString (RegExpHelpers)
 
-- (NSString *)stringwithPatternReplacedBy:(NSString *)pattern replacement:(NSString *)replacement;
-- (NSString *)stringwithPatternRemoved:(NSString *)pattern;
+- (NSString *)stringWithPatternReplacedBy:(NSString *)pattern replacement:(NSString *)replacement;
+- (NSString *)stringWithPatternRemoved:(NSString *)pattern;
 
 @end
