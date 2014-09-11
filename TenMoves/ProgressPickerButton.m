@@ -46,18 +46,17 @@
         [self.layer addSublayer:_circle];
         [_circle addSublayer:_innerCircle];
         
-        [self addObserver:self forKeyPath:@"type" options:NSKeyValueObservingOptionNew context:nil];
-        
         [_label constrainCenterHorizontally];
         [_label constrainCenterVerticallyOffset:25];
     }
     return self;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"type"]) {
-        self.circle.backgroundColor = [Snapshot colorForProgressType:self.type].CGColor;
-    }
+- (void)setType:(SnapshotProgress)type {
+    if (_type == type) return;
+    _type = type;
+    UIColor *color = [Snapshot colorForProgressType:type];
+    self.circle.backgroundColor = color.CGColor;
 }
 
 - (void)layoutSubviews {
