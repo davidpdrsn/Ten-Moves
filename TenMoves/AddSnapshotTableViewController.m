@@ -29,10 +29,6 @@
 
 @property (strong, nonatomic) NSArray *progressButtons;
 
-@property (strong, nonatomic) ProgressPickerButton *improved;
-@property (strong, nonatomic) ProgressPickerButton *same;
-@property (strong, nonatomic) ProgressPickerButton *regressed;
-
 @property (weak, nonatomic) IBOutlet UITableViewCell *progressCell;
 @property (weak, nonatomic) IBOutlet UIButton *pickVideoButton;
 @property (weak, nonatomic) IBOutlet UIView *progressPickerContainer;
@@ -61,7 +57,7 @@
     improved.label.text = [Snapshot textForProgressType:SnapshotProgressImproved];
     [improved addTarget:self action:@selector(tappedProgressPicker:) forControlEvents:UIControlEventTouchUpInside];
     improved.hasBorder = YES;
-    
+
     ProgressPickerButton *same = [ProgressPickerButton autolayoutView];
     [self.progressPickerContainer addSubview:same];
     [same constrainFlushTopBottom];
@@ -81,11 +77,7 @@
     regressed.label.text = [Snapshot textForProgressType:SnapshotProgressRegressed];
     [regressed addTarget:self action:@selector(tappedProgressPicker:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.improved = improved;
-    self.same = same;
-    self.regressed = regressed;
-    
-    self.progressButtons = @[self.improved, self.same, self.regressed];
+    self.progressButtons = @[improved, same, regressed];
     
     [self updateActiveProgressPicker];
 }
@@ -96,7 +88,7 @@
 }
 
 - (void)updateActiveProgressPicker {
-    for (ProgressPickerButton *button in @[self.improved, self.same, self.regressed]) {
+    for (ProgressPickerButton *button in self.progressButtons) {
         [button setActive:(self.selectedProgress == button.type) animated:YES];
     }
 }
