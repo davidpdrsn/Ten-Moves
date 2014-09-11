@@ -53,10 +53,8 @@
 }
 
 - (void)setType:(SnapshotProgress)type {
-    if (_type == type) return;
     _type = type;
-    UIColor *color = [Snapshot colorForProgressType:type];
-    self.circle.backgroundColor = color.CGColor;
+    self.circle.backgroundColor = [Snapshot colorForProgressType:type].CGColor;
 }
 
 - (void)layoutSubviews {
