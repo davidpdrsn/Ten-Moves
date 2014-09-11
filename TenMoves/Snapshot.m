@@ -212,12 +212,8 @@ static NSString *ENTITY_NAME = @"Snapshot";
             self.video = video;
             self.image = image;
             completionBlock();
-        } failure:^(NSError *error) {
-            failureBlock(error);
-        }];
-    } failure:^(NSError *error) {
-        failureBlock(error);
-    }];
+        } failure:failureBlock];
+    } failure:failureBlock];
 }
 
 - (BOOL)hasNotes {
