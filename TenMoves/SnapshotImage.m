@@ -16,9 +16,6 @@ static NSString *ENTITY_NAME = @"SnapshotImage";
 
 @implementation SnapshotImage
 
-@dynamic path;
-@dynamic snapshot;
-
 + (instancetype)newManagedObject {
     SnapshotImage *image = (SnapshotImage *) [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
                                                                     inManagedObjectContext:[Repository managedObjectContext]];
@@ -63,23 +60,6 @@ static NSString *ENTITY_NAME = @"SnapshotImage";
         instance.url = [imageDestinationUrl URLWithoutRootToDocumentsDirectory];
         successBlock(instance);
     }
-}
-
-- (void)setUrl:(NSURL *)url {
-    self.path = url.absoluteString;
-}
-
-- (NSURL *)url {
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    NSString *documentsPath = [appDelegate applicationDocumentsDirectory].absoluteString;
-    NSString *pathWithDocumentsDirectory = [documentsPath stringByAppendingString:self.path];
-    return [NSURL URLWithString:pathWithDocumentsDirectory];
-}
-
-- (void)prepareForDeletion {
-    [super prepareForDeletion];
-    
-    [[NSFileManager defaultManager] removeItemAtPath:self.path error:nil];
 }
 
 - (UIImage *)image {

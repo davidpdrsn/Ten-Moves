@@ -12,7 +12,7 @@
 		8601299E197297280053C71D /* ALAssetsLibrary+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */; };
 		861454A919C1DAAE0026B288 /* NSString+RegExpHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 861454A819C1DAAE0026B288 /* NSString+RegExpHelpers.m */; };
 		861454AC19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 861454AB19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m */; };
-		863B0EAE1984237F00AAF919 /* ModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 863B0EAD1984237F00AAF919 /* ModelObject.m */; };
+		863B0EAE1984237F00AAF919 /* ManagedSnapshotAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 863B0EAD1984237F00AAF919 /* ManagedSnapshotAsset.m */; };
 		86405D681987D0D300136C9C /* VideoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 86405D671987D0D300136C9C /* VideoEditor.m */; };
 		865304BD197FD97D00EEE9E0 /* ProgressPickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 865304BC197FD97D00EEE9E0 /* ProgressPickerButton.m */; };
 		8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */; };
@@ -73,8 +73,8 @@
 		861454AA19C1DBBC0026B288 /* NSURL+ReformattingHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+ReformattingHelpers.h"; sourceTree = "<group>"; };
 		861454AB19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+ReformattingHelpers.m"; sourceTree = "<group>"; };
 		8631D7401983E6680030195A /* TenMoves.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TenMoves.entitlements; sourceTree = "<group>"; };
-		863B0EAC1984237F00AAF919 /* ModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelObject.h; sourceTree = "<group>"; };
-		863B0EAD1984237F00AAF919 /* ModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelObject.m; sourceTree = "<group>"; };
+		863B0EAC1984237F00AAF919 /* ManagedSnapshotAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagedSnapshotAsset.h; sourceTree = "<group>"; };
+		863B0EAD1984237F00AAF919 /* ManagedSnapshotAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagedSnapshotAsset.m; sourceTree = "<group>"; };
 		863B0EB0198426E500AAF919 /* TenMoves 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 3.xcdatamodel"; sourceTree = "<group>"; };
 		86405D661987D0D300136C9C /* VideoEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoEditor.h; sourceTree = "<group>"; };
 		86405D671987D0D300136C9C /* VideoEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoEditor.m; sourceTree = "<group>"; };
@@ -386,8 +386,8 @@
 				8676880F198526FA005679ED /* Snapshot.m */,
 				86768808198525D5005679ED /* SnapshotImage.h */,
 				86768809198525D5005679ED /* SnapshotImage.m */,
-				863B0EAC1984237F00AAF919 /* ModelObject.h */,
-				863B0EAD1984237F00AAF919 /* ModelObject.m */,
+				863B0EAC1984237F00AAF919 /* ManagedSnapshotAsset.h */,
+				863B0EAD1984237F00AAF919 /* ManagedSnapshotAsset.m */,
 				8685E3B2196F595E00A97585 /* Move.h */,
 				8685E3B3196F595E00A97585 /* Move.m */,
 			);
@@ -550,7 +550,7 @@
 				865304BD197FD97D00EEE9E0 /* ProgressPickerButton.m in Sources */,
 				86A3F26319712D7900E389A1 /* ArrayDataSource.m in Sources */,
 				86ED30C2196F0F0F00FC738B /* main.m in Sources */,
-				863B0EAE1984237F00AAF919 /* ModelObject.m in Sources */,
+				863B0EAE1984237F00AAF919 /* ManagedSnapshotAsset.m in Sources */,
 				8676881419852FAF005679ED /* SnapshotVideo.m in Sources */,
 				8685E3BE196F6A9200A97585 /* AddSnapshotTableViewController.m in Sources */,
 				8678734519BCE70000973FAE /* CALayer+SizingAndPositioning.m in Sources */,

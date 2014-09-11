@@ -8,20 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "ModelObject.h"
+#import "ManagedSnapshotAsset.h"
 
 @class Snapshot;
 
-@interface SnapshotImage : ModelObject
-
-@property (nonatomic, retain) NSString * path;
-@property (nonatomic, retain) Snapshot *snapshot;
+@interface SnapshotImage : ManagedSnapshotAsset
 
 + (instancetype)newManagedObject;
 + (void)newManagedObjectWithImage:(UIImage *)image success:(void (^)(SnapshotImage *image))successBlock failure:(void (^)(NSError *error))failureBlock;
 
-- (void)setUrl:(NSURL *)url;
-- (NSURL *)url;
 - (UIImage *)image;
 
 @end

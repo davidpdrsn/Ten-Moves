@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "ModelObject.h"
+#import "ManagedSnapshotAsset.h"
 
 // TODO: rename to SnapshotProgressType
 typedef enum {

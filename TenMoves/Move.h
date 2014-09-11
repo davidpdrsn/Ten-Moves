@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "ModelObject.h"
+#import "ManagedSnapshotAsset.h"
 
 @class Snapshot;
 
-@interface Move : ModelObject
+@interface Move : ManagedSnapshotAsset
 
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSDate * updatedAt;

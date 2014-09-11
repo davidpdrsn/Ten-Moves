@@ -8,9 +8,17 @@
 
 #import <CoreData/CoreData.h>
 
-@interface ModelObject : NSManagedObject
+@class Snapshot;
+
+@interface ManagedSnapshotAsset : NSManagedObject
 
 + (NSString *)documentsDirectory;
 + (NSString *)createUuidString;
+
+@property (nonatomic, retain) NSString *path;
+@property (nonatomic, retain) Snapshot *snapshot;
+
+- (void)setUrl:(NSURL *)url;
+- (NSURL *)url;
 
 @end

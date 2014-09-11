@@ -16,9 +16,6 @@ static NSString *ENTITY_NAME = @"SnapshotVideo";
 
 @implementation SnapshotVideo
 
-@dynamic path;
-@dynamic snapshot;
-
 + (instancetype)newManagedObject {
     SnapshotVideo *video = (SnapshotVideo *) [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
                                                                     inManagedObjectContext:[Repository managedObjectContext]];
@@ -63,23 +60,6 @@ static NSString *ENTITY_NAME = @"SnapshotVideo";
         instance.url = [videoDestinationUrl URLWithoutRootToDocumentsDirectory];
         successBlock(instance);
     }
-}
-
-- (void)setUrl:(NSURL *)url {
-    self.path = url.absoluteString;
-}
-
-- (NSURL *)url {
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    NSString *documentsPath = [appDelegate applicationDocumentsDirectory].absoluteString;
-    NSString *pathWithDocumentsDirectory = [documentsPath stringByAppendingString:self.path];
-    return [NSURL URLWithString:pathWithDocumentsDirectory];
-}
-
-- (void)prepareForDeletion {
-    [super prepareForDeletion];
-    
-    [[NSFileManager defaultManager] removeItemAtURL:self.url error:nil];
 }
 
 @end
