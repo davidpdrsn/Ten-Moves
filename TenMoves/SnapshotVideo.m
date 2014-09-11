@@ -60,7 +60,7 @@ static NSString *ENTITY_NAME = @"SnapshotVideo";
     if (error) {
         failureBlock(error);
     } else {
-        instance.url = [videoDestinationUrl URLWithRootToDocumentsDirectoryRemoved];
+        instance.url = [videoDestinationUrl URLWithoutRootToDocumentsDirectory];
         successBlock(instance);
     }
 }

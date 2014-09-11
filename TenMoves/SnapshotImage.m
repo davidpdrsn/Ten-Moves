@@ -60,7 +60,7 @@ static NSString *ENTITY_NAME = @"SnapshotImage";
     if (error) {
         failureBlock(error);
     } else {
-        instance.url = [imageDestinationUrl URLWithRootToDocumentsDirectoryRemoved];
+        instance.url = [imageDestinationUrl URLWithoutRootToDocumentsDirectory];
         successBlock(instance);
     }
 }

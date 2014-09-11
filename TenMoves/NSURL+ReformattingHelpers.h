@@ -10,6 +10,6 @@
 
 @interface NSURL (ReformattingHelpers)
 
-- (NSURL *)URLWithRootToDocumentsDirectoryRemoved;
+- (NSURL *)URLWithoutRootToDocumentsDirectory;
 
 @end

@@ -11,7 +11,7 @@
 
 @implementation NSURL (ReformattingHelpers)
 
-- (NSURL *)URLWithRootToDocumentsDirectoryRemoved {
+- (NSURL *)URLWithoutRootToDocumentsDirectory {
     NSString *currentPath = self.absoluteString;
     NSString *newPath = [currentPath stringWithPatternRemoved:@".*documents/"];
     return [NSURL URLWithString:newPath];

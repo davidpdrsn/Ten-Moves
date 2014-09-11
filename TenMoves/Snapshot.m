@@ -144,11 +144,11 @@ static NSString *ENTITY_NAME = @"Snapshot";
     BOOL wrongVideoPath = [videoPath rangeOfString:@"file:///"].location != NSNotFound;
     
     if (wrongImagePath) {
-        self.image.url = [self.image.url URLWithRootToDocumentsDirectoryRemoved];
+        self.image.url = [self.image.url URLWithoutRootToDocumentsDirectory];
     }
     
     if (wrongVideoPath) {
-        self.video.url = [self.video.url URLWithRootToDocumentsDirectoryRemoved];
+        self.video.url = [self.video.url URLWithoutRootToDocumentsDirectory];
     }
     
     if (wrongVideoPath || wrongImagePath) {
