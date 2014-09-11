@@ -67,27 +67,27 @@ static NSString *ENTITY_NAME = @"Snapshot";
     switch (type) {
         case SnapshotProgressImproved:
             return @{
-              @"color": [UIColor colorWithRed:0.225 green:0.848 blue:0.423 alpha:1.000],
-              @"text": @"Better"
-              };
+                     @"color": [UIColor colorWithRed:0.225 green:0.848 blue:0.423 alpha:1.000],
+                     @"text": @"Better"
+                     };
             break;
         case SnapshotProgressSame:
             return @{
-              @"color": [UIColor colorWithRed:1.000 green:0.780 blue:0.153 alpha:1.000],
-              @"text": @"Same"
-              };
+                     @"color": [UIColor colorWithRed:1.000 green:0.780 blue:0.153 alpha:1.000],
+                     @"text": @"Same"
+                     };
             break;
         case SnapshotProgressRegressed:
             return @{
-              @"color": [UIColor colorWithRed:0.945 green:0.233 blue:0.221 alpha:1.000],
-              @"text": @"Worse"
-              };
+                     @"color": [UIColor colorWithRed:0.945 green:0.233 blue:0.221 alpha:1.000],
+                     @"text": @"Worse"
+                     };
             break;
         case SnapshotProgressBaseline:
             return @{
-              @"color": [UIColor colorWithRed:0.707 green:0.775 blue:0.785 alpha:1.000],
-              @"text": @"Baseline"
-              };
+                     @"color": [UIColor colorWithRed:0.707 green:0.775 blue:0.785 alpha:1.000],
+                     @"text": @"Baseline"
+                     };
             break;
         default:
             // can't be reached
