@@ -16,6 +16,8 @@
 #import "SnapshotVideo.h"
 #import "VideoEditor.h"
 #import "AppDelegate.h"
+#import "NSString+RegExpHelpers.h"
+#import "NSURL+ReformattingHelpers.h"
 
 static NSString *ENTITY_NAME = @"Snapshot";
 
@@ -138,24 +140,20 @@ static NSString *ENTITY_NAME = @"Snapshot";
 - (void)correctUrls {
     NSString *imagePath = self.image.path;
     NSString *videoPath = self.video.path;
+    BOOL wrongImagePath = [imagePath rangeOfString:@"file:///"].location != NSNotFound;
+    BOOL wrongVideoPath = [videoPath rangeOfString:@"file:///"].location != NSNotFound;
     
-    if ([imagePath rangeOfString:@"file:///"].location != NSNotFound) {
-        self.image.path = [self pathWithoutRoot:self.image.path];
+    if (wrongImagePath) {
+        self.image.url = [self.image.url URLWithRootToDocumentsDirectoryRemoved];
     }
     
-    if ([videoPath rangeOfString:@"file:///"].location != NSNotFound) {
-        self.video.path = [self pathWithoutRoot:self.video.path];
+    if (wrongVideoPath) {
+        self.video.url = [self.video.url URLWithRootToDocumentsDirectoryRemoved];
     }
-}
-
-- (NSString *)pathWithoutRoot:(NSString *)path {
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@".*documents/" options:NSRegularExpressionCaseInsensitive error:nil];
-    NSString *modifiedString = [regex stringByReplacingMatchesInString:path
-                                                               options:0
-                                                                 range:NSMakeRange(0, path.length)
-                                                          withTemplate:@""];
     
-    return modifiedString;
+    if (wrongVideoPath || wrongImagePath) {
+        [Repository saveWithCompletionHandler:nil];
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

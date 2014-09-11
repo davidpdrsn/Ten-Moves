@@ -10,6 +10,8 @@
 		84DE765F5B484136A47281D2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE63772FF7C54DF5B88E07D2 /* libPods.a */; };
 		8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 860129991972886A0053C71D /* UITableViewCell+HelperMethods.m */; };
 		8601299E197297280053C71D /* ALAssetsLibrary+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */; };
+		861454A919C1DAAE0026B288 /* NSString+RegExpHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 861454A819C1DAAE0026B288 /* NSString+RegExpHelpers.m */; };
+		861454AC19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 861454AB19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m */; };
 		863B0EAE1984237F00AAF919 /* ModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 863B0EAD1984237F00AAF919 /* ModelObject.m */; };
 		86405D681987D0D300136C9C /* VideoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 86405D671987D0D300136C9C /* VideoEditor.m */; };
 		86405D6B1987E1CC00136C9C /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86405D6A1987E1CC00136C9C /* LoadingView.m */; };
@@ -68,6 +70,10 @@
 		860129991972886A0053C71D /* UITableViewCell+HelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+HelperMethods.m"; sourceTree = "<group>"; };
 		8601299C197297280053C71D /* ALAssetsLibrary+HelperMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+HelperMethods.h"; sourceTree = "<group>"; };
 		8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+HelperMethods.m"; sourceTree = "<group>"; };
+		861454A719C1DAAE0026B288 /* NSString+RegExpHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+RegExpHelpers.h"; sourceTree = "<group>"; };
+		861454A819C1DAAE0026B288 /* NSString+RegExpHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RegExpHelpers.m"; sourceTree = "<group>"; };
+		861454AA19C1DBBC0026B288 /* NSURL+ReformattingHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+ReformattingHelpers.h"; sourceTree = "<group>"; };
+		861454AB19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+ReformattingHelpers.m"; sourceTree = "<group>"; };
 		8631D7401983E6680030195A /* TenMoves.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TenMoves.entitlements; sourceTree = "<group>"; };
 		863B0EAC1984237F00AAF919 /* ModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelObject.h; sourceTree = "<group>"; };
 		863B0EAD1984237F00AAF919 /* ModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelObject.m; sourceTree = "<group>"; };
@@ -184,6 +190,10 @@
 		8601299B19728FC90053C71D /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				861454A719C1DAAE0026B288 /* NSString+RegExpHelpers.h */,
+				861454A819C1DAAE0026B288 /* NSString+RegExpHelpers.m */,
+				861454AA19C1DBBC0026B288 /* NSURL+ReformattingHelpers.h */,
+				861454AB19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m */,
 				8678734319BCE70000973FAE /* CALayer+SizingAndPositioning.h */,
 				8678734419BCE70000973FAE /* CALayer+SizingAndPositioning.m */,
 				8660464619BC982A00DA6C3B /* UIView+Autolayout.h */,
@@ -536,6 +546,7 @@
 				8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */,
 				8660464819BC982A00DA6C3B /* UIView+Autolayout.m in Sources */,
 				86A50456198917AD00E3FC8A /* JTSTextView.m in Sources */,
+				861454AC19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m in Sources */,
 				86768810198526FA005679ED /* Snapshot.m in Sources */,
 				8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */,
 				86ED30F2196F193200FC738B /* AddMoveTableViewController.m in Sources */,
@@ -557,6 +568,7 @@
 				8658D100197317A000A2B36C /* VideoPreview.m in Sources */,
 				8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */,
 				8601299E197297280053C71D /* ALAssetsLibrary+HelperMethods.m in Sources */,
+				861454A919C1DAAE0026B288 /* NSString+RegExpHelpers.m in Sources */,
 				86A5045B1989294800E3FC8A /* ShowSnapshotViewController.m in Sources */,
 				86ED30EF196F120700FC738B /* MovesTableViewController.m in Sources */,
 				86405D6B1987E1CC00136C9C /* LoadingView.m in Sources */,

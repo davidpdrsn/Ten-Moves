@@ -10,6 +10,7 @@
 #import "Snapshot.h"
 #import "Repository.h"
 #import "AppDelegate.h"
+#import "NSURL+ReformattingHelpers.h"
 
 static NSString *ENTITY_NAME = @"SnapshotImage";
 
@@ -59,9 +60,13 @@ static NSString *ENTITY_NAME = @"SnapshotImage";
     if (error) {
         failureBlock(error);
     } else {
-        instance.path = imageDestinationUrl.absoluteString;
+        instance.url = [imageDestinationUrl URLWithRootToDocumentsDirectoryRemoved];
         successBlock(instance);
     }
+}
+
+- (void)setUrl:(NSURL *)url {
+    self.path = url.absoluteString;
 }
 
 - (NSURL *)url {

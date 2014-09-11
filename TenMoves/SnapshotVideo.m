@@ -10,6 +10,7 @@
 #import "Snapshot.h"
 #import "Repository.h"
 #import "AppDelegate.h"
+#import "NSURL+ReformattingHelpers.h"
 
 static NSString *ENTITY_NAME = @"SnapshotVideo";
 
@@ -59,9 +60,13 @@ static NSString *ENTITY_NAME = @"SnapshotVideo";
     if (error) {
         failureBlock(error);
     } else {
-        instance.path = videoDestinationUrl.absoluteString;
+        instance.url = [videoDestinationUrl URLWithRootToDocumentsDirectoryRemoved];
         successBlock(instance);
     }
+}
+
+- (void)setUrl:(NSURL *)url {
+    self.path = url.absoluteString;
 }
 
 - (NSURL *)url {

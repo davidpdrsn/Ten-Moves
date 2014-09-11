@@ -20,6 +20,7 @@
 + (instancetype)newManagedObject;
 + (void)newManagedObjectWithVideoAtUrl:(NSURL *)url success:(void (^)(SnapshotVideo *video))successBlock failure:(void (^)(NSError *error))failureBlock;
 
+- (void)setUrl:(NSURL *)url;
 - (NSURL *)url;
 
 @end

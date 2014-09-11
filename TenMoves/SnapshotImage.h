@@ -20,6 +20,7 @@
 + (instancetype)newManagedObject;
 + (void)newManagedObjectWithImage:(UIImage *)image success:(void (^)(SnapshotImage *image))successBlock failure:(void (^)(NSError *error))failureBlock;
 
+- (void)setUrl:(NSURL *)url;
 - (NSURL *)url;
 - (UIImage *)image;
 
