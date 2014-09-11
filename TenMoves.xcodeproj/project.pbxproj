@@ -14,7 +14,6 @@
 		861454AC19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 861454AB19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m */; };
 		863B0EAE1984237F00AAF919 /* ModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 863B0EAD1984237F00AAF919 /* ModelObject.m */; };
 		86405D681987D0D300136C9C /* VideoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 86405D671987D0D300136C9C /* VideoEditor.m */; };
-		86405D6B1987E1CC00136C9C /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86405D6A1987E1CC00136C9C /* LoadingView.m */; };
 		865304BD197FD97D00EEE9E0 /* ProgressPickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 865304BC197FD97D00EEE9E0 /* ProgressPickerButton.m */; };
 		8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FC197302FB00A2B36C /* SnapshotTableViewCell.m */; };
 		8658D100197317A000A2B36C /* VideoPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 8658D0FF197317A000A2B36C /* VideoPreview.m */; };
@@ -79,8 +78,6 @@
 		863B0EB0198426E500AAF919 /* TenMoves 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 3.xcdatamodel"; sourceTree = "<group>"; };
 		86405D661987D0D300136C9C /* VideoEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoEditor.h; sourceTree = "<group>"; };
 		86405D671987D0D300136C9C /* VideoEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoEditor.m; sourceTree = "<group>"; };
-		86405D691987E1CC00136C9C /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
-		86405D6A1987E1CC00136C9C /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
 		865304BB197FD97D00EEE9E0 /* ProgressPickerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressPickerButton.h; sourceTree = "<group>"; };
 		865304BC197FD97D00EEE9E0 /* ProgressPickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressPickerButton.m; sourceTree = "<group>"; };
 		8658D0FB197302FB00A2B36C /* SnapshotTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnapshotTableViewCell.h; sourceTree = "<group>"; };
@@ -230,8 +227,6 @@
 		8685E3B8196F5B0E00A97585 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				86405D691987E1CC00136C9C /* LoadingView.h */,
-				86405D6A1987E1CC00136C9C /* LoadingView.m */,
 				865304BB197FD97D00EEE9E0 /* ProgressPickerButton.h */,
 				865304BC197FD97D00EEE9E0 /* ProgressPickerButton.m */,
 				8658D0FE197317A000A2B36C /* VideoPreview.h */,
@@ -565,7 +560,6 @@
 				861454A919C1DAAE0026B288 /* NSString+RegExpHelpers.m in Sources */,
 				86A5045B1989294800E3FC8A /* ShowSnapshotViewController.m in Sources */,
 				86ED30EF196F120700FC738B /* MovesTableViewController.m in Sources */,
-				86405D6B1987E1CC00136C9C /* LoadingView.m in Sources */,
 				865E4D461982737A0000CC30 /* Constants.m in Sources */,
 				86CE5B3919976FEB00D34095 /* LPBlockActionSheet.m in Sources */,
 			);
