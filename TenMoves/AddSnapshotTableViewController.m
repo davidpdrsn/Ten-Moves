@@ -145,7 +145,7 @@
         
         [self.delegate addSnapshotTableViewControllerDidSave];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Snapshot must have video" message:nil delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Missing video" message:@"A snapshot cannot be saved without a video. Add a video and try again." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         [alert show];
     }
 }
@@ -224,7 +224,8 @@
 
 - (void)addVideoToSnapshotAtUrl:(NSURL *)mediaUrl {
     [self.currentSnapshot saveVideoAtFileUrl:mediaUrl completionBlock:^{} failureBlock:^(NSError *error) {
-        NSLog(@"there was an error");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Saving failed" message:@"Sorry but there was a problem saving the video" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
     }];
 }
 
