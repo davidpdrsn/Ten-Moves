@@ -18,6 +18,7 @@
 #import "AppDelegate.h"
 #import "NSString+RegExpHelpers.h"
 #import "NSURL+ReformattingHelpers.h"
+#import "UpdatedAtObserver.h"
 
 static NSString *ENTITY_NAME = @"Snapshot";
 
@@ -26,9 +27,13 @@ static NSString *ENTITY_NAME = @"Snapshot";
     NSURL *_cachedVideoUrl;
 }
 
+@property (strong, nonatomic) UpdatedAtObserver *updatedAtObserver;
+
 @end
 
 @implementation Snapshot
+
+@synthesize updatedAtObserver;
 
 @dynamic createdAt;
 @dynamic progress;
@@ -107,13 +112,10 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return [Snapshot textForProgressType:[self progressTypeRaw]];
 }
 
-- (void)addObservers {
-    [self addObserver:self forKeyPath:@"video" options:0 context:NULL];
-    [self addObserver:self forKeyPath:@"move" options:0 context:NULL];
-}
-
 - (void)awakeFromInsert {
     [super awakeFromInsert];
+
+    [self addUpdatedAtObserver];
     
     NSDate *date = [NSDate date];
     self.updatedAt = date;
@@ -132,9 +134,15 @@ static NSString *ENTITY_NAME = @"Snapshot";
 
 - (void)awakeFromFetch {
     [super awakeFromFetch];
+    [self addUpdatedAtObserver];
     [self addObservers];
     [self checkIfSnapshotHasBecomeBasline];
     [self correctUrls];
+}
+
+- (void)addUpdatedAtObserver {
+    if (self.updatedAtObserver) return;
+    self.updatedAtObserver = [[UpdatedAtObserver alloc] initWithKeyPaths:@[@"video", @"move", @"notes", @"image", @"progress"] object:self];
 }
 
 - (void)correctUrls {
@@ -154,6 +162,11 @@ static NSString *ENTITY_NAME = @"Snapshot";
     if (wrongVideoPath || wrongImagePath) {
         [Repository saveWithCompletionHandler:nil];
     }
+}
+
+- (void)addObservers {
+    [self addObserver:self forKeyPath:@"video" options:0 context:NULL];
+    [self addObserver:self forKeyPath:@"move" options:0 context:NULL];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
