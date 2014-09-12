@@ -55,6 +55,7 @@
 		86F2653E19C2CB4500320718 /* TestCaseWithCoreData.h in Sources */ = {isa = PBXBuildFile; fileRef = 86F2653C19C2CB4500320718 /* TestCaseWithCoreData.h */; };
 		86F2653F19C2CB4500320718 /* TestCaseWithCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F2653D19C2CB4500320718 /* TestCaseWithCoreData.m */; };
 		86F2654219C2D3E500320718 /* UpdatedAtObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F2654119C2D3E500320718 /* UpdatedAtObserver.m */; };
+		86F2654519C2DB4200320718 /* MoveTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F2654419C2DB4200320718 /* MoveTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +163,7 @@
 		86F2653D19C2CB4500320718 /* TestCaseWithCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = TestCaseWithCoreData.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
 		86F2654019C2D3E500320718 /* UpdatedAtObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatedAtObserver.h; sourceTree = "<group>"; };
 		86F2654119C2D3E500320718 /* UpdatedAtObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatedAtObserver.m; sourceTree = "<group>"; };
+		86F2654419C2DB4200320718 /* MoveTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveTest.m; sourceTree = "<group>"; };
 		CE63772FF7C54DF5B88E07D2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -361,6 +363,7 @@
 				86F2653C19C2CB4500320718 /* TestCaseWithCoreData.h */,
 				86F2653D19C2CB4500320718 /* TestCaseWithCoreData.m */,
 				86F2653A19C2C8CA00320718 /* SnapshotTest.m */,
+				86F2654419C2DB4200320718 /* MoveTest.m */,
 				865490C519C22A730033695D /* NSURL+ReformattingHelpers.m */,
 				865490C319C2289D0033695D /* NSString+RegExpHelpers.m */,
 				86ED30D9196F0F1000FC738B /* Supporting Files */,
@@ -591,6 +594,7 @@
 				865490C619C22A730033695D /* NSURL+ReformattingHelpers.m in Sources */,
 				865490C419C2289D0033695D /* NSString+RegExpHelpers.m in Sources */,
 				86F2653F19C2CB4500320718 /* TestCaseWithCoreData.m in Sources */,
+				86F2654519C2DB4200320718 /* MoveTest.m in Sources */,
 				86F2653E19C2CB4500320718 /* TestCaseWithCoreData.h in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

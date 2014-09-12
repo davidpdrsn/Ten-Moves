@@ -9,10 +9,19 @@
 #import "Move.h"
 #import "Snapshot.h"
 #import "Repository.h"
+#import "UpdatedAtObserver.h"
 
 static NSString *ENTITY_NAME = @"Move";
 
+@interface Move ()
+
+@property (strong, nonatomic) UpdatedAtObserver *updatedAtObserver;
+
+@end
+
 @implementation Move
+
+@synthesize updatedAtObserver;
 
 @dynamic createdAt;
 @dynamic updatedAt;
@@ -38,10 +47,22 @@ static NSString *ENTITY_NAME = @"Move";
 
 - (void)awakeFromInsert {
     [super awakeFromInsert];
+
+    [self addUpdatedAtObserver];
     
     NSDate *date = [NSDate date];
     self.updatedAt = date;
     self.createdAt = date;
+}
+
+- (void)awakeFromFetch {
+    [super awakeFromFetch];
+    [self addUpdatedAtObserver];
+}
+
+- (void)addUpdatedAtObserver {
+    if (self.updatedAtObserver) return;
+    self.updatedAtObserver = [[UpdatedAtObserver alloc] initWithKeyPaths:@[@"name", @"snapshots"] object:self];
 }
 
 @end
