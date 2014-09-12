@@ -12,7 +12,7 @@
 
 @interface ManagedSnapshotAsset : NSManagedObject
 
-+ (NSString *)documentsDirectory;
++ (NSURL *)documentsDirectory;
 + (NSString *)createUuidString;
 
 @property (nonatomic, retain) NSString *path;

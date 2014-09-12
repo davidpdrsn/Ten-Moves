@@ -11,6 +11,7 @@
 #import "Repository.h"
 #import "AppDelegate.h"
 #import "NSURL+ReformattingHelpers.h"
+#import "NSString+RegExpHelpers.h"
 
 static NSString *ENTITY_NAME = @"SnapshotVideo";
 
@@ -23,16 +24,15 @@ static NSString *ENTITY_NAME = @"SnapshotVideo";
     return video;
 }
 
-+ (NSString *)directory {
-    NSString *imagesPath = [[self documentsDirectory] stringByAppendingPathComponent:@"/snapshot-videos"];
-    return imagesPath;
++ (NSURL *)directory {
+    return [[self documentsDirectory] URLByAppendingPathComponent:@"snapshot-videos"];
 }
 
 + (void)createDirectoryUnlessItsThere:(NSError **)error {
     NSFileManager *manager = [NSFileManager defaultManager];
     
-    if (![manager fileExistsAtPath:[self directory]]) {
-        [manager createDirectoryAtPath:[self directory] withIntermediateDirectories:NO attributes:nil error:error];
+    if (![manager fileExistsAtPath:[self directory].path]) {
+        [manager createDirectoryAtURL:[self directory] withIntermediateDirectories:NO attributes:nil error:error];
     }
 }
 
@@ -49,7 +49,7 @@ static NSString *ENTITY_NAME = @"SnapshotVideo";
     NSFileManager *manager = [NSFileManager defaultManager];
     
     NSString *filename = [NSString stringWithFormat:@"/%@.%@", [self createUuidString], url.pathExtension];
-    NSURL *videoDestinationUrl = [NSURL fileURLWithPath:[[self directory] stringByAppendingString:filename]];
+    NSURL *videoDestinationUrl = [[self directory] URLByAppendingPathComponent:filename];
     
     NSError *error;
     [manager copyItemAtURL:url toURL:videoDestinationUrl error:&error];

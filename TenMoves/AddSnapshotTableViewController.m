@@ -223,7 +223,9 @@
 }
 
 - (void)addVideoToSnapshotAtUrl:(NSURL *)mediaUrl {
-    [self.currentSnapshot saveVideoAtFileUrl:mediaUrl completionBlock:^{} failureBlock:^(NSError *error) {}];
+    [self.currentSnapshot saveVideoAtFileUrl:mediaUrl completionBlock:^{} failureBlock:^(NSError *error) {
+        NSLog(@"there was an error");
+    }];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {

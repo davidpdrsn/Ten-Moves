@@ -23,16 +23,15 @@ static NSString *ENTITY_NAME = @"SnapshotImage";
     return image;
 }
 
-+ (NSString *)directory {
-    NSString *imagesPath = [[self documentsDirectory] stringByAppendingPathComponent:@"/snapshot-images"];
-    return imagesPath;
++ (NSURL *)directory {
+    return [[self documentsDirectory] URLByAppendingPathComponent:@"snapshot-images"];
 }
 
 + (void)createDirectoryUnlessItsThere:(NSError **)error {
     NSFileManager *manager = [NSFileManager defaultManager];
     
-    if (![manager fileExistsAtPath:[self directory]]) {
-        [manager createDirectoryAtPath:[self directory] withIntermediateDirectories:NO attributes:nil error:error];
+    if (![manager fileExistsAtPath:[self directory].path]) {
+        [manager createDirectoryAtURL:[self directory] withIntermediateDirectories:NO attributes:nil error:error];
     }
 }
 
@@ -49,7 +48,7 @@ static NSString *ENTITY_NAME = @"SnapshotImage";
     NSData *imageData = UIImagePNGRepresentation(image);
     
     NSString *filename = [NSString stringWithFormat:@"/%@.png", [self createUuidString]];
-    NSURL *imageDestinationUrl = [NSURL fileURLWithPath:[[SnapshotImage directory] stringByAppendingString:filename]];
+    NSURL *imageDestinationUrl = [[SnapshotImage directory] URLByAppendingPathComponent:filename];
     
     NSError *error;
     [imageData writeToURL:imageDestinationUrl options:NSDataWritingAtomic error:&error];

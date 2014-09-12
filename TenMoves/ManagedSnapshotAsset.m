@@ -14,10 +14,10 @@
 @dynamic path;
 @dynamic snapshot;
 
-+ (NSString *)documentsDirectory {
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    NSString *documentsPath = [appDelegate applicationDocumentsDirectory].absoluteString;
-    return documentsPath;
++ (NSURL *)documentsDirectory {
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [searchPaths objectAtIndex:0];
+    return [NSURL fileURLWithPath:documentPath];
 }
 
 + (NSString *)createUuidString {
@@ -38,8 +38,7 @@
 }
 
 - (NSURL *)url {
-    NSString *pathWithDocumentsDirectory = [[self.class documentsDirectory] stringByAppendingString:self.path];
-    return [NSURL URLWithString:pathWithDocumentsDirectory];
+    return [[self.class documentsDirectory] URLByAppendingPathComponent:self.path];
 }
 
 @end
