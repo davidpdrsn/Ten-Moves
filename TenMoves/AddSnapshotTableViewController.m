@@ -145,7 +145,7 @@
         
         [self.delegate addSnapshotTableViewControllerDidSave];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Missing video" message:@"A snapshot cannot be saved without a video. Add a video and try again." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Missing video" message:@"A snapshot cannot be saved without a video. Pick a video and try again." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         [alert show];
     }
 }
