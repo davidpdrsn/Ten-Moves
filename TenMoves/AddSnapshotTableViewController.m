@@ -175,11 +175,10 @@
     
     self.sheet.willPresentCallBack = ^{
         _self.videoPreview.enabled = NO;
-        
         for (ProgressPickerButton *button in _self.progressButtons) { button.enabled = NO; }
     };
     
-    self.sheet.willDismissCallBack = ^{
+    self.sheet.didDismissCallBack = ^{
         _self.videoPreview.enabled = YES;
         
         if (![_self.currentSnapshot isBaseline]) {
