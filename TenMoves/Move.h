@@ -12,7 +12,7 @@
 
 @class Snapshot;
 
-@interface Move : ManagedSnapshotAsset
+@interface Move : NSManagedObject
 
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSDate * updatedAt;
