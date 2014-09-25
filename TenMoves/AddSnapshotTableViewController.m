@@ -41,6 +41,11 @@
 
 @property (strong, nonatomic) LPBlockActionSheet *sheet;
 
+@property (strong, nonatomic) Snapshot *previousSnapshot;
+@property (weak, nonatomic) IBOutlet VideoPreview *previousSnapshotVideo;
+@property (weak, nonatomic) IBOutlet UILabel *previousSnapshotLabel;
+@property (weak, nonatomic) IBOutlet UIView *previousSnapshotProgress;
+
 @end
 
 @implementation AddSnapshotTableViewController
@@ -120,6 +125,24 @@
     if (self.editingSnapshot) {
         self.title = @"Edit snapshot";
     }
+
+    self.previousSnapshot = [self.currentSnapshot previousSnapshot];
+
+    if (self.previousSnapshot != nil) {
+        [self setupPreviousSnapshotCell];
+    }
+}
+
+- (void)setupPreviousSnapshotCell {
+    [self.previousSnapshotVideo setVideoAndImageFromSnapshot:self.previousSnapshot];
+    self.previousSnapshotVideo.delegate = self;
+
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateStyle = NSDateFormatterLongStyle;
+    self.previousSnapshotLabel.text = [formatter stringFromDate:self.previousSnapshot.createdAt];
+
+    self.previousSnapshotProgress.layer.cornerRadius = self.previousSnapshotProgress.frame.size.height/2;
+    self.previousSnapshotProgress.backgroundColor = [Snapshot colorForProgressType:self.previousSnapshot.progressTypeRaw];
 }
 
 - (void)endEditing {
@@ -195,6 +218,14 @@
     }
     
     return nil;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (self.previousSnapshot == nil) {
+        return [super numberOfSectionsInTableView:tableView] - 1;
+    } else {
+        return [super numberOfSectionsInTableView:tableView];
+    }
 }
 
 #pragma mark - picking video

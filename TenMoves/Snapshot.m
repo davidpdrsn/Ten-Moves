@@ -273,4 +273,12 @@ static NSString *ENTITY_NAME = @"Snapshot";
     }
 }
 
+- (instancetype)previousSnapshot {
+    if (self.progressTypeRaw == SnapshotProgressBaseline) return nil;
+
+    NSArray *otherSnapshots = [self sortedRelatedSnapshots];
+    NSUInteger indexOfSelf = [otherSnapshots indexOfObject:self];
+    return [otherSnapshots objectAtIndex:indexOfSelf-1];
+}
+
 @end

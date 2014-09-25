@@ -53,4 +53,6 @@ typedef enum {
 
 - (BOOL)isBaseline;
 
+- (instancetype)previousSnapshot;
+
 @end

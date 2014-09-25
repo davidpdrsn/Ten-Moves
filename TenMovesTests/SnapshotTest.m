@@ -107,4 +107,23 @@
     XCTAssert([updatedAt isEqualToString:now]);
 }
 
+- (void)testPreviousSnapshotWhenThereAreNone {
+    Move *move = [Move newManagedObject];
+    Snapshot *baselineSnapshot = [Snapshot newManagedObject];
+    baselineSnapshot.move = move;
+
+    XCTAssert([baselineSnapshot previousSnapshot] == nil);
+}
+
+- (void)testPreviousSnapshot {
+    Move *move = [Move newManagedObject];
+    Snapshot *baselineSnapshot = [Snapshot newManagedObject];
+    baselineSnapshot.move = move;
+
+    Snapshot *anotherSnapshot = [Snapshot newManagedObject];
+    anotherSnapshot.move = move;
+
+    XCTAssert([anotherSnapshot previousSnapshot] == baselineSnapshot);
+}
+
 @end
