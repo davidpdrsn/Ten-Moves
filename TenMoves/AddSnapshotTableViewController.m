@@ -127,13 +127,12 @@
     }
 
     self.previousSnapshot = [self.currentSnapshot previousSnapshot];
-
-    if (self.previousSnapshot != nil) {
-        [self setupPreviousSnapshotCell];
-    }
+    [self setupPreviousSnapshotCell];
 }
 
 - (void)setupPreviousSnapshotCell {
+    if (self.previousSnapshot == nil) return;
+
     [self.previousSnapshotVideo setVideoAndImageFromSnapshot:self.previousSnapshot];
     self.previousSnapshotVideo.delegate = self;
 
@@ -198,12 +197,17 @@
     
     self.sheet.willPresentCallBack = ^{
         _self.videoPreview.enabled = NO;
+        _self.previousSnapshotVideo.enabled = NO;
+        _self.previousSnapshotProgress.backgroundColor = [[Snapshot colorForProgressType:SnapshotProgressBaseline] colorWithAlphaComponent:.5];
+
         for (ProgressPickerButton *button in _self.progressButtons) { button.enabled = NO; }
     };
     
     self.sheet.didDismissCallBack = ^{
         _self.videoPreview.enabled = YES;
-        
+        _self.previousSnapshotVideo.enabled = YES;
+        [_self setupPreviousSnapshotCell];
+
         if (![_self.currentSnapshot isBaseline]) {
             for (ProgressPickerButton *button in _self.progressButtons) { button.enabled = YES; }
         }
@@ -226,6 +230,10 @@
     } else {
         return [super numberOfSectionsInTableView:tableView];
     }
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 
 #pragma mark - picking video

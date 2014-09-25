@@ -126,4 +126,17 @@
     XCTAssert([anotherSnapshot previousSnapshot] == baselineSnapshot);
 }
 
+- (void)testPreviousSnapshotAfterDeleting {
+    Move *move = [Move newManagedObject];
+    Snapshot *baselineSnapshot = [Snapshot newManagedObject];
+    baselineSnapshot.move = move;
+
+    Snapshot *anotherSnapshot = [Snapshot newManagedObject];
+    anotherSnapshot.move = move;
+
+    [self.moc deleteObject:baselineSnapshot];
+
+    XCTAssert([anotherSnapshot previousSnapshot] == nil);
+}
+
 @end
