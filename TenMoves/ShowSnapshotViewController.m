@@ -26,12 +26,6 @@
 @property (weak, nonatomic) IBOutlet JTSTextView *notesTextView;
 @property (weak, nonatomic) IBOutlet UILabel *moveLabel;
 
-@property (strong, nonatomic) Snapshot *nextSnapshot;
-@property (strong, nonatomic) Snapshot *prevSnapshot;
-
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *prevButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton;
-
 @end
 
 @implementation ShowSnapshotViewController
@@ -57,9 +51,7 @@
     self.moveLabel.text = self.snapshot.move.name;
     
     [self configureNotesView];
-    
-    [self configureNextAndPrev];
-    
+
     [self configureTitle];
 }
 
@@ -82,18 +74,6 @@
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     NSString *formattedDateString = [dateFormatter stringFromDate:self.snapshot.createdAt];
     self.title = formattedDateString;
-}
-
-- (void)configureNextAndPrev {
-    if (!self.nextSnapshot)
-        self.nextButton.enabled = NO;
-    else
-        self.nextButton.enabled = YES;
-    
-    if (!self.prevSnapshot)
-        self.prevButton.enabled = NO;
-    else
-        self.prevButton.enabled = YES;
 }
 
 - (void)configureNotesView {
@@ -132,44 +112,6 @@
 - (void)showSnapshot:(Snapshot *)snapshot {
     self.snapshot = snapshot;
     [self viewDidLoad];
-    [self configureNextAndPrev];
-}
-
-- (IBAction)next:(UIBarButtonItem *)sender {
-    if (self.nextSnapshot) {
-        [self showSnapshot:self.nextSnapshot];
-    }
-}
-
-- (IBAction)prev:(UIBarButtonItem *)sender {
-    if (self.prevSnapshot) {
-        [self showSnapshot:self.prevSnapshot];
-    }
-}
-
-- (void)setSnapshot:(Snapshot *)snapshot {
-    _snapshot = snapshot;
-
-    NSFetchRequest *fetchRequest = [Snapshot fetchRequestForSnapshotsBelongingToMove:self.snapshot.move];
-    [Repository executeFetch:fetchRequest completionBlock:^(NSArray *results) {
-        NSUInteger index = [results indexOfObject:self.snapshot];
-        NSInteger nextIndex = index+1;
-        NSInteger prevIndex = index-1;
-        
-        if (results.count-1 >= nextIndex) {
-            self.nextSnapshot = results[index+1];
-        } else {
-            self.nextSnapshot = nil;
-        }
-        
-        if (0 <= prevIndex) {
-            self.prevSnapshot = results[index-1];
-        } else {
-            self.prevSnapshot = nil;
-        }
-    } failureBlock:^(NSError *error) {
-        NSLog(@"%@", error.userInfo);
-    }];
 }
 
 - (void)imageViewWithSnapshot:(VideoPreview *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
