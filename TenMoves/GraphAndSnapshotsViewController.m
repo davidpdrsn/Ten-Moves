@@ -29,7 +29,6 @@
     [super viewDidLoad];
 
     self.title = self.move.name;
-
 }
 
 - (BOOL)smallScreen {
@@ -38,14 +37,19 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"EmbedTable"]) {
-        SnapshotsTableViewController *destination = (SnapshotsTableViewController *)segue.destinationViewController;
+        SnapshotsTableViewController *destination =
+            (SnapshotsTableViewController *)segue.destinationViewController;
         destination.move = self.move;
+
     } else if ([segue.identifier isEqualToString:@"EmbedGraph"]) {
-        GraphViewController *graphViewController = (GraphViewController *)segue.destinationViewController;
+        GraphViewController *graphViewController =
+            (GraphViewController *)segue.destinationViewController;
         graphViewController.move = self.move;
+
     } else if ([segue.identifier isEqualToString:@"AddSnapshot"]) {
         UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
-        AddSnapshotTableViewController *add = (AddSnapshotTableViewController *)nav.topViewController;
+        AddSnapshotTableViewController *add =
+            (AddSnapshotTableViewController *)nav.topViewController;
         Snapshot *snapshot = [Snapshot newManagedObject];
         [self.move addSnapshotsObject:snapshot];
         snapshot.move = self.move;

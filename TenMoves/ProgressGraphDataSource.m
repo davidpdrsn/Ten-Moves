@@ -85,13 +85,4 @@
     return [number floatValue];
 }
 
-//- (NSString *)lineGraph:(BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index {
-//    Snapshot *snap = [self sortedSnapshots][index];
-//    return [self.formatter stringFromDate:snap.createdAt];
-//}
-//
-//- (NSInteger)numberOfGapsBetweenLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph {
-//    return 2;
-//}
-
 @end

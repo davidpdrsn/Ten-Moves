@@ -37,7 +37,11 @@
         _cellIdentifier = cellIdentifier;
         _configureCellBlock = configureCellBlock;
         
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[Repository managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+        _fetchedResultsController =
+            [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                managedObjectContext:[Repository managedObjectContext]
+                                                  sectionNameKeyPath:nil
+                                                           cacheName:nil];
         
         _fetchedResultsController.delegate = self;
         
@@ -69,7 +73,9 @@
     return [sectionInfo numberOfObjects];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.cellIdentifier];
     self.configureCellBlock(cell, [self itemAtIndexPath:indexPath]);
     return cell;
@@ -79,7 +85,9 @@
     return [self.fetchedResultsController objectAtIndexPath:indexPath];
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         id itemToDelete = [self itemAtIndexPath:indexPath];
         [Repository deleteObject:itemToDelete];
@@ -93,7 +101,8 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    return [self.delegate arrayDataSource:self textForFooterView:self.fetchedResultsController.fetchedObjects];
+    return [self.delegate arrayDataSource:self
+                        textForFooterView:self.fetchedResultsController.fetchedObjects];
 }
 
 #pragma mark - fetched results controller delegate methods
@@ -111,14 +120,20 @@
     [self.table endUpdates];
 }
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
     switch (type) {
         case NSFetchedResultsChangeInsert:
-            [self.table insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.table insertRowsAtIndexPaths:@[newIndexPath]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [self.table deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.table deleteRowsAtIndexPaths:@[indexPath]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
             
         case NSFetchedResultsChangeUpdate: {
@@ -130,8 +145,10 @@
             break;
             
         case NSFetchedResultsChangeMove:
-            [self.table deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.table insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.table deleteRowsAtIndexPaths:@[indexPath]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.table insertRowsAtIndexPaths:@[newIndexPath]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
     }
 }
