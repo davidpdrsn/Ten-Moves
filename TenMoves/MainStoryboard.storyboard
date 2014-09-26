@@ -120,7 +120,7 @@
                         <outlet property="twitterButton" destination="2sR-Wl-l3T" id="vN8-IL-C7n"/>
                         <outlet property="websiteButton" destination="7iG-cu-7GH" id="W3M-FF-uO5"/>
                         <segue destination="cGj-6s-1db" kind="presentation" identifier="editMove" id="Y3l-Y7-ArY"/>
-                        <segue destination="3jC-hk-gaG" kind="show" identifier="showSnapshots" id="mUS-vH-G5l"/>
+                        <segue destination="fZa-wC-1MG" kind="show" identifier="showSnapshots" id="nog-H8-g7A"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nNP-bd-A4k" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -132,7 +132,7 @@
             <objects>
                 <tableViewController id="3jC-hk-gaG" customClass="SnapshotsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="22" sectionFooterHeight="22" id="toy-iv-Ye3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="381"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
@@ -197,22 +197,74 @@
                     <navigationItem key="navigationItem" title="Snapshots" id="NB0-mM-lbt">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="whW-S7-qwQ">
                             <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
-                            <connections>
-                                <segue destination="Ngb-hy-wIt" kind="presentation" identifier="AddSnapshot" id="X53-0C-15U"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xRf-1G-k4Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-676.875" y="-462.67605633802816"/>
+            <point key="canvasLocation" x="91" y="64.5"/>
+        </scene>
+        <!--Graph And Snapshots View Controller-->
+        <scene sceneID="i6G-e7-3eV">
+            <objects>
+                <viewController id="fZa-wC-1MG" customClass="GraphAndSnapshotsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="de4-Ub-jgt"/>
+                        <viewControllerLayoutGuide type="bottom" id="azZ-ir-JAa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="z3L-g2-Pn8">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Q0-3o-Kkv">
+                                <rect key="frame" x="0.0" y="64" width="600" height="156"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="156" id="HWt-dH-z2q"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="Coc-Hq-qmr" kind="embed" identifier="EmbedGraph" id="gng-7t-D18"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="akq-ye-fL6">
+                                <rect key="frame" x="0.0" y="219" width="600" height="381"/>
+                                <connections>
+                                    <segue destination="3jC-hk-gaG" kind="embed" identifier="EmbedTable" id="FA6-ro-HYF"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="azZ-ir-JAa" firstAttribute="top" secondItem="akq-ye-fL6" secondAttribute="bottom" id="0uT-L7-vd8"/>
+                            <constraint firstItem="2Q0-3o-Kkv" firstAttribute="top" secondItem="de4-Ub-jgt" secondAttribute="bottom" id="48H-iM-j7E"/>
+                            <constraint firstItem="akq-ye-fL6" firstAttribute="leading" secondItem="z3L-g2-Pn8" secondAttribute="leadingMargin" constant="-16" id="5ht-jS-dBH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="akq-ye-fL6" secondAttribute="trailing" constant="-16" id="7P5-Mc-Dmv"/>
+                            <constraint firstItem="akq-ye-fL6" firstAttribute="top" secondItem="de4-Ub-jgt" secondAttribute="bottom" constant="155" id="K0c-tF-EeL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2Q0-3o-Kkv" secondAttribute="trailing" constant="-16" id="TH2-zg-58h"/>
+                            <constraint firstItem="2Q0-3o-Kkv" firstAttribute="leading" secondItem="z3L-g2-Pn8" secondAttribute="leadingMargin" constant="-16" id="sR8-B0-G7B"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ic0-DD-1Z7">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="d5B-OH-LHU">
+                            <connections>
+                                <segue destination="Ngb-hy-wIt" kind="presentation" identifier="AddSnapshot" id="at3-5b-hxt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="graphContainerView" destination="2Q0-3o-Kkv" id="c4p-ee-snw"/>
+                        <outlet property="tableContainerView" destination="akq-ye-fL6" id="gTO-Th-Y7S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9SA-Nw-wgm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-721" y="-473"/>
         </scene>
         <!--Show Snapshot View Controller-->
         <scene sceneID="XNX-m0-ZOJ">
             <objects>
                 <tableViewController id="QTj-tZ-FBg" customClass="ShowSnapshotViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="uZW-Cg-BFv">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="381"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
@@ -416,7 +468,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Tn-XY-jLf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="328.125" y="-462.67605633802816"/>
+            <point key="canvasLocation" x="900" y="-291.5"/>
         </scene>
         <!--Add snapshot-->
         <scene sceneID="BPQ-X1-JxN">
@@ -569,7 +621,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J6w-Au-orM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1126" y="-1265"/>
+            <point key="canvasLocation" x="1274" y="-1125"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zuJ-1d-axa">
@@ -669,7 +721,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWP-5h-dOI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140.625" y="-1263.3802816901407"/>
+            <point key="canvasLocation" x="288" y="-1124"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ccm-W4-tse">
@@ -689,10 +741,44 @@
             </objects>
             <point key="canvasLocation" x="-1837.5" y="-1284.5070422535209"/>
         </scene>
+        <!--Graph View Controller-->
+        <scene sceneID="90I-sK-a6P">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Coc-Hq-qmr" customClass="GraphViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uTY-kd-9Vi"/>
+                        <viewControllerLayoutGuide type="bottom" id="VWm-5m-uJK"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="QQF-aj-BBS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="156"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JNc-xw-rSn" customClass="BEMSimpleLineGraphView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="156"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JNc-xw-rSn" firstAttribute="top" secondItem="uTY-kd-9Vi" secondAttribute="bottom" id="712-Qv-ZWQ"/>
+                            <constraint firstItem="VWm-5m-uJK" firstAttribute="top" secondItem="JNc-xw-rSn" secondAttribute="bottom" id="LTC-t7-7HE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JNc-xw-rSn" secondAttribute="trailing" constant="-16" id="WC4-0n-jrA"/>
+                            <constraint firstItem="JNc-xw-rSn" firstAttribute="leading" secondItem="QQF-aj-BBS" secondAttribute="leadingMargin" constant="-16" id="vag-Ah-dat"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <connections>
+                        <outlet property="graphView" destination="JNc-xw-rSn" id="uTd-ge-vQE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YQX-Tb-cFO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="91" y="-368"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Y3l-Y7-ArY"/>
-        <segue reference="CVy-n6-xPM"/>
+        <segue reference="at3-5b-hxt"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
 </document>

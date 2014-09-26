@@ -8,14 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "UIScrollView+EmptyDataSet.h"
-#import "AddSnapshotTableViewControllerDelegate.h"
 #import "ImageViewWithSnapshotDelegate.h"
 
 @class Snapshot;
 @class Move;
 @class AddMoveTableViewController;
 
-@interface SnapshotsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddSnapshotTableViewControllerDelegate, ImageViewWithSnapshotDelegate>
+@interface SnapshotsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, ImageViewWithSnapshotDelegate>
 
 @property (nonatomic, strong) Move *move;
 

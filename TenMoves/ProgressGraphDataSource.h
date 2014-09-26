@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BEMSimpleLineGraphView.h"
 
 @class Snapshot;
 
-@interface ProgressGraphDataSource : NSObject
+@interface ProgressGraphDataSource : NSObject <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
 
 - (instancetype)initWithSnapshots:(NSSet *)snapshots;
 

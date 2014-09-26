@@ -14,6 +14,7 @@
 #import "Constants.h"
 #import "AddMoveTableViewController.h"
 #import "ArrayDataSource.h"
+#import "GraphAndSnapshotsViewController.h"
 
 @interface MovesTableViewController ()
 
@@ -82,9 +83,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     BOOL isEditingSegue = [segue.identifier isEqualToString:@"editMove"];
-    
+
     if ([segue.identifier isEqualToString:@"showSnapshots"]) {
-        SnapshotsTableViewController *destination = (SnapshotsTableViewController *) segue.destinationViewController;
+        GraphAndSnapshotsViewController *destination = (GraphAndSnapshotsViewController *) segue.destinationViewController;
         Move *move = [self.dataSource itemAtIndexPath:[self.tableView indexPathForSelectedRow]];
         destination.move = move;
     } else if ([segue.identifier isEqualToString:@"AddMove"] || isEditingSegue) {

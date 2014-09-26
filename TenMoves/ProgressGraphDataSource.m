@@ -12,6 +12,7 @@
 @interface ProgressGraphDataSource ()
 
 @property (strong, nonatomic) NSSet *snapshots;
+@property (strong, nonatomic) NSDateFormatter *formatter;
 
 @end
 
@@ -21,6 +22,8 @@
     self = [super init];
     if (self) {
         _snapshots = snapshots;
+        _formatter = [[NSDateFormatter alloc] init];
+        [_formatter setDateStyle:NSDateFormatterShortStyle];
     }
     return self;
 }
@@ -29,11 +32,16 @@
     return self.snapshots.count;
 }
 
+- (NSArray *)sortedSnapshots {
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES];
+    NSArray *all = [[self.snapshots allObjects] sortedArrayUsingDescriptors:@[sort]];
+    return all;
+}
+
 - (NSArray *)dataPoints {
     NSMutableArray *acc = [@[] mutableCopy];
 
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES];
-    NSArray *all = [[self.snapshots allObjects] sortedArrayUsingDescriptors:@[sort]];
+    NSArray *all = [self sortedSnapshots];
 
     for (NSUInteger i = 0; i < all.count; i++) {
         Snapshot *snap = all[i];
@@ -65,5 +73,25 @@
 
     return [NSArray arrayWithArray:acc];
 }
+
+#pragma mark - Line graph data source
+
+- (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph {
+    return [self numberOfSnapshots];
+}
+
+- (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index {
+    NSNumber *number = [self dataPoints][index];
+    return [number floatValue];
+}
+
+//- (NSString *)lineGraph:(BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index {
+//    Snapshot *snap = [self sortedSnapshots][index];
+//    return [self.formatter stringFromDate:snap.createdAt];
+//}
+//
+//- (NSInteger)numberOfGapsBetweenLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph {
+//    return 2;
+//}
 
 @end

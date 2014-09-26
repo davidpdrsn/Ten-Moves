@@ -45,16 +45,14 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self.dataSource;
+
+    self.clearsSelectionOnViewWillAppear = YES;
     
     for (Snapshot *snapshot in [self.dataSource objects]) {
         [snapshot prepareCache];
     }
     
     self.title = self.move.name;
-
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc]init];
-    [self.tableView addSubview:refreshControl];
-    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)refresh:(id)sender {
@@ -65,9 +63,7 @@
     [super viewWillAppear:animated];
     
     [self.dataSource reload];
-    
-    [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
-    
+
     for (SnapshotTableViewCell *cell in [self.tableView visibleCells]) {
         [cell setProgressIndicatorBackground];
     }
@@ -79,42 +75,11 @@
 #pragma mark - segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"AddSnapshot"]) {
-        UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
-        AddSnapshotTableViewController *add = (AddSnapshotTableViewController *)nav.topViewController;
-        Snapshot *snapshot = [Snapshot newManagedObject];
-        [self.move addSnapshotsObject:snapshot];
-        snapshot.move = self.move;
-        add.currentSnapshot = snapshot;
-        add.delegate = self;
-    } else if ([segue.identifier isEqualToString:@"showSnapshot"]) {
+    if ([segue.identifier isEqualToString:@"showSnapshot"]) {
         Snapshot *snapshot = [self.dataSource itemAtIndexPath:[self.tableView indexPathForSelectedRow]];
         ShowSnapshotViewController *destination = (ShowSnapshotViewController *)segue.destinationViewController;
         destination.snapshot = snapshot;
     }
-}
-
-#pragma mark - add snapshot delegate
-
-- (void)addSnapshotTableViewControllerDidSave {
-    [Repository saveWithCompletionHandler:^(NSError *error) {
-        if (error) {
-            [[[UIAlertView alloc] initWithTitle:@"Video missing"
-                                        message:@"Snapshots have to contain a video"
-                                       delegate:nil
-                              cancelButtonTitle:@"Okay, sorry"
-                              otherButtonTitles:nil] show];
-        } else {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
-    }];
-}
-
-- (void)addSnapshotTableViewControllerDidCancel:(Snapshot *)snapshotToDelete {
-    [self.move removeSnapshotsObject:snapshotToDelete];
-    [Repository deleteObject:snapshotToDelete];
-    [self.dataSource reload];
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - array datasource
