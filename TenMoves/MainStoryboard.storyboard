@@ -19,11 +19,14 @@
                             <rect key="frame" x="0.0" y="167.5" width="600" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rp0-aE-efD">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rp0-aE-efD">
                                     <rect key="frame" x="185" y="0.0" width="230" height="70"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7iG-cu-7GH">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7iG-cu-7GH">
                                             <rect key="frame" x="0.0" y="20" width="93" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="93" id="ufj-yr-Msf"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <state key="normal" title="tenmoves.net">
                                                 <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -33,8 +36,11 @@
                                                 <action selector="websiteButtonTapped:" destination="5LR-3t-n7x" eventType="touchUpInside" id="9IJ-S5-MtV"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sR-Wl-l3T">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sR-Wl-l3T">
                                             <rect key="frame" x="124" y="20" width="106" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="106" id="0wR-1D-3vv"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <state key="normal" title="@tenmovesapp">
                                                 <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -46,9 +52,23 @@
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="2sR-Wl-l3T" secondAttribute="bottom" constant="20" id="CiW-z4-mc2"/>
+                                        <constraint firstItem="7iG-cu-7GH" firstAttribute="leading" secondItem="Rp0-aE-efD" secondAttribute="leading" id="EIG-qe-2gf"/>
+                                        <constraint firstItem="7iG-cu-7GH" firstAttribute="top" secondItem="Rp0-aE-efD" secondAttribute="top" constant="20" id="Ftz-Da-s1X"/>
+                                        <constraint firstItem="2sR-Wl-l3T" firstAttribute="top" secondItem="Rp0-aE-efD" secondAttribute="top" constant="20" id="G7x-Gc-SBG"/>
+                                        <constraint firstAttribute="bottom" secondItem="7iG-cu-7GH" secondAttribute="bottom" constant="20" id="XHs-e0-5Rp"/>
+                                        <constraint firstAttribute="trailing" secondItem="2sR-Wl-l3T" secondAttribute="trailing" id="fmb-eL-AtS"/>
+                                        <constraint firstAttribute="width" constant="230" id="r2r-dm-SHo"/>
+                                    </constraints>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="Rp0-aE-efD" secondAttribute="bottom" id="EPL-5d-xig"/>
+                                <constraint firstItem="Rp0-aE-efD" firstAttribute="top" secondItem="ZSp-JF-mcs" secondAttribute="top" id="RrX-Vh-tAI"/>
+                                <constraint firstAttribute="centerX" secondItem="Rp0-aE-efD" secondAttribute="centerX" id="kJh-jW-F7Z"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Move" id="7g7-fw-5dJ" customClass="MoveTableViewCell">
