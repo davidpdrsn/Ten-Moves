@@ -51,6 +51,14 @@
     }
     
     self.title = self.move.name;
+
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc]init];
+    [self.tableView addSubview:refreshControl];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)refresh:(id)sender {
+    [(UIRefreshControl *)sender endRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

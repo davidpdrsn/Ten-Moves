@@ -14,6 +14,8 @@
 		861454AC19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 861454AB19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m */; };
 		863B0EAE1984237F00AAF919 /* ManagedSnapshotAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 863B0EAD1984237F00AAF919 /* ManagedSnapshotAsset.m */; };
 		86405D681987D0D300136C9C /* VideoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 86405D671987D0D300136C9C /* VideoEditor.m */; };
+		86479A8819D5620700136336 /* ProgressGraphDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 86479A8719D5620700136336 /* ProgressGraphDataSource.m */; };
+		86479A8A19D5623800136336 /* ProgressGraphDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 86479A8919D5623800136336 /* ProgressGraphDataSourceTest.m */; };
 		865304BD197FD97D00EEE9E0 /* ProgressPickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 865304BC197FD97D00EEE9E0 /* ProgressPickerButton.m */; };
 		865490C419C2289D0033695D /* NSString+RegExpHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 865490C319C2289D0033695D /* NSString+RegExpHelpers.m */; };
 		865490C619C22A730033695D /* NSURL+ReformattingHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 865490C519C22A730033695D /* NSURL+ReformattingHelpers.m */; };
@@ -84,6 +86,9 @@
 		863B0EB0198426E500AAF919 /* TenMoves 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 3.xcdatamodel"; sourceTree = "<group>"; };
 		86405D661987D0D300136C9C /* VideoEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoEditor.h; sourceTree = "<group>"; };
 		86405D671987D0D300136C9C /* VideoEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoEditor.m; sourceTree = "<group>"; };
+		86479A8619D5620700136336 /* ProgressGraphDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressGraphDataSource.h; sourceTree = "<group>"; };
+		86479A8719D5620700136336 /* ProgressGraphDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressGraphDataSource.m; sourceTree = "<group>"; };
+		86479A8919D5623800136336 /* ProgressGraphDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressGraphDataSourceTest.m; sourceTree = "<group>"; };
 		865304BB197FD97D00EEE9E0 /* ProgressPickerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressPickerButton.h; sourceTree = "<group>"; };
 		865304BC197FD97D00EEE9E0 /* ProgressPickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressPickerButton.m; sourceTree = "<group>"; };
 		865490C319C2289D0033695D /* NSString+RegExpHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RegExpHelpers.m"; sourceTree = "<group>"; };
@@ -257,6 +262,8 @@
 		86A3F26419712D7D00E389A1 /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
+				86479A8619D5620700136336 /* ProgressGraphDataSource.h */,
+				86479A8719D5620700136336 /* ProgressGraphDataSource.m */,
 				86A3F26119712D7900E389A1 /* ArrayDataSource.h */,
 				86A3F26219712D7900E389A1 /* ArrayDataSource.m */,
 			);
@@ -360,6 +367,7 @@
 		86ED30D8196F0F1000FC738B /* TenMovesTests */ = {
 			isa = PBXGroup;
 			children = (
+				86479A8919D5623800136336 /* ProgressGraphDataSourceTest.m */,
 				86F2653C19C2CB4500320718 /* TestCaseWithCoreData.h */,
 				86F2653D19C2CB4500320718 /* TestCaseWithCoreData.m */,
 				86F2653A19C2C8CA00320718 /* SnapshotTest.m */,
@@ -562,6 +570,7 @@
 				86ED30F2196F193200FC738B /* AddMoveTableViewController.m in Sources */,
 				8685E3B4196F595E00A97585 /* Move.m in Sources */,
 				8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */,
+				86479A8819D5620700136336 /* ProgressGraphDataSource.m in Sources */,
 				86405D681987D0D300136C9C /* VideoEditor.m in Sources */,
 				86ED30C6196F0F0F00FC738B /* AppDelegate.m in Sources */,
 				86ED30C9196F0F0F00FC738B /* TenMoves.xcdatamodeld in Sources */,
@@ -591,6 +600,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86F2653B19C2C8CA00320718 /* SnapshotTest.m in Sources */,
+				86479A8A19D5623800136336 /* ProgressGraphDataSourceTest.m in Sources */,
 				865490C619C22A730033695D /* NSURL+ReformattingHelpers.m in Sources */,
 				865490C419C2289D0033695D /* NSString+RegExpHelpers.m in Sources */,
 				86F2653F19C2CB4500320718 /* TestCaseWithCoreData.m in Sources */,
