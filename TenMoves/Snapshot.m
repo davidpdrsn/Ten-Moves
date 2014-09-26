@@ -44,22 +44,22 @@ static NSString *ENTITY_NAME = @"Snapshot";
 @dynamic notes;
 
 + (instancetype)newManagedObject {
-    Snapshot *snapshot = (Snapshot *) [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
-                                                                    inManagedObjectContext:[Repository managedObjectContext]];
-    
-    return snapshot;
+    return (Snapshot *)[NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
+                                                     inManagedObjectContext:[Repository managedObjectContext]];
 }
 
 + (NSFetchRequest *)fetchRequestForSnapshotsBelongingToMove:(Move *)move {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:ENTITY_NAME inManagedObjectContext:[Repository managedObjectContext]];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:ENTITY_NAME
+                                              inManagedObjectContext:[Repository managedObjectContext]];
     [fetchRequest setEntity:entity];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt"
+                                                                   ascending:NO];
+    fetchRequest.sortDescriptors = @[sortDescriptor];
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"move = %@", move];
-    [fetchRequest setPredicate:predicate];
+    fetchRequest.predicate = predicate;
     
     return fetchRequest;
 }
@@ -142,7 +142,8 @@ static NSString *ENTITY_NAME = @"Snapshot";
 
 - (void)addUpdatedAtObserver {
     if (self.updatedAtObserver) return;
-    self.updatedAtObserver = [[UpdatedAtObserver alloc] initWithKeyPaths:@[@"video", @"move", @"notes", @"image", @"progress"] object:self];
+    NSArray *keyPaths = @[@"video", @"move", @"notes", @"image", @"progress"];
+    self.updatedAtObserver = [[UpdatedAtObserver alloc] initWithKeyPaths:keyPaths object:self];
 }
 
 - (void)correctUrls {
@@ -169,7 +170,11 @@ static NSString *ENTITY_NAME = @"Snapshot";
     [self addObserver:self forKeyPath:@"move" options:0 context:NULL];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+
     if ([keyPath isEqualToString:@"video"]) {
         [self invalidateCaches];
     } else if ([keyPath isEqualToString:@"move"]) {
@@ -253,9 +258,9 @@ static NSString *ENTITY_NAME = @"Snapshot";
 
 - (NSArray *)sortedRelatedSnapshots {
     NSSet *allSnapshots = self.move.snapshots;
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES];
-    NSArray *sortedSnapshots = [allSnapshots sortedArrayUsingDescriptors:@[sortDescriptor]];
-    return sortedSnapshots;
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdAt"
+                                                                     ascending:YES];
+    return [allSnapshots sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 - (BOOL)isBaseline {

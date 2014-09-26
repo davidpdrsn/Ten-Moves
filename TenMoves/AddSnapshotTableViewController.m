@@ -54,36 +54,34 @@
 
 - (void)setupProgressPickers {
     ProgressPickerButton *improved = [ProgressPickerButton autolayoutView];
-    [self.progressPickerContainer addSubview:improved];
-    [improved constrainFlushTopBottom];
-    [improved constrainWidthToRatio:.333333];
-    [improved constrainFlushLeft];
-    improved.type = SnapshotProgressImproved;
-    improved.label.text = [Snapshot textForProgressType:SnapshotProgressImproved];
-    [improved addTarget:self action:@selector(tappedProgressPicker:) forControlEvents:UIControlEventTouchUpInside];
-    improved.hasBorder = YES;
-
     ProgressPickerButton *same = [ProgressPickerButton autolayoutView];
-    [self.progressPickerContainer addSubview:same];
-    [same constrainFlushTopBottom];
-    [same constrainWidthToRatio:.333333];
-    [same constrainCenterHorizontally];
-    same.type = SnapshotProgressSame;
-    same.label.text = [Snapshot textForProgressType:SnapshotProgressSame];
-    [same addTarget:self action:@selector(tappedProgressPicker:) forControlEvents:UIControlEventTouchUpInside];
-    same.hasBorder = YES;
-    
     ProgressPickerButton *regressed = [ProgressPickerButton autolayoutView];
-    [self.progressPickerContainer addSubview:regressed];
-    [regressed constrainFlushTopBottom];
-    [regressed constrainWidthToRatio:.333333];
-    [regressed constrainFlushRight];
+
+    // Setup thats different for each button
+    improved.type = SnapshotProgressImproved;
+    same.type = SnapshotProgressSame;
     regressed.type = SnapshotProgressRegressed;
-    regressed.label.text = [Snapshot textForProgressType:SnapshotProgressRegressed];
-    [regressed addTarget:self action:@selector(tappedProgressPicker:) forControlEvents:UIControlEventTouchUpInside];
-    
+
     self.progressButtons = @[improved, same, regressed];
-    
+
+    [improved constrainFlushLeft];
+    [same constrainCenterHorizontally];
+    [regressed constrainFlushRight];
+
+    improved.hasBorder = YES;
+    same.hasBorder = YES;
+
+    // Setup shared for all buttons
+    for (ProgressPickerButton *button in self.progressButtons) {
+        [self.progressPickerContainer addSubview:button];
+        [button constrainFlushTopBottom];
+        [button constrainWidthToRatio:.333333];
+        button.label.text = [Snapshot textForProgressType:button.type];
+        [button addTarget:self
+                   action:@selector(tappedProgressPicker:)
+         forControlEvents:UIControlEventTouchUpInside];
+    }
+
     [self updateActiveProgressPicker];
 }
 
@@ -114,7 +112,9 @@
     
     [self configureTextView];
     
-    UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEditing)];
+    UITapGestureRecognizer *tapper =
+        [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                action:@selector(endEditing)];
     [self.tableView addGestureRecognizer:tapper];
     
     if (self.currentSnapshot.video) {
@@ -140,8 +140,11 @@
     formatter.dateStyle = NSDateFormatterLongStyle;
     self.previousSnapshotLabel.text = [formatter stringFromDate:self.previousSnapshot.createdAt];
 
-    self.previousSnapshotProgress.layer.cornerRadius = self.previousSnapshotProgress.frame.size.height/2;
-    self.previousSnapshotProgress.backgroundColor = [Snapshot colorForProgressType:self.previousSnapshot.progressTypeRaw];
+    self.previousSnapshotProgress.layer.cornerRadius =
+        self.previousSnapshotProgress.frame.size.height/2;
+
+    self.previousSnapshotProgress.backgroundColor =
+        [Snapshot colorForProgressType:self.previousSnapshot.progressTypeRaw];
 }
 
 - (void)endEditing {
@@ -149,7 +152,6 @@
 }
 
 #pragma mark - IBActions
-
 
 - (IBAction)cancel:(id)sender {
     if (self.editingSnapshot) {
@@ -167,7 +169,11 @@
         
         [self.delegate addSnapshotTableViewControllerDidSave];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Missing video" message:@"A snapshot cannot be saved without a video. Pick a video and try again." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Missing video"
+                                                        message:@"A snapshot cannot be saved without a video. Pick a video and try again."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:nil];
         [alert show];
     }
 }
@@ -188,19 +194,25 @@
     [self.sheet setCancelButtonTitle:@"Cancel" block:nil];
     
     [self.sheet addButtonWithTitle:@"Take Video" block:^{
-        [_self startMediaBrowserFromViewController:_self usingDelegate:_self type:UIImagePickerControllerSourceTypeCamera];
+        [_self startMediaBrowserFromViewController:_self
+                                     usingDelegate:_self
+                                              type:UIImagePickerControllerSourceTypeCamera];
     }];
     
     [self.sheet addButtonWithTitle:@"Choose Existing" block:^{
-        [_self startMediaBrowserFromViewController:_self usingDelegate:_self type:UIImagePickerControllerSourceTypePhotoLibrary];
+        [_self startMediaBrowserFromViewController:_self
+                                     usingDelegate:_self
+                                              type:UIImagePickerControllerSourceTypePhotoLibrary];
     }];
     
     self.sheet.willPresentCallBack = ^{
         _self.videoPreview.enabled = NO;
         _self.previousSnapshotVideo.enabled = NO;
-        _self.previousSnapshotProgress.backgroundColor = [[Snapshot colorForProgressType:SnapshotProgressBaseline] colorWithAlphaComponent:.5];
+        _self.previousSnapshotProgress.backgroundColor =
+            [[Snapshot colorForProgressType:SnapshotProgressBaseline] colorWithAlphaComponent:.5];
 
-        for (ProgressPickerButton *button in _self.progressButtons) { button.enabled = NO; }
+        for (ProgressPickerButton *button in _self.progressButtons)
+            button.enabled = NO;
     };
     
     self.sheet.didDismissCallBack = ^{
@@ -209,7 +221,8 @@
         [_self setupPreviousSnapshotCell];
 
         if (![_self.currentSnapshot isBaseline]) {
-            for (ProgressPickerButton *button in _self.progressButtons) { button.enabled = YES; }
+            for (ProgressPickerButton *button in _self.progressButtons)
+                button.enabled = YES;
         }
     };
 }
@@ -241,29 +254,38 @@
 - (void)startMediaBrowserFromViewController: (UIViewController*) controller
                                usingDelegate: (id <UIImagePickerControllerDelegate, UINavigationControllerDelegate>) delegate
                                        type:(UIImagePickerControllerSourceType)type {
-    if (([UIImagePickerController isSourceTypeAvailable: type] == NO) || (delegate == nil) || (controller == nil)) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Video recording not supported" message:@"Your phone does not support video recording" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        [alert show];
-        return;
+
+    if ([UIImagePickerController isSourceTypeAvailable: type] && delegate && controller) {
+        UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
+        mediaUI.sourceType = type;
+        mediaUI.mediaTypes = @[(NSString *)kUTTypeMovie];
+        mediaUI.allowsEditing = YES;
+        mediaUI.delegate = delegate;
+        [controller presentViewController:mediaUI animated:YES completion:nil];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"Video recording not supported"
+                                    message:@"Your phone does not support video recording"
+                                   delegate:nil
+                          cancelButtonTitle:@"Cancel"
+                          otherButtonTitles:nil] show];
     }
-    
-    UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
-    mediaUI.sourceType = type;
-    mediaUI.mediaTypes = @[(NSString *)kUTTypeMovie];
-    mediaUI.allowsEditing = YES;
-    mediaUI.delegate = delegate;
-    [controller presentViewController:mediaUI animated:YES completion:nil];
 }
 
 - (void)showVideoCopyAlert {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed importing video" message:nil delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-    [alert show];
+    [[[UIAlertView alloc] initWithTitle:@"Failed importing video"
+                                message:nil
+                               delegate:nil
+                      cancelButtonTitle:@"Okay"
+                      otherButtonTitles:nil] show];
 }
 
 - (void)addVideoToSnapshotAtUrl:(NSURL *)mediaUrl {
     [self.currentSnapshot saveVideoAtFileUrl:mediaUrl completionBlock:^{} failureBlock:^(NSError *error) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Saving failed" message:@"Sorry but there was a problem saving the video" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-        [alert show];
+        [[[UIAlertView alloc] initWithTitle:@"Saving failed"
+                                    message:@"Sorry but there was a problem saving the video"
+                                   delegate:nil
+                          cancelButtonTitle:@"Okay"
+                          otherButtonTitles:nil] show];
     }];
 }
 
@@ -338,7 +360,9 @@
 
 #pragma mark - ImageViewSnapshot delegate methods
 
-- (void)imageViewWithSnapshot:(VideoPreview *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
+- (void)imageViewWithSnapshot:(VideoPreview *)imageView
+presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
+
     [self presentMoviePlayerViewControllerAnimated:player];
 }
 
@@ -386,7 +410,10 @@
 - (void)tableViewScrollToBottomAnimated:(BOOL)animated {
     NSInteger numberOfRows = [self.tableView numberOfRowsInSection:2];
     if (numberOfRows) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:numberOfRows-1 inSection:2] atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:numberOfRows-1 inSection:2];
+        [self.tableView scrollToRowAtIndexPath:indexPath
+                              atScrollPosition:UITableViewScrollPositionBottom
+                                      animated:animated];
     }
 }
 

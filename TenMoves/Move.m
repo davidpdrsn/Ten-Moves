@@ -29,18 +29,17 @@ static NSString *ENTITY_NAME = @"Move";
 @dynamic snapshots;
 
 + (instancetype)newManagedObject {
-    Move *move = (Move *) [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
-                                                        inManagedObjectContext:[Repository managedObjectContext]];
-    
-    return move;
+    return (Move *)[NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
+                                                 inManagedObjectContext:[Repository managedObjectContext]];
 }
 
 + (NSFetchRequest *)fetchRequest {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:ENTITY_NAME inManagedObjectContext:[Repository managedObjectContext]];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:ENTITY_NAME
+                                              inManagedObjectContext:[Repository managedObjectContext]];
     [fetchRequest setEntity:entity];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+    fetchRequest.sortDescriptors = @[sortDescriptor];
     
     return fetchRequest;
 }
@@ -62,7 +61,8 @@ static NSString *ENTITY_NAME = @"Move";
 
 - (void)addUpdatedAtObserver {
     if (self.updatedAtObserver) return;
-    self.updatedAtObserver = [[UpdatedAtObserver alloc] initWithKeyPaths:@[@"name", @"snapshots"] object:self];
+    NSArray *keyPaths = @[@"name", @"snapshots"];
+    self.updatedAtObserver = [[UpdatedAtObserver alloc] initWithKeyPaths:keyPaths object:self];
 }
 
 @end
