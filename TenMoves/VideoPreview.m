@@ -33,7 +33,7 @@
         [self addSubview:self.overlay];
         
         [self.overlay constrainFlush];
-        
+
         UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
         self.userInteractionEnabled = YES;
         [self addGestureRecognizer:tapper];
