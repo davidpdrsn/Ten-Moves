@@ -224,7 +224,9 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Q0-3o-Kkv">
                                 <rect key="frame" x="0.0" y="64" width="600" height="156"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="156" id="HWt-dH-z2q"/>
+                                    <constraint firstAttribute="height" constant="156" id="HWt-dH-z2q">
+                                        <variation key="heightClass=compact" constant="90"/>
+                                    </constraint>
                                 </constraints>
                                 <connections>
                                     <segue destination="Coc-Hq-qmr" kind="embed" identifier="EmbedGraph" id="gng-7t-D18"/>
@@ -243,7 +245,9 @@
                             <constraint firstItem="2Q0-3o-Kkv" firstAttribute="top" secondItem="de4-Ub-jgt" secondAttribute="bottom" id="48H-iM-j7E"/>
                             <constraint firstItem="akq-ye-fL6" firstAttribute="leading" secondItem="z3L-g2-Pn8" secondAttribute="leadingMargin" constant="-16" id="5ht-jS-dBH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="akq-ye-fL6" secondAttribute="trailing" constant="-16" id="7P5-Mc-Dmv"/>
-                            <constraint firstItem="akq-ye-fL6" firstAttribute="top" secondItem="de4-Ub-jgt" secondAttribute="bottom" constant="155" id="K0c-tF-EeL"/>
+                            <constraint firstItem="akq-ye-fL6" firstAttribute="top" secondItem="de4-Ub-jgt" secondAttribute="bottom" constant="155" id="K0c-tF-EeL">
+                                <variation key="heightClass=compact" constant="89"/>
+                            </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="2Q0-3o-Kkv" secondAttribute="trailing" constant="-16" id="TH2-zg-58h"/>
                             <constraint firstItem="2Q0-3o-Kkv" firstAttribute="leading" secondItem="z3L-g2-Pn8" secondAttribute="leadingMargin" constant="-16" id="sR8-B0-G7B"/>
                         </constraints>
@@ -262,7 +266,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9SA-Nw-wgm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-721" y="-473"/>
+            <point key="canvasLocation" x="-721" y="-474"/>
         </scene>
         <!--Show Snapshot View Controller-->
         <scene sceneID="XNX-m0-ZOJ">
@@ -759,12 +763,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="156"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JNc-xw-rSn" customClass="BEMSimpleLineGraphView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JNc-xw-rSn" customClass="BEMSimpleLineGraphView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="156"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JNc-xw-rSn" firstAttribute="top" secondItem="uTY-kd-9Vi" secondAttribute="bottom" id="6wA-Uu-V5b"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JNc-xw-rSn" secondAttribute="trailing" constant="-16" id="POP-Fz-eue"/>
+                            <constraint firstItem="VWm-5m-uJK" firstAttribute="top" secondItem="JNc-xw-rSn" secondAttribute="bottom" id="kYk-LS-9mF"/>
+                            <constraint firstItem="JNc-xw-rSn" firstAttribute="leading" secondItem="QQF-aj-BBS" secondAttribute="leadingMargin" constant="-16" id="oIJ-az-nyH"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <connections>
