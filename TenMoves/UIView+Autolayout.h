@@ -29,6 +29,10 @@
 - (void)constrainFlushLeft;
 - (void)constrainFlushRight;
 - (void)constrainFlushLeftRight;
+- (void)constrainFlushTop;
+- (void)constrainFlushTopOffset:(CGFloat)offset;
+- (void)constrainFlushBottom;
+- (void)constrainFlushBottomOffset:(CGFloat)offset;
 - (void)constrainFlushTopBottom;
 - (void)constrainFlush;
 

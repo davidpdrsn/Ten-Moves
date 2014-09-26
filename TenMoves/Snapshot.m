@@ -281,4 +281,15 @@ static NSString *ENTITY_NAME = @"Snapshot";
     return [otherSnapshots objectAtIndex:indexOfSelf-1];
 }
 
+- (instancetype)nextSnapshot {
+    NSArray *otherSnapshots = [self sortedRelatedSnapshots];
+    NSUInteger indexOfSelf = [otherSnapshots indexOfObject:self];
+
+    if (otherSnapshots.count-1 == indexOfSelf) {
+        return nil;
+    } else {
+        return [otherSnapshots objectAtIndex:indexOfSelf+1];
+    }
+}
+
 @end
