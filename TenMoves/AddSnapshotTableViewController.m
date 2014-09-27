@@ -72,7 +72,9 @@
         [self.progressPickerContainer addSubview:button];
         [button constrainFlushTopBottom];
         [button constrainWidthToRatio:.333333];
-        button.label.text = [Snapshot textForProgressType:button.type];
+        NSString *text = [Snapshot textForProgressType:button.type];
+        button.label.text = text;
+        button.accessibilityLabel = text;
         [button addTarget:self
                    action:@selector(tappedProgressPicker:)
          forControlEvents:UIControlEventTouchUpInside];

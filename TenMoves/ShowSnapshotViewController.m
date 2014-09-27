@@ -85,9 +85,12 @@
     
     if ([self.snapshot hasNotes]) {
         self.notesTextView.text = self.snapshot.notes;
+        self.notesTextView.accessibilityLabel = self.snapshot.notes;
         self.notesTextView.textColor = [UIColor blackColor];
     } else {
-        self.notesTextView.text = @"No notes";
+        NSString *text = @"No notes";
+        self.notesTextView.text = text;
+        self.notesTextView.accessibilityLabel = text;
         self.notesTextView.textColor = [UIColor lightGrayColor];
     }
     

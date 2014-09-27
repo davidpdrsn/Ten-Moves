@@ -1,13 +1,18 @@
 PODS:
   - BEMSimpleLineGraph (3.1)
   - DZNEmptyDataSet (1.4.1)
+  - KIF (3.0.8):
+    - KIF/XCTest
+  - KIF/XCTest (3.0.8)
 
 DEPENDENCIES:
   - BEMSimpleLineGraph
   - DZNEmptyDataSet
+  - KIF (~> 3.0)
 
 SPEC CHECKSUMS:
   BEMSimpleLineGraph: db20cc489912a023d9a082b7c05f15789195f3f6
   DZNEmptyDataSet: 381e880cb3bb2d33885cb0325218443df265bc98
+  KIF: 2db5e8cf59136dd1267d49cca0d55883389b09d3
 
 COCOAPODS: 0.34.0

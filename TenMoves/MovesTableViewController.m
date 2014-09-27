@@ -47,6 +47,7 @@
     self.tableView.emptyDataSetSource = self.dataSource;
     
     self.editButtonItem.tintColor = self.view.tintColor;
+    self.editButtonItem.accessibilityLabel = @"Edit";
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     self.tableView.allowsSelectionDuringEditing = YES;
     
@@ -138,7 +139,8 @@
         moveCell.nameLabel.text = move.name;
         moveCell.countLabel.text = [NSString stringWithFormat:@"%i", (int)move.snapshots.count];
         moveCell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
+        moveCell.accessibilityLabel = move.name;
+
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateStyle:NSDateFormatterMediumStyle];
         moveCell.detailTextLabel.text = [formatter stringFromDate:move.createdAt];

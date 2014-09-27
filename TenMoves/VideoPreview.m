@@ -37,6 +37,8 @@
         UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
         self.userInteractionEnabled = YES;
         [self addGestureRecognizer:tapper];
+
+        self.accessibilityTraits = UIAccessibilityTraitButton | UIAccessibilityTraitImage;
     }
     
     if (!self.triangle) {
@@ -113,6 +115,12 @@
 }
 
 - (void)setVideoAndImageFromSnapshot:(Snapshot *)snapshot {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateStyle = NSDateFormatterMediumStyle;
+    NSString *dateString = [formatter stringFromDate:snapshot.createdAt];
+    NSString *label = [NSString stringWithFormat:@"Play video from %@", dateString];
+    self.accessibilityLabel = label;
+
     self.image = [snapshot cachedImage];
     self.videoUrl = [snapshot cachedVideo];
 }

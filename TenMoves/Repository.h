@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class NSFetchRequest;
+
 typedef void (^CompletionWithPossibleErrorBlock)(NSError *);
 
 @interface Repository : NSObject

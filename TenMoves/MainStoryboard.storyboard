@@ -118,6 +118,9 @@
                     <navigationItem key="navigationItem" title="Moves" id="uhC-D2-HWU">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="tmr-o6-BL7">
                             <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Add move"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <segue destination="cGj-6s-1db" kind="presentation" identifier="AddMove" id="GqP-GM-bs0"/>
                             </connections>
@@ -168,6 +171,10 @@
                                         </view>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hJ1-UY-VhF" customClass="VideoPreview">
                                             <rect key="frame" x="8" y="8" width="71" height="71"/>
+                                            <accessibility key="accessibilityConfiguration">
+                                                <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                                                <bool key="isElement" value="YES"/>
+                                            </accessibility>
                                             <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="71" id="g0t-8u-qts"/>
@@ -254,6 +261,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="ic0-DD-1Z7">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="d5B-OH-LHU">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Add snapshot"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <segue destination="Ngb-hy-wIt" kind="presentation" identifier="AddSnapshot" id="at3-5b-hxt"/>
                             </connections>
@@ -288,16 +298,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="175"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="24T-4l-bwK" customClass="VideoPreview">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="brU-tF-eDi" customClass="VideoPreview">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="176"/>
-                                                    <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                                                        <bool key="isElement" value="YES"/>
+                                                    </accessibility>
+                                                    <gestureRecognizers/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="24T-4l-bwK" firstAttribute="top" secondItem="INq-lr-W0K" secondAttribute="topMargin" constant="-8" id="RXa-SY-qkd"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="24T-4l-bwK" secondAttribute="bottom" constant="-8.5" id="W2B-zu-DOv"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="24T-4l-bwK" secondAttribute="trailing" constant="-8" id="bvr-C3-2CY"/>
-                                                <constraint firstItem="24T-4l-bwK" firstAttribute="leading" secondItem="INq-lr-W0K" secondAttribute="leadingMargin" constant="-8" id="qg2-2l-kOR"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="brU-tF-eDi" secondAttribute="bottom" constant="-8" id="8H4-ba-ME3"/>
+                                                <constraint firstItem="brU-tF-eDi" firstAttribute="leading" secondItem="INq-lr-W0K" secondAttribute="leadingMargin" constant="-8" id="Nbg-V8-3IV"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="brU-tF-eDi" secondAttribute="trailing" constant="-8" id="byv-Tm-ww1"/>
+                                                <constraint firstItem="brU-tF-eDi" firstAttribute="top" secondItem="INq-lr-W0K" secondAttribute="topMargin" constant="-8" id="zVB-Ew-ex3"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -475,7 +489,7 @@
                         <outlet property="notesTextView" destination="lsG-Bq-EIf" id="C0D-NE-yz6"/>
                         <outlet property="progressCircle" destination="8bW-Ds-Jm4" id="FUZ-wN-d7K"/>
                         <outlet property="progressLabel" destination="Goh-sa-Qkk" id="oWc-Eg-z6G"/>
-                        <outlet property="thumbnail" destination="24T-4l-bwK" id="XbJ-vi-Jyv"/>
+                        <outlet property="thumbnail" destination="brU-tF-eDi" id="t9a-Bo-Vsx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Tn-XY-jLf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -503,6 +517,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JnG-IP-oJX">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="62"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Pick video"/>
                                                     <state key="normal" title="Pick video">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -544,6 +559,9 @@
                                             <subviews>
                                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mje-g9-PDM" customClass="JTSTextView">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="87"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="notes"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </scrollView>
                                             </subviews>
                                             <constraints>
@@ -581,6 +599,10 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ltc-lx-me9" customClass="VideoPreview">
                                                     <rect key="frame" x="7" y="7" width="44" height="45"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                                                        <bool key="isElement" value="YES"/>
+                                                    </accessibility>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="44" id="LZR-e2-wp4"/>
                                                         <constraint firstAttribute="height" constant="45" id="ubz-u9-c5D"/>
@@ -672,6 +694,7 @@
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K8D-J7-o8N">
                                                     <rect key="frame" x="20" y="7" width="560" height="30"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Name"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
@@ -701,6 +724,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="YxL-ng-3fz">
                             <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Save"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="done:" destination="Fma-3G-TG3" id="vVB-J6-aPd"/>
                             </connections>
@@ -787,8 +813,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="at3-5b-hxt"/>
         <segue reference="Y3l-Y7-ArY"/>
+        <segue reference="CVy-n6-xPM"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99215692280000001" green="0.63921570780000003" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
 </document>

@@ -23,6 +23,9 @@
 - (void)setupProgressIndicator {
     self.progressIndicator.layer.cornerRadius = self.progressIndicator.frame.size.height/2;
     [self setProgressIndicatorBackground];
+
+    self.progressIndicator.accessibilityLabel =
+        [Snapshot textForProgressType:self.snapshot.progressTypeRaw];
 }
 
 - (void)setSnapshot:(Snapshot *)snapshot {
