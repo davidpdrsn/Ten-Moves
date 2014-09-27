@@ -37,6 +37,7 @@
     self.graphView.alphaLine = 1;
     self.graphView.animationGraphEntranceTime = 1;
     self.graphView.enablePopUpReport = NO;
+    [self setSizeOfPoint];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadGraph)
@@ -52,17 +53,20 @@
 }
 
 - (void)reloadGraph {
+    [self setSizeOfPoint];
     [self.graphView reloadGraph];
-
-    if ([self.dataSource numberOfSnapshots] != 1)
-        self.graphView.sizePoint = 0;
-    else
-        self.graphView.sizePoint = 10;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.graphView reloadGraph];
+}
+
+- (void)setSizeOfPoint {
+    if ([self.dataSource numberOfSnapshots] != 1)
+        self.graphView.sizePoint = 0;
+    else
+        self.graphView.sizePoint = 10;
 }
 
 @end
