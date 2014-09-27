@@ -64,10 +64,6 @@
 
     self.progressButtons = @[improved, same, regressed];
 
-    [improved constrainFlushLeft];
-    [same constrainCenterHorizontally];
-    [regressed constrainFlushRight];
-
     improved.hasBorder = YES;
     same.hasBorder = YES;
 
@@ -81,6 +77,10 @@
                    action:@selector(tappedProgressPicker:)
          forControlEvents:UIControlEventTouchUpInside];
     }
+
+    [improved constrainFlushLeft];
+    [same constrainCenterHorizontally];
+    [regressed constrainFlushRight];
 
     [self updateActiveProgressPicker];
 }
