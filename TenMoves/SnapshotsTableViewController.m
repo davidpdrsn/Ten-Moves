@@ -39,8 +39,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.navigationController.view.tintColor = self.view.tintColor;
-
     self.dataSource = [self createDataSource];
     
     self.tableView.delegate = self;
@@ -83,7 +81,6 @@
 - (ArrayDataSource *)createDataSource {
     ConfigureCellBlock configureCell = ^UITableViewCell *(UITableViewCell *cell, Snapshot *snapshot) {
         SnapshotTableViewCell *snapshotCell = (SnapshotTableViewCell *)cell;
-//        snapshotCell.tintColor = self.view.tintColor;
         snapshotCell.snapshot = snapshot;
         [snapshotCell.thumbnailImageView setVideoAndImageFromSnapshot:snapshot];
         snapshotCell.thumbnailImageView.delegate = self;
