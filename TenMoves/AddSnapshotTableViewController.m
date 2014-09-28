@@ -20,8 +20,9 @@
 #import "LPBlockActionSheet.h"
 #import "SnapshotVideo.h"
 #import "UIView+Autolayout.h"
+#import "VideoPicker.h"
 
-@interface AddSnapshotTableViewController ()
+@interface AddSnapshotTableViewController () <VideoPickerDelegate>
 
 @property (strong, nonatomic) VideoPreview *videoPreview;
 @property (assign, nonatomic) BOOL resizedButton;
@@ -77,17 +78,15 @@
     __weak AddSnapshotTableViewController *_self = self;
     
     [self.sheet setCancelButtonTitle:@"Cancel" block:nil];
+
+    VideoPicker *picker = [[VideoPicker alloc] initWithDelegate:self];
     
     [self.sheet addButtonWithTitle:@"Take Video" block:^{
-        [_self startMediaBrowserFromViewController:_self
-                                     usingDelegate:_self
-                                              type:UIImagePickerControllerSourceTypeCamera];
+        [picker startBrowsingForType:UIImagePickerControllerSourceTypeCamera];
     }];
     
     [self.sheet addButtonWithTitle:@"Choose Existing" block:^{
-        [_self startMediaBrowserFromViewController:_self
-                                     usingDelegate:_self
-                                              type:UIImagePickerControllerSourceTypePhotoLibrary];
+        [picker startBrowsingForType:UIImagePickerControllerSourceTypePhotoLibrary];
     }];
     
     self.sheet.willPresentCallBack = ^{
@@ -224,6 +223,16 @@
     [self.sheet showInView:self.view];
 }
 
+- (void)addVideoToSnapshotAtUrl:(NSURL *)mediaUrl {
+    [self.currentSnapshot saveVideoAtFileUrl:mediaUrl completionBlock:^{} failureBlock:^(NSError *error) {
+        [[[UIAlertView alloc] initWithTitle:@"Saving failed"
+                                    message:@"Sorry but there was a problem saving the video"
+                                   delegate:nil
+                          cancelButtonTitle:@"Okay"
+                          otherButtonTitles:nil] show];
+    }];
+}
+
 #pragma mark - table view
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
@@ -248,65 +257,9 @@
 
 #pragma mark - picking video
 
-- (void)startMediaBrowserFromViewController: (UIViewController*) controller
-                               usingDelegate: (id <UIImagePickerControllerDelegate, UINavigationControllerDelegate>) delegate
-                                       type:(UIImagePickerControllerSourceType)type {
-
-    if ([UIImagePickerController isSourceTypeAvailable: type] && delegate && controller) {
-        UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
-        mediaUI.sourceType = type;
-        mediaUI.mediaTypes = @[(NSString *)kUTTypeMovie];
-        mediaUI.allowsEditing = YES;
-        mediaUI.delegate = delegate;
-        [controller presentViewController:mediaUI animated:YES completion:nil];
-    } else {
-        [[[UIAlertView alloc] initWithTitle:@"Video recording not supported"
-                                    message:@"Your phone does not support video recording"
-                                   delegate:nil
-                          cancelButtonTitle:@"Cancel"
-                          otherButtonTitles:nil] show];
-    }
-}
-
-- (void)showVideoCopyAlert {
-    [[[UIAlertView alloc] initWithTitle:@"Failed importing video"
-                                message:nil
-                               delegate:nil
-                      cancelButtonTitle:@"Okay"
-                      otherButtonTitles:nil] show];
-}
-
-- (void)addVideoToSnapshotAtUrl:(NSURL *)mediaUrl {
-    [self.currentSnapshot saveVideoAtFileUrl:mediaUrl completionBlock:^{} failureBlock:^(NSError *error) {
-        [[[UIAlertView alloc] initWithTitle:@"Saving failed"
-                                    message:@"Sorry but there was a problem saving the video"
-                                   delegate:nil
-                          cancelButtonTitle:@"Okay"
-                          otherButtonTitles:nil] show];
-    }];
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSURL *mediaUrl = info[UIImagePickerControllerMediaURL];
-    
-    BOOL videoWasEdited = info[@"_UIImagePickerControllerVideoEditingStart"] && info[@"_UIImagePickerControllerVideoEditingEnd"];
-    if (videoWasEdited) {
-        NSNumber *start = [info objectForKey:@"_UIImagePickerControllerVideoEditingStart"];
-        NSNumber *end = [info objectForKey:@"_UIImagePickerControllerVideoEditingEnd"];
-        
-        VideoEditor *editor = [[VideoEditor alloc] init];
-        [editor trimVideoAtUrl:mediaUrl start:start end:end completionBlock:^(NSURL *urlOfTrimmedVideo) {
-            self.urlOfSelectedVideo = urlOfTrimmedVideo;
-            [self showThumbnailOfVideoAnimated:YES];
-        } failureBlock:^(NSError *error) {
-            [self showVideoCopyAlert];
-        }];
-    } else {
-        self.urlOfSelectedVideo = mediaUrl;
-        [self showThumbnailOfVideoAnimated:YES];
-    }
-    
-    [picker dismissViewControllerAnimated:YES completion:nil];
+- (void)videoPicker:(VideoPicker *)picker didPickVideoAtUrl:(NSURL *)url {
+    self.urlOfSelectedVideo = url;
+    [self showThumbnailOfVideoAnimated:YES];
 }
 
 - (void)showThumbnailOfVideoAnimated:(BOOL)animated {

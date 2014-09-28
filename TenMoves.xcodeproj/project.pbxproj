@@ -18,6 +18,7 @@
 		86295B4E19D74936005BA319 /* KIFTestCaseWithCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 86295B4D19D74936005BA319 /* KIFTestCaseWithCoreData.m */; };
 		86295B5019D763C4005BA319 /* SnapshotAcceptanceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86295B4F19D763C4005BA319 /* SnapshotAcceptanceTests.m */; };
 		86325BFA19D868A90033944F /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 86325BF919D868A90033944F /* Globals.m */; };
+		86325BFD19D871AA0033944F /* VideoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 86325BFC19D871AA0033944F /* VideoPicker.m */; };
 		8633B5E219D58F56000F0A5E /* GraphAndSnapshotsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8633B5E119D58F56000F0A5E /* GraphAndSnapshotsViewController.m */; };
 		863B0EAE1984237F00AAF919 /* ManagedSnapshotAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 863B0EAD1984237F00AAF919 /* ManagedSnapshotAsset.m */; };
 		86405D681987D0D300136C9C /* VideoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 86405D671987D0D300136C9C /* VideoEditor.m */; };
@@ -107,6 +108,8 @@
 		8631D7401983E6680030195A /* TenMoves.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TenMoves.entitlements; sourceTree = "<group>"; };
 		86325BF819D868A90033944F /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		86325BF919D868A90033944F /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
+		86325BFB19D871AA0033944F /* VideoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPicker.h; sourceTree = "<group>"; };
+		86325BFC19D871AA0033944F /* VideoPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPicker.m; sourceTree = "<group>"; };
 		8633B5E019D58F56000F0A5E /* GraphAndSnapshotsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphAndSnapshotsViewController.h; sourceTree = "<group>"; };
 		8633B5E119D58F56000F0A5E /* GraphAndSnapshotsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphAndSnapshotsViewController.m; sourceTree = "<group>"; };
 		863B0EAC1984237F00AAF919 /* ManagedSnapshotAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagedSnapshotAsset.h; sourceTree = "<group>"; };
@@ -295,6 +298,8 @@
 		863B0EAB1984227800AAF919 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				86325BFB19D871AA0033944F /* VideoPicker.h */,
+				86325BFC19D871AA0033944F /* VideoPicker.m */,
 				86F2654019C2D3E500320718 /* UpdatedAtObserver.h */,
 				86F2654119C2D3E500320718 /* UpdatedAtObserver.m */,
 				86CE5B3719976FEB00D34095 /* LPBlockActionSheet.h */,
@@ -779,6 +784,7 @@
 				86F2654219C2D3E500320718 /* UpdatedAtObserver.m in Sources */,
 				86ED30EF196F120700FC738B /* MovesTableViewController.m in Sources */,
 				86CE5B3919976FEB00D34095 /* LPBlockActionSheet.m in Sources */,
+				86325BFD19D871AA0033944F /* VideoPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
