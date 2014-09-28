@@ -52,7 +52,68 @@
 
 #pragma mark - view life cycle
 
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupProgressPickers];
+    [self setupNotesView];
+    [self showCurrentSnapshotIfEditing];
+    [self setupPreviousSnapshotCell];
+}
+
+#pragma mark - setup views
+
+- (void)showCurrentSnapshotIfEditing {
+    if (self.editingSnapshot && self.currentSnapshot.video) {
+        self.urlOfSelectedVideo = [self.currentSnapshot.video url];
+        [self showThumbnailOfVideoAnimated:NO];
+        self.title = @"Edit snapshot";
+    }
+}
+
+- (void)setupActionSheet {
+    self.sheet = [[LPBlockActionSheet alloc] init];
+    
+    __weak AddSnapshotTableViewController *_self = self;
+    
+    [self.sheet setCancelButtonTitle:@"Cancel" block:nil];
+    
+    [self.sheet addButtonWithTitle:@"Take Video" block:^{
+        [_self startMediaBrowserFromViewController:_self
+                                     usingDelegate:_self
+                                              type:UIImagePickerControllerSourceTypeCamera];
+    }];
+    
+    [self.sheet addButtonWithTitle:@"Choose Existing" block:^{
+        [_self startMediaBrowserFromViewController:_self
+                                     usingDelegate:_self
+                                              type:UIImagePickerControllerSourceTypePhotoLibrary];
+    }];
+    
+    self.sheet.willPresentCallBack = ^{
+        _self.videoPreview.enabled = NO;
+        _self.previousSnapshotVideo.enabled = NO;
+        _self.previousSnapshotProgress.backgroundColor =
+            [[Snapshot colorForProgressType:SnapshotProgressBaseline] colorWithAlphaComponent:.5];
+
+        for (ProgressPickerButton *button in _self.progressButtons)
+            button.enabled = NO;
+    };
+    
+    self.sheet.didDismissCallBack = ^{
+        _self.videoPreview.enabled = YES;
+        _self.previousSnapshotVideo.enabled = YES;
+
+        if (![_self.currentSnapshot isBaseline]) {
+            for (ProgressPickerButton *button in _self.progressButtons)
+                button.enabled = YES;
+        }
+    };
+}
+
 - (void)setupProgressPickers {
+    self.selectedProgress = self.currentSnapshot.progressTypeRaw;
+
     ProgressPickerButton *improved = [ProgressPickerButton autolayoutView];
     ProgressPickerButton *same = [ProgressPickerButton autolayoutView];
     ProgressPickerButton *regressed = [ProgressPickerButton autolayoutView];
@@ -85,25 +146,6 @@
     [regressed constrainFlushRight];
 
     [self updateActiveProgressPicker];
-}
-
-- (void)tappedProgressPicker:(ProgressPickerButton *)button {
-    self.selectedProgress = button.type;
-    [self updateActiveProgressPicker];
-}
-
-- (void)updateActiveProgressPicker {
-    for (ProgressPickerButton *button in self.progressButtons) {
-        [button setActive:(self.selectedProgress == button.type) animated:YES];
-    }
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.selectedProgress = self.currentSnapshot.progressTypeRaw;
-    
-    [self setupProgressPickers];
     
     if ([self.currentSnapshot isBaseline]) {
         self.progressCell.userInteractionEnabled = NO;
@@ -111,28 +153,11 @@
             button.enabled = NO;
         }
     }
-    
-    [self configureTextView];
-    
-    UITapGestureRecognizer *tapper =
-        [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                action:@selector(endEditing)];
-    [self.tableView addGestureRecognizer:tapper];
-    
-    if (self.currentSnapshot.video) {
-        self.urlOfSelectedVideo = [self.currentSnapshot.video url];
-        [self showThumbnailOfVideoAnimated:NO];
-    }
-    
-    if (self.editingSnapshot) {
-        self.title = @"Edit snapshot";
-    }
-
-    self.previousSnapshot = [self.currentSnapshot previousSnapshot];
-    [self setupPreviousSnapshotCell];
 }
 
 - (void)setupPreviousSnapshotCell {
+    self.previousSnapshot = [self.currentSnapshot previousSnapshot];
+
     if (self.previousSnapshot == nil) return;
 
     [self.previousSnapshotVideo setVideoAndImageFromSnapshot:self.previousSnapshot];
@@ -149,11 +174,22 @@
         [Snapshot colorForProgressType:self.previousSnapshot.progressTypeRaw];
 }
 
+- (void)updateActiveProgressPicker {
+    for (ProgressPickerButton *button in self.progressButtons) {
+        [button setActive:(self.selectedProgress == button.type) animated:YES];
+    }
+}
+
+#pragma mark - Respond to user interactions
+
 - (void)endEditing {
     [self.tableView endEditing:YES];
 }
 
-#pragma mark - IBActions
+- (void)tappedProgressPicker:(ProgressPickerButton *)button {
+    self.selectedProgress = button.type;
+    [self updateActiveProgressPicker];
+}
 
 - (IBAction)cancel:(id)sender {
     if (self.editingSnapshot) {
@@ -182,51 +218,10 @@
 
 - (IBAction)pickPhoto:(id)sender {
     if (!self.sheet) {
-        [self configureActionSheet];
+        [self setupActionSheet];
     }
     
     [self.sheet showInView:self.view];
-}
-
-- (void)configureActionSheet {
-    self.sheet = [[LPBlockActionSheet alloc] init];
-    
-    __weak AddSnapshotTableViewController *_self = self;
-    
-    [self.sheet setCancelButtonTitle:@"Cancel" block:nil];
-    
-    [self.sheet addButtonWithTitle:@"Take Video" block:^{
-        [_self startMediaBrowserFromViewController:_self
-                                     usingDelegate:_self
-                                              type:UIImagePickerControllerSourceTypeCamera];
-    }];
-    
-    [self.sheet addButtonWithTitle:@"Choose Existing" block:^{
-        [_self startMediaBrowserFromViewController:_self
-                                     usingDelegate:_self
-                                              type:UIImagePickerControllerSourceTypePhotoLibrary];
-    }];
-    
-    self.sheet.willPresentCallBack = ^{
-        _self.videoPreview.enabled = NO;
-        _self.previousSnapshotVideo.enabled = NO;
-        _self.previousSnapshotProgress.backgroundColor =
-            [[Snapshot colorForProgressType:SnapshotProgressBaseline] colorWithAlphaComponent:.5];
-
-        for (ProgressPickerButton *button in _self.progressButtons)
-            button.enabled = NO;
-    };
-    
-    self.sheet.didDismissCallBack = ^{
-        _self.videoPreview.enabled = YES;
-        _self.previousSnapshotVideo.enabled = YES;
-        [_self setupPreviousSnapshotCell];
-
-        if (![_self.currentSnapshot isBaseline]) {
-            for (ProgressPickerButton *button in _self.progressButtons)
-                button.enabled = YES;
-        }
-    };
 }
 
 #pragma mark - table view
@@ -328,9 +323,7 @@
 
 #pragma mark - ImageViewSnapshot delegate methods
 
-- (void)imageViewWithSnapshot:(VideoPreview *)imageView
-presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
-
+- (void)imageViewWithSnapshot:(VideoPreview *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
     [self presentMoviePlayerViewControllerAnimated:player];
 }
 
@@ -340,7 +333,7 @@ presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
 
 #pragma mark - text view methods
 
-- (void)configureTextView {
+- (void)setupNotesView {
     self.textView.textViewDelegate = self;
     self.textView.automaticallyAdjustsContentInsetForKeyboard = NO;
     self.initialTextViewHeight = self.textView.frame.size.height;
@@ -350,6 +343,11 @@ presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
         self.textView.text = self.currentSnapshot.notes;
         [self textViewDidChange:self.textView];
     }
+    
+    UITapGestureRecognizer *tapper =
+        [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                action:@selector(endEditing)];
+    [self.tableView addGestureRecognizer:tapper];
 }
 
 - (void)textViewDidBeginEditing:(JTSTextView *)textView {
