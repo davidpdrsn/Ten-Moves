@@ -39,7 +39,6 @@
     self.dateLabel.text = [formatter stringFromDate:self.snapshot.createdAt];
     
     [self.thumbnail setVideoAndImageFromSnapshot:self.snapshot];
-    self.thumbnail.tintColor = self.view.tintColor;
     [self.thumbnail awakeFromNib];
     self.thumbnail.delegate = self;
     
@@ -53,6 +52,15 @@
     [self configureNotesView];
 
     [self configureTitle];
+
+    self.navigationItem.rightBarButtonItem =
+        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                      target:self
+                                                      action:@selector(editSnapshot)];
+}
+
+- (void)editSnapshot {
+    [self performSegueWithIdentifier:@"editSnapshot" sender:self];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {

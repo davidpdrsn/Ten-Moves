@@ -46,7 +46,6 @@
     self.tableView.emptyDataSetDelegate = self.dataSource;
     self.tableView.emptyDataSetSource = self.dataSource;
     
-    self.editButtonItem.tintColor = self.view.tintColor;
     self.editButtonItem.accessibilityLabel = @"Edit";
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     self.tableView.allowsSelectionDuringEditing = YES;

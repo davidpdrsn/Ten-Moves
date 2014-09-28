@@ -59,6 +59,7 @@
 
 - (void)tapped:(UIGestureRecognizer *)gesture {
     if (gesture.state != UIGestureRecognizerStateEnded || !self.enabled) return;
+    assert(self.delegate != nil);
     
     MPMoviePlayerViewController *player = [[MPMoviePlayerViewController alloc] initWithContentURL:self.videoUrl];
     
@@ -105,11 +106,6 @@
     self.overlay.backgroundColor = [self.tintColor colorWithAlphaComponent:0.5];
 }
 
-- (void)setTintColor:(UIColor *)tintColor {
-    [super setTintColor:tintColor];
-    [self updateBackground];
-}
-
 - (void)setHighlighted:(BOOL)highlighted {
     [self updateBackground];
 }
@@ -131,7 +127,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:.125 animations:^{
             if (enabled) {
-                self.overlay.backgroundColor = [self.tintColor colorWithAlphaComponent:.5];
+                [self updateBackground];
             } else {
                 self.overlay.backgroundColor = [[Snapshot colorForProgressType:SnapshotProgressBaseline] colorWithAlphaComponent:.5];
             }

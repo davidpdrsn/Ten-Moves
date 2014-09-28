@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *progressCell;
 @property (weak, nonatomic) IBOutlet UIButton *pickVideoButton;
 @property (weak, nonatomic) IBOutlet UIView *progressPickerContainer;
+@property (weak, nonatomic) IBOutlet VideoPreview *pickedVideoPreview;
 
 @property (assign, nonatomic) SnapshotProgress selectedProgress;
 @property (strong, nonatomic) NSURL *urlOfSelectedVideo;
@@ -315,49 +316,15 @@
 }
 
 - (void)showThumbnailOfVideoAnimated:(BOOL)animated {
-    int offset = 5;
-    CGFloat size = self.pickVideoButton.superview.frame.size.height-offset*2;
-    
-    CGRect frame = CGRectMake(offset, offset, size, size);
-    
-    if (self.videoPreview) {
-        [self.videoPreview removeFromSuperview];
-    }
-    
-    self.videoPreview = [[VideoPreview alloc] initWithFrame:frame];
-    self.videoPreview.tintColor = self.view.tintColor;
-    
+    self.pickedVideoPreview.videoUrl = self.urlOfSelectedVideo;
+    self.pickedVideoPreview.hidden = NO;
+
     VideoEditor *editor = [[VideoEditor alloc] init];
-    self.videoPreview.image = [editor thumbnailForVideoAtUrl:self.urlOfSelectedVideo];
-    self.videoPreview.videoUrl = self.urlOfSelectedVideo;
-    self.videoPreview.delegate = self;
-    
-    [self.pickVideoButton.superview addSubview:self.videoPreview];
-    
-    [self.videoPreview awakeFromNib];
-    
-    if (!self.resizedButton) {
-        self.resizedButton = YES;
-        
-        CGPoint destination = self.videoPreview.center;
-        self.videoPreview.center = CGPointMake(self.videoPreview.center.x-(self.videoPreview.frame.size.width+offset), self.videoPreview.center.y);
-        
-        void (^showThumbnail)() = ^void() {
-            self.videoPreview.center = destination;
-        };
-        
-        if (animated) {
-            [UIView animateWithDuration:.5
-                                  delay:.5
-                 usingSpringWithDamping:.5
-                  initialSpringVelocity:20
-                                options:UIViewAnimationOptionCurveLinear
-                             animations:showThumbnail
-                             completion:nil];
-        } else {
-            showThumbnail();
-        }
-    }
+    self.pickedVideoPreview.image = [editor thumbnailForVideoAtUrl:self.urlOfSelectedVideo];
+
+    self.pickedVideoPreview.delegate = self;
+
+    [self.pickedVideoPreview awakeFromNib];
 }
 
 #pragma mark - ImageViewSnapshot delegate methods
