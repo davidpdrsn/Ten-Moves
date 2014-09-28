@@ -12,7 +12,6 @@
 
 #import "AddSnapshotTableViewController.h"
 #import "Snapshot.h"
-#import "Constants.h"
 #import "ProgressPickerButton.h"
 #import "VideoPreview.h"
 #import "ALAssetsLibrary+HelperMethods.h"

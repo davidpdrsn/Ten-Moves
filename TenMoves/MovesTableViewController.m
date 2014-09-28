@@ -11,10 +11,10 @@
 #import "MoveTableViewCell.h"
 #import "SnapshotsTableViewController.h"
 #import "Repository.h"
-#import "Constants.h"
 #import "AddMoveTableViewController.h"
 #import "ArrayDataSource.h"
 #import "GraphAndSnapshotsViewController.h"
+#import "Globals.h"
 
 @interface MovesTableViewController ()
 
@@ -156,7 +156,7 @@
     if (objects.count == 0) {
         return nil;
     } else {
-        NSInteger remaining = MAX_NUMBER_OF_MOVES - objects.count;
+        NSInteger remaining = [Globals sharedInstance].maxNumberOfMoves - objects.count;
         if (remaining == 0) {
             return @"You have no slots remaining";
         } else {
@@ -179,7 +179,7 @@
 }
 
 - (void)enableOrDisableAddButton {
-    self.addButton.enabled = [self.dataSource totalNumberOfObjects] < MAX_NUMBER_OF_MOVES;
+    self.addButton.enabled = [self.dataSource totalNumberOfObjects] < [Globals sharedInstance].maxNumberOfMoves;
 }
 
 - (void)hideOrShowBottomView {

@@ -55,10 +55,6 @@
     self.title = self.move.name;
 }
 
-- (void)refresh:(id)sender {
-    [(UIRefreshControl *)sender endRefreshing];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     

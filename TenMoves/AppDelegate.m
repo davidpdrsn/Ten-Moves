@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Repository.h"
+#import "Globals.h"
 
 @implementation AppDelegate
 
@@ -20,7 +21,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Repository setManagedObjectContext:self.managedObjectContext];
-    
+
+    Globals *globals = [Globals sharedInstance];
+    globals.maxNumberOfMoves = 10;
+
     return YES;
 }
 
