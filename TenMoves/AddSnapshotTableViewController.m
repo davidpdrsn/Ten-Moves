@@ -21,6 +21,7 @@
 #import "SnapshotVideo.h"
 #import "UIView+Autolayout.h"
 #import "VideoPicker.h"
+#import "SnapshotTableViewCell.h"
 
 @interface AddSnapshotTableViewController () <VideoPickerDelegate>
 
@@ -42,9 +43,7 @@
 @property (strong, nonatomic) LPBlockActionSheet *sheet;
 
 @property (strong, nonatomic) Snapshot *previousSnapshot;
-@property (weak, nonatomic) IBOutlet VideoPreview *previousSnapshotVideo;
-@property (weak, nonatomic) IBOutlet UILabel *previousSnapshotLabel;
-@property (weak, nonatomic) IBOutlet UIView *previousSnapshotProgress;
+@property (weak, nonatomic) IBOutlet SnapshotTableViewCell *previousSnapshotCell;
 
 @end
 
@@ -63,6 +62,14 @@
 
 #pragma mark - setup views
 
+- (void)setupPreviousSnapshotCell {
+    self.previousSnapshot = [self.currentSnapshot previousSnapshot];
+    if (self.previousSnapshot == nil) return;
+
+    self.previousSnapshotCell.snapshot = self.previousSnapshot;
+    self.previousSnapshotCell.thumbnailImageView.delegate = self;
+}
+
 - (void)showCurrentSnapshotIfEditing {
     if (self.editingSnapshot && self.currentSnapshot.video) {
         self.urlOfSelectedVideo = [self.currentSnapshot.video url];
@@ -74,7 +81,7 @@
 - (void)setupActionSheet {
     self.sheet = [[LPBlockActionSheet alloc] init];
     
-    __weak AddSnapshotTableViewController *_self = self;
+    typeof(self) __weak weakSelf = self;
     
     [self.sheet setCancelButtonTitle:@"Cancel" block:nil];
 
@@ -89,21 +96,19 @@
     }];
     
     self.sheet.willPresentCallBack = ^{
-        _self.videoPreview.enabled = NO;
-        _self.previousSnapshotVideo.enabled = NO;
-        _self.previousSnapshotProgress.backgroundColor =
-            [[Snapshot colorForProgressType:SnapshotProgressBaseline] colorWithAlphaComponent:.5];
+        weakSelf.videoPreview.enabled = NO;
+        weakSelf.previousSnapshotCell.thumbnailImageView.enabled = NO;
 
-        for (ProgressPickerButton *button in _self.progressButtons)
+        for (ProgressPickerButton *button in weakSelf.progressButtons)
             button.enabled = NO;
     };
     
     self.sheet.didDismissCallBack = ^{
-        _self.videoPreview.enabled = YES;
-        _self.previousSnapshotVideo.enabled = YES;
+        weakSelf.videoPreview.enabled = YES;
+        weakSelf.previousSnapshotCell.thumbnailImageView.enabled = YES;
 
-        if (![_self.currentSnapshot isBaseline]) {
-            for (ProgressPickerButton *button in _self.progressButtons)
+        if (![weakSelf.currentSnapshot isBaseline]) {
+            for (ProgressPickerButton *button in weakSelf.progressButtons)
                 button.enabled = YES;
         }
     };
@@ -151,25 +156,6 @@
             button.enabled = NO;
         }
     }
-}
-
-- (void)setupPreviousSnapshotCell {
-    self.previousSnapshot = [self.currentSnapshot previousSnapshot];
-
-    if (self.previousSnapshot == nil) return;
-
-    [self.previousSnapshotVideo setVideoAndImageFromSnapshot:self.previousSnapshot];
-    self.previousSnapshotVideo.delegate = self;
-
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateStyle = NSDateFormatterLongStyle;
-    self.previousSnapshotLabel.text = [formatter stringFromDate:self.previousSnapshot.createdAt];
-
-    self.previousSnapshotProgress.layer.cornerRadius =
-        self.previousSnapshotProgress.frame.size.height/2;
-
-    self.previousSnapshotProgress.backgroundColor =
-        [Snapshot colorForProgressType:self.previousSnapshot.progressTypeRaw];
 }
 
 - (void)updateActiveProgressPicker {

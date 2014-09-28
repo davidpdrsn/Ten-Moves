@@ -15,9 +15,7 @@
 
 @property (strong, nonatomic) Snapshot *snapshot;
 
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (strong, nonatomic) IBOutlet VideoPreview *thumbnailImageView;
-@property (strong, nonatomic) IBOutlet UIView *progressIndicator;
+@property (strong, nonatomic) VideoPreview *thumbnailImageView;
 
 - (void)setProgressIndicatorBackground;
 

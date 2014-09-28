@@ -212,44 +212,8 @@
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pms-pN-H0d" id="cZH-6W-zDN">
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hEa-qr-hmS" customClass="VideoPreview">
-                                            <rect key="frame" x="8" y="8" width="70" height="70"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="70" id="Trn-9e-9b2"/>
-                                                <constraint firstAttribute="height" constant="70" id="qhX-xN-4xk"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcL-Ag-xLo">
-                                            <rect key="frame" x="86" y="32" width="468" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="275-WV-YJk">
-                                            <rect key="frame" x="566" y="33" width="20" height="20"/>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="Q83-uz-qzM"/>
-                                                <constraint firstAttribute="width" constant="20" id="zfR-52-wok"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="VcL-Ag-xLo" firstAttribute="leading" secondItem="hEa-qr-hmS" secondAttribute="trailing" constant="8" id="4al-5U-gnF"/>
-                                        <constraint firstAttribute="centerY" secondItem="275-WV-YJk" secondAttribute="centerY" id="LDg-ws-ZzX"/>
-                                        <constraint firstItem="275-WV-YJk" firstAttribute="leading" secondItem="VcL-Ag-xLo" secondAttribute="trailing" constant="12" id="X59-ZX-9Ea"/>
-                                        <constraint firstItem="hEa-qr-hmS" firstAttribute="leading" secondItem="cZH-6W-zDN" secondAttribute="leadingMargin" id="hcp-Qp-BB9"/>
-                                        <constraint firstAttribute="centerY" secondItem="hEa-qr-hmS" secondAttribute="centerY" id="jUn-Fo-GQl"/>
-                                        <constraint firstItem="275-WV-YJk" firstAttribute="leading" secondItem="VcL-Ag-xLo" secondAttribute="trailing" constant="12" id="mdq-oc-PbZ"/>
-                                        <constraint firstAttribute="centerY" secondItem="VcL-Ag-xLo" secondAttribute="centerY" id="uwa-S6-cJu"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="275-WV-YJk" secondAttribute="trailing" constant="6" id="wMc-3H-pZw"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="dateLabel" destination="VcL-Ag-xLo" id="D0D-2A-4WK"/>
-                                    <outlet property="progressIndicator" destination="275-WV-YJk" id="EZb-UQ-qhz"/>
-                                    <outlet property="thumbnailImageView" destination="hEa-qr-hmS" id="isV-f4-Fkk"/>
                                     <segue destination="D0W-Rv-cva" kind="show" identifier="showSnapshot" id="VUj-PJ-Vup"/>
                                 </connections>
                             </tableViewCell>
@@ -518,44 +482,10 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Previous snapshot" id="93k-IM-8Ix">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="T4j-lt-DgU">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="T4j-lt-DgU" customClass="SnapshotTableViewCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T4j-lt-DgU" id="BWe-j4-PrZ">
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="524-jv-Ewo" customClass="VideoPreview">
-                                                    <rect key="frame" x="6" y="6" width="48" height="47.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="48" id="Xe7-6v-Oe5"/>
-                                                        <constraint firstAttribute="height" constant="47.5" id="yOq-U3-V0k"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sRF-fB-KlY">
-                                                    <rect key="frame" x="564" y="20" width="20" height="20"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="U4n-Cg-jAY"/>
-                                                        <constraint firstAttribute="height" constant="20" id="fYm-aQ-jOU"/>
-                                                    </constraints>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P3H-4J-dHT">
-                                                    <rect key="frame" x="62" y="19" width="492" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="sRF-fB-KlY" secondAttribute="centerY" id="15H-yo-oBm"/>
-                                                <constraint firstAttribute="centerY" secondItem="524-jv-Ewo" secondAttribute="centerY" id="1Z9-gV-hZL"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="sRF-fB-KlY" secondAttribute="trailing" constant="8" id="EAk-vZ-NyS"/>
-                                                <constraint firstItem="sRF-fB-KlY" firstAttribute="leading" secondItem="P3H-4J-dHT" secondAttribute="trailing" constant="10" id="GVh-OE-lpD"/>
-                                                <constraint firstAttribute="centerY" secondItem="P3H-4J-dHT" secondAttribute="centerY" id="MWe-Ep-i1d"/>
-                                                <constraint firstItem="P3H-4J-dHT" firstAttribute="leading" secondItem="524-jv-Ewo" secondAttribute="trailing" constant="8" id="WXX-mB-eMf"/>
-                                                <constraint firstItem="524-jv-Ewo" firstAttribute="leading" secondItem="BWe-j4-PrZ" secondAttribute="leadingMargin" constant="-2" id="i4M-5H-oKu"/>
-                                                <constraint firstItem="P3H-4J-dHT" firstAttribute="leading" secondItem="524-jv-Ewo" secondAttribute="trailing" constant="8" id="w68-X4-VFb"/>
-                                                <constraint firstItem="sRF-fB-KlY" firstAttribute="leading" secondItem="P3H-4J-dHT" secondAttribute="trailing" constant="10" id="wWf-3y-jUc"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -581,9 +511,7 @@
                     <connections>
                         <outlet property="pickVideoButton" destination="Jgl-5Y-ifo" id="Ptz-Dm-4fo"/>
                         <outlet property="pickedVideoPreview" destination="V9T-mI-p3S" id="OQ5-z6-MK7"/>
-                        <outlet property="previousSnapshotLabel" destination="P3H-4J-dHT" id="bXp-aL-Nk7"/>
-                        <outlet property="previousSnapshotProgress" destination="sRF-fB-KlY" id="JLo-jW-tF2"/>
-                        <outlet property="previousSnapshotVideo" destination="524-jv-Ewo" id="e2G-KL-3UC"/>
+                        <outlet property="previousSnapshotCell" destination="T4j-lt-DgU" id="fDr-j5-6c8"/>
                         <outlet property="progressCell" destination="62r-yj-UFN" id="esM-Bb-gV6"/>
                         <outlet property="progressPickerContainer" destination="FtH-lG-9HA" id="i1m-c1-MVc"/>
                         <outlet property="textView" destination="xgy-t3-Srb" id="GfG-ny-Wy0"/>

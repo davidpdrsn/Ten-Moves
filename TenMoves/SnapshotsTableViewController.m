@@ -81,10 +81,13 @@
 - (ArrayDataSource *)createDataSource {
     ConfigureCellBlock configureCell = ^UITableViewCell *(UITableViewCell *cell, Snapshot *snapshot) {
         SnapshotTableViewCell *snapshotCell = (SnapshotTableViewCell *)cell;
+
+        // This line prevents video preview from being blue while view slides in
+        snapshotCell.tintColor = self.view.tintColor;
+
         snapshotCell.snapshot = snapshot;
-        [snapshotCell.thumbnailImageView setVideoAndImageFromSnapshot:snapshot];
         snapshotCell.thumbnailImageView.delegate = self;
-        
+
         return snapshotCell;
     };
     
