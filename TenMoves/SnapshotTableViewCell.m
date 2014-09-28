@@ -10,7 +10,6 @@
 #import "ALAssetsLibrary+HelperMethods.h"
 #import "VideoPreview.h"
 #import "Snapshot.h"
-#import "Constants.h"
 #import "SnapshotVideo.h"
 @import AssetsLibrary;
 

@@ -25,7 +25,6 @@
 @interface AddSnapshotTableViewController () <VideoPickerDelegate>
 
 @property (strong, nonatomic) VideoPreview *videoPreview;
-@property (assign, nonatomic) BOOL resizedButton;
 
 @property (strong, nonatomic) NSArray *progressButtons;
 
