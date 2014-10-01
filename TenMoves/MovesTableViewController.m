@@ -15,6 +15,8 @@
 #import "ArrayDataSource.h"
 #import "GraphAndSnapshotsViewController.h"
 #import "Globals.h"
+#import "Snapshot.h"
+#import "CreatesFakeData.h"
 
 @interface MovesTableViewController ()
 
