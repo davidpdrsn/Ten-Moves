@@ -6,6 +6,7 @@ link_with 'TenMoves', 'TenMovesTests'
 
 pod 'DZNEmptyDataSet'
 pod 'BEMSimpleLineGraph'
+pod 'AFNetworking', '~> 2.0'
 
 target 'Acceptance Tests', exclusive: true do
   pod 'KIF', '~> 3.0'
