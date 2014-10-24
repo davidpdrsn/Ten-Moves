@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "Repository.h"
 #import "Globals.h"
+#import "API.h"
 
 @implementation AppDelegate
 

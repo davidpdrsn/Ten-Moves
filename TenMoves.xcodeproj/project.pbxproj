@@ -155,6 +155,7 @@
 		8680FA2A19D59EDA0046A71B /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 		8683594B19FA4922005E5A6E /* API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
 		8683594C19FA4922005E5A6E /* API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = API.m; sourceTree = "<group>"; };
+		8683594E19FA5314005E5A6E /* TenMoves 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 12.xcdatamodel"; sourceTree = "<group>"; };
 		8685E3B2196F595E00A97585 /* Move.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Move.h; sourceTree = "<group>"; };
 		8685E3B3196F595E00A97585 /* Move.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Move.m; sourceTree = "<group>"; };
 		8685E3B5196F5B0900A97585 /* MoveTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveTableViewCell.h; sourceTree = "<group>"; };
@@ -1092,6 +1093,7 @@
 		86ED30C7196F0F0F00FC738B /* TenMoves.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				8683594E19FA5314005E5A6E /* TenMoves 12.xcdatamodel */,
 				869D77D719A758EA0046AE67 /* TenMoves 9.xcdatamodel */,
 				86BAA62019B4854800B4C128 /* TenMoves 10.xcdatamodel */,
 				86BAA62119B4997500B4C128 /* TenMoves 11.xcdatamodel */,
@@ -1104,7 +1106,7 @@
 				865E4D43198265FB0000CC30 /* TenMoves 2.xcdatamodel */,
 				86ED30C8196F0F0F00FC738B /* TenMoves.xcdatamodel */,
 			);
-			currentVersion = 86BAA62119B4997500B4C128 /* TenMoves 11.xcdatamodel */;
+			currentVersion = 8683594E19FA5314005E5A6E /* TenMoves 12.xcdatamodel */;
 			path = TenMoves.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

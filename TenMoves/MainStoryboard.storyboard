@@ -598,6 +598,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="containerView" destination="ofv-fZ-lLa" id="hCV-yS-4Eh"/>
                         <outlet property="nameField" destination="WbE-fy-uQg" id="UVC-UF-zcu"/>
                     </connections>
                 </tableViewController>

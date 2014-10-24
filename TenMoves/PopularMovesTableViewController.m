@@ -35,6 +35,7 @@
         } else {
             self.popularMoves = moves;
             [self.tableView reloadData];
+            [self.delegate popularMovesTableViewControllerDidLoadMoves:self];
         }
     }];
 }
@@ -66,11 +67,11 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    return @"These are some popular moves that other users are practicing";
+    return @"Popular moves that other users are practicing";
 }
 
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.popularMoves.count == 0) {
+    if (self.popularMoves.count > 0) {
         NSString *name = self.popularMoves[indexPath.row];
         [self.delegate popularMovesTableViewController:self tappedMoveWithName:name];
     }

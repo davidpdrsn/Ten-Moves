@@ -10,6 +10,7 @@
 #import "Snapshot.h"
 #import "Repository.h"
 #import "UpdatedAtObserver.h"
+#import "API.h"
 
 static NSString *ENTITY_NAME = @"Move";
 
@@ -27,6 +28,7 @@ static NSString *ENTITY_NAME = @"Move";
 @dynamic updatedAt;
 @dynamic name;
 @dynamic snapshots;
+@dynamic savedToApi;
 
 + (instancetype)newManagedObject {
     return (Move *)[NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME
@@ -57,6 +59,18 @@ static NSString *ENTITY_NAME = @"Move";
 - (void)awakeFromFetch {
     [super awakeFromFetch];
     [self addUpdatedAtObserver];
+    [self save];
+}
+
+- (void)save {
+    if (!self.savedToApi) {
+        [[API sharedInstance] addMove:self.name completion:^(NSError *error) {
+            if (error) return;
+            
+            self.savedToApi = YES;
+            [Repository saveWithCompletionHandler:nil];
+        }];
+    }
 }
 
 - (void)addUpdatedAtObserver {

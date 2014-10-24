@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSDate * updatedAt;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic) BOOL savedToApi;
 @property (nonatomic, retain) NSSet *snapshots;
 
 + (instancetype)newManagedObject;
@@ -31,5 +32,6 @@
 - (void)removeSnapshotsObject:(Snapshot *)value;
 - (void)addSnapshots:(NSSet *)values;
 - (void)removeSnapshots:(NSSet *)values;
+- (void)save;
 
 @end

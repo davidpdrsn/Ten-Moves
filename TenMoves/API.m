@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) NSString *apiBase;
 @property (strong, nonatomic) NSString *apiKey;
+@property (strong, nonatomic) AFHTTPRequestOperationManager *manager;
 
 @end
 
@@ -34,13 +35,15 @@
         _apiBase = @"http://tenmovesapi.herokuapp.com";
 #endif
         _apiKey = @"027b311dc95c1613a2d05e99b7d6bd4079b7414c";
+        _manager = [AFHTTPRequestOperationManager manager];
     }
     return self;
 }
 
+#pragma mark - main api methods
+
 - (void)getMoves:(void (^)(id moves, NSError *error))completionBlock {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[self.apiBase stringByAppendingPathComponent:@"moves"]
+    [self.manager GET:[self.apiBase stringByAppendingPathComponent:@"moves"]
       parameters:[self makeParams:nil]
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              
@@ -50,8 +53,22 @@
     }];
 }
 
+- (void)addMove:(NSString *)name completion:(void (^)(NSError *error))completionBlock {
+    [self.manager POST:[self.apiBase stringByAppendingPathComponent:@"moves"]
+            parameters:[self makeParams:@{ @"move": @{ @"name": name } }]
+               success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(error);
+    }];
+}
+
+#pragma mark - helpers
+
 - (NSDictionary *)makeParams:(NSDictionary *)params {
-    NSMutableDictionary *allParams = [@{ @"api_key": self.apiKey } mutableCopy];
+    NSMutableDictionary *allParams = [@{
+                                        @"api_key": self.apiKey
+                                        } mutableCopy];
     if (params) {
         [allParams addEntriesFromDictionary:params];
     }

@@ -13,6 +13,7 @@
 @protocol PopularMovesTableViewControllerDelegate <NSObject>
 
 - (void)popularMovesTableViewController:(PopularMovesTableViewController *)controller tappedMoveWithName:(NSString *)name;
+- (void)popularMovesTableViewControllerDidLoadMoves:(PopularMovesTableViewController *)controller;
 
 @end
 

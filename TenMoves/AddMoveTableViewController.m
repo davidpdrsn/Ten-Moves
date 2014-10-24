@@ -15,6 +15,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 
 @end
 
@@ -45,6 +46,14 @@
     self.nameField.text = name;
 }
 
+- (void)popularMovesTableViewControllerDidLoadMoves:(PopularMovesTableViewController *)controller {
+    UITableView *view = (UITableView *)controller.view;
+    CGSize newSize = view.contentSize;
+    CGRect newFrame = self.containerView.frame;
+    newFrame.size = newSize;
+    self.containerView.frame = newFrame;
+}
+
 #pragma mark - setup view elements
 
 - (void)setupNameField {
@@ -59,6 +68,7 @@
 
 - (void)add {
     self.currentMove.name = self.nameField.text;
+    [self.currentMove save];
     [self.delegate addMoveViewControllerDidSave];
 }
 
