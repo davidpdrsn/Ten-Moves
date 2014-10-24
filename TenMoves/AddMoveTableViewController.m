@@ -8,8 +8,9 @@
 
 #import "AddMoveTableViewController.h"
 #import "Move.h"
+#import "PopularMovesTableViewController.h"
 
-@interface AddMoveTableViewController () {
+@interface AddMoveTableViewController () <PopularMovesTableViewControllerDelegate> {
     UIBarButtonItem *addButton;
 }
 
@@ -31,6 +32,17 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.nameField becomeFirstResponder];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"embedPopularMoves"]) {
+        PopularMovesTableViewController *destination = (PopularMovesTableViewController *)segue.destinationViewController;
+        destination.delegate = self;
+    }
+}
+
+- (void)popularMovesTableViewController:(PopularMovesTableViewController *)controller tappedMoveWithName:(NSString *)name {
+    self.nameField.text = name;
 }
 
 #pragma mark - setup view elements
