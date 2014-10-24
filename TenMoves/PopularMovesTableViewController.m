@@ -7,7 +7,7 @@
 //
 
 #import "PopularMovesTableViewController.h"
-#import "AFNetworking/AFNetworking.h"
+#import "API.h"
 
 @interface PopularMovesTableViewController ()
 
@@ -20,30 +20,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-#ifdef DEBUG
-    NSLog(@"Only log when in debug");
-#endif
-
     [self fetchPopularMoves];
 }
 
 - (void)fetchPopularMoves {
-    NSDictionary *params = @{ @"api_key": @"027b311dc95c1613a2d05e99b7d6bd4079b7414c" };
-    
-    NSString *url;
-#ifdef DEBUG
-    url = @"http://tenmoves-api.dev";
-#else
-    url = @"http://tenmovesapi.herokuapp.com";
-#endif
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[url stringByAppendingPathComponent:@"moves"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.popularMoves = responseObject;
-
-        [self.tableView reloadData];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+    [[API sharedInstance] getMoves:^(id moves, NSError *error) {
+        if (error) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"error getting moves"
+                                                            message:nil
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        } else {
+            self.popularMoves = moves;
+            [self.tableView reloadData];
+        }
     }];
 }
 
