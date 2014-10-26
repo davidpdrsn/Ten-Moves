@@ -62,6 +62,14 @@ static NSString *ENTITY_NAME = @"Move";
     [self save];
 }
 
+- (void)prepareForDeletion {
+    [super prepareForDeletion];
+    
+    if (self.savedToApi) {
+        [[API sharedInstance] deleteMove:self.name completion:^(NSError *error) {}];
+    }
+}
+
 - (void)save {
     if (!self.savedToApi) {
         [[API sharedInstance] addMove:self.name completion:^(NSError *error) {

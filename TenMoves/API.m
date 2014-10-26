@@ -63,6 +63,14 @@
     }];
 }
 
+- (void)deleteMove:(NSString *)name completion:(void (^)(NSError *))completionBlock {
+    [self.manager DELETE:[self.apiBase stringByAppendingPathComponent:@"delete_move_by_name"] parameters:[self makeParams:@{ @"name": name }] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(error);
+    }];
+}
+
 #pragma mark - helpers
 
 - (NSDictionary *)makeParams:(NSDictionary *)params {

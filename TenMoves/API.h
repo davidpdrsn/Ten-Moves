@@ -14,5 +14,6 @@
 
 - (void)getMoves:(void (^)(id moves, NSError *error))completionBlock;
 - (void)addMove:(NSString *)name completion:(void (^)(NSError *error))completionBlock;
+- (void)deleteMove:(NSString *)name completion:(void (^)(NSError *error))completionBlock;
 
 @end

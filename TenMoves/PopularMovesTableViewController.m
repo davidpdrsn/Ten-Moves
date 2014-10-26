@@ -12,6 +12,7 @@
 @interface PopularMovesTableViewController ()
 
 @property (strong, nonatomic) NSArray *popularMoves;
+@property (strong, nonatomic) NSError *fetchError;
 
 @end
 
@@ -26,17 +27,13 @@
 - (void)fetchPopularMoves {
     [[API sharedInstance] getMoves:^(id moves, NSError *error) {
         if (error) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"error getting moves"
-                                                            message:nil
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Cancel"
-                                                  otherButtonTitles:nil];
-            [alert show];
+            self.fetchError = error;
         } else {
             self.popularMoves = moves;
-            [self.tableView reloadData];
-            [self.delegate popularMovesTableViewControllerDidLoadMoves:self];
         }
+        
+        [self.tableView reloadData];
+        [self.delegate popularMovesTableViewControllerDidLoadMoves:self];
     }];
 }
 
@@ -48,18 +45,27 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.fetchError) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"errorCell"];
+        cell.textLabel.text = @"Error getting moves, try again later";
+        cell.textLabel.textColor = [UIColor lightGrayColor];
+        return cell;
+    }
+    
     if (self.popularMoves == nil) {
         return [tableView dequeueReusableCellWithIdentifier:@"spinnerCell"];
-    } else if (self.popularMoves.count == 0) {
+    }
+    
+    if (self.popularMoves.count == 0) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"popularMoveCell"];
         cell.textLabel.text = @"No popular moves found...";
         cell.textLabel.textColor = [UIColor lightGrayColor];
         return cell;
-    } else {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"popularMoveCell"];
-        cell.textLabel.text = self.popularMoves[indexPath.row];
-        return cell;
     }
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"popularMoveCell"];
+    cell.textLabel.text = self.popularMoves[indexPath.row];
+    return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
