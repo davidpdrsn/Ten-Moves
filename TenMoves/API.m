@@ -8,6 +8,7 @@
 
 #import "API.h"
 #import "AFNetworking/AFNetworking.h"
+#import "Settings.h"
 
 @interface API ()
 
@@ -54,6 +55,8 @@
 }
 
 - (void)addMove:(NSString *)name completion:(void (^)(NSError *error))completionBlock {
+    if (![Settings sharedInstance].shareMovesWithAPI) { return; }
+    
     [self.manager POST:[self.apiBase stringByAppendingPathComponent:@"moves"]
             parameters:[self makeParams:@{ @"move": @{ @"name": name } }]
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -64,6 +67,8 @@
 }
 
 - (void)deleteMove:(NSString *)name completion:(void (^)(NSError *))completionBlock {
+    if (![Settings sharedInstance].shareMovesWithAPI) { return; }
+    
     [self.manager DELETE:[self.apiBase stringByAppendingPathComponent:@"delete_move_by_name"] parameters:[self makeParams:@{ @"name": name }] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
