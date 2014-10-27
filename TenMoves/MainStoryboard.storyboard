@@ -752,7 +752,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection footerTitle="Disable this if you don't your moves to show up in the list of popular moves that other users are practicing." id="GSd-2v-m5h">
+                            <tableViewSection id="GSd-2v-m5h">
+                                <string key="footerTitle">Disable this if you don't your moves to show up in the list of popular moves. The sharing is completly anonymous and only the names of moves are shared.</string>
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PbE-b1-Kqc">
                                         <autoresizingMask key="autoresizingMask"/>
