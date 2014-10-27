@@ -13,6 +13,8 @@
 		8601299A1972886A0053C71D /* UITableViewCell+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 860129991972886A0053C71D /* UITableViewCell+HelperMethods.m */; };
 		8601299E197297280053C71D /* ALAssetsLibrary+HelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */; };
 		860C814619DC68E8000429EB /* CreatesFakeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 860C814519DC68E8000429EB /* CreatesFakeData.m */; };
+		860D014E19FE8CB10071F0BA /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D014D19FE8CB10071F0BA /* Settings.m */; };
+		860D015119FE8D0A0071F0BA /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D015019FE8D0A0071F0BA /* SettingsTableViewController.m */; };
 		861454A919C1DAAE0026B288 /* NSString+RegExpHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 861454A819C1DAAE0026B288 /* NSString+RegExpHelpers.m */; };
 		861454AC19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 861454AB19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m */; };
 		861BD23E19D72DCF00C5F094 /* MoveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 861BD23D19D72DCF00C5F094 /* MoveTests.m */; };
@@ -100,6 +102,10 @@
 		8601299D197297280053C71D /* ALAssetsLibrary+HelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+HelperMethods.m"; sourceTree = "<group>"; };
 		860C814419DC68E8000429EB /* CreatesFakeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatesFakeData.h; sourceTree = "<group>"; };
 		860C814519DC68E8000429EB /* CreatesFakeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatesFakeData.m; sourceTree = "<group>"; };
+		860D014C19FE8CB10071F0BA /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		860D014D19FE8CB10071F0BA /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		860D014F19FE8D0A0071F0BA /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		860D015019FE8D0A0071F0BA /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		861454A719C1DAAE0026B288 /* NSString+RegExpHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+RegExpHelpers.h"; sourceTree = "<group>"; };
 		861454A819C1DAAE0026B288 /* NSString+RegExpHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RegExpHelpers.m"; sourceTree = "<group>"; };
 		861454AA19C1DBBC0026B288 /* NSURL+ReformattingHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+ReformattingHelpers.h"; sourceTree = "<group>"; };
@@ -308,6 +314,8 @@
 		863B0EAB1984227800AAF919 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				860D014C19FE8CB10071F0BA /* Settings.h */,
+				860D014D19FE8CB10071F0BA /* Settings.m */,
 				8683594B19FA4922005E5A6E /* API.h */,
 				8683594C19FA4922005E5A6E /* API.m */,
 				860C814419DC68E8000429EB /* CreatesFakeData.h */,
@@ -487,6 +495,8 @@
 		86EE8D95196F503200EE4DCF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				860D014F19FE8D0A0071F0BA /* SettingsTableViewController.h */,
+				860D015019FE8D0A0071F0BA /* SettingsTableViewController.m */,
 				8689949A19F0188200C50499 /* PopularMovesTableViewController.h */,
 				8689949B19F0188200C50499 /* PopularMovesTableViewController.m */,
 				8680FA2919D59EDA0046A71B /* GraphViewController.h */,
@@ -788,7 +798,9 @@
 				8676880A198525D5005679ED /* SnapshotImage.m in Sources */,
 				865304BD197FD97D00EEE9E0 /* ProgressPickerButton.m in Sources */,
 				86A3F26319712D7900E389A1 /* ArrayDataSource.m in Sources */,
+				860D015119FE8D0A0071F0BA /* SettingsTableViewController.m in Sources */,
 				86ED30C2196F0F0F00FC738B /* main.m in Sources */,
+				860D014E19FE8CB10071F0BA /* Settings.m in Sources */,
 				863B0EAE1984237F00AAF919 /* ManagedSnapshotAsset.m in Sources */,
 				8676881419852FAF005679ED /* SnapshotVideo.m in Sources */,
 				86325BFA19D868A90033944F /* Globals.m in Sources */,
