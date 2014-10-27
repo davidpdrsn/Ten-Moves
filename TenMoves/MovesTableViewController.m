@@ -49,8 +49,6 @@
     self.tableView.allowsSelectionDuringEditing = YES;
     
     self.tableView.delegate = self;
-    
-    self.bottomView.backgroundColor = [UIColor clearColor];
 }
 
 -  (void)viewWillAppear:(BOOL)animated {
@@ -162,16 +160,11 @@
 
 - (void)hideOrShowAdditionalControls {
     [self enableOrDisableAddButton];
-    [self hideOrShowBottomView];
     [self enableOrDisableEditButton];
 }
 
 - (void)enableOrDisableAddButton {
     self.addButton.enabled = [self.dataSource totalNumberOfObjects] < [Globals sharedInstance].maxNumberOfMoves;
-}
-
-- (void)hideOrShowBottomView {
-    self.bottomView.hidden = [self.dataSource totalNumberOfObjects] == 0;
 }
 
 - (void)enableOrDisableEditButton {
