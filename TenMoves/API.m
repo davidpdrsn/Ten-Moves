@@ -31,8 +31,7 @@
     self = [super init];
     if (self) {
 #ifdef DEBUG
-//        _apiBase = @"http://tenmoves-api.dev";
-        _apiBase = @"http:192.168.1.59:3000";
+        _apiBase = @"http://localhost:3000";
 #else
         _apiBase = @"http://tenmovesapi.herokuapp.com";
 #endif

@@ -27,7 +27,9 @@
 - (void)constrainHeightToRatio:(CGFloat)ratio;
 
 - (void)constrainFlushLeft;
+- (void)constrainFlushLeftOffset:(CGFloat)offset;
 - (void)constrainFlushRight;
+- (void)constrainFlushRightOffset:(CGFloat)offset;
 - (void)constrainFlushLeftRight;
 - (void)constrainFlushTop;
 - (void)constrainFlushTopOffset:(CGFloat)offset;

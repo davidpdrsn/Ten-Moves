@@ -8,26 +8,27 @@
 
 #import "AddMoveTableViewController.h"
 #import "Move.h"
-#import "SuggestedMovesTableViewController.h"
 #import "DGPThrottledBlock.h"
+#import "UIView+Autolayout.h"
+#import "API.h"
 
-@interface AddMoveTableViewController () <PopularMovesTableViewControllerDelegate> {
+@interface AddMoveTableViewController () {
     UIBarButtonItem *addButton;
 }
 
-@property (weak, nonatomic) IBOutlet UITextField *nameField;
-@property (weak, nonatomic) IBOutlet UIView *containerView;
-@property (strong, nonatomic) SuggestedMovesTableViewController *popularMovesViewController;
-@property (strong, nonatomic) DGPThrottledBlock *reloadBlock;
+@property (weak, nonatomic) UITextField *nameField;
+@property (strong, nonatomic) NSArray *suggestedMoves;
+@property (strong, nonatomic) NSError *fetchError;
+@property (strong, nonatomic) DGPThrottledBlock *fetchBlock;
 
 @end
 
 @implementation AddMoveTableViewController
 
+#pragma mark - view life cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setupNameField];
     
     if (self.editingMove) {
         self.title = @"Edit move";
@@ -38,13 +39,14 @@
     tap.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:tap];
     
-    [self.nameField addTarget:self
-                  action:@selector(textFieldDidChange:)
-        forControlEvents:UIControlEventEditingChanged];
-    
-    self.reloadBlock = [[DGPThrottledBlock alloc] initWithBlock:^{
-        [self reloadSuggestions];
+    self.fetchBlock = [[DGPThrottledBlock alloc] initWithBlock:^{
+        [self loadSuggestedMoves];
     } throttleDay:0.3];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self loadSuggestedMoves];
 }
 
 - (void)endEditing {
@@ -55,51 +57,8 @@
     [self endEditing];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [self.nameField becomeFirstResponder];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"embedPopularMoves"]) {
-        SuggestedMovesTableViewController *destination = (SuggestedMovesTableViewController *)segue.destinationViewController;
-        destination.delegate = self;
-        [destination loadPopularMoves];
-        
-        self.popularMovesViewController = destination;
-    }
-}
-
-- (void)popularMovesTableViewController:(SuggestedMovesTableViewController *)controller tappedMoveWithName:(NSString *)name {
-    self.nameField.text = name;
-    [self textFieldDidChange:self.nameField];
-}
-
-- (void)popularMovesTableViewControllerDidLoadMoves:(SuggestedMovesTableViewController *)controller {
-    UITableView *view = (UITableView *)controller.view;
-    CGSize newSize = view.contentSize;
-    CGRect newFrame = self.containerView.frame;
-    newFrame.size = newSize;
-    self.containerView.frame = newFrame;
-}
-
 - (void)textFieldDidChange:(UITextField *)field {
-    [self.reloadBlock start];
-}
-
-- (void)reloadSuggestions {
-    if ([self.nameField.text isEqualToString:@""]) {
-        [self.popularMovesViewController loadPopularMoves];
-    } else {
-        NSString *query = self.nameField.text;
-        [self.popularMovesViewController loadResultsFromSearch:query];
-    }
-}
-
-#pragma mark - setup view elements
-
-- (void)setupNameField {
-    self.nameField.text = self.currentMove.name;
-    self.nameField.delegate = self;
+    [self.fetchBlock start];
 }
 
 #pragma mark - button actions
@@ -124,7 +83,109 @@
 #pragma mark - table view methods
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.section != 0 && indexPath.row != 0;
+    return indexPath.section != 0;
+}
+
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 || ![self hasSuggestedMoves]) return;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+       [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+    });
+}
+
+- (BOOL)hasSuggestedMoves {
+    return !(!self.suggestedMoves || self.fetchError || self.suggestedMoves.count == 0);
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return 1;
+    } else {
+        return (self.suggestedMoves.count == 0) ? 1 : self.suggestedMoves.count;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44.0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+
+        if (!self.nameField) {
+            UITextField *field = [[UITextField alloc] init];
+            [cell addSubview:field];
+            
+            [field constrainFlushBottom];
+            [field constrainFlushTop];
+            [field constrainFlushLeftOffset:12];
+            [field constrainFlushRightOffset:12];
+            
+            field.placeholder = @"Name";
+            
+            if (self.currentMove.name) field.text = self.currentMove.name;
+            
+            self.nameField = field;
+            [field addTarget:self
+                      action:@selector(textFieldDidChange:)
+            forControlEvents:UIControlEventEditingChanged];
+        }
+        
+        return cell;
+    } else if (indexPath.section == 1) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+        
+        if (self.fetchError) {
+            cell.textLabel.text = @"Error getting suggested moves";
+            cell.textLabel.textColor = [UIColor lightGrayColor];
+        } else if (self.suggestedMoves == nil) {
+            UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            [cell addSubview:spinner];
+            [spinner constrainCenter];
+            [spinner startAnimating];
+        } else if (self.suggestedMoves.count == 0) {
+            cell.textLabel.text = @"No suggested moves found";
+            cell.textLabel.textColor = [UIColor lightGrayColor];
+        } else {
+            cell.textLabel.text = self.suggestedMoves[indexPath.row];
+            cell.textLabel.textColor = [UIColor blackColor];
+            [cell addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(suggestedMoveTapped:)]];
+            cell.tag = indexPath.row;
+        }
+        
+        return cell;
+    }
+    
+    return nil;
+}
+
+- (void)suggestedMoveTapped:(UIGestureRecognizer *)tap {
+    if (![self hasSuggestedMoves]) return;
+    
+    self.nameField.text = self.suggestedMoves[tap.view.tag];
+    [self loadSuggestedMoves];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 1) {
+        return @"Suggested moves";
+    }
+    
+    return nil;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    if (section == 1) {
+        return @"Moves other users are practicing";
+    }
+    
+    return nil;
 }
 
 #pragma mark - text field delegate
@@ -136,6 +197,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     [self enableOrDisableAddButtonWithTextField:textField string:string range:range];
+
     return YES;
 }
 
@@ -146,6 +208,46 @@
     } else {
         addButton.enabled = YES;
     }
+}
+
+#pragma mark - loading suggested moves
+
+- (void)loadSuggestedMoves {
+    if ([self.nameField.text isEqualToString:@""]) {
+        [self loadPopularMoves];
+    } else {
+        [self loadMovesMatchingTypedName];
+    }
+}
+
+- (void)loadMovesMatchingTypedName {
+    [[API sharedInstance] getMovesMatchingQuery:self.nameField.text completionBlock:^(id moves, NSError *error) {
+        if (error) {
+            self.fetchError = error;
+        } else {
+            self.fetchError = nil;
+            self.suggestedMoves = moves;
+        }
+        
+        [self reloadSectionWithSuggestedMoves];
+    }];
+}
+
+- (void)loadPopularMoves {
+    [[API sharedInstance] getPopularMoves:^(id moves, NSError *error) {
+        if (error) {
+            self.fetchError = error;
+        } else {
+            self.fetchError = nil;
+            self.suggestedMoves = moves;
+        }
+        
+        [self reloadSectionWithSuggestedMoves];
+    }];
+}
+
+- (void)reloadSectionWithSuggestedMoves {
+    [self.tableView reloadSections:[[NSIndexSet alloc] initWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end

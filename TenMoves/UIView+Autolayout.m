@@ -160,6 +160,28 @@
                                                                    views:@{@"view": self}]];
 }
 
+- (void)constrainFlushLeftOffset:(CGFloat)offset {
+    [self prepare];
+    
+    NSDictionary *metrics = @{ @"offset": [NSNumber numberWithFloat:offset] };
+    
+    [self.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"|-offset-[view]"
+                                                                           options:0
+                                                                           metrics:metrics
+                                                                             views:@{@"view": self}]];
+}
+
+- (void)constrainFlushRightOffset:(CGFloat)offset {
+    [self prepare];
+    
+    NSDictionary *metrics = @{ @"offset": [NSNumber numberWithFloat:offset] };
+    
+    [self.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat: @"[view]-offset-|"
+                                                                           options:0
+                                                                           metrics:metrics
+                                                                             views:@{@"view": self}]];
+}
+
 
 - (void)constrainFlushRight {
     [self prepare];
