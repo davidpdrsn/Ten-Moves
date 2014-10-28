@@ -13,5 +13,6 @@
 + (instancetype)sharedInstance;
 
 @property (assign, nonatomic) NSUInteger maxNumberOfMoves;
+@property (strong, nonatomic) UIColor *globalTint;
 
 @end

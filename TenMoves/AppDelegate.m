@@ -25,6 +25,9 @@
 
     Globals *globals = [Globals sharedInstance];
     globals.maxNumberOfMoves = 10;
+    globals.globalTint = [UIColor colorWithRed:253.0/255 green:163.0/255 blue:39.0/255 alpha:1];
+    
+    [[UITabBar appearance] setTintColor:globals.globalTint];
 
     return YES;
 }
