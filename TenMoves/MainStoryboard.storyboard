@@ -547,7 +547,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G9T-H7-te6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1161" y="-1247"/>
+            <point key="canvasLocation" x="38" y="-1327"/>
         </scene>
         <!--Graph View Controller-->
         <scene sceneID="90I-sK-a6P">
@@ -617,7 +617,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Y8-Lj-JuQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1863" y="-1247"/>
+            <point key="canvasLocation" x="-664" y="-1327"/>
         </scene>
         <!--Popular Moves Table View Controller-->
         <scene sceneID="iTH-ix-kCd">
@@ -664,7 +664,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pe5-SF-w4Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-352" y="-1379.5"/>
+            <point key="canvasLocation" x="847" y="-1459.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="jeB-95-380">
@@ -683,7 +683,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JRN-9N-mrj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3393" y="526"/>
+            <point key="canvasLocation" x="-2729" y="-70"/>
         </scene>
         <!--Settings-->
         <scene sceneID="U0W-PE-xVu">
