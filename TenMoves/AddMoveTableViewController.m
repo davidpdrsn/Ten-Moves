@@ -87,8 +87,6 @@
 }
 
 - (void)reloadSuggestions {
-    NSLog(@"loading");
-    
     if ([self.nameField.text isEqualToString:@""]) {
         [self.popularMovesViewController loadPopularMoves];
     } else {
