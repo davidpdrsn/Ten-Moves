@@ -467,7 +467,7 @@
         <scene sceneID="zuJ-1d-axa">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fdZ-9A-wJ3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Moves" id="Rgn-oC-aHF"/>
+                    <tabBarItem key="tabBarItem" title="Moves" image="Moves Selected" id="Rgn-oC-aHF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="36U-LL-IzL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -835,7 +835,7 @@
         <scene sceneID="GNQ-JN-Clt">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ycm-Aa-HLw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" id="onI-Om-NOM"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings Icon Selected" id="onI-Om-NOM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LBP-Ov-8Hd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -851,6 +851,10 @@
             <point key="canvasLocation" x="-1725" y="307"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Moves Selected" width="32" height="32"/>
+        <image name="Settings Icon Selected" width="32" height="32"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="1AH-HP-uim"/>
         <segue reference="t0G-r7-lmm"/>
