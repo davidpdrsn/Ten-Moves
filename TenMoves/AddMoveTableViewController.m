@@ -29,6 +29,19 @@
     if (self.editingMove) {
         self.title = @"Edit move";
     }
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(endEditing)];
+    tap.cancelsTouchesInView = NO;
+    [self.tableView addGestureRecognizer:tap];
+}
+
+- (void)endEditing {
+    [self.nameField resignFirstResponder];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self endEditing];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
