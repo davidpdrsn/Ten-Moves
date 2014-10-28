@@ -619,10 +619,10 @@
             </objects>
             <point key="canvasLocation" x="-664" y="-1327"/>
         </scene>
-        <!--Popular Moves Table View Controller-->
+        <!--Suggested Moves Table View Controller-->
         <scene sceneID="iTH-ix-kCd">
             <objects>
-                <tableViewController id="dJC-dz-c7M" customClass="PopularMovesTableViewController" sceneMemberID="viewController">
+                <tableViewController id="dJC-dz-c7M" customClass="SuggestedMovesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="S8l-t7-bMo">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="209"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -695,7 +695,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection id="GSd-2v-m5h">
-                                <string key="footerTitle">Disable this if you don't your moves to show up in the list of popular moves. The sharing is completly anonymous and only the names of moves are shared.</string>
+                                <string key="footerTitle">Disable this if you don't your moves to show up in the list of suggested moves. The sharing is completly anonymous and only the names of moves are shared.</string>
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PbE-b1-Kqc">
                                         <autoresizingMask key="autoresizingMask"/>

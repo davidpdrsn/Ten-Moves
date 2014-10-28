@@ -8,7 +8,8 @@
 
 #import "AddMoveTableViewController.h"
 #import "Move.h"
-#import "PopularMovesTableViewController.h"
+#import "SuggestedMovesTableViewController.h"
+#import "DGPThrottledBlock.h"
 
 @interface AddMoveTableViewController () <PopularMovesTableViewControllerDelegate> {
     UIBarButtonItem *addButton;
@@ -16,6 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (strong, nonatomic) SuggestedMovesTableViewController *popularMovesViewController;
+@property (strong, nonatomic) DGPThrottledBlock *reloadBlock;
 
 @end
 
@@ -34,6 +37,14 @@
                                                                           action:@selector(endEditing)];
     tap.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:tap];
+    
+    [self.nameField addTarget:self
+                  action:@selector(textFieldDidChange:)
+        forControlEvents:UIControlEventEditingChanged];
+    
+    self.reloadBlock = [[DGPThrottledBlock alloc] initWithBlock:^{
+        [self reloadSuggestions];
+    } throttleDay:0.3];
 }
 
 - (void)endEditing {
@@ -50,21 +61,40 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"embedPopularMoves"]) {
-        PopularMovesTableViewController *destination = (PopularMovesTableViewController *)segue.destinationViewController;
+        SuggestedMovesTableViewController *destination = (SuggestedMovesTableViewController *)segue.destinationViewController;
         destination.delegate = self;
+        [destination loadPopularMoves];
+        
+        self.popularMovesViewController = destination;
     }
 }
 
-- (void)popularMovesTableViewController:(PopularMovesTableViewController *)controller tappedMoveWithName:(NSString *)name {
+- (void)popularMovesTableViewController:(SuggestedMovesTableViewController *)controller tappedMoveWithName:(NSString *)name {
     self.nameField.text = name;
+    [self textFieldDidChange:self.nameField];
 }
 
-- (void)popularMovesTableViewControllerDidLoadMoves:(PopularMovesTableViewController *)controller {
+- (void)popularMovesTableViewControllerDidLoadMoves:(SuggestedMovesTableViewController *)controller {
     UITableView *view = (UITableView *)controller.view;
     CGSize newSize = view.contentSize;
     CGRect newFrame = self.containerView.frame;
     newFrame.size = newSize;
     self.containerView.frame = newFrame;
+}
+
+- (void)textFieldDidChange:(UITextField *)field {
+    [self.reloadBlock start];
+}
+
+- (void)reloadSuggestions {
+    NSLog(@"loading");
+    
+    if ([self.nameField.text isEqualToString:@""]) {
+        [self.popularMovesViewController loadPopularMoves];
+    } else {
+        NSString *query = self.nameField.text;
+        [self.popularMovesViewController loadResultsFromSearch:query];
+    }
 }
 
 #pragma mark - setup view elements
@@ -108,7 +138,6 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     [self enableOrDisableAddButtonWithTextField:textField string:string range:range];
-    
     return YES;
 }
 

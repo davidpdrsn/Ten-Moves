@@ -6,37 +6,51 @@
 //  Copyright (c) 2014 David Pedersen. All rights reserved.
 //
 
-#import "PopularMovesTableViewController.h"
+#import "SuggestedMovesTableViewController.h"
 #import "API.h"
 
-@interface PopularMovesTableViewController ()
+@interface SuggestedMovesTableViewController ()
 
 @property (strong, nonatomic) NSArray *popularMoves;
 @property (strong, nonatomic) NSError *fetchError;
 
 @end
 
-@implementation PopularMovesTableViewController
+@implementation SuggestedMovesTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self fetchPopularMoves];
 }
 
-- (void)fetchPopularMoves {
-    [[API sharedInstance] getMoves:^(id moves, NSError *error) {
+- (void)loadPopularMoves {
+    [[API sharedInstance] getPopularMoves:^(id moves, NSError *error) {
         if (error) {
             self.fetchError = error;
         } else {
             self.popularMoves = moves;
         }
         
-        [self.tableView reloadData];
-        [self.delegate popularMovesTableViewControllerDidLoadMoves:self];
+        [self doneLoading];
     }];
 }
 
+- (void)loadResultsFromSearch:(NSString *)query {
+    
+    [[API sharedInstance] getMovesMatchingQuery:query completionBlock:^(id moves, NSError *error) {
+        if (error) {
+            self.fetchError = error;
+        } else {
+            self.popularMoves = moves;
+        }
+        
+        [self doneLoading];
+    }];
+}
+
+- (void)doneLoading {
+    [self.tableView reloadData];
+    [self.delegate popularMovesTableViewControllerDidLoadMoves:self];
+}
 
 #pragma mark - Table view data source
 
@@ -65,15 +79,16 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"popularMoveCell"];
     cell.textLabel.text = self.popularMoves[indexPath.row];
+    cell.textLabel.textColor = [UIColor blackColor];
     return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"Popular moves";
+    return @"Suggested moves";
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    return @"Popular moves that other users are practicing";
+    return @"These are moves that users are practicing";
 }
 
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -12,7 +12,9 @@
 
 + (instancetype)sharedInstance;
 
-- (void)getMoves:(void (^)(id moves, NSError *error))completionBlock;
+- (void)getPopularMoves:(void (^)(id moves, NSError *error))completionBlock;
+- (void)getMovesMatchingQuery:(NSString *)query completionBlock:(void (^)(id moves, NSError *error))completionBlock;
+
 - (void)addMove:(NSString *)name completion:(void (^)(NSError *error))completionBlock;
 - (void)deleteMove:(NSString *)name completion:(void (^)(NSError *error))completionBlock;
 

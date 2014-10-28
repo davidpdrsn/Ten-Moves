@@ -17,6 +17,7 @@
 		860D015119FE8D0A0071F0BA /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D015019FE8D0A0071F0BA /* SettingsTableViewController.m */; };
 		861454A919C1DAAE0026B288 /* NSString+RegExpHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 861454A819C1DAAE0026B288 /* NSString+RegExpHelpers.m */; };
 		861454AC19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 861454AB19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m */; };
+		8617416519FFD4880033AA93 /* DGPThrottledBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 8617416419FFD4880033AA93 /* DGPThrottledBlock.m */; };
 		861BD23E19D72DCF00C5F094 /* MoveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 861BD23D19D72DCF00C5F094 /* MoveTests.m */; };
 		86295B4E19D74936005BA319 /* KIFTestCaseWithCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 86295B4D19D74936005BA319 /* KIFTestCaseWithCoreData.m */; };
 		86295B5019D763C4005BA319 /* SnapshotAcceptanceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86295B4F19D763C4005BA319 /* SnapshotAcceptanceTests.m */; };
@@ -46,7 +47,7 @@
 		8685E3B7196F5B0900A97585 /* MoveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3B6196F5B0900A97585 /* MoveTableViewCell.m */; };
 		8685E3BB196F60E200A97585 /* SnapshotsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3BA196F60E200A97585 /* SnapshotsTableViewController.m */; };
 		8685E3BE196F6A9200A97585 /* AddSnapshotTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8685E3BD196F6A9200A97585 /* AddSnapshotTableViewController.m */; };
-		8689949C19F0188200C50499 /* PopularMovesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8689949B19F0188200C50499 /* PopularMovesTableViewController.m */; };
+		8689949C19F0188200C50499 /* SuggestedMovesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8689949B19F0188200C50499 /* SuggestedMovesTableViewController.m */; };
 		86A3F26319712D7900E389A1 /* ArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A3F26219712D7900E389A1 /* ArrayDataSource.m */; };
 		86A3F2671971578900E389A1 /* Repository.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A3F2661971578900E389A1 /* Repository.m */; };
 		86A50456198917AD00E3FC8A /* JTSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A50455198917AD00E3FC8A /* JTSTextView.m */; };
@@ -110,6 +111,8 @@
 		861454A819C1DAAE0026B288 /* NSString+RegExpHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RegExpHelpers.m"; sourceTree = "<group>"; };
 		861454AA19C1DBBC0026B288 /* NSURL+ReformattingHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+ReformattingHelpers.h"; sourceTree = "<group>"; };
 		861454AB19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+ReformattingHelpers.m"; sourceTree = "<group>"; };
+		8617416319FFD4880033AA93 /* DGPThrottledBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGPThrottledBlock.h; sourceTree = "<group>"; };
+		8617416419FFD4880033AA93 /* DGPThrottledBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DGPThrottledBlock.m; sourceTree = "<group>"; };
 		861BD23219D72C8B00C5F094 /* Acceptance Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Acceptance Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		861BD23519D72C8B00C5F094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		861BD23D19D72DCF00C5F094 /* MoveTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveTests.m; sourceTree = "<group>"; };
@@ -170,8 +173,8 @@
 		8685E3BA196F60E200A97585 /* SnapshotsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotsTableViewController.m; sourceTree = "<group>"; };
 		8685E3BC196F6A9200A97585 /* AddSnapshotTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSnapshotTableViewController.h; sourceTree = "<group>"; };
 		8685E3BD196F6A9200A97585 /* AddSnapshotTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSnapshotTableViewController.m; sourceTree = "<group>"; };
-		8689949A19F0188200C50499 /* PopularMovesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopularMovesTableViewController.h; sourceTree = "<group>"; };
-		8689949B19F0188200C50499 /* PopularMovesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopularMovesTableViewController.m; sourceTree = "<group>"; };
+		8689949A19F0188200C50499 /* SuggestedMovesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestedMovesTableViewController.h; sourceTree = "<group>"; };
+		8689949B19F0188200C50499 /* SuggestedMovesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestedMovesTableViewController.m; sourceTree = "<group>"; };
 		869D77D719A758EA0046AE67 /* TenMoves 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TenMoves 9.xcdatamodel"; sourceTree = "<group>"; };
 		86A3F26119712D7900E389A1 /* ArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayDataSource.h; sourceTree = "<group>"; };
 		86A3F26219712D7900E389A1 /* ArrayDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayDataSource.m; sourceTree = "<group>"; };
@@ -314,6 +317,8 @@
 		863B0EAB1984227800AAF919 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8617416319FFD4880033AA93 /* DGPThrottledBlock.h */,
+				8617416419FFD4880033AA93 /* DGPThrottledBlock.m */,
 				860D014C19FE8CB10071F0BA /* Settings.h */,
 				860D014D19FE8CB10071F0BA /* Settings.m */,
 				8683594B19FA4922005E5A6E /* API.h */,
@@ -497,8 +502,8 @@
 			children = (
 				860D014F19FE8D0A0071F0BA /* SettingsTableViewController.h */,
 				860D015019FE8D0A0071F0BA /* SettingsTableViewController.m */,
-				8689949A19F0188200C50499 /* PopularMovesTableViewController.h */,
-				8689949B19F0188200C50499 /* PopularMovesTableViewController.m */,
+				8689949A19F0188200C50499 /* SuggestedMovesTableViewController.h */,
+				8689949B19F0188200C50499 /* SuggestedMovesTableViewController.m */,
 				8680FA2919D59EDA0046A71B /* GraphViewController.h */,
 				8680FA2A19D59EDA0046A71B /* GraphViewController.m */,
 				8633B5E019D58F56000F0A5E /* GraphAndSnapshotsViewController.h */,
@@ -804,9 +809,10 @@
 				863B0EAE1984237F00AAF919 /* ManagedSnapshotAsset.m in Sources */,
 				8676881419852FAF005679ED /* SnapshotVideo.m in Sources */,
 				86325BFA19D868A90033944F /* Globals.m in Sources */,
-				8689949C19F0188200C50499 /* PopularMovesTableViewController.m in Sources */,
+				8689949C19F0188200C50499 /* SuggestedMovesTableViewController.m in Sources */,
 				8685E3BE196F6A9200A97585 /* AddSnapshotTableViewController.m in Sources */,
 				8678734519BCE70000973FAE /* CALayer+SizingAndPositioning.m in Sources */,
+				8617416519FFD4880033AA93 /* DGPThrottledBlock.m in Sources */,
 				8658D100197317A000A2B36C /* VideoPreview.m in Sources */,
 				8658D0FD197302FB00A2B36C /* SnapshotTableViewCell.m in Sources */,
 				8601299E197297280053C71D /* ALAssetsLibrary+HelperMethods.m in Sources */,

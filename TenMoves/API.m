@@ -43,11 +43,21 @@
 
 #pragma mark - main api methods
 
-- (void)getMoves:(void (^)(id moves, NSError *error))completionBlock {
+- (void)getPopularMoves:(void (^)(id moves, NSError *error))completionBlock {
     [self.manager GET:[self.apiBase stringByAppendingPathComponent:@"moves"]
       parameters:[self makeParams:nil]
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              
+        completionBlock(responseObject, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(nil, error);
+    }];
+}
+
+- (void)getMovesMatchingQuery:(NSString *)query completionBlock:(void (^)(id moves, NSError *error))completionBlock {
+    [self.manager GET:[self.apiBase stringByAppendingPathComponent:@"search"]
+           parameters:[self makeParams:@{@"query":query}]
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(nil, error);
