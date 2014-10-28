@@ -93,6 +93,12 @@
     }
 }
 
+#pragma mark - table view methods
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.section != 0 && indexPath.row != 0;
+}
+
 #pragma mark - text field delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
