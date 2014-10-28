@@ -57,10 +57,6 @@
     [self endEditing];
 }
 
-- (void)textFieldDidChange:(UITextField *)field {
-    [self.fetchBlock start];
-}
-
 #pragma mark - button actions
 - (IBAction)done:(id)sender {
     [self add];
@@ -92,10 +88,6 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
        [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     });
-}
-
-- (BOOL)hasSuggestedMoves {
-    return !(!self.suggestedMoves || self.fetchError || self.suggestedMoves.count == 0);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -165,13 +157,6 @@
     return nil;
 }
 
-- (void)suggestedMoveTapped:(UIGestureRecognizer *)tap {
-    if (![self hasSuggestedMoves]) return;
-    
-    self.nameField.text = self.suggestedMoves[tap.view.tag];
-    [self loadSuggestedMoves];
-}
-
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 1) {
         return @"Suggested moves";
@@ -208,6 +193,10 @@
     } else {
         addButton.enabled = YES;
     }
+}
+
+- (void)textFieldDidChange:(UITextField *)field {
+    [self.fetchBlock start];
 }
 
 #pragma mark - loading suggested moves
@@ -248,6 +237,17 @@
 
 - (void)reloadSectionWithSuggestedMoves {
     [self.tableView reloadSections:[[NSIndexSet alloc] initWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (BOOL)hasSuggestedMoves {
+    return !(!self.suggestedMoves || self.fetchError || self.suggestedMoves.count == 0);
+}
+
+- (void)suggestedMoveTapped:(UIGestureRecognizer *)tap {
+    if (![self hasSuggestedMoves]) return;
+    
+    self.nameField.text = self.suggestedMoves[tap.view.tag];
+    [self loadSuggestedMoves];
 }
 
 @end
