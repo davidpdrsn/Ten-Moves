@@ -33,7 +33,7 @@
 #ifdef DEBUG
         _apiBase = @"http://localhost:3000";
 #else
-        _apiBase = @"http://tenmovesapi.herokuapp.com";
+        _apiBase = @"http://api.tenmoves.net";
 #endif
         _apiKey = @"027b311dc95c1613a2d05e99b7d6bd4079b7414c";
         _manager = [AFHTTPRequestOperationManager manager];
