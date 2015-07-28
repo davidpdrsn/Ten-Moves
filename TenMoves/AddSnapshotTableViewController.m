@@ -8,8 +8,8 @@
 
 #import <MobileCoreServices/UTCoreTypes.h>
 @import AssetsLibrary;
-@import MediaPlayer;
-
+@import AVKit;
+@import AVFoundation;
 #import "AddSnapshotTableViewController.h"
 #import "Snapshot.h"
 #import "ProgressPickerButton.h"
@@ -261,12 +261,10 @@
 
 #pragma mark - ImageViewSnapshot delegate methods
 
-- (void)imageViewWithSnapshot:(VideoPreview *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
-    [self presentMoviePlayerViewControllerAnimated:player];
-}
-
-- (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(VideoPreview *)imageView {
-    [self dismissMoviePlayerViewControllerAnimated];
+- (void)imageViewWithSnapshot:(VideoPreview *)imageView presentMoviePlayerViewControllerAnimated:(AVPlayerViewController *)player {
+    [self presentViewController:player animated:YES completion:^() {
+        [player.player play];
+    }];
 }
 
 #pragma mark - text view methods

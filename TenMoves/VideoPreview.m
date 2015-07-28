@@ -10,7 +10,8 @@
 #import "Snapshot.h"
 #import "SnapshotImage.h"
 #import "SnapshotVideo.h"
-@import MediaPlayer;
+@import AVKit;
+@import AVFoundation;
 #import "VideoEditor.h"
 #import "UIView+Autolayout.h"
 
@@ -60,34 +61,12 @@
 - (void)tapped:(UIGestureRecognizer *)gesture {
     if (gesture.state != UIGestureRecognizerStateEnded || !self.enabled) return;
     assert(self.delegate != nil);
-    
-    MPMoviePlayerViewController *player = [[MPMoviePlayerViewController alloc] initWithContentURL:self.videoUrl];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:player
-                                                    name:MPMoviePlayerPlaybackDidFinishNotification
-                                                  object:player.moviePlayer];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(movieFinishedCallback:)
-                                                 name:MPMoviePlayerPlaybackDidFinishNotification
-                                               object:player.moviePlayer];
-    
-    [player.moviePlayer prepareToPlay];
-    
-    [self.delegate imageViewWithSnapshot:self presentMoviePlayerViewControllerAnimated:player];
-}
-- (void)movieFinishedCallback:(NSNotification *)notification {
-    NSNumber *finishReason = [[notification userInfo] objectForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey];
-    
-    if ([finishReason intValue] != MPMovieFinishReasonPlaybackEnded) {
-        MPMoviePlayerController *moviePlayer = [notification object];
-        
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:MPMoviePlayerPlaybackDidFinishNotification
-                                                      object:moviePlayer];
-        
-        [self.delegate imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:self];
-    }
+
+    AVPlayer *player = [AVPlayer playerWithURL:self.videoUrl];
+    AVPlayerViewController *playerViewController = [AVPlayerViewController new];
+    playerViewController.player = player;
+
+    [self.delegate imageViewWithSnapshot:self presentMoviePlayerViewControllerAnimated:playerViewController];
 }
 
 - (void)setVideoUrl:(NSURL *)videoUrl {

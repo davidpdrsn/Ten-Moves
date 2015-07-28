@@ -7,7 +7,8 @@
 //
 
 #import "ShowSnapshotViewController.h"
-@import MediaPlayer;
+@import AVFoundation;
+@import AVKit;
 #import "Snapshot.h"
 #import "VideoPreview.h"
 #import "Repository.h"
@@ -125,12 +126,10 @@
     [self viewDidLoad];
 }
 
-- (void)imageViewWithSnapshot:(VideoPreview *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
-    [self presentMoviePlayerViewControllerAnimated:player];
-}
-
-- (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(VideoPreview *)imageView {
-    [self dismissMoviePlayerViewControllerAnimated];
+- (void)imageViewWithSnapshot:(VideoPreview *)imageView presentMoviePlayerViewControllerAnimated:(AVPlayerViewController *)player {
+    [self presentViewController:player animated:YES completion:^{
+        [player.player play];
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

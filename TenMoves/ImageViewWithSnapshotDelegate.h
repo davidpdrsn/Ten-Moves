@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class VideoPreview, MPMoviePlayerViewController;
+@class VideoPreview, AVPlayerViewController;
 
 @protocol ImageViewWithSnapshotDelegate
 
-- (void)imageViewWithSnapshot:(VideoPreview *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player;
-- (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(VideoPreview *)imageView;
+- (void)imageViewWithSnapshot:(VideoPreview *)imageView presentMoviePlayerViewControllerAnimated:(AVPlayerViewController *)player;
 
 @end

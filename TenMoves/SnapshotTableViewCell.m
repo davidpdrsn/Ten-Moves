@@ -106,6 +106,8 @@ static void * LPSomeContext = "LPSnapshotCell";
                 
                 [self.thumbnailImageView setVideoAndImageFromSnapshot:self.snapshot];
                 [self.thumbnailImageView awakeFromNib];
+
+                NSLog(@"%@", self.snapshot.video.path);
                 
                 [self setupProgressIndicator];
             }

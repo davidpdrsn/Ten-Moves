@@ -19,9 +19,9 @@
 #import "ShowSnapshotViewController.h"
 #import "SnapshotVideo.h"
 #import "SnapshotImage.h"
-@import MediaPlayer;
 @import AssetsLibrary;
 @import AVFoundation;
+@import AVKit;
 
 @interface SnapshotsTableViewController ()
 
@@ -98,12 +98,10 @@
 
 #pragma mark - image view with snapshot delegate methods
 
-- (void)imageViewWithSnapshot:(VideoPreview *)imageView presentMoviePlayerViewControllerAnimated:(MPMoviePlayerViewController *)player {
-    [self presentMoviePlayerViewControllerAnimated:player];
-}
-
-- (void)imageViewWithSnapshotDismissMoviePlayerViewControllerAnimated:(VideoPreview *)imageView {
-    [self dismissMoviePlayerViewControllerAnimated];
+- (void)imageViewWithSnapshot:(VideoPreview *)imageView presentMoviePlayerViewControllerAnimated:(AVPlayerViewController *)player {
+    [self presentViewController:player animated:YES completion:^{
+        [player.player play];
+    }];
 }
 
 #pragma mark - misc helper methods

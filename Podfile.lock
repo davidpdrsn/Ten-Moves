@@ -1,29 +1,29 @@
 PODS:
-  - AFNetworking (2.4.1):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
+  - AFNetworking (2.5.4):
+    - AFNetworking/NSURLConnection (= 2.5.4)
+    - AFNetworking/NSURLSession (= 2.5.4)
+    - AFNetworking/Reachability (= 2.5.4)
+    - AFNetworking/Security (= 2.5.4)
+    - AFNetworking/Serialization (= 2.5.4)
+    - AFNetworking/UIKit (= 2.5.4)
+  - AFNetworking/NSURLConnection (2.5.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-    - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.4.1):
+  - AFNetworking/NSURLSession (2.5.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.4.1):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.4.1)
-  - AFNetworking/Security (2.4.1)
-  - AFNetworking/Serialization (2.4.1)
-  - AFNetworking/UIKit (2.4.1):
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - BEMSimpleLineGraph (3.1)
   - DZNEmptyDataSet (1.4.1)
   - KIF (3.0.8):
-    - KIF/XCTest
+    - KIF/XCTest (= 3.0.8)
   - KIF/XCTest (3.0.8)
 
 DEPENDENCIES:
@@ -33,9 +33,9 @@ DEPENDENCIES:
   - KIF (~> 3.0)
 
 SPEC CHECKSUMS:
-  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
-  BEMSimpleLineGraph: db20cc489912a023d9a082b7c05f15789195f3f6
-  DZNEmptyDataSet: 381e880cb3bb2d33885cb0325218443df265bc98
-  KIF: 2db5e8cf59136dd1267d49cca0d55883389b09d3
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  BEMSimpleLineGraph: 54e5f9fbcad282b464b9425abf215f95fa43c9f2
+  DZNEmptyDataSet: b6d8ef0e69a4347b70c642148453174dbf8817f1
+  KIF: 3c2cb8e66fb216f9c3abcd714699411f0256f767
 
-COCOAPODS: 0.34.4
+COCOAPODS: 0.37.2
