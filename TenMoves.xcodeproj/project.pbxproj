@@ -19,6 +19,9 @@
 		861454AC19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 861454AB19C1DBBC0026B288 /* NSURL+ReformattingHelpers.m */; };
 		8617416519FFD4880033AA93 /* DGPThrottledBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 8617416419FFD4880033AA93 /* DGPThrottledBlock.m */; };
 		861BD23E19D72DCF00C5F094 /* MoveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 861BD23D19D72DCF00C5F094 /* MoveTests.m */; };
+		862480821B68C3ED00FB8212 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 862480811B68C3ED00FB8212 /* Settings.plist */; };
+		862480831B68C3ED00FB8212 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 862480811B68C3ED00FB8212 /* Settings.plist */; };
+		862480841B68C3ED00FB8212 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 862480811B68C3ED00FB8212 /* Settings.plist */; };
 		86295B4E19D74936005BA319 /* KIFTestCaseWithCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 86295B4D19D74936005BA319 /* KIFTestCaseWithCoreData.m */; };
 		86295B5019D763C4005BA319 /* SnapshotAcceptanceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86295B4F19D763C4005BA319 /* SnapshotAcceptanceTests.m */; };
 		86325BFA19D868A90033944F /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 86325BF919D868A90033944F /* Globals.m */; };
@@ -115,6 +118,7 @@
 		861BD23219D72C8B00C5F094 /* Acceptance Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Acceptance Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		861BD23519D72C8B00C5F094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		861BD23D19D72DCF00C5F094 /* MoveTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveTests.m; sourceTree = "<group>"; };
+		862480811B68C3ED00FB8212 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		86295B4C19D74936005BA319 /* KIFTestCaseWithCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIFTestCaseWithCoreData.h; sourceTree = "<group>"; };
 		86295B4D19D74936005BA319 /* KIFTestCaseWithCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KIFTestCaseWithCoreData.m; sourceTree = "<group>"; };
 		86295B4F19D763C4005BA319 /* SnapshotAcceptanceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnapshotAcceptanceTests.m; sourceTree = "<group>"; };
@@ -442,6 +446,7 @@
 		86ED30BB196F0F0F00FC738B /* TenMoves */ = {
 			isa = PBXGroup;
 			children = (
+				862480811B68C3ED00FB8212 /* Settings.plist */,
 				86325BF819D868A90033944F /* Globals.h */,
 				86325BF919D868A90033944F /* Globals.m */,
 				86A50457198917B500E3FC8A /* Vendor */,
@@ -646,6 +651,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				862480841B68C3ED00FB8212 /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,6 +660,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86ED30EC196F114D00FC738B /* MainStoryboard.storyboard in Resources */,
+				862480821B68C3ED00FB8212 /* Settings.plist in Resources */,
 				86ED30C0196F0F0F00FC738B /* InfoPlist.strings in Resources */,
 				86ED30CB196F0F0F00FC738B /* Images.xcassets in Resources */,
 			);
@@ -664,6 +671,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86ED30DD196F0F1000FC738B /* InfoPlist.strings in Resources */,
+				862480831B68C3ED00FB8212 /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

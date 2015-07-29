@@ -35,7 +35,10 @@
 #else
         _apiBase = @"http://api.tenmoves.net";
 #endif
-        _apiKey = @"027b311dc95c1613a2d05e99b7d6bd4079b7414c";
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
+        NSDictionary *settings = [[NSDictionary alloc] initWithContentsOfFile:path];
+        _apiKey = settings[@"ApiKey"];
+
         _manager = [AFHTTPRequestOperationManager manager];
     }
     return self;
